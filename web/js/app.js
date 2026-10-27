@@ -500,7 +500,8 @@
       ctx.restore();
     };
     const g = guide.getContext('2d');
-    const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = document.documentElement.dataset.theme;
+    const dark = theme ? theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
     drawGlyph(g, dark ? '#4a4a52' : '#d6d2c8');
     const ictx = ink.getContext('2d');
     ictx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1042,11 +1043,35 @@
         <div class="row"><button class="btn primary" data-act="export">⬇️ Export backup</button>
           <label class="btn">⬆️ Import backup<input type="file" accept="application/json,.json" data-change="import" hidden></label>
           <button class="btn" data-act="copy">📋 Copy as text</button>
-          <button class="btn danger" data-act="reset">Reset all progress</button></div>
-        <p class="small muted" id="backup-msg" aria-live="polite"></p></div>`;
+          <button class="btn danger" data-act="reset">${resetArmed ? 'Tap again to erase everything' : 'Reset all progress'}</button></div>
+        ${resetArmed ? '<p class="small no">This erases progress for both languages and cannot be undone. Export a backup first if you want to keep it.</p>' : ''}
+        ${pendingImport ? `<div class="feedback bad"><b>Replace your current progress with this backup?</b>
+          <span class="detail">The backup has ${pendingImport.xp} XP${pendingImport.updatedAt ? `, saved ${h(new Date(pendingImport.updatedAt).toLocaleString())}` : ''}. Your current progress (${progress.xp} XP) will be overwritten.</span>
+          <div class="row" style="margin-top:.6rem"><button class="btn primary" data-act="import-confirm">Replace my progress</button><button class="btn" data-act="import-cancel">Cancel</button></div></div>` : ''}
+        <details style="margin-top:.8rem"><summary class="small">Paste a backup instead</summary>
+          <textarea class="input" id="import-text" style="font-size:.85rem;min-height:5rem;margin-top:.5rem" placeholder="Paste the backup text copied from the web app or the Swift app"></textarea>
+          <button class="btn" data-act="import-paste" style="margin-top:.5rem">Import pasted backup</button></details>
+        <p class="small muted" id="backup-msg" aria-live="polite">${h(backupNote)}</p>
+        <p class="small muted">If Export doesn't download a file (some embedded viewers block downloads), use Copy as text and keep it somewhere safe.</p></div>`;
   }
 
-  function backupMsg(text) { const el = document.getElementById('backup-msg'); if (el) el.textContent = text; }
+  let pendingImport = null; // sanitized backup waiting for the learner to confirm
+  let resetArmed = false;
+  let resetTimer = null;
+  let backupNote = '';
+  function backupMsg(text) { backupNote = text; const el = document.getElementById('backup-msg'); if (el) el.textContent = text; }
+  function stageImport(text) {
+    try {
+      const data = JSON.parse(text);
+      if (!data || typeof data !== 'object' || !data.languages) throw new Error('that is not a Lingua backup');
+      pendingImport = E.sanitizeProgress(data);
+      backupNote = '';
+    } catch (err) {
+      pendingImport = null;
+      backupNote = `Couldn't import: ${err.message === 'that is not a Lingua backup' ? err.message : 'the text is not valid backup JSON'}.`;
+    }
+    render();
+  }
 
   // ---------------------------------------------------------------- events
   const actions = {
@@ -1239,11 +1264,29 @@
       try { await navigator.clipboard.writeText(JSON.stringify(progress)); backupMsg('Copied. Paste it into the Swift app’s Import screen.'); } catch (err) { backupMsg('Copying is blocked here. Use Export instead.'); }
     },
     reset: () => {
-      if (!confirm('Reset ALL progress for both languages? This cannot be undone. Export a backup first if you want to keep it.')) return;
+      clearTimeout(resetTimer);
+      if (!resetArmed) {
+        resetArmed = true;
+        resetTimer = setTimeout(() => { resetArmed = false; if (route()[0] === 'progress') render(); }, 6000);
+        render();
+        return;
+      }
+      resetArmed = false;
       progress = E.emptyProgress();
       save();
+      backupNote = 'All progress was reset.';
       render();
     },
+    'import-confirm': () => {
+      if (!pendingImport) return;
+      progress = pendingImport;
+      pendingImport = null;
+      save();
+      backupNote = 'Backup restored.';
+      render();
+    },
+    'import-cancel': () => { pendingImport = null; backupNote = 'Import cancelled. Nothing changed.'; render(); },
+    'import-paste': () => stageImport(document.getElementById('import-text').value),
   };
 
   const changes = {
@@ -1253,18 +1296,9 @@
       const file = el.files && el.files[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const data = JSON.parse(reader.result);
-          if (!data || typeof data !== 'object' || !data.languages) throw new Error('not a Lingua backup');
-          if (!confirm('Replace your current progress with this backup?')) return;
-          progress = E.sanitizeProgress(data);
-          save();
-          render();
-          backupMsg('Backup restored.');
-        } catch (err) { backupMsg(`Couldn't import: ${err.message}.`); }
-      };
+      reader.onload = () => stageImport(String(reader.result));
       reader.readAsText(file);
+      el.value = ''; // so choosing the same file again still triggers a change
     },
   };
 
@@ -1317,7 +1351,8 @@
   document.getElementById('storage-warning').hidden = storageOK;
   render();
 
-  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+  // Service workers can't run when the app is embedded in another page, so only register at top level.
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol) && window.self === window.top) {
     navigator.serviceWorker.register('sw.js').catch(() => { /* offline support is best-effort */ });
   }
 })();

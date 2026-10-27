@@ -51,7 +51,9 @@ No build step is needed to use it. Either:
 - open `web/index.html` directly in a browser (works from `file://`), or
 - serve it to get offline caching and installability: `npm run serve`, then visit http://localhost:8080.
 
-To publish it, upload the `web/` folder to any static host (GitHub Pages, Netlify, etc.). After the first visit it works fully offline.
+To publish it, upload the `web/` folder to any static host. After the first visit it works fully offline.
+
+**GitHub Pages (included).** `.github/workflows/pages.yml` deploys `web/` on every push to `main`. One-time setup: repository **Settings → Pages → Build and deployment → Source: GitHub Actions**. The site is then served at `https://anewbyss.github.io/linguistics-/`.
 
 ## Run the Swift Playgrounds app
 

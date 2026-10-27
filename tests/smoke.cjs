@@ -235,12 +235,21 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
   const file = await download.path();
   const exported = JSON.parse(fs.readFileSync(file, 'utf8'));
   assert(exported.languages.ar.aptitude.length === 1, 'export has data');
-  page.once('dialog', (d) => d.accept());
+  await page.locator('[data-act="reset"]').click();
+  assert(await page.locator('#xp').innerText() !== '⭐ 0', 'first reset tap only asks for confirmation');
   await page.locator('[data-act="reset"]').click();
   assert(await page.locator('#xp').innerText() === '⭐ 0', 'reset cleared xp');
-  page.once('dialog', (d) => d.accept());
   await page.setInputFiles('input[data-change="import"]', file);
+  await page.locator('[data-act="import-cancel"]').click();
+  assert(await page.locator('#xp').innerText() === '⭐ 0', 'cancelled import changes nothing');
+  await page.setInputFiles('input[data-change="import"]', []);
+  await page.setInputFiles('input[data-change="import"]', file);
+  await page.locator('[data-act="import-confirm"]').click();
   await page.waitForFunction(() => !document.querySelector('#xp').textContent.endsWith(' 0'));
+  await page.locator('details summary', { hasText: 'Paste a backup' }).click();
+  await page.fill('#import-text', 'not json');
+  await page.locator('[data-act="import-paste"]').click();
+  assert((await page.locator('#backup-msg').innerText()).includes("Couldn't import"), 'bad paste explained');
 
   step('mobile layout has no horizontal scroll');
   await page.setViewportSize({ width: 375, height: 800 });

@@ -26,8 +26,9 @@
 body[data-lang="ar"] { --accent: #0f766e; }
 body[data-lang="es"] { --accent: #c2185b; }
 
+/* Dark palette: follows the system setting unless a light theme is chosen explicitly (data-theme). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #121212;
     --surface: #1c1c1e;
     --surface-2: #26262a;
@@ -46,9 +47,30 @@ body[data-lang="es"] { --accent: #c2185b; }
     --series-4: #c98500;
     color-scheme: dark;
   }
-  body[data-lang="ar"] { --accent: #2bb3a3; --accent-ink: #062b27; }
-  body[data-lang="es"] { --accent: #f06292; --accent-ink: #3b0a1d; }
+  :root:not([data-theme="light"]) body[data-lang="ar"] { --accent: #2bb3a3; --accent-ink: #062b27; }
+  :root:not([data-theme="light"]) body[data-lang="es"] { --accent: #f06292; --accent-ink: #3b0a1d; }
 }
+:root[data-theme="dark"] {
+  --bg: #121212;
+  --surface: #1c1c1e;
+  --surface-2: #26262a;
+  --text: #f2f1ee;
+  --muted: #a3a09a;
+  --line: #34343a;
+  --good: #4cc27f;
+  --good-bg: #173524;
+  --bad: #ff7b6e;
+  --bad-bg: #3d1d1a;
+  --warn-bg: #3a2f10;
+  --shadow: none;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  color-scheme: dark;
+}
+:root[data-theme="dark"] body[data-lang="ar"] { --accent: #2bb3a3; --accent-ink: #062b27; }
+:root[data-theme="dark"] body[data-lang="es"] { --accent: #f06292; --accent-ink: #3b0a1d; }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
