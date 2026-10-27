@@ -1,0 +1,13 @@
+{
+  "name": "lingua",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Arabic and Mexican Spanish learning app: web app (PWA) and Swift Playgrounds app sharing one content source.",
+  "scripts": {
+    "build": "node scripts/build-content.mjs",
+    "check": "node scripts/build-content.mjs --check",
+    "test": "node scripts/build-content.mjs --check && node --test tests/engine.test.mjs tests/swift-schema.test.mjs",
+    "test:e2e": "node tests/smoke.cjs",
+    "serve": "python3 -m http.server 8080 --directory web"
+  }
+}
