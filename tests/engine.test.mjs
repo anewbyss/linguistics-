@@ -159,8 +159,9 @@ test('daily challenge: 10 items, fixed for the day, mixed skills', () => {
     assert.notDeepEqual(a, c, 'next day → new challenge');
     assert.equal(a.length, 10);
     const count = (skill) => a.filter((i) => i.skill === skill).length;
-    assert.deepEqual([count('reading'), count('writing'), count('speaking')], [4, 3, 3]);
-    assert.ok(a.some((i) => i.type === 'type') && a.some((i) => i.type === 'speak'));
+    assert.deepEqual([count('reading'), count('writing'), count('listening'), count('speaking')], [3, 3, 2, 2]);
+    assert.ok(['type', 'speak', 'dictation'].every((t) => a.some((i) => i.type === t)));
+    assert.ok(a.some((i) => i.audio), 'one audio-first comprehension item');
   }
 });
 
@@ -197,19 +198,22 @@ test('speech similarity ignores case, accents, vowel marks and spaces', () => {
 test('fluency: zero at start, coverage alone caps at 60, full mastery reaches C1', () => {
   const lp = E.emptyLang();
   const f0 = E.fluency(es, lp);
-  assert.deepEqual([f0.reading.score, f0.writing.score, f0.speaking.score, f0.overall.score], [0, 0, 0, 0]);
+  assert.deepEqual([f0.reading.score, f0.writing.score, f0.listening.score, f0.speaking.score, f0.overall.score], [0, 0, 0, 0, 0]);
   assert.equal(f0.overall.band, 'A1');
   for (const c of es.categories) for (const l of c.lessons) lp.lessons[l.id] = { best: 100, done: true, at: null };
   for (const l of es.reading.letters) { lp.letters[l.char] = 1; lp.tracing[l.char] = 1; }
   for (const w of es.reading.writing) lp.writing[w.answer] = true;
   for (const p of E.speakingPhrases(es)) lp.speaking[p.t] = { best: 90 };
   for (const s of es.scenarios) lp.scenarios[s.id] = { best: 100, at: null };
+  for (const c of E.srsDeck(es, lp)) lp.srs[c.t] = { box: 4, due: '2099-01-01', seen: 4 };
+  for (const x of E.listeningItems(es)) lp.listening[x.t] = { best: 95 };
+  for (const pr of [...es.writingPrompts, ...es.speakingPrompts]) lp.prompts[pr.id] = { best: 90 };
   const f1 = E.fluency(es, lp);
   assert.equal(f1.reading.score, 60);
   assert.equal(f1.speaking.accuracy, null);
   for (const skill of E.SKILLS) for (let i = 0; i < 10; i++) E.logPractice(lp, skill, 100);
   const f2 = E.fluency(es, lp);
-  assert.deepEqual([f2.reading.score, f2.writing.score, f2.speaking.score, f2.overall.score], [100, 100, 100, 100]);
+  assert.deepEqual([f2.reading.score, f2.writing.score, f2.listening.score, f2.speaking.score, f2.overall.score], [100, 100, 100, 100, 100]);
   assert.equal(f2.overall.band, 'C1');
   lp.aptitude.push({ at: null, level: 'A2', score: 8, total: 20, bySkill: {} });
   assert.equal(E.fluency(es, lp).overall.score, Math.round(0.75 * 100 + 0.25 * 30), 'test level is blended into overall');
@@ -247,7 +251,7 @@ test('sanitizeProgress keeps the new fluency fields', () => {
   const lp = raw.languages.es;
   lp.tracing = { a: 2 };
   lp.speaking = { hola: { best: 88 }, adiós: { best: 40, self: true } };
-  lp.practice = { reading: [50, 'x', 120], writing: [], speaking: [70] };
+  lp.practice = { reading: [50, 'x', 120], writing: [], listening: [], speaking: [70] };
   lp.challenges = { '2026-10-01': { score: 7, total: 10, bySkill: { reading: { c: 3, t: 4 } } }, nope: {} };
   lp.fluency = [{ day: '2026-10-01', reading: 10, writing: 5, speaking: 0, overall: 5 }];
   const s = E.sanitizeProgress(JSON.parse(JSON.stringify(raw))).languages.es;
@@ -258,5 +262,78 @@ test('sanitizeProgress keeps the new fluency fields', () => {
   assert.equal(s.fluency.length, 1);
   // Old backups without the new fields still load.
   const old = E.sanitizeProgress({ languages: { ar: { lessons: {} } } }).languages.ar;
-  assert.deepEqual(old.practice, { reading: [], writing: [], speaking: [] });
+  assert.deepEqual(old.practice, { reading: [], writing: [], listening: [], speaking: [] });
+  assert.deepEqual([old.srs, old.listening, old.prompts, old.minutes], [{}, {}, {}, {}]);
+});
+
+test('spaced repetition: new cards unlock with lessons, intervals grow, again resets', () => {
+  const lp = E.emptyLang();
+  const day = '2026-10-01';
+  assert.equal(E.srsQueue(es, lp, day).length, 0, 'nothing to review before any lesson is done');
+  const first = es.categories[0].lessons[0];
+  lp.lessons[first.id] = { best: 100, done: true, at: null };
+  const q = E.srsQueue(es, lp, day, 5);
+  assert.equal(q.length, 5);
+  assert.ok(q.every((c) => c.lesson === first.id));
+  const card = q[0].t;
+  assert.deepEqual(E.srsGrade(lp, card, 'good', day), { box: 1, due: '2026-10-02', seen: 1 });
+  assert.equal(E.srsGrade(lp, card, 'good', '2026-10-02').due, '2026-10-05');
+  assert.equal(E.srsGrade(lp, card, 'easy', '2026-10-05').box, 4);
+  assert.deepEqual(E.srsGrade(lp, card, 'again', '2026-10-19'), { box: 0, due: '2026-10-19', seen: 4 });
+  assert.ok(E.srsQueue(es, lp, '2026-10-19', 0).some((c) => c.t === card), 'card is due again today');
+  lp.saved.push({ t: 'órale', en: 'wow; OK' });
+  assert.ok(E.srsDeck(es, lp).some((c) => c.t === 'órale'), 'saved words join the deck');
+});
+
+test('srs dates cross month and year boundaries', () => {
+  assert.equal(E.addDays('2026-12-30', 3), '2027-01-02');
+  assert.equal(E.addDays('2028-02-28', 1), '2028-02-29');
+});
+
+test('analyzePrompt: requirements, unknown words and accent hints', () => {
+  const pr = es.writingPrompts.find((p) => p.id === 'es-w-intro');
+  const good = E.analyzePrompt('Me llamo Sam. Soy de Canadá, pero vivo en Guadalajara. Estudio español y trabajo en una cafetería.', pr, es, esIdx);
+  assert.ok(good.requirements.every((r) => r.met));
+  assert.ok(good.passed && good.score >= 90, `score ${good.score}`);
+  const sloppy = E.analyzePrompt('me llamo sam soy de canada y trabajo en una cafeteria xqzv', pr, es, esIdx);
+  assert.ok(sloppy.accentHints.some((h) => h.suggestion === 'canadá'), 'suggests the accent');
+  assert.ok(sloppy.unknown.includes('xqzv'), 'flags an unknown word');
+  const empty = E.analyzePrompt('', pr, es, esIdx);
+  assert.equal(empty.score, 0);
+  assert.equal(empty.passed, false);
+});
+
+test('analyzePrompt: Arabic requirements match with a leading و and without hamza', () => {
+  const pr = ar.writingPrompts.find((p) => p.id === 'ar-w-intro');
+  const r = E.analyzePrompt('اسمي سام. انا من كندا وادرس العربية', pr, ar, arIdx);
+  assert.ok(r.requirements.every((x) => x.met), JSON.stringify(r.requirements));
+});
+
+test('every prompt model answer passes its own check', () => {
+  for (const lang of [ar, es]) {
+    const idx = lang.id === 'ar' ? arIdx : esIdx;
+    for (const pr of [...lang.writingPrompts, ...lang.speakingPrompts]) {
+      const r = E.analyzePrompt(pr.model.t, pr, lang, idx);
+      assert.ok(r.passed, `${pr.id} scored ${r.score}`);
+    }
+  }
+});
+
+test('listening items and dictation scoring', () => {
+  for (const lang of [ar, es]) {
+    const items = E.listeningItems(lang);
+    assert.ok(items.length > 80, `${lang.id} has plenty of lines`);
+    assert.equal(new Set(items.map((i) => i.t)).size, items.length, 'no duplicates');
+  }
+  assert.equal(E.dictationScore('donde esta el bano', '¿Dónde está el baño?', 'es') >= 90, true);
+});
+
+test('study time adds active minutes and finds the next level', () => {
+  const lp = E.emptyLang();
+  for (let i = 0; i < 90; i++) E.logMinute(lp, '2026-10-01');
+  const t = E.studyTime(es, lp, new Date(2026, 9, 3));
+  assert.equal(t.minutes, 90);
+  assert.equal(t.weekMinutes, 90);
+  assert.equal(t.nextLevel, 'A1');
+  assert.equal(t.nextLevelHours, es.levelHours.A1);
 });

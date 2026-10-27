@@ -22,6 +22,17 @@
   --series-2: #eb6834;
   --series-3: #1baf7a;
   --series-4: #eda100;
+  --series-5: #e87ba4;
+  /* Hayya the mascot */
+  --hayya-body: #2f9e6b;
+  --hayya-belly: rgb(255 255 255 / 0.55);
+  --hayya-ink: #1d1d1b;
+  --hayya-eye: #ffffff;
+  --hayya-tongue: #e34948;
+  --hayya-blush: #f4a3b8;
+  --hayya-f1: #eda100;
+  --hayya-f2: #eb6834;
+  --hayya-f3: #e87ba4;
 }
 body[data-lang="ar"] { --accent: #0f766e; }
 body[data-lang="es"] { --accent: #c2185b; }
@@ -45,6 +56,8 @@ body[data-lang="es"] { --accent: #c2185b; }
     --series-2: #d95926;
     --series-3: #199e70;
     --series-4: #c98500;
+    --series-5: #d55181;
+    --hayya-body: #4cc28a;
     color-scheme: dark;
   }
   :root:not([data-theme="light"]) body[data-lang="ar"] { --accent: #2bb3a3; --accent-ink: #062b27; }
@@ -67,6 +80,8 @@ body[data-lang="es"] { --accent: #c2185b; }
   --series-2: #d95926;
   --series-3: #199e70;
   --series-4: #c98500;
+  --series-5: #d55181;
+  --hayya-body: #4cc28a;
   color-scheme: dark;
 }
 :root[data-theme="dark"] body[data-lang="ar"] { --accent: #2bb3a3; --accent-ink: #062b27; }
@@ -134,6 +149,7 @@ main { max-width: 960px; margin: 0 auto; padding: 1.25rem 1rem 4rem; outline: no
   padding: 1.1rem 1.2rem; margin-bottom: 1rem; box-shadow: var(--shadow);
 }
 .grid { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.grid.two { grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); }
 .grid.tight { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
 .row { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
 .spread { justify-content: space-between; }
@@ -347,6 +363,33 @@ textarea.input { min-height: 6rem; resize: vertical; }
 .trend .tip { min-height: 1.4em; color: var(--text); margin-top: 0.3rem; }
 .legend { display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.85rem; margin-bottom: 0.4rem; }
 .legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 0.35rem; vertical-align: middle; }
+
+.hayya { flex-shrink: 0; overflow: visible; animation: hy-bob 3.4s ease-in-out infinite; }
+body[data-lang] .hayya { --hayya-body: var(--accent); }
+.hy-body { fill: none; stroke: var(--hayya-body); stroke-width: 15; stroke-linecap: round; }
+.hy-scales { fill: none; stroke: var(--hayya-belly); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 0.1 11; }
+.hy-head { fill: var(--hayya-body); }
+.hy-eye { fill: var(--hayya-eye); }
+.hy-pupil { fill: var(--hayya-ink); }
+.hy-line { fill: none; stroke: var(--hayya-ink); stroke-width: 2; stroke-linecap: round; }
+.hy-mouth { fill: var(--hayya-ink); }
+.hy-tongue { fill: none; stroke: var(--hayya-tongue); stroke-width: 1.8; stroke-linecap: round; }
+.hy-blush { fill: var(--hayya-blush); opacity: 0.7; }
+.hy-f1 { fill: var(--hayya-f1); } .hy-f2 { fill: var(--hayya-f2); } .hy-f3 { fill: var(--hayya-f3); }
+@keyframes hy-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .hayya { animation: none; } }
+.hero-mascot { display: flex; justify-content: center; margin-bottom: 0.2rem; }
+.hayya-tip {
+  display: flex; gap: 0.8rem; align-items: center; text-decoration: none; color: var(--text);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 0.6rem 1rem 0.6rem 0.6rem;
+  box-shadow: var(--shadow);
+}
+a.hayya-tip:hover { border-color: var(--accent); }
+.hayya-tip .say { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; font-size: 0.95rem; }
+.hayya-tip .say b { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+.checklist { list-style: none; padding: 0; margin: 0.6rem 0; display: grid; gap: 0.3rem; }
+.checklist li { font-size: 0.95rem; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 footer.foot { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 2rem; }
 

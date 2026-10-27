@@ -1409,6 +1409,173 @@
      ]
     },
     {
+     "id": "ar-health",
+     "title": "Health & the Body",
+     "nativeTitle": "الصحة والجسم",
+     "icon": "cross.case",
+     "emoji": "🩺",
+     "summary": "Body parts, the dual, saying what hurts, and visiting the sick.",
+     "lessons": [
+      {
+       "id": "ar-health-1",
+       "title": "The Body & Feeling Unwell",
+       "level": "A2",
+       "summary": "The dual form and describing symptoms.",
+       "grammar": {
+        "title": "The dual: two hands, two eyes",
+        "body": [
+         "Arabic has a special form for exactly two of something, the dual (al-muthannā). Add -ān (or -ayn after prepositions and in speech): yad (hand) → yadān / yadayn.",
+         "Many body parts come in pairs: عين ʿayn (eye) → عينان ʿaynān; أذن udhun (ear) → أذنان udhunān.",
+         "To say something hurts, MSA uses يؤلمني (yuʾlimunī, 'it hurts me'): رأسي يؤلمني raʾsī yuʾlimunī (my head hurts). عندي صداع ʿindī ṣudāʿ (I have a headache) is understood everywhere."
+        ],
+        "table": {
+         "headers": [
+          "Singular",
+          "Dual",
+          "Meaning"
+         ],
+         "rows": [
+          [
+           "يد yad",
+           "يدان yadān",
+           "two hands"
+          ],
+          [
+           "عين ʿayn",
+           "عينان ʿaynān",
+           "two eyes"
+          ],
+          [
+           "أذن udhun",
+           "أذنان udhunān",
+           "two ears"
+          ],
+          [
+           "رِجل rijl",
+           "رِجلان rijlān",
+           "two legs / feet"
+          ],
+          [
+           "كتاب kitāb",
+           "كتابان kitābān",
+           "two books"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "رأس",
+         "en": "head",
+         "tr": "raʾs"
+        },
+        {
+         "t": "بطن",
+         "en": "stomach / belly",
+         "tr": "baṭn"
+        },
+        {
+         "t": "ظهر",
+         "en": "back",
+         "tr": "ẓahr"
+        },
+        {
+         "t": "سنّ",
+         "en": "tooth",
+         "tr": "sinn"
+        },
+        {
+         "t": "حرارة",
+         "en": "fever / temperature",
+         "tr": "ḥarāra"
+        },
+        {
+         "t": "زكام",
+         "en": "a cold",
+         "tr": "zukām"
+        },
+        {
+         "t": "يؤلمني",
+         "en": "it hurts me",
+         "tr": "yuʾlimunī"
+        }
+       ],
+       "examples": [
+        {
+         "t": "رأسي يؤلمني منذ الصباح.",
+         "en": "My head has been hurting since the morning.",
+         "tr": "raʾsī yuʾlimunī mundhu aṣ-ṣabāḥ."
+        },
+        {
+         "t": "عندي حرارة وزكام.",
+         "en": "I have a fever and a cold.",
+         "tr": "ʿindī ḥarāra wa-zukām."
+        },
+        {
+         "t": "سلامتك! — الله يسلمك.",
+         "en": "Get well soon! — Thank you (God keep you safe).",
+         "tr": "salāmtak! — allāh ysallmak."
+        }
+       ],
+       "culture": {
+        "title": "Visiting the sick",
+        "body": [
+         "Visiting someone who is ill (ʿiyādat al-marīḍ) is an important social duty. Visitors bring fruit, juice or sweets.",
+         "Wish a sick person سلامتك (salāmtak to a man, salāmtik to a woman), literally 'your safety'. The reply is الله يسلمك.",
+         "Pharmacists are often the first stop for minor illnesses and give advice freely."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-health-1-q1",
+         "q": "'Two eyes' is…",
+         "options": [
+          "عينان",
+          "عيني",
+          "عين",
+          "عيون"
+         ],
+         "answer": 0,
+         "explain": "عيون is the plural (eyes in general); عينان is exactly two."
+        },
+        {
+         "id": "ar-health-1-q2",
+         "q": "رأسي يؤلمني means…",
+         "options": [
+          "My back hurts",
+          "My head hurts",
+          "I'm tired",
+          "I have a fever"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-health-1-q3",
+         "q": "What do you say to someone who is ill?",
+         "options": [
+          "صحتين",
+          "نعيماً",
+          "مبروك",
+          "سلامتك"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-health-1-q4",
+         "q": "The dual ending -ān means…",
+         "options": [
+          "one",
+          "exactly two",
+          "many",
+          "none"
+         ],
+         "answer": 1
+        }
+       ]
+      }
+     ]
+    },
+    {
      "id": "ar-verb",
      "title": "Verbs & Roots",
      "nativeTitle": "الأفعال والجذور",
@@ -2069,6 +2236,695 @@
      ]
     },
     {
+     "id": "ar-egy",
+     "title": "Dialect: Egyptian Arabic",
+     "nativeTitle": "اللهجة المصرية",
+     "icon": "bubble.left",
+     "emoji": "🇪🇬",
+     "summary": "The most widely understood dialect: sounds, question words and verbs.",
+     "lessons": [
+      {
+       "id": "ar-egy-1",
+       "title": "Egyptian Sounds & Basics",
+       "level": "A2",
+       "summary": "How Egyptian differs from MSA, and everyday words.",
+       "grammar": {
+        "title": "What changes in Egyptian",
+        "body": [
+         "ج is pronounced g: جميل gamīl, جديد gidīd.",
+         "ق usually becomes a glottal stop (ʾ) in Cairo: قهوة → ʾahwa, قلب → ʾalb.",
+         "Negate with ma-…-sh around the verb: ماعرفش maʿrafsh (I don't know), مافيش mafīsh (there isn't).",
+         "Demonstratives follow the noun: البيت ده il-bēt da (this house), العربية دي il-ʿarabiyya di (this car)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "MSA",
+          "Egyptian"
+         ],
+         "rows": [
+          [
+           "How are you?",
+           "كيف حالك؟",
+           "إزيك؟ izzayyak / izzayyik"
+          ],
+          [
+           "What?",
+           "ماذا؟",
+           "إيه؟ ēh"
+          ],
+          [
+           "Where?",
+           "أين؟",
+           "فين؟ fēn"
+          ],
+          [
+           "When?",
+           "متى؟",
+           "إمتى؟ imta"
+          ],
+          [
+           "Why?",
+           "لماذا؟",
+           "ليه؟ lēh"
+          ],
+          [
+           "now",
+           "الآن",
+           "دلوقتي dilwaʾti"
+          ],
+          [
+           "tomorrow",
+           "غداً",
+           "بكرة bukra"
+          ],
+          [
+           "I don't know",
+           "لا أعرف",
+           "مش عارف / ماعرفش mish ʿārif / maʿrafsh"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "إزيك",
+         "en": "how are you? (to a man)",
+         "tr": "izzayyak"
+        },
+        {
+         "t": "كويس",
+         "en": "good / fine",
+         "tr": "kwayyis"
+        },
+        {
+         "t": "عايز / عايزة",
+         "en": "want (m / f)",
+         "tr": "ʿāyiz / ʿayza"
+        },
+        {
+         "t": "فين",
+         "en": "where",
+         "tr": "fēn"
+        },
+        {
+         "t": "دلوقتي",
+         "en": "now",
+         "tr": "dilwaʾti"
+        },
+        {
+         "t": "بكرة",
+         "en": "tomorrow",
+         "tr": "bukra"
+        },
+        {
+         "t": "ماشي",
+         "en": "OK",
+         "tr": "māshi"
+        }
+       ],
+       "examples": [
+        {
+         "t": "إزيك؟ — الحمد لله، كويس.",
+         "en": "How are you? — Fine, thank God.",
+         "tr": "izzayyak? — il-ḥamdu li-llāh, kwayyis."
+        },
+        {
+         "t": "أنا عايز قهوة، لو سمحت.",
+         "en": "I'd like a coffee, please.",
+         "tr": "ana ʿāyiz ʾahwa, law samaḥt."
+        },
+        {
+         "t": "المحطة فين؟",
+         "en": "Where's the station?",
+         "tr": "il-maḥaṭṭa fēn?",
+         "note": "Question words often come at the end in Egyptian."
+        }
+       ],
+       "culture": {
+        "title": "Egypt's voice",
+        "body": [
+         "Egyptian Arabic is the most widely understood dialect, spread by Cairo's film, TV and music industry since the 1930s.",
+         "Friendly titles are everywhere: يا باشا yā bāsha (boss), يا أستاذ yā ustāz (sir), يا حاجة yā ḥagga (to an older woman).",
+         "Egyptians are famous for their humour: jokes (nukat) and wordplay are part of everyday life."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-egy-1-q1",
+         "q": "In Cairo, قهوة sounds like…",
+         "options": [
+          "ʾahwa",
+          "kahwa",
+          "gahwa",
+          "qahwa"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-egy-1-q2",
+         "q": "'Where?' in Egyptian is…",
+         "options": [
+          "أين",
+          "فين",
+          "شو",
+          "وين"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-egy-1-q3",
+         "q": "ماعرفش means…",
+         "options": [
+          "I know",
+          "I didn't go",
+          "I don't know",
+          "I want"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-egy-1-q4",
+         "q": "'This house' in Egyptian is…",
+         "options": [
+          "ده البيت",
+          "بيت الده",
+          "هذا بيت",
+          "البيت ده"
+         ],
+         "answer": 3
+        }
+       ]
+      },
+      {
+       "id": "ar-egy-2",
+       "title": "Egyptian Verbs: Now, Later, Before",
+       "level": "B1",
+       "summary": "b- for the present, ḥa- for the future, and the past.",
+       "grammar": {
+        "title": "b- for now, ḥa- for later",
+        "body": [
+         "The present adds b- (bi-) to the verb: باكتب baktib (I write / I'm writing), بتكتب bitiktib (you write).",
+         "The future adds ḥa- (or ha-): حاكتب ḥaktib (I will write), حنروح ḥanrūḥ (we will go).",
+         "The past is close to MSA without the final vowels: كتبت katabt (I wrote), كتب katab (he wrote), كتبت katabit (she wrote)."
+        ],
+        "table": {
+         "headers": [
+          "Person",
+          "Present",
+          "Past"
+         ],
+         "rows": [
+          [
+           "I",
+           "باكتب baktib",
+           "كتبت katabt"
+          ],
+          [
+           "you (m)",
+           "بتكتب bitiktib",
+           "كتبت katabt"
+          ],
+          [
+           "you (f)",
+           "بتكتبي bitiktibi",
+           "كتبتي katabti"
+          ],
+          [
+           "he",
+           "بيكتب biyiktib",
+           "كتب katab"
+          ],
+          [
+           "she",
+           "بتكتب bitiktib",
+           "كتبت katabit"
+          ],
+          [
+           "we",
+           "بنكتب biniktib",
+           "كتبنا katabna"
+          ],
+          [
+           "they",
+           "بيكتبوا biyiktibu",
+           "كتبوا katabu"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "باروح",
+         "en": "I go / I'm going",
+         "tr": "barūḥ"
+        },
+        {
+         "t": "حاروح",
+         "en": "I'll go",
+         "tr": "ḥarūḥ"
+        },
+        {
+         "t": "رحت",
+         "en": "I went",
+         "tr": "ruḥt"
+        },
+        {
+         "t": "حاضر",
+         "en": "certainly / right away",
+         "tr": "ḥāḍir"
+        },
+        {
+         "t": "طب",
+         "en": "OK then / so",
+         "tr": "ṭab"
+        },
+        {
+         "t": "خلاص",
+         "en": "done / enough",
+         "tr": "khalāṣ"
+        },
+        {
+         "t": "مش",
+         "en": "not",
+         "tr": "mish"
+        }
+       ],
+       "examples": [
+        {
+         "t": "أنا باشتغل في بنك.",
+         "en": "I work in a bank.",
+         "tr": "ana bashtaghal fi bank."
+        },
+        {
+         "t": "حنروح السينما بكرة.",
+         "en": "We'll go to the cinema tomorrow.",
+         "tr": "ḥanrūḥ is-sinima bukra."
+        },
+        {
+         "t": "امبارح رحت السوق.",
+         "en": "Yesterday I went to the market.",
+         "tr": "imbāriḥ ruḥt is-sūʾ."
+        }
+       ],
+       "culture": {
+        "title": "Everyday Cairo",
+        "body": [
+         "حاضر (ḥāḍir), 'present / ready', is the polite way to say 'yes, right away', from waiters to children answering their parents.",
+         "Life is lived late: cafés (ʾahāwi) and street-food stalls stay busy well past midnight.",
+         "Koshari (كشري), a mix of rice, lentils, pasta, chickpeas, tomato sauce and fried onions, is the beloved national street food."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-egy-2-q1",
+         "q": "حاروح means…",
+         "options": [
+          "I went",
+          "Go!",
+          "I'm going now",
+          "I'll go"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-egy-2-q2",
+         "q": "'He writes / is writing' in Egyptian is…",
+         "options": [
+          "كتب",
+          "اكتب",
+          "بيكتب",
+          "حيكتب"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-egy-2-q3",
+         "q": "حاضر is used to say…",
+         "options": [
+          "yes, right away (politely)",
+          "I'm sorry",
+          "goodbye",
+          "how much?"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-egy-2-q4",
+         "q": "Koshari is…",
+         "options": [
+          "a street-food dish",
+          "a dance",
+          "a type of coffee",
+          "a café"
+         ],
+         "answer": 0
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ar-lev",
+     "title": "Dialect: Levantine Arabic",
+     "nativeTitle": "اللهجة الشامية",
+     "icon": "bubble.right",
+     "emoji": "🌿",
+     "summary": "Syria, Lebanon, Jordan and Palestine: basics, courtesy and verbs.",
+     "lessons": [
+      {
+       "id": "ar-lev-1",
+       "title": "Levantine Basics",
+       "level": "A2",
+       "summary": "بدّي, شو, قدّيش and everyday courtesy.",
+       "grammar": {
+        "title": "What changes in Levantine",
+        "body": [
+         "In cities, ق also becomes a glottal stop: قلب → ʾalb. In villages and Bedouin areas you may hear g instead.",
+         "'Want' takes possessive endings: بدّي biddi (I want), بدّك biddak (you want), بدّو biddo (he wants).",
+         "Negate verbs with ما (mā) and other words with مش (mish): ما بعرف mā baʿrif (I don't know), مش منيح mish mnīḥ (not good).",
+         "'This' is هيدا / هيدي (hayda / haydi) in Lebanon and هاد (hād) in Syria and Jordan. هال- (hal-) attaches to a noun: هالبيت hal-bēt (this house)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "MSA",
+          "Levantine"
+         ],
+         "rows": [
+          [
+           "How are you?",
+           "كيف حالك؟",
+           "كيفك؟ kīfak / kīfik"
+          ],
+          [
+           "What?",
+           "ماذا؟",
+           "شو؟ shū"
+          ],
+          [
+           "Where?",
+           "أين؟",
+           "وين؟ wēn"
+          ],
+          [
+           "How much?",
+           "بكم؟",
+           "قدّيش؟ ʾaddēsh"
+          ],
+          [
+           "now",
+           "الآن",
+           "هلّق hallaʾ"
+          ],
+          [
+           "I want",
+           "أريد",
+           "بدّي biddi"
+          ],
+          [
+           "there is",
+           "يوجد",
+           "في fī"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "كيفك",
+         "en": "how are you? (to a man)",
+         "tr": "kīfak"
+        },
+        {
+         "t": "منيح",
+         "en": "good / fine",
+         "tr": "mnīḥ"
+        },
+        {
+         "t": "بدّي",
+         "en": "I want",
+         "tr": "biddi"
+        },
+        {
+         "t": "قدّيش",
+         "en": "how much",
+         "tr": "ʾaddēsh"
+        },
+        {
+         "t": "تكرم",
+         "en": "of course / you're welcome",
+         "tr": "tikram"
+        },
+        {
+         "t": "يعطيك العافية",
+         "en": "thanks for your hard work",
+         "tr": "yaʿṭīk il-ʿāfye"
+        },
+        {
+         "t": "كمان",
+         "en": "also / more",
+         "tr": "kamān"
+        }
+       ],
+       "examples": [
+        {
+         "t": "مرحبا، كيفك؟ — منيح، الحمد لله.",
+         "en": "Hi, how are you? — Good, thank God.",
+         "tr": "marḥaba, kīfak? — mnīḥ, il-ḥamdu li-llāh."
+        },
+        {
+         "t": "قدّيش هاد؟",
+         "en": "How much is this?",
+         "tr": "ʾaddēsh hād?"
+        },
+        {
+         "t": "يعطيك العافية! — الله يعافيك.",
+         "en": "Thanks for your hard work! — God give you health.",
+         "tr": "yaʿṭīk il-ʿāfye! — alla yʿāfīk.",
+         "note": "Said to anyone working: shopkeepers, drivers, cooks."
+        }
+       ],
+       "culture": {
+        "title": "Levantine courtesy",
+        "body": [
+         "يعطيك العافية greets anyone who is working or has made an effort. The reply is الله يعافيك.",
+         "تكرم / تكرمي (tikram / tikrami, 'be honoured') answers a request: 'of course, with pleasure'.",
+         "Mornings often start with Fairuz on the radio, and coffee is offered to every guest."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-lev-1-q1",
+         "q": "'How much?' in Levantine is…",
+         "options": [
+          "إيش",
+          "قدّيش",
+          "بكم",
+          "كم الساعة"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-lev-1-q2",
+         "q": "بدّي means…",
+         "options": [
+          "I want",
+          "I know",
+          "I must",
+          "I have"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-lev-1-q3",
+         "q": "What do you say to someone who is working hard?",
+         "options": [
+          "صحتين",
+          "نعيماً",
+          "مبروك",
+          "يعطيك العافية"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-lev-1-q4",
+         "q": "ما بعرف means…",
+         "options": [
+          "I know",
+          "Don't know!",
+          "I don't know",
+          "I didn't go"
+         ],
+         "answer": 2
+        }
+       ]
+      },
+      {
+       "id": "ar-lev-2",
+       "title": "Levantine Verbs & Daily Life",
+       "level": "B1",
+       "summary": "b- present, عم for right now, رح for the future.",
+       "grammar": {
+        "title": "b-, ʿam and raḥ",
+        "body": [
+         "The present adds b-: بكتب biktob (I write), بتكتب btiktob (you write). In the \"we\" form it becomes m-: منكتب mniktob (we write).",
+         "عم (ʿam) before the verb means right now: عم بكتب ʿam biktob (I'm writing).",
+         "The future uses رح (raḥ) + the verb without b-: رح اكتب raḥ iktob (I'll write), رح نروح raḥ nrūḥ (we'll go).",
+         "The past is like Egyptian: كتبت katabt (I wrote), كتب katab (he wrote), كتبت katabet (she wrote)."
+        ],
+        "table": {
+         "headers": [
+          "Person",
+          "Present",
+          "Future"
+         ],
+         "rows": [
+          [
+           "I",
+           "بكتب biktob",
+           "رح اكتب raḥ iktob"
+          ],
+          [
+           "you (m)",
+           "بتكتب btiktob",
+           "رح تكتب raḥ tiktob"
+          ],
+          [
+           "you (f)",
+           "بتكتبي btiktobi",
+           "رح تكتبي raḥ tiktobi"
+          ],
+          [
+           "he",
+           "بيكتب byiktob",
+           "رح يكتب raḥ yiktob"
+          ],
+          [
+           "we",
+           "منكتب mniktob",
+           "رح نكتب raḥ niktob"
+          ],
+          [
+           "they",
+           "بيكتبوا byiktobu",
+           "رح يكتبوا raḥ yiktobu"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "عم",
+         "en": "-ing (right now)",
+         "tr": "ʿam"
+        },
+        {
+         "t": "رح",
+         "en": "will",
+         "tr": "raḥ"
+        },
+        {
+         "t": "هلّق",
+         "en": "now",
+         "tr": "hallaʾ"
+        },
+        {
+         "t": "بكرا",
+         "en": "tomorrow",
+         "tr": "bukra"
+        },
+        {
+         "t": "مبارح",
+         "en": "yesterday",
+         "tr": "mbāreḥ"
+        },
+        {
+         "t": "ع راسي",
+         "en": "with pleasure (lit. on my head)",
+         "tr": "ʿa rāsi"
+        },
+        {
+         "t": "صحتين",
+         "en": "enjoy your meal",
+         "tr": "ṣaḥtēn"
+        }
+       ],
+       "examples": [
+        {
+         "t": "شو عم تعمل؟ — عم بطبخ.",
+         "en": "What are you doing? — I'm cooking.",
+         "tr": "shū ʿam taʿmel? — ʿam boṭbokh."
+        },
+        {
+         "t": "رح نروح ع البحر بكرا.",
+         "en": "We'll go to the sea tomorrow.",
+         "tr": "raḥ nrūḥ ʿal-baḥr bukra."
+        },
+        {
+         "t": "صحتين! — ع قلبك.",
+         "en": "Enjoy your meal! — And to your heart.",
+         "tr": "ṣaḥtēn! — ʿa-albak."
+        }
+       ],
+       "culture": {
+        "title": "The mezze table",
+        "body": [
+         "Levantine meals are shared: hummus, mutabbal, tabbouleh, fattoush and warm bread are passed around for everyone.",
+         "صحتين (ṣaḥtēn, 'two healths') is answered with ع قلبك (ʿa-albak, 'on your heart').",
+         "Phrases like ع راسي ('on my head') show you'll gladly do something."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-lev-2-q1",
+         "q": "عم بطبخ means…",
+         "options": [
+          "I cooked",
+          "I'm cooking (right now)",
+          "I'll cook",
+          "I don't cook"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-lev-2-q2",
+         "q": "The Levantine future marker is…",
+         "options": [
+          "ب",
+          "ما",
+          "رح",
+          "عم"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-lev-2-q3",
+         "q": "Reply to 'صحتين':",
+         "options": [
+          "ع قلبك",
+          "الله أكرم",
+          "وعليكم السلام",
+          "مبروك"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-lev-2-q4",
+         "q": "منكتب means…",
+         "options": [
+          "they write",
+          "you write",
+          "we write",
+          "I write"
+         ],
+         "answer": 2
+        }
+       ]
+      }
+     ]
+    },
+    {
      "id": "ar-cult",
      "title": "Culture & Dialects",
      "nativeTitle": "الثقافة واللهجات",
@@ -2397,6 +3253,652 @@
      ]
     },
     {
+     "id": "ar-work",
+     "title": "Work & Opinions",
+     "nativeTitle": "العمل والآراء",
+     "icon": "briefcase",
+     "emoji": "💼",
+     "summary": "The workplace, linking verbs with أن, comparisons and giving opinions.",
+     "lessons": [
+      {
+       "id": "ar-work-1",
+       "title": "Jobs & the Workplace",
+       "level": "B1",
+       "summary": "أن + subjunctive and talking about work.",
+       "grammar": {
+        "title": "أن + subjunctive: I want to…",
+        "body": [
+         "To say 'I want to work', Arabic links two verbs with أن (an) and puts the second in the subjunctive, which ends in -a: أريد أن أعمل urīdu an aʿmala.",
+         "The same pattern follows يجب أن (yajibu an, must), أحب أن (uḥibbu an, I like to) and أستطيع أن (astaṭīʿu an, I can).",
+         "Instead of أن + verb you can use a verbal noun (maṣdar): أحب العمل هنا uḥibbu al-ʿamala hunā (I love working here)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Arabic",
+          "Say"
+         ],
+         "rows": [
+          [
+           "I want to work",
+           "أريد أن أعمل",
+           "urīdu an aʿmala"
+          ],
+          [
+           "I must travel",
+           "يجب أن أسافر",
+           "yajibu an usāfira"
+          ],
+          [
+           "I can come",
+           "أستطيع أن آتي",
+           "astaṭīʿu an ātiya"
+          ],
+          [
+           "I like reading",
+           "أحب القراءة",
+           "uḥibbu al-qirāʾa"
+          ],
+          [
+           "I hope to succeed",
+           "أتمنى أن أنجح",
+           "atamannā an anjaḥa"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "وظيفة",
+         "en": "job / position",
+         "tr": "waẓīfa"
+        },
+        {
+         "t": "شركة",
+         "en": "company",
+         "tr": "sharika"
+        },
+        {
+         "t": "مدير",
+         "en": "manager",
+         "tr": "mudīr"
+        },
+        {
+         "t": "زميل / زميلة",
+         "en": "colleague (m / f)",
+         "tr": "zamīl / zamīla"
+        },
+        {
+         "t": "راتب",
+         "en": "salary",
+         "tr": "rātib"
+        },
+        {
+         "t": "اجتماع",
+         "en": "meeting",
+         "tr": "ijtimāʿ"
+        },
+        {
+         "t": "مقابلة عمل",
+         "en": "job interview",
+         "tr": "muqābalat ʿamal"
+        }
+       ],
+       "examples": [
+        {
+         "t": "أعمل مهندساً في شركة كبيرة.",
+         "en": "I work as an engineer in a big company.",
+         "tr": "aʿmalu muhandisan fī sharika kabīra.",
+         "note": "After أعمل the job title takes -an (accusative)."
+        },
+        {
+         "t": "عندي اجتماع مع المدير الساعة العاشرة.",
+         "en": "I have a meeting with the manager at ten.",
+         "tr": "ʿindī ijtimāʿ maʿa al-mudīr as-sāʿa al-ʿāshira."
+        },
+        {
+         "t": "أريد أن أغيّر وظيفتي.",
+         "en": "I want to change my job.",
+         "tr": "urīdu an ughayyira waẓīfatī."
+        }
+       ],
+       "culture": {
+        "title": "Work culture",
+        "body": [
+         "Relationships matter: expect coffee and small talk before business, and don't rush to the agenda.",
+         "واسطة (wāsṭa), personal connections or influence, is a widely discussed part of getting things done in many Arab countries.",
+         "Work weeks differ: Sunday to Thursday is common (for example in Saudi Arabia, Egypt and Jordan), while the UAE moved to Monday to Friday in 2022.",
+         "Titles are used at work as forms of address: ustādh, duktūr, muhandis (engineer)."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-work-1-q1",
+         "q": "'I want to work' (MSA) is…",
+         "options": [
+          "أريد أن أعمل",
+          "أريد عمل أن",
+          "أريد أعمل",
+          "أعمل أريد"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-work-1-q2",
+         "q": "راتب means…",
+         "options": [
+          "salary",
+          "meeting",
+          "colleague",
+          "office"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-work-1-q3",
+         "q": "واسطة refers to…",
+         "options": [
+          "a meeting room",
+          "personal connections / influence",
+          "overtime",
+          "a type of contract"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-work-1-q4",
+         "q": "After أن the verb is…",
+         "options": [
+          "always a noun",
+          "past tense",
+          "subjunctive (-a)",
+          "jussive"
+         ],
+         "answer": 2
+        }
+       ]
+      },
+      {
+       "id": "ar-work-2",
+       "title": "Opinions & Comparisons",
+       "level": "B1",
+       "summary": "أفعل comparatives, superlatives and polite disagreement.",
+       "grammar": {
+        "title": "Comparatives and giving opinions",
+        "body": [
+         "Comparatives use the pattern أفعل (afʿal): كبير kabīr → أكبر akbar (bigger), صغير → أصغر aṣghar, جميل → أجمل ajmal, جيد → أفضل afḍal (better).",
+         "Add من (min, than): القاهرة أكبر من عمّان al-Qāhira akbar min ʿAmmān (Cairo is bigger than Amman). The form does not change for gender.",
+         "With al- it becomes a superlative: الأكبر al-akbar (the biggest). Before a noun: أكبر مدينة akbar madīna (the biggest city).",
+         "Give opinions with أعتقد أنّ (aʿtaqidu anna, I think that), في رأيي (fī raʾyī, in my opinion) and أوافق / لا أوافق (uwāfiqu / lā uwāfiqu, I agree / disagree)."
+        ],
+        "table": {
+         "headers": [
+          "Adjective",
+          "Comparative",
+          "Superlative"
+         ],
+         "rows": [
+          [
+           "كبير big",
+           "أكبر bigger",
+           "الأكبر the biggest"
+          ],
+          [
+           "صغير small",
+           "أصغر smaller",
+           "الأصغر the smallest"
+          ],
+          [
+           "جميل beautiful",
+           "أجمل more beautiful",
+           "الأجمل the most beautiful"
+          ],
+          [
+           "جيد good",
+           "أفضل better",
+           "الأفضل the best"
+          ],
+          [
+           "سهل easy",
+           "أسهل easier",
+           "الأسهل the easiest"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "في رأيي",
+         "en": "in my opinion",
+         "tr": "fī raʾyī"
+        },
+        {
+         "t": "أعتقد أنّ",
+         "en": "I think that",
+         "tr": "aʿtaqidu anna"
+        },
+        {
+         "t": "أوافق",
+         "en": "I agree",
+         "tr": "uwāfiqu"
+        },
+        {
+         "t": "لا أوافق",
+         "en": "I disagree",
+         "tr": "lā uwāfiqu"
+        },
+        {
+         "t": "من ناحية",
+         "en": "on one hand",
+         "tr": "min nāḥiya"
+        },
+        {
+         "t": "ومن ناحية أخرى",
+         "en": "on the other hand",
+         "tr": "wa-min nāḥiya ukhrā"
+        },
+        {
+         "t": "أفضل",
+         "en": "better / best",
+         "tr": "afḍal"
+        }
+       ],
+       "examples": [
+        {
+         "t": "في رأيي، الحياة في القرية أهدأ من المدينة.",
+         "en": "In my opinion, life in the village is calmer than in the city.",
+         "tr": "fī raʾyī, al-ḥayāh fī al-qarya ahdaʾ min al-madīna."
+        },
+        {
+         "t": "أعتقد أنّ العربية أصعب من الإسبانية.",
+         "en": "I think Arabic is harder than Spanish.",
+         "tr": "aʿtaqidu anna al-ʿarabiyya aṣʿab min al-isbāniyya."
+        },
+        {
+         "t": "مع احترامي، لا أوافق.",
+         "en": "With respect, I disagree.",
+         "tr": "maʿa iḥtirāmī, lā uwāfiq."
+        }
+       ],
+       "culture": {
+        "title": "Disagreeing politely",
+        "body": [
+         "Soften disagreement: start with مع احترامي (maʿa iḥtirāmī, with respect) or معك حق، بس… (maʿak ḥaqq, bas…, you're right, but…).",
+         "Directly criticising someone senior in public can cause loss of face, so disagreement is often expressed privately or indirectly.",
+         "Lively debate among friends, though, is a favourite pastime, especially about football, politics and food."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-work-2-q1",
+         "q": "'Bigger' is…",
+         "options": [
+          "الكبير",
+          "كبيرة",
+          "أكبر",
+          "كبار"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-work-2-q2",
+         "q": "'The best' is…",
+         "options": [
+          "جيد جداً",
+          "أفضل من",
+          "الأفضل",
+          "الجيدة"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-work-2-q3",
+         "q": "'In my opinion' is…",
+         "options": [
+          "في رأيي",
+          "من فضلك",
+          "على طول",
+          "إن شاء الله"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-work-2-q4",
+         "q": "Which phrase softens a disagreement?",
+         "options": [
+          "مع احترامي",
+          "خلاص",
+          "لا أبداً",
+          "يلا"
+         ],
+         "answer": 0
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ar-story",
+     "title": "Storytelling",
+     "nativeTitle": "الحكايات",
+     "icon": "book",
+     "emoji": "📜",
+     "summary": "Past continuous, time words, relative clauses and proverbs.",
+     "lessons": [
+      {
+       "id": "ar-story-1",
+       "title": "Telling a Story",
+       "level": "B1",
+       "summary": "Background with كان, events with the past, and time words.",
+       "grammar": {
+        "title": "Background and events",
+        "body": [
+         "كان + a present-tense verb describes what was going on or used to happen: كنتُ أدرس kuntu adrusu (I was studying / I used to study).",
+         "The simple past moves the story forward: ثم رنّ الهاتف thumma ranna al-hātif (then the phone rang).",
+         "Time words: عندما ʿindamā (when), بينما baynamā (while), ثمّ thumma (then), بعد أن baʿda an + past (after), قبل أن qabla an + subjunctive (before)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Arabic",
+          "Say"
+         ],
+         "rows": [
+          [
+           "I was studying",
+           "كنتُ أدرس",
+           "kuntu adrusu"
+          ],
+          [
+           "We used to live in Beirut",
+           "كنّا نسكن في بيروت",
+           "kunnā naskunu fī Bayrūt"
+          ],
+          [
+           "When I arrived",
+           "عندما وصلتُ",
+           "ʿindamā waṣaltu"
+          ],
+          [
+           "While she was reading",
+           "بينما كانت تقرأ",
+           "baynamā kānat taqraʾ"
+          ],
+          [
+           "After we ate",
+           "بعد أن أكلنا",
+           "baʿda an akalnā"
+          ],
+          [
+           "Before you leave",
+           "قبل أن تذهب",
+           "qabla an tadhhaba"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "كان يا ما كان",
+         "en": "once upon a time",
+         "tr": "kān yā mā kān"
+        },
+        {
+         "t": "عندما",
+         "en": "when",
+         "tr": "ʿindamā"
+        },
+        {
+         "t": "بينما",
+         "en": "while",
+         "tr": "baynamā"
+        },
+        {
+         "t": "ثمّ",
+         "en": "then",
+         "tr": "thumma"
+        },
+        {
+         "t": "فجأة",
+         "en": "suddenly",
+         "tr": "fajʾatan"
+        },
+        {
+         "t": "في النهاية",
+         "en": "in the end",
+         "tr": "fī an-nihāya"
+        },
+        {
+         "t": "قصة",
+         "en": "story",
+         "tr": "qiṣṣa"
+        }
+       ],
+       "examples": [
+        {
+         "t": "عندما كنتُ صغيراً، كنتُ ألعب في الشارع كل يوم.",
+         "en": "When I was little, I used to play in the street every day.",
+         "tr": "ʿindamā kuntu ṣaghīran, kuntu alʿabu fī ash-shāriʿ kulla yawm."
+        },
+        {
+         "t": "بينما كنتُ أمشي، بدأ المطر فجأةً.",
+         "en": "While I was walking, it suddenly started to rain.",
+         "tr": "baynamā kuntu amshī, badaʾa al-maṭar fajʾatan."
+        },
+        {
+         "t": "وفي النهاية، عاشوا في سعادة.",
+         "en": "And in the end, they lived happily.",
+         "tr": "wa-fī an-nihāya, ʿāshū fī saʿāda."
+        }
+       ],
+       "culture": {
+        "title": "The storyteller's art",
+        "body": [
+         "The ḥakawātī (حكواتي), a professional storyteller, once performed epic tales in coffeehouses, and the tradition has been revived in some cafés in Damascus and elsewhere.",
+         "Folk tales often open with كان يا ما كان، في قديم الزمان (kān yā mā kān, fī qadīm az-zamān): 'there was, or there was not, in olden times'.",
+         "The Thousand and One Nights (ألف ليلة وليلة, alf layla wa-layla) is the most famous story collection, framed by Shahrazad telling stories to save her life."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-story-1-q1",
+         "q": "كنتُ أدرس means…",
+         "options": [
+          "I studied once",
+          "I was studying / used to study",
+          "I will study",
+          "I am studying"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-story-1-q2",
+         "q": "'Suddenly' is…",
+         "options": [
+          "بينما",
+          "ثمّ",
+          "عندما",
+          "فجأة"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-story-1-q3",
+         "q": "Folk tales often begin with…",
+         "options": [
+          "كان يا ما كان",
+          "يا حبيبي",
+          "مع السلامة",
+          "إن شاء الله"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-story-1-q4",
+         "q": "بعد أن is followed by…",
+         "options": [
+          "the future",
+          "the past tense",
+          "a noun only",
+          "the subjunctive"
+         ],
+         "answer": 1
+        }
+       ]
+      },
+      {
+       "id": "ar-story-2",
+       "title": "Relative Clauses & Proverbs",
+       "level": "B2",
+       "summary": "الذي / التي / اللي and the proverbs people quote.",
+       "grammar": {
+        "title": "Who, which, that",
+        "body": [
+         "Relative pronouns agree with a definite noun: الذي alladhī (m), التي allatī (f), الذين alladhīna (m pl), اللواتي allawātī (f pl).",
+         "If the noun is indefinite, leave the pronoun out: رأيتُ رجلاً يبيع الخبز raʾaytu rajulan yabīʿu al-khubz (I saw a man selling bread).",
+         "Arabic repeats the noun as a pronoun inside the clause: الكتاب الذي قرأتُه al-kitāb alladhī qaraʾtuhu (the book that I read [it]).",
+         "Everyday dialects use one form for everything: اللي (illī)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Arabic"
+         ],
+         "rows": [
+          [
+           "the man who came",
+           "الرجل الذي جاء"
+          ],
+          [
+           "the woman who works here",
+           "المرأة التي تعمل هنا"
+          ],
+          [
+           "the students who passed",
+           "الطلاب الذين نجحوا"
+          ],
+          [
+           "the book I read",
+           "الكتاب الذي قرأتُه"
+          ],
+          [
+           "a city I love",
+           "مدينة أحبّها"
+          ],
+          [
+           "(dialect) the one who came",
+           "اللي إجا illi ija (Lev.) / اللي جه illi geh (Egy.)"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "الذي",
+         "en": "who / which (m)",
+         "tr": "alladhī"
+        },
+        {
+         "t": "التي",
+         "en": "who / which (f)",
+         "tr": "allatī"
+        },
+        {
+         "t": "الذين",
+         "en": "who (m pl)",
+         "tr": "alladhīna"
+        },
+        {
+         "t": "اللي",
+         "en": "who / which (dialects)",
+         "tr": "illī"
+        },
+        {
+         "t": "مَثَل",
+         "en": "proverb",
+         "tr": "mathal"
+        },
+        {
+         "t": "الصبر",
+         "en": "patience",
+         "tr": "aṣ-ṣabr"
+        }
+       ],
+       "examples": [
+        {
+         "t": "هذا هو الفيلم الذي حدّثتُك عنه.",
+         "en": "This is the film I told you about.",
+         "tr": "hādhā huwa al-film alladhī ḥaddathtuka ʿanhu."
+        },
+        {
+         "t": "الصبر مفتاح الفرج.",
+         "en": "Patience is the key to relief.",
+         "tr": "aṣ-ṣabru miftāḥu al-faraj.",
+         "note": "A much-loved proverb."
+        },
+        {
+         "t": "من جدّ وجد.",
+         "en": "Whoever strives, succeeds.",
+         "tr": "man jadda wajada."
+        }
+       ],
+       "culture": {
+        "title": "Proverbs in daily life",
+        "body": [
+         "Proverbs (amthāl) are woven into conversation to give advice or comfort, and quoting one well is admired.",
+         "Others you'll hear: اللي فات مات (illī fāt māt, 'what's past is dead': let it go) and العين بصيرة واليد قصيرة (al-ʿayn baṣīra wa-l-yad qaṣīra, 'the eye sees but the hand is short': I'd like to, but I can't afford it)."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-story-2-q1",
+         "q": "'The woman who works here' is…",
+         "options": [
+          "المرأة الذي تعمل هنا",
+          "المرأة التي تعمل هنا",
+          "المرأة الذين تعمل هنا",
+          "المرأة تعمل التي هنا"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-story-2-q2",
+         "q": "With an indefinite noun, the relative pronoun is…",
+         "options": [
+          "always التي",
+          "left out",
+          "replaced by أنّ",
+          "always الذي"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-story-2-q3",
+         "q": "الصبر مفتاح الفرج means…",
+         "options": [
+          "Patience is the key to relief",
+          "Knowledge is power",
+          "Time is money",
+          "Haste makes waste"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-story-2-q4",
+         "q": "اللي is…",
+         "options": [
+          "the dialect relative pronoun",
+          "a question word",
+          "a verb",
+          "a preposition"
+         ],
+         "answer": 0
+        }
+       ]
+      }
+     ]
+    },
+    {
      "id": "ar-adv",
      "title": "Advanced Grammar",
      "nativeTitle": "قواعد متقدمة",
@@ -2703,6 +4205,325 @@
           "because",
           "still",
           "but"
+         ],
+         "answer": 1
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ar-news",
+     "title": "News & Formal Arabic",
+     "nativeTitle": "الأخبار والفصحى",
+     "icon": "newspaper",
+     "emoji": "📰",
+     "summary": "The passive voice, reporting language, connectors and conditionals.",
+     "lessons": [
+      {
+       "id": "ar-news-1",
+       "title": "Reading the News",
+       "level": "B2",
+       "summary": "Passive verbs, تمّ + verbal noun, and reporting phrases.",
+       "grammar": {
+        "title": "The passive voice",
+        "body": [
+         "News Arabic often uses the passive, formed by changing the vowels: كَتَبَ kataba (he wrote) → كُتِبَ kutiba (it was written); يَكتُب yaktubu → يُكتَب yuktabu (it is written).",
+         "Headlines love تمّ + verbal noun (tamma, 'was completed'): تمّ افتتاح المعرض tamma iftitāḥ al-maʿraḍ (the exhibition was opened).",
+         "Reporting phrases: صرّح ṣarraḥa (declared), أعلن aʿlana (announced), وفقاً لـ wifqan li- (according to), أفادت مصادر afādat maṣādir (sources reported)."
+        ],
+        "table": {
+         "headers": [
+          "Active",
+          "Passive"
+         ],
+         "rows": [
+          [
+           "كتب kataba (wrote)",
+           "كُتب kutiba (was written)"
+          ],
+          [
+           "أعلن aʿlana (announced)",
+           "أُعلن uʿlina (was announced)"
+          ],
+          [
+           "انتخب intakhaba (elected)",
+           "انتُخب intukhiba (was elected)"
+          ],
+          [
+           "يقول yaqūlu (says)",
+           "يُقال yuqālu (it is said)"
+          ],
+          [
+           "افتتح iftataḥa (opened)",
+           "تمّ افتتاح tamma iftitāḥ (was opened)"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "حكومة",
+         "en": "government",
+         "tr": "ḥukūma"
+        },
+        {
+         "t": "رئيس",
+         "en": "president / head",
+         "tr": "raʾīs"
+        },
+        {
+         "t": "انتخابات",
+         "en": "elections",
+         "tr": "intikhābāt"
+        },
+        {
+         "t": "اقتصاد",
+         "en": "economy",
+         "tr": "iqtiṣād"
+        },
+        {
+         "t": "مؤتمر صحفي",
+         "en": "press conference",
+         "tr": "muʾtamar ṣuḥufī"
+        },
+        {
+         "t": "وفقاً لـ",
+         "en": "according to",
+         "tr": "wifqan li-"
+        },
+        {
+         "t": "أعلن",
+         "en": "announced",
+         "tr": "aʿlana"
+        }
+       ],
+       "examples": [
+        {
+         "t": "أعلنت الحكومة عن خطة اقتصادية جديدة.",
+         "en": "The government announced a new economic plan.",
+         "tr": "aʿlanat al-ḥukūma ʿan khuṭṭa iqtiṣādiyya jadīda."
+        },
+        {
+         "t": "انتُخب رئيس جديد للبلدية.",
+         "en": "A new mayor was elected.",
+         "tr": "intukhiba raʾīs jadīd li-l-baladiyya."
+        },
+        {
+         "t": "وفقاً للتقرير، ارتفعت الأسعار بنسبة خمسة في المئة.",
+         "en": "According to the report, prices rose by five percent.",
+         "tr": "wifqan li-t-taqrīr, irtafaʿat al-asʿār bi-nisbat khamsa fī al-miʾa."
+        }
+       ],
+       "culture": {
+        "title": "News Arabic",
+        "body": [
+         "Broadcast news is in MSA across the Arab world, which makes it the best shared listening practice for learners.",
+         "Headlines often start with a verb and drop small words: يلتقي الوزير… (the minister meets…).",
+         "Big pan-Arab channels include Al Jazeera, Al Arabiya, Sky News Arabia and BBC News Arabic, each with its own editorial perspective, so compare sources."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-news-1-q1",
+         "q": "كُتِبَ means…",
+         "options": [
+          "it was written",
+          "he wrote",
+          "he writes",
+          "write!"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-news-1-q2",
+         "q": "تمّ افتتاح المعرض means…",
+         "options": [
+          "The exhibition is closed",
+          "The exhibition was opened",
+          "The exhibition will open",
+          "Open the exhibition"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-news-1-q3",
+         "q": "وفقاً لـ means…",
+         "options": [
+          "because of",
+          "despite",
+          "instead of",
+          "according to"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-news-1-q4",
+         "q": "انتخابات means…",
+         "options": [
+          "conference",
+          "economy",
+          "elections",
+          "government"
+         ],
+         "answer": 2
+        }
+       ]
+      },
+      {
+       "id": "ar-news-2",
+       "title": "Formal Writing & Conditionals",
+       "level": "C1",
+       "summary": "Connectors, إذا vs. لو, and formal letter formulas.",
+       "grammar": {
+        "title": "Connectors and 'if'",
+        "body": [
+         "Formal Arabic links ideas with connectors: بالإضافة إلى bi-l-iḍāfa ilā (in addition to), علاوة على ذلك ʿilāwatan ʿalā dhālika (moreover), لذلك li-dhālika (therefore), ومع ذلك wa-maʿa dhālika (nevertheless), نظراً لـ naẓaran li- (given / due to).",
+         "Real conditions use إذا (idhā) + past with present meaning: إذا درستَ نجحتَ idhā darasta najaḥta (if you study, you'll succeed).",
+         "Unreal conditions use لو (law) + past, and the result often takes لـ (la-): لو درستُ لنجحتُ law darastu la-najaḥtu (if I had studied, I would have passed).",
+         "Formal letters open with تحية طيبة وبعد (taḥiyya ṭayyiba wa-baʿd, 'kind greetings, and then…') and close with وتفضلوا بقبول فائق الاحترام (please accept my highest respect)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Arabic"
+         ],
+         "rows": [
+          [
+           "in addition to",
+           "بالإضافة إلى"
+          ],
+          [
+           "moreover",
+           "علاوة على ذلك"
+          ],
+          [
+           "therefore",
+           "لذلك"
+          ],
+          [
+           "nevertheless",
+           "ومع ذلك"
+          ],
+          [
+           "due to",
+           "نظراً لـ"
+          ],
+          [
+           "If you study, you'll succeed",
+           "إذا درستَ نجحتَ"
+          ],
+          [
+           "If I had studied, I'd have passed",
+           "لو درستُ لنجحتُ"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "بالإضافة إلى",
+         "en": "in addition to",
+         "tr": "bi-l-iḍāfa ilā"
+        },
+        {
+         "t": "علاوة على ذلك",
+         "en": "moreover",
+         "tr": "ʿilāwatan ʿalā dhālika"
+        },
+        {
+         "t": "لذلك",
+         "en": "therefore",
+         "tr": "li-dhālika"
+        },
+        {
+         "t": "ومع ذلك",
+         "en": "nevertheless",
+         "tr": "wa-maʿa dhālika"
+        },
+        {
+         "t": "إذا",
+         "en": "if (real)",
+         "tr": "idhā"
+        },
+        {
+         "t": "لو",
+         "en": "if (unreal)",
+         "tr": "law"
+        },
+        {
+         "t": "تحية طيبة وبعد",
+         "en": "kind greetings (letter opening)",
+         "tr": "taḥiyya ṭayyiba wa-baʿd"
+        }
+       ],
+       "examples": [
+        {
+         "t": "تحية طيبة وبعد، أكتب إليكم بخصوص طلبي.",
+         "en": "Kind greetings. I am writing to you regarding my application.",
+         "tr": "taḥiyya ṭayyiba wa-baʿd, aktubu ilaykum bi-khuṣūṣ ṭalabī."
+        },
+        {
+         "t": "لو كنتُ أعرف، لأخبرتُك.",
+         "en": "If I had known, I would have told you.",
+         "tr": "law kuntu aʿrif, la-akhbartuk."
+        },
+        {
+         "t": "الخطة جيدة، ومع ذلك تحتاج إلى وقت.",
+         "en": "The plan is good; nevertheless, it needs time.",
+         "tr": "al-khuṭṭa jayyida, wa-maʿa dhālika taḥtāju ilā waqt."
+        }
+       ],
+       "culture": {
+        "title": "Eloquence",
+        "body": [
+         "Rhetoric (balāgha) is prized: good formal Arabic varies its connectors and avoids repeating the same word.",
+         "Official letters, speeches and sermons open with set formulas, and skipping them can seem abrupt.",
+         "Newspaper opinion columns (maqālāt ar-raʾy) are a great way to absorb formal style."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-news-2-q1",
+         "q": "'Nevertheless' is…",
+         "options": [
+          "لذلك",
+          "بالإضافة إلى",
+          "إذا",
+          "ومع ذلك"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-news-2-q2",
+         "q": "لو درستُ لنجحتُ means…",
+         "options": [
+          "If you study, you'll pass",
+          "I studied and passed",
+          "If I had studied, I would have passed",
+          "I will study to pass"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-news-2-q3",
+         "q": "Which word starts a real (possible) condition?",
+         "options": [
+          "إذا",
+          "لكنّ",
+          "لو",
+          "لأنّ"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "ar-news-2-q4",
+         "q": "تحية طيبة وبعد is used…",
+         "options": [
+          "to apologise",
+          "to open a formal letter",
+          "to congratulate someone",
+          "to say goodbye"
          ],
          "answer": 1
         }
@@ -4783,6 +6604,777 @@
        ]
       }
      ]
+    },
+    {
+     "id": "ar-sc-doctor",
+     "title": "At the Doctor",
+     "level": "B1",
+     "emoji": "🩺",
+     "icon": "stethoscope",
+     "setting": "You've had stomach pain since last night and see a doctor at a clinic.",
+     "goal": "Describe your symptoms, answer questions and understand the advice.",
+     "steps": [
+      {
+       "speaker": "Doctor",
+       "line": {
+        "t": "ما المشكلة؟ ممّ تشكو؟",
+        "en": "What's the problem? What are you suffering from?",
+        "tr": "mā al-mushkila? mimmā tashkū?"
+       },
+       "prompt": "Say your stomach hurts and you have a fever.",
+       "choices": [
+        {
+         "t": "بطني يؤلمني وعندي حرارة.",
+         "en": "My stomach hurts and I have a fever.",
+         "correct": true,
+         "feedback": "Clear and complete.",
+         "tr": "baṭnī yuʾlimunī wa-ʿindī ḥarāra."
+        },
+        {
+         "t": "أنا بطن وحرارة.",
+         "en": "I am stomach and fever.",
+         "correct": false,
+         "feedback": "Use بطني يؤلمني (my stomach hurts) and عندي (I have).",
+         "tr": "ana baṭn wa-ḥarāra."
+        },
+        {
+         "t": "عندي بطن جديد.",
+         "en": "I have a new stomach.",
+         "correct": false,
+         "feedback": "That's 'I have a new stomach'!",
+         "tr": "ʿindī baṭn jadīd."
+        }
+       ]
+      },
+      {
+       "speaker": "Doctor",
+       "line": {
+        "t": "منذ متى؟",
+        "en": "Since when?",
+        "tr": "mundhu matā?"
+       },
+       "prompt": "Say: for two days.",
+       "choices": [
+        {
+         "t": "كل يوم.",
+         "en": "Every day.",
+         "correct": false,
+         "feedback": "That doesn't say how long.",
+         "tr": "kull yawm."
+        },
+        {
+         "t": "بعد يومين.",
+         "en": "In two days.",
+         "correct": false,
+         "feedback": "بعد = after. He asked since when.",
+         "tr": "baʿda yawmayn."
+        },
+        {
+         "t": "منذ يومين.",
+         "en": "For two days.",
+         "correct": true,
+         "feedback": "يومين is the dual of يوم (day).",
+         "tr": "mundhu yawmayn."
+        }
+       ]
+      },
+      {
+       "speaker": "Doctor",
+       "line": {
+        "t": "هل أكلتَ شيئاً غريباً؟",
+        "en": "Did you eat anything unusual?",
+        "tr": "hal akalta shayʾan gharīban?"
+       },
+       "prompt": "Answer him.",
+       "choices": [
+        {
+         "t": "نعم، أكلتُ في مطعم جديد أمس.",
+         "en": "Yes, I ate at a new restaurant yesterday.",
+         "correct": true,
+         "feedback": "Useful detail for the doctor.",
+         "tr": "naʿam, akaltu fī maṭʿam jadīd ams."
+        },
+        {
+         "t": "لا، لم آكل شيئاً غريباً.",
+         "en": "No, I didn't eat anything unusual.",
+         "correct": true,
+         "feedback": "لم + jussive: a correct past negative.",
+         "tr": "lā, lam ākul shayʾan gharīban."
+        },
+        {
+         "t": "سآكل غداً.",
+         "en": "I'll eat tomorrow.",
+         "correct": false,
+         "feedback": "He's asking about the past.",
+         "tr": "sa-ākulu ghadan."
+        }
+       ]
+      },
+      {
+       "speaker": "Doctor",
+       "line": {
+        "t": "اشرب الكثير من الماء، وكُلْ طعاماً خفيفاً، واسترحْ يومين.",
+        "en": "Drink plenty of water, eat light food and rest for two days.",
+        "tr": "ishrab al-kathīr min al-māʾ, wa-kul ṭaʿāman khafīfan, wa-istariḥ yawmayn."
+       },
+       "prompt": "What does he advise?",
+       "choices": [
+        {
+         "t": "",
+         "en": "Don't drink water for two days",
+         "correct": false,
+         "feedback": "اشرب الكثير = drink a lot."
+        },
+        {
+         "t": "",
+         "en": "Drink lots of water, eat light food and rest for two days",
+         "correct": true,
+         "feedback": "Three commands: اشرب (drink), كُل (eat), استرح (rest)."
+        },
+        {
+         "t": "",
+         "en": "Eat a big meal and go back to work",
+         "correct": false,
+         "feedback": "خفيف = light."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Thank the doctor.",
+       "choices": [
+        {
+         "t": "عفواً يا دكتور.",
+         "en": "You're welcome, doctor.",
+         "correct": false,
+         "feedback": "That's his line.",
+         "tr": "ʿafwan yā duktūr."
+        },
+        {
+         "t": "شكراً يا دكتور.",
+         "en": "Thank you, doctor.",
+         "correct": true,
+         "feedback": "He may reply سلامتك (get well soon).",
+         "tr": "shukran yā duktūr."
+        },
+        {
+         "t": "سلامتك يا دكتور.",
+         "en": "Get well soon, doctor.",
+         "correct": false,
+         "feedback": "He's not the one who's ill!",
+         "tr": "salāmtak yā duktūr."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ar-sc-interview",
+     "title": "A Job Interview in Dubai",
+     "level": "B2",
+     "emoji": "💼",
+     "icon": "briefcase",
+     "setting": "A formal interview, in Standard Arabic, for a marketing role at a company in Dubai.",
+     "goal": "Present yourself formally and answer interview questions.",
+     "steps": [
+      {
+       "speaker": "Interviewer",
+       "line": {
+        "t": "أهلاً بكِ. حدّثينا عن نفسكِ.",
+        "en": "Welcome. Tell us about yourself.",
+        "tr": "ahlan biki. ḥaddithīnā ʿan nafsiki."
+       },
+       "prompt": "Describe your experience.",
+       "choices": [
+        {
+         "t": "اسمي سارة، وعملتُ ثلاث سنوات في التسويق.",
+         "en": "My name is Sara, and I worked in marketing for three years.",
+         "correct": true,
+         "feedback": "Clear and formal.",
+         "tr": "ismī Sāra, wa-ʿamiltu thalāth sanawāt fī at-taswīq."
+        },
+        {
+         "t": "يلا، شو بدّك؟",
+         "en": "Come on, what do you want?",
+         "correct": false,
+         "feedback": "Far too informal for an interview!",
+         "tr": "yalla, shū biddak?"
+        },
+        {
+         "t": "أنا سارة وسأعمل أمس.",
+         "en": "I'm Sara and I will work yesterday.",
+         "correct": false,
+         "feedback": "سـ (future) clashes with أمس (yesterday).",
+         "tr": "ana Sāra wa-sa-aʿmalu ams."
+        }
+       ]
+      },
+      {
+       "speaker": "Interviewer",
+       "line": {
+        "t": "لماذا تريدين العمل معنا؟",
+        "en": "Why do you want to work with us?",
+        "tr": "limādhā turīdīna al-ʿamal maʿanā?"
+       },
+       "prompt": "Give a strong reason.",
+       "choices": [
+        {
+         "t": "لأنّ الراتب كبير فقط.",
+         "en": "Only because the salary is big.",
+         "correct": false,
+         "feedback": "Honest, but not persuasive.",
+         "tr": "li-anna ar-rātib kabīr faqaṭ."
+        },
+        {
+         "t": "لأنّ شركتكم رائدة في مجالها، وأريد أن أتطوّر مهنياً.",
+         "en": "Because your company leads its field, and I want to grow professionally.",
+         "correct": true,
+         "feedback": "لأنّ + accusative and أن + subjunctive. Excellent.",
+         "tr": "li-anna sharikatakum rāʾida fī majālihā, wa-urīdu an ataṭawwara mihniyyan."
+        },
+        {
+         "t": "لا أعرف.",
+         "en": "I don't know.",
+         "correct": false,
+         "feedback": "Prepare an answer to this one!",
+         "tr": "lā aʿrif."
+        }
+       ]
+      },
+      {
+       "speaker": "Interviewer",
+       "line": {
+        "t": "ما هي نقاط قوّتكِ؟",
+        "en": "What are your strengths?",
+        "tr": "mā hiya nuqāṭ quwwatiki?"
+       },
+       "prompt": "Name two strengths.",
+       "choices": [
+        {
+         "t": "نقطة قوّتي هي النوم.",
+         "en": "My strength is sleeping.",
+         "correct": false,
+         "feedback": "Ha! Not for an interview.",
+         "tr": "nuqṭat quwwatī hiya an-nawm."
+        },
+        {
+         "t": "ليس عندي نقاط.",
+         "en": "I don't have any points.",
+         "correct": false,
+         "feedback": "Too modest, and a bit confusing.",
+         "tr": "laysa ʿindī nuqāṭ."
+        },
+        {
+         "t": "أنا منظّمة، وأعمل جيداً ضمن فريق.",
+         "en": "I'm organised and I work well in a team.",
+         "correct": true,
+         "feedback": "Specific and positive.",
+         "tr": "ana munaẓẓama, wa-aʿmalu jayyidan ḍimna farīq."
+        }
+       ]
+      },
+      {
+       "speaker": "Interviewer",
+       "line": {
+        "t": "سنتواصل معكِ خلال أسبوع.",
+        "en": "We'll contact you within a week.",
+        "tr": "sa-natawāṣalu maʿaki khilāla usbūʿ."
+       },
+       "prompt": "What did they say?",
+       "choices": [
+        {
+         "t": "",
+         "en": "Call them in a month",
+         "correct": false,
+         "feedback": "أسبوع = week."
+        },
+        {
+         "t": "",
+         "en": "They'll contact you within a week",
+         "correct": true,
+         "feedback": "سـ + present = future; خلال = within."
+        },
+        {
+         "t": "",
+         "en": "You start next week",
+         "correct": false,
+         "feedback": "They'll contact you; you haven't been hired yet."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Thank them formally.",
+       "choices": [
+        {
+         "t": "شكراً لكم على وقتكم، وأتطلّع إلى سماع ردّكم.",
+         "en": "Thank you for your time; I look forward to hearing from you.",
+         "correct": true,
+         "feedback": "A polished, formal close.",
+         "tr": "shukran lakum ʿalā waqtikum, wa-ataṭallaʿu ilā samāʿ raddikum."
+        },
+        {
+         "t": "مع السلامة يا حبيبي.",
+         "en": "Goodbye, my dear.",
+         "correct": false,
+         "feedback": "Definitely not in an interview!",
+         "tr": "maʿa as-salāma yā ḥabībī."
+        },
+        {
+         "t": "باي!",
+         "en": "Bye!",
+         "correct": false,
+         "feedback": "Too casual.",
+         "tr": "bāy!"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ar-sc-news",
+     "title": "Talking About the News",
+     "level": "B2",
+     "emoji": "📰",
+     "icon": "newspaper",
+     "setting": "A friend brings up a news story over coffee.",
+     "goal": "Understand the story, give your opinion and disagree politely.",
+     "steps": [
+      {
+       "speaker": "Friend",
+       "line": {
+        "t": "هل سمعتَ أنّ الحكومة قرّرت رفع أسعار الوقود؟",
+        "en": "Did you hear the government decided to raise fuel prices?",
+        "tr": "hal samiʿta anna al-ḥukūma qarrarat rafʿ asʿār al-wuqūd?"
+       },
+       "prompt": "What is the news?",
+       "choices": [
+        {
+         "t": "",
+         "en": "The government decided to raise fuel prices",
+         "correct": true,
+         "feedback": "رفع = raising; الوقود = fuel."
+        },
+        {
+         "t": "",
+         "en": "There's a new government",
+         "correct": false,
+         "feedback": "The government made a decision; it is not new."
+        },
+        {
+         "t": "",
+         "en": "Fuel prices fell",
+         "correct": false,
+         "feedback": "رفع means raising, not lowering."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Give your opinion.",
+       "choices": [
+        {
+         "t": "في رأيي، كان القرار ضرورياً للاقتصاد.",
+         "en": "In my opinion, the decision was necessary for the economy.",
+         "correct": true,
+         "feedback": "Note ضرورياً: accusative after كان.",
+         "tr": "fī raʾyī, kāna al-qarār ḍarūriyyan li-l-iqtiṣād."
+        },
+        {
+         "t": "أعتقد أنّ هذا القرار سيؤثّر على الفقراء أكثر.",
+         "en": "I think this decision will affect the poor more.",
+         "correct": true,
+         "feedback": "أعتقد أنّ + a full sentence. Well argued.",
+         "tr": "aʿtaqidu anna hādhā al-qarār sa-yuʾaththiru ʿalā al-fuqarāʾ akthar."
+        },
+        {
+         "t": "أعتقد الوقود.",
+         "en": "I think fuel.",
+         "correct": false,
+         "feedback": "Incomplete. Use أعتقد أنّ + a sentence.",
+         "tr": "aʿtaqidu al-wuqūd."
+        }
+       ]
+      },
+      {
+       "speaker": "Friend",
+       "line": {
+        "t": "لكنّ الحكومة تقول إنّ الأسعار سترتفع قليلاً فقط.",
+        "en": "But the government says prices will rise only a little.",
+        "tr": "lākinna al-ḥukūma taqūlu inna al-asʿār sa-tartafiʿu qalīlan faqaṭ."
+       },
+       "prompt": "Disagree politely.",
+       "choices": [
+        {
+         "t": "أنت غبي.",
+         "en": "You're stupid.",
+         "correct": false,
+         "feedback": "That's not polite disagreement!",
+         "tr": "anta ghabī."
+        },
+        {
+         "t": "مع احترامي، لا أوافق، لأنّ كلّ شيء سيغلو.",
+         "en": "With respect, I disagree, because everything will get more expensive.",
+         "correct": true,
+         "feedback": "Polite, with a reason.",
+         "tr": "maʿa iḥtirāmī, lā uwāfiq, li-anna kulla shayʾ sa-yaghlū."
+        },
+        {
+         "t": "خلاص.",
+         "en": "Enough.",
+         "correct": false,
+         "feedback": "That ends the conversation rather than disagreeing.",
+         "tr": "khalāṣ."
+        }
+       ]
+      },
+      {
+       "prompt": "Suggest checking another source.",
+       "choices": [
+        {
+         "t": "لنأكل الخبر.",
+         "en": "Let's eat the news.",
+         "correct": false,
+         "feedback": "خبر (news) vs. خبز (bread)!",
+         "tr": "li-naʾkul al-khabar."
+        },
+        {
+         "t": "لنقرأ الخبر في مصدر آخر أيضاً.",
+         "en": "Let's read the story in another source too.",
+         "correct": true,
+         "feedback": "لـ + subjunctive: \"let's…\".",
+         "tr": "li-naqraʾ al-khabar fī maṣdar ākhar ayḍan."
+        },
+        {
+         "t": "لن أقرأ أبداً.",
+         "en": "I will never read.",
+         "correct": false,
+         "feedback": "The opposite of what you want.",
+         "tr": "lan aqraʾa abadan."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ar-sc-koshari",
+     "title": "Koshari in Cairo",
+     "level": "A2",
+     "emoji": "🍲",
+     "icon": "takeoutbag.and.cup.and.straw",
+     "setting": "A busy koshari shop in downtown Cairo. Everyone speaks Egyptian Arabic.",
+     "goal": "Order, choose how spicy, and pay the Egyptian way.",
+     "steps": [
+      {
+       "speaker": "Server",
+       "line": {
+        "t": "أهلاً يا باشا، تحب إيه؟",
+        "en": "Welcome, boss. What would you like?",
+        "tr": "ahlan yā bāsha, tiḥibb ēh?"
+       },
+       "prompt": "Order a medium koshari.",
+       "choices": [
+        {
+         "t": "عايز طبق كشري وسط، لو سمحت.",
+         "en": "I'd like a medium plate of koshari, please.",
+         "correct": true,
+         "feedback": "Perfect Egyptian: عايز, and طبق pronounced ṭabaʾ.",
+         "tr": "ʿāyiz ṭabaʾ koshari wasaṭ, law samaḥt."
+        },
+        {
+         "t": "أنا كشري.",
+         "en": "I am koshari.",
+         "correct": false,
+         "feedback": "Use عايز (I want).",
+         "tr": "ana koshari."
+        },
+        {
+         "t": "فين الكشري؟",
+         "en": "Where's the koshari?",
+         "correct": false,
+         "feedback": "You're standing in front of it!",
+         "tr": "fēn il-koshari?"
+        }
+       ]
+      },
+      {
+       "speaker": "Server",
+       "line": {
+        "t": "عايزه حرّاق ولا لأ؟",
+        "en": "Do you want it spicy or not?",
+        "tr": "ʿāyzu ḥarrāʾ walla laʾ?"
+       },
+       "prompt": "Answer him.",
+       "choices": [
+        {
+         "t": "حرّاق شوية بس.",
+         "en": "Just a little spicy.",
+         "correct": true,
+         "feedback": "شوية = a little; بس = only.",
+         "tr": "ḥarrāʾ shwayya bas."
+        },
+        {
+         "t": "لأ، من غير شطّة.",
+         "en": "No, without hot sauce.",
+         "correct": true,
+         "feedback": "من غير = without; شطة = hot sauce.",
+         "tr": "laʾ, min ghēr shaṭṭa."
+        },
+        {
+         "t": "أيوه، لأ.",
+         "en": "Yes, no.",
+         "correct": false,
+         "feedback": "Pick one!",
+         "tr": "aywa, laʾ."
+        }
+       ]
+      },
+      {
+       "speaker": "Server",
+       "line": {
+        "t": "هنا ولا تيك أواي؟",
+        "en": "For here or takeaway?",
+        "tr": "hena walla tēk awāy?"
+       },
+       "prompt": "Choose.",
+       "choices": [
+        {
+         "t": "بكرة.",
+         "en": "Tomorrow.",
+         "correct": false,
+         "feedback": "Koshari is for now!",
+         "tr": "bukra."
+        },
+        {
+         "t": "تيك أواي، لو سمحت.",
+         "en": "Takeaway, please.",
+         "correct": true,
+         "feedback": "Egyptians use the English word.",
+         "tr": "tēk awāy, law samaḥt."
+        },
+        {
+         "t": "هنا.",
+         "en": "Here.",
+         "correct": true,
+         "feedback": "هنا is pronounced hena in Egyptian.",
+         "tr": "hena."
+        }
+       ]
+      },
+      {
+       "speaker": "Server",
+       "line": {
+        "t": "الحساب خمسة وتلاتين جنيه.",
+        "en": "That's thirty-five pounds.",
+        "tr": "il-ḥisāb khamsa w-talātīn ginēh."
+       },
+       "prompt": "How much is it?",
+       "choices": [
+        {
+         "t": "",
+         "en": "53 pounds",
+         "correct": false,
+         "feedback": "Units come first: five and thirty."
+        },
+        {
+         "t": "",
+         "en": "35 pounds",
+         "correct": true,
+         "feedback": "تلاتين = thirty (Egyptian ث → t)."
+        },
+        {
+         "t": "",
+         "en": "15 pounds",
+         "correct": false,
+         "feedback": "خمستاشر would be fifteen."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Thank him the Egyptian way.",
+       "choices": [
+        {
+         "t": "تسلم إيدك!",
+         "en": "Bless your hand!",
+         "correct": true,
+         "feedback": "A warm Egyptian thank-you to whoever served you.",
+         "tr": "tislam īdak!"
+        },
+        {
+         "t": "عفواً.",
+         "en": "You're welcome.",
+         "correct": false,
+         "feedback": "That's his line.",
+         "tr": "ʿafwan."
+        },
+        {
+         "t": "شكراً يا باشا.",
+         "en": "Thanks, boss.",
+         "correct": true,
+         "feedback": "Friendly and natural.",
+         "tr": "shukran yā bāsha."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ar-sc-manoushe",
+     "title": "Breakfast at a Beirut Bakery",
+     "level": "A2",
+     "emoji": "🫓",
+     "icon": "sun.max",
+     "setting": "A neighbourhood bakery in Beirut early in the morning. The baker speaks Lebanese Arabic.",
+     "goal": "Order a za'atar manoushe and pay politely.",
+     "steps": [
+      {
+       "speaker": "Baker",
+       "line": {
+        "t": "صباح الخير! شو بتحب؟",
+        "en": "Good morning! What would you like?",
+        "tr": "ṣabāḥ il-khēr! shū btḥebb?"
+       },
+       "prompt": "Order a za'atar manoushe.",
+       "choices": [
+        {
+         "t": "مع السلامة.",
+         "en": "Goodbye.",
+         "correct": false,
+         "feedback": "You just arrived!",
+         "tr": "maʿ is-salāme."
+        },
+        {
+         "t": "أنا زعتر.",
+         "en": "I am za'atar.",
+         "correct": false,
+         "feedback": "Use بدّي (I want).",
+         "tr": "ana zaʿtar."
+        },
+        {
+         "t": "صباح النور، بدّي منقوشة زعتر لو سمحت.",
+         "en": "Good morning, I'd like a za'atar manoushe, please.",
+         "correct": true,
+         "feedback": "بدّي = I want. Very natural.",
+         "tr": "ṣabāḥ in-nūr, biddi manʾūshe zaʿtar law samaḥt."
+        }
+       ]
+      },
+      {
+       "speaker": "Baker",
+       "line": {
+        "t": "بدّك ياها مع خضرا؟",
+        "en": "Do you want it with vegetables?",
+        "tr": "biddak yāha maʿ khuḍra?"
+       },
+       "prompt": "Answer him.",
+       "choices": [
+        {
+         "t": "قدّيش الساعة؟",
+         "en": "What time is it?",
+         "correct": false,
+         "feedback": "He asked about vegetables.",
+         "tr": "ʾaddēsh is-sēʿa?"
+        },
+        {
+         "t": "إيه، مع بندورة ونعنع.",
+         "en": "Yes, with tomato and mint.",
+         "correct": true,
+         "feedback": "بندورة = tomato in the Levant.",
+         "tr": "ēh, maʿ banadōra w-naʿnaʿ."
+        },
+        {
+         "t": "لا، بس زعتر.",
+         "en": "No, just za'atar.",
+         "correct": true,
+         "feedback": "بس = only.",
+         "tr": "lā, bas zaʿtar."
+        }
+       ]
+      },
+      {
+       "prompt": "Ask how much it is.",
+       "choices": [
+        {
+         "t": "قدّيش حقها؟",
+         "en": "How much is it?",
+         "correct": true,
+         "feedback": "حقها = its price (lit. its right).",
+         "tr": "ʾaddēsh ḥaʾʾa?"
+        },
+        {
+         "t": "وين حقها؟",
+         "en": "Where is its price?",
+         "correct": false,
+         "feedback": "وين = where. Use قدّيش.",
+         "tr": "wēn ḥaʾʾa?"
+        },
+        {
+         "t": "شو اسمها؟",
+         "en": "What's its name?",
+         "correct": false,
+         "feedback": "You know its name: manoushe!",
+         "tr": "shū isma?"
+        }
+       ]
+      },
+      {
+       "speaker": "Baker",
+       "line": {
+        "t": "تكرم، مية وخمسين ألف.",
+        "en": "Of course, a hundred and fifty thousand.",
+        "tr": "tikram, miyye w-khamsīn alf."
+       },
+       "prompt": "How much did he say?",
+       "choices": [
+        {
+         "t": "",
+         "en": "15",
+         "correct": false,
+         "feedback": "Much more than that!"
+        },
+        {
+         "t": "",
+         "en": "150,000 (Lebanese pounds)",
+         "correct": true,
+         "feedback": "مية = hundred, خمسين = fifty, ألف = thousand. Lebanese prices run into the thousands."
+        },
+        {
+         "t": "",
+         "en": "1,500",
+         "correct": false,
+         "feedback": "Listen for ألف (thousand)."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Thank him for his work as you leave.",
+       "choices": [
+        {
+         "t": "شكراً كتير.",
+         "en": "Thanks a lot.",
+         "correct": true,
+         "feedback": "Simple and friendly.",
+         "tr": "shukran ktīr."
+        },
+        {
+         "t": "صحتين.",
+         "en": "Enjoy your meal.",
+         "correct": false,
+         "feedback": "He isn't the one eating!",
+         "tr": "ṣaḥtēn."
+        },
+        {
+         "t": "يعطيك العافية!",
+         "en": "Thanks for your hard work!",
+         "correct": true,
+         "feedback": "He will reply الله يعافيك.",
+         "tr": "yaʿṭīk il-ʿāfye!"
+        }
+       ]
+      }
+     ]
     }
    ],
    "aptitude": [
@@ -5399,8 +7991,8 @@
     },
     {
      "t": "رجل",
-     "tr": "rajul",
-     "en": "man"
+     "tr": "rajul / rijl",
+     "en": "man; leg"
     },
     {
      "t": "امرأة",
@@ -6506,6 +9098,946 @@
      "t": "والله",
      "tr": "wallāh",
      "en": "really; I swear"
+    },
+    {
+     "t": "رأس",
+     "tr": "raʾs",
+     "en": "head"
+    },
+    {
+     "t": "وجه",
+     "tr": "wajh",
+     "en": "face"
+    },
+    {
+     "t": "عين",
+     "tr": "ʿayn",
+     "en": "eye; spring (of water)"
+    },
+    {
+     "t": "أذن",
+     "tr": "udhun",
+     "en": "ear"
+    },
+    {
+     "t": "أنف",
+     "tr": "anf",
+     "en": "nose"
+    },
+    {
+     "t": "فم",
+     "tr": "fam",
+     "en": "mouth"
+    },
+    {
+     "t": "سن",
+     "tr": "sinn",
+     "en": "tooth"
+    },
+    {
+     "t": "يد",
+     "tr": "yad",
+     "en": "hand"
+    },
+    {
+     "t": "قلب",
+     "tr": "qalb",
+     "en": "heart"
+    },
+    {
+     "t": "بطن",
+     "tr": "baṭn",
+     "en": "stomach; belly"
+    },
+    {
+     "t": "ظهر",
+     "tr": "ẓahr / ẓuhr",
+     "en": "back; noon"
+    },
+    {
+     "t": "دم",
+     "tr": "dam",
+     "en": "blood"
+    },
+    {
+     "t": "جسم",
+     "tr": "jism",
+     "en": "body"
+    },
+    {
+     "t": "حرارة",
+     "tr": "ḥarāra",
+     "en": "fever; temperature; heat"
+    },
+    {
+     "t": "زكام",
+     "tr": "zukām",
+     "en": "cold (illness)"
+    },
+    {
+     "t": "سعال",
+     "tr": "suʿāl",
+     "en": "cough"
+    },
+    {
+     "t": "ممرضة",
+     "tr": "mumarriḍa",
+     "en": "nurse"
+    },
+    {
+     "t": "صحة",
+     "tr": "ṣiḥḥa",
+     "en": "health"
+    },
+    {
+     "t": "سلامتك",
+     "tr": "salāmtak",
+     "en": "get well soon"
+    },
+    {
+     "t": "يؤلمني",
+     "tr": "yuʾlimunī",
+     "en": "it hurts me"
+    },
+    {
+     "t": "وظيفة",
+     "tr": "waẓīfa",
+     "en": "job; position"
+    },
+    {
+     "t": "شركة",
+     "tr": "sharika",
+     "en": "company"
+    },
+    {
+     "t": "مدير",
+     "tr": "mudīr",
+     "en": "manager; director"
+    },
+    {
+     "t": "زميل",
+     "tr": "zamīl",
+     "en": "colleague"
+    },
+    {
+     "t": "راتب",
+     "tr": "rātib",
+     "en": "salary"
+    },
+    {
+     "t": "اجتماع",
+     "tr": "ijtimāʿ",
+     "en": "meeting"
+    },
+    {
+     "t": "مقابلة",
+     "tr": "muqābala",
+     "en": "interview"
+    },
+    {
+     "t": "مشروع",
+     "tr": "mashrūʿ",
+     "en": "project"
+    },
+    {
+     "t": "عقد",
+     "tr": "ʿaqd",
+     "en": "contract"
+    },
+    {
+     "t": "مهندس",
+     "tr": "muhandis",
+     "en": "engineer"
+    },
+    {
+     "t": "محامي",
+     "tr": "muḥāmī",
+     "en": "lawyer"
+    },
+    {
+     "t": "موظف",
+     "tr": "muwaẓẓaf",
+     "en": "employee"
+    },
+    {
+     "t": "تاجر",
+     "tr": "tājir",
+     "en": "merchant; trader"
+    },
+    {
+     "t": "فلاح",
+     "tr": "fallāḥ",
+     "en": "farmer"
+    },
+    {
+     "t": "رأي",
+     "tr": "raʾy",
+     "en": "opinion"
+    },
+    {
+     "t": "في رأيي",
+     "tr": "fī raʾyī",
+     "en": "in my opinion"
+    },
+    {
+     "t": "أعتقد",
+     "tr": "aʿtaqidu",
+     "en": "I think; I believe"
+    },
+    {
+     "t": "أوافق",
+     "tr": "uwāfiqu",
+     "en": "I agree"
+    },
+    {
+     "t": "لا أوافق",
+     "tr": "lā uwāfiqu",
+     "en": "I disagree"
+    },
+    {
+     "t": "خائف",
+     "tr": "khāʾif",
+     "en": "afraid; scared"
+    },
+    {
+     "t": "غاضب",
+     "tr": "ghāḍib",
+     "en": "angry"
+    },
+    {
+     "t": "متحمس",
+     "tr": "mutaḥammis",
+     "en": "excited"
+    },
+    {
+     "t": "قلق",
+     "tr": "qalaq",
+     "en": "worry; anxious"
+    },
+    {
+     "t": "فخور",
+     "tr": "fakhūr",
+     "en": "proud"
+    },
+    {
+     "t": "ممل",
+     "tr": "mumill",
+     "en": "boring"
+    },
+    {
+     "t": "مهم",
+     "tr": "muhimm",
+     "en": "important"
+    },
+    {
+     "t": "ممكن",
+     "tr": "mumkin",
+     "en": "possible; maybe"
+    },
+    {
+     "t": "مستحيل",
+     "tr": "mustaḥīl",
+     "en": "impossible"
+    },
+    {
+     "t": "صحيح",
+     "tr": "ṣaḥīḥ",
+     "en": "correct; true"
+    },
+    {
+     "t": "خطأ",
+     "tr": "khaṭaʾ",
+     "en": "mistake; wrong"
+    },
+    {
+     "t": "أفضل",
+     "tr": "afḍal",
+     "en": "better; best"
+    },
+    {
+     "t": "أكبر",
+     "tr": "akbar",
+     "en": "bigger; biggest"
+    },
+    {
+     "t": "أصغر",
+     "tr": "aṣghar",
+     "en": "smaller; smallest"
+    },
+    {
+     "t": "أجمل",
+     "tr": "ajmal",
+     "en": "more beautiful"
+    },
+    {
+     "t": "مطر",
+     "tr": "maṭar",
+     "en": "rain"
+    },
+    {
+     "t": "ثلج",
+     "tr": "thalj",
+     "en": "snow; ice"
+    },
+    {
+     "t": "ريح",
+     "tr": "rīḥ",
+     "en": "wind"
+    },
+    {
+     "t": "غيوم",
+     "tr": "ghuyūm",
+     "en": "clouds"
+    },
+    {
+     "t": "سماء",
+     "tr": "samāʾ",
+     "en": "sky"
+    },
+    {
+     "t": "شجرة",
+     "tr": "shajara",
+     "en": "tree"
+    },
+    {
+     "t": "نهر",
+     "tr": "nahr",
+     "en": "river"
+    },
+    {
+     "t": "وردة",
+     "tr": "warda",
+     "en": "flower; rose"
+    },
+    {
+     "t": "حيوان",
+     "tr": "ḥayawān",
+     "en": "animal"
+    },
+    {
+     "t": "قطة",
+     "tr": "qiṭṭa",
+     "en": "cat"
+    },
+    {
+     "t": "كلب",
+     "tr": "kalb",
+     "en": "dog"
+    },
+    {
+     "t": "حصان",
+     "tr": "ḥiṣān",
+     "en": "horse"
+    },
+    {
+     "t": "جمل",
+     "tr": "jamal",
+     "en": "camel"
+    },
+    {
+     "t": "طائر",
+     "tr": "ṭāʾir",
+     "en": "bird"
+    },
+    {
+     "t": "حية",
+     "tr": "ḥayya",
+     "en": "snake"
+    },
+    {
+     "t": "أفعى",
+     "tr": "afʿā",
+     "en": "snake; viper"
+    },
+    {
+     "t": "صيف",
+     "tr": "ṣayf",
+     "en": "summer"
+    },
+    {
+     "t": "شتاء",
+     "tr": "shitāʾ",
+     "en": "winter"
+    },
+    {
+     "t": "ربيع",
+     "tr": "rabīʿ",
+     "en": "spring (season)"
+    },
+    {
+     "t": "خريف",
+     "tr": "kharīf",
+     "en": "autumn; fall"
+    },
+    {
+     "t": "مطبخ",
+     "tr": "maṭbakh",
+     "en": "kitchen"
+    },
+    {
+     "t": "سرير",
+     "tr": "sarīr",
+     "en": "bed"
+    },
+    {
+     "t": "كرسي",
+     "tr": "kursī",
+     "en": "chair"
+    },
+    {
+     "t": "طاولة",
+     "tr": "ṭāwila",
+     "en": "table"
+    },
+    {
+     "t": "مفتاح",
+     "tr": "miftāḥ",
+     "en": "key"
+    },
+    {
+     "t": "ملابس",
+     "tr": "malābis",
+     "en": "clothes"
+    },
+    {
+     "t": "قميص",
+     "tr": "qamīṣ",
+     "en": "shirt"
+    },
+    {
+     "t": "حذاء",
+     "tr": "ḥidhāʾ",
+     "en": "shoe; shoes"
+    },
+    {
+     "t": "أحمر",
+     "tr": "aḥmar",
+     "en": "red"
+    },
+    {
+     "t": "أزرق",
+     "tr": "azraq",
+     "en": "blue"
+    },
+    {
+     "t": "أخضر",
+     "tr": "akhḍar",
+     "en": "green"
+    },
+    {
+     "t": "أصفر",
+     "tr": "aṣfar",
+     "en": "yellow"
+    },
+    {
+     "t": "أبيض",
+     "tr": "abyaḍ",
+     "en": "white"
+    },
+    {
+     "t": "أسود",
+     "tr": "aswad",
+     "en": "black"
+    },
+    {
+     "t": "لون",
+     "tr": "lawn",
+     "en": "colour; color"
+    },
+    {
+     "t": "قال",
+     "tr": "qāla",
+     "en": "said; say"
+    },
+    {
+     "t": "أقول",
+     "tr": "aqūlu",
+     "en": "I say"
+    },
+    {
+     "t": "سأل",
+     "tr": "saʾala",
+     "en": "asked; ask"
+    },
+    {
+     "t": "أجاب",
+     "tr": "ajāba",
+     "en": "answered"
+    },
+    {
+     "t": "فكر",
+     "tr": "fakkara",
+     "en": "thought; think"
+    },
+    {
+     "t": "تذكر",
+     "tr": "tadhakkara",
+     "en": "remembered; remember"
+    },
+    {
+     "t": "نسي",
+     "tr": "nasiya",
+     "en": "forgot; forget"
+    },
+    {
+     "t": "بدأ",
+     "tr": "badaʾa",
+     "en": "began; start"
+    },
+    {
+     "t": "انتهى",
+     "tr": "intahā",
+     "en": "ended; finish"
+    },
+    {
+     "t": "وصل",
+     "tr": "waṣala",
+     "en": "arrived; arrive"
+    },
+    {
+     "t": "خرج",
+     "tr": "kharaja",
+     "en": "went out; leave"
+    },
+    {
+     "t": "دخل",
+     "tr": "dakhala",
+     "en": "entered; enter"
+    },
+    {
+     "t": "جلس",
+     "tr": "jalasa",
+     "en": "sat; sit"
+    },
+    {
+     "t": "وقف",
+     "tr": "waqafa",
+     "en": "stood; stop"
+    },
+    {
+     "t": "لعب",
+     "tr": "laʿiba",
+     "en": "played; play"
+    },
+    {
+     "t": "طبخ",
+     "tr": "ṭabakha",
+     "en": "cooked; cook"
+    },
+    {
+     "t": "غسل",
+     "tr": "ghasala",
+     "en": "washed; wash"
+    },
+    {
+     "t": "يجب",
+     "tr": "yajibu",
+     "en": "must; have to"
+    },
+    {
+     "t": "أستطيع",
+     "tr": "astaṭīʿu",
+     "en": "I can"
+    },
+    {
+     "t": "أحتاج",
+     "tr": "aḥtāju",
+     "en": "I need; need"
+    },
+    {
+     "t": "أعطى",
+     "tr": "aʿṭā",
+     "en": "gave; give"
+    },
+    {
+     "t": "أخذ",
+     "tr": "akhadha",
+     "en": "took; take"
+    },
+    {
+     "t": "أرسل",
+     "tr": "arsala",
+     "en": "sent; send"
+    },
+    {
+     "t": "اتصل",
+     "tr": "ittaṣala",
+     "en": "called (on the phone); call"
+    },
+    {
+     "t": "ضحك",
+     "tr": "ḍaḥika",
+     "en": "laughed; laugh"
+    },
+    {
+     "t": "بكى",
+     "tr": "bakā",
+     "en": "cried; cry"
+    },
+    {
+     "t": "أتمنى",
+     "tr": "atamannā",
+     "en": "I hope; I wish"
+    },
+    {
+     "t": "حكومة",
+     "tr": "ḥukūma",
+     "en": "government"
+    },
+    {
+     "t": "رئيس",
+     "tr": "raʾīs",
+     "en": "president; head"
+    },
+    {
+     "t": "وزير",
+     "tr": "wazīr",
+     "en": "minister"
+    },
+    {
+     "t": "انتخابات",
+     "tr": "intikhābāt",
+     "en": "elections"
+    },
+    {
+     "t": "اقتصاد",
+     "tr": "iqtiṣād",
+     "en": "economy"
+    },
+    {
+     "t": "سياسة",
+     "tr": "siyāsa",
+     "en": "politics; policy"
+    },
+    {
+     "t": "حرب",
+     "tr": "ḥarb",
+     "en": "war"
+    },
+    {
+     "t": "مشكلة",
+     "tr": "mushkila",
+     "en": "problem"
+    },
+    {
+     "t": "حل",
+     "tr": "ḥall",
+     "en": "solution"
+    },
+    {
+     "t": "خبر",
+     "tr": "khabar",
+     "en": "news item"
+    },
+    {
+     "t": "أخبار",
+     "tr": "akhbār",
+     "en": "news"
+    },
+    {
+     "t": "صحيفة",
+     "tr": "ṣaḥīfa",
+     "en": "newspaper"
+    },
+    {
+     "t": "مؤتمر",
+     "tr": "muʾtamar",
+     "en": "conference"
+    },
+    {
+     "t": "تقرير",
+     "tr": "taqrīr",
+     "en": "report"
+    },
+    {
+     "t": "قانون",
+     "tr": "qānūn",
+     "en": "law"
+    },
+    {
+     "t": "مجتمع",
+     "tr": "mujtamaʿ",
+     "en": "society"
+    },
+    {
+     "t": "تاريخ",
+     "tr": "tārīkh",
+     "en": "history; date"
+    },
+    {
+     "t": "ثقافة",
+     "tr": "thaqāfa",
+     "en": "culture"
+    },
+    {
+     "t": "تعليم",
+     "tr": "taʿlīm",
+     "en": "education"
+    },
+    {
+     "t": "بيئة",
+     "tr": "bīʾa",
+     "en": "environment"
+    },
+    {
+     "t": "تكنولوجيا",
+     "tr": "tiknūlūjiyā",
+     "en": "technology"
+    },
+    {
+     "t": "إنترنت",
+     "tr": "intirnit",
+     "en": "internet"
+    },
+    {
+     "t": "وفقا لـ",
+     "tr": "wifqan li-",
+     "en": "according to"
+    },
+    {
+     "t": "لأن",
+     "tr": "li-anna",
+     "en": "because"
+    },
+    {
+     "t": "إذا",
+     "tr": "idhā",
+     "en": "if"
+    },
+    {
+     "t": "لو",
+     "tr": "law",
+     "en": "if (hypothetical)"
+    },
+    {
+     "t": "أيضا",
+     "tr": "ayḍan",
+     "en": "also; too"
+    },
+    {
+     "t": "فقط",
+     "tr": "faqaṭ",
+     "en": "only"
+    },
+    {
+     "t": "ربما",
+     "tr": "rubbamā",
+     "en": "maybe; perhaps"
+    },
+    {
+     "t": "دائما",
+     "tr": "dāʾiman",
+     "en": "always"
+    },
+    {
+     "t": "أبدا",
+     "tr": "abadan",
+     "en": "never; ever"
+    },
+    {
+     "t": "أحيانا",
+     "tr": "aḥyānan",
+     "en": "sometimes"
+    },
+    {
+     "t": "بعد",
+     "tr": "baʿda",
+     "en": "after"
+    },
+    {
+     "t": "قبل",
+     "tr": "qabla",
+     "en": "before"
+    },
+    {
+     "t": "ثم",
+     "tr": "thumma",
+     "en": "then"
+    },
+    {
+     "t": "عندما",
+     "tr": "ʿindamā",
+     "en": "when"
+    },
+    {
+     "t": "بينما",
+     "tr": "baynamā",
+     "en": "while"
+    },
+    {
+     "t": "لذلك",
+     "tr": "li-dhālika",
+     "en": "therefore; so"
+    },
+    {
+     "t": "ومع ذلك",
+     "tr": "wa-maʿa dhālika",
+     "en": "nevertheless; however"
+    },
+    {
+     "t": "فجأة",
+     "tr": "fajʾatan",
+     "en": "suddenly"
+    },
+    {
+     "t": "بعد غد",
+     "tr": "baʿda ghad",
+     "en": "the day after tomorrow"
+    },
+    {
+     "t": "الأسبوع القادم",
+     "tr": "al-usbūʿ al-qādim",
+     "en": "next week"
+    },
+    {
+     "t": "السنة الماضية",
+     "tr": "as-sana al-māḍiya",
+     "en": "last year"
+    },
+    {
+     "t": "قصة",
+     "tr": "qiṣṣa",
+     "en": "story"
+    },
+    {
+     "t": "دلوقتي",
+     "tr": "dilwaʾti",
+     "en": "now (Egyptian)"
+    },
+    {
+     "t": "بكرة",
+     "tr": "bukra",
+     "en": "tomorrow (Egyptian / Levantine)"
+    },
+    {
+     "t": "فين",
+     "tr": "fēn",
+     "en": "where (Egyptian)"
+    },
+    {
+     "t": "إيه",
+     "tr": "ēh",
+     "en": "what (Egyptian)"
+    },
+    {
+     "t": "إمتى",
+     "tr": "imta",
+     "en": "when (Egyptian)"
+    },
+    {
+     "t": "ليه",
+     "tr": "lēh",
+     "en": "why (Egyptian)"
+    },
+    {
+     "t": "مش",
+     "tr": "mish",
+     "en": "not (Egyptian / Levantine)"
+    },
+    {
+     "t": "عشان",
+     "tr": "ʿashān",
+     "en": "because; for (Egyptian)"
+    },
+    {
+     "t": "أوي",
+     "tr": "awi",
+     "en": "very (Egyptian)"
+    },
+    {
+     "t": "حاضر",
+     "tr": "ḥāḍir",
+     "en": "certainly; right away"
+    },
+    {
+     "t": "ماشي",
+     "tr": "māshi",
+     "en": "OK; fine"
+    },
+    {
+     "t": "أيوه",
+     "tr": "aywa",
+     "en": "yes (Egyptian)"
+    },
+    {
+     "t": "لأ",
+     "tr": "laʾ",
+     "en": "no (dialect)"
+    },
+    {
+     "t": "طب",
+     "tr": "ṭab",
+     "en": "OK then; so (Egyptian)"
+    },
+    {
+     "t": "وين",
+     "tr": "wēn",
+     "en": "where (Levantine / Gulf)"
+    },
+    {
+     "t": "قديش",
+     "tr": "ʾaddēsh",
+     "en": "how much (Levantine)"
+    },
+    {
+     "t": "هلق",
+     "tr": "hallaʾ",
+     "en": "now (Levantine)"
+    },
+    {
+     "t": "منيح",
+     "tr": "mnīḥ",
+     "en": "good; fine (Levantine)"
+    },
+    {
+     "t": "كتير",
+     "tr": "ktīr",
+     "en": "very; a lot (Levantine)"
+    },
+    {
+     "t": "هيك",
+     "tr": "hēk",
+     "en": "like this; so (Levantine)"
+    },
+    {
+     "t": "تكرم",
+     "tr": "tikram",
+     "en": "of course; you're welcome (Levantine)"
+    },
+    {
+     "t": "يعطيك العافية",
+     "tr": "yaʿṭīk il-ʿāfye",
+     "en": "thanks for your hard work (Levantine)"
+    },
+    {
+     "t": "زين",
+     "tr": "zēn",
+     "en": "good (Gulf)"
+    },
+    {
+     "t": "الحين",
+     "tr": "al-ḥīn",
+     "en": "now (Gulf)"
+    },
+    {
+     "t": "شلونك",
+     "tr": "shlōnak",
+     "en": "how are you (Gulf / Iraqi)"
+    },
+    {
+     "t": "وايد",
+     "tr": "wāyid",
+     "en": "a lot (Gulf)"
+    },
+    {
+     "t": "يلا نروح",
+     "tr": "yalla nrūḥ",
+     "en": "let's go"
+    },
+    {
+     "t": "تسلم إيدك",
+     "tr": "tislam īdak",
+     "en": "bless your hand (thank you)"
     }
    ],
    "media": [
@@ -6717,7 +10249,573 @@
       "listening"
      ]
     }
-   ]
+   ],
+   "writingPrompts": [
+    {
+     "id": "ar-w-intro",
+     "level": "A1",
+     "prompt": "Introduce yourself: your name, where you are from, and what you do.",
+     "minWords": 8,
+     "requirements": [
+      {
+       "label": "your name (اسمي…)",
+       "any": [
+        "اسمي"
+       ]
+      },
+      {
+       "label": "where you are from (أنا من…)",
+       "any": [
+        "أنا من",
+        "انا من"
+       ]
+      },
+      {
+       "label": "what you do (طالب، أعمل، أدرس…)",
+       "any": [
+        "طالب",
+        "طالبة",
+        "أعمل",
+        "أدرس",
+        "مهندس",
+        "معلم",
+        "طبيب",
+        "موظف"
+       ]
+      }
+     ],
+     "model": {
+      "t": "اسمي سام. أنا من كندا. أنا طالب وأدرس العربية في الجامعة.",
+      "en": "My name is Sam. I'm from Canada. I'm a student and I study Arabic at university.",
+      "tr": "ismī Sām. ana min Kanadā. ana ṭālib wa-adrusu al-ʿarabiyya fī al-jāmiʿa."
+     }
+    },
+    {
+     "id": "ar-w-family",
+     "level": "A2",
+     "prompt": "Describe your family: who is in it and one thing about each person.",
+     "minWords": 12,
+     "requirements": [
+      {
+       "label": "family members (أبي، أمي، أخي…)",
+       "any": [
+        "أبي",
+        "أمي",
+        "أخي",
+        "أختي",
+        "عائلتي",
+        "زوجي",
+        "زوجتي",
+        "ابني",
+        "بنتي"
+       ]
+      },
+      {
+       "label": "\"I have\" (عندي)",
+       "any": [
+        "عندي"
+       ]
+      },
+      {
+       "label": "a describing word (كبير، لطيف…)",
+       "any": [
+        "كبير",
+        "كبيرة",
+        "صغير",
+        "صغيرة",
+        "جميل",
+        "جميلة",
+        "لطيف",
+        "لطيفة",
+        "طويل",
+        "طويلة",
+        "سعيد",
+        "سعيدة"
+       ]
+      }
+     ],
+     "model": {
+      "t": "عندي عائلة صغيرة. أبي طبيب وأمي معلمة. عندي أخ واحد، هو طويل ولطيف.",
+      "en": "I have a small family. My father is a doctor and my mother is a teacher. I have one brother; he is tall and kind.",
+      "tr": "ʿindī ʿāʾila ṣaghīra. abī ṭabīb wa-ummī muʿallima. ʿindī akh wāḥid, huwa ṭawīl wa-laṭīf."
+     }
+    },
+    {
+     "id": "ar-w-day",
+     "level": "A2",
+     "prompt": "Describe your daily routine from morning to evening, in the present tense.",
+     "minWords": 15,
+     "requirements": [
+      {
+       "label": "present-tense verbs (أذهب، أشرب، أعمل…)",
+       "any": [
+        "أذهب",
+        "أشرب",
+        "آكل",
+        "أعمل",
+        "أدرس",
+        "أنام",
+        "أستيقظ",
+        "أقرأ"
+       ]
+      },
+      {
+       "label": "times of day (الساعة، في الصباح…)",
+       "any": [
+        "الساعة",
+        "في الصباح",
+        "صباحا",
+        "في المساء",
+        "مساء",
+        "بعد الظهر"
+       ]
+      },
+      {
+       "label": "sequence words (ثم، بعد ذلك)",
+       "any": [
+        "ثم",
+        "بعد ذلك",
+        "بعدها"
+       ]
+      }
+     ],
+     "model": {
+      "t": "أستيقظ في الساعة السابعة وأشرب القهوة. ثم أذهب إلى العمل. في المساء أقرأ كتاباً وأنام في الساعة الحادية عشرة.",
+      "en": "I wake up at seven and drink coffee. Then I go to work. In the evening I read a book and sleep at eleven.",
+      "tr": "astayqiẓu fī as-sāʿa as-sābiʿa wa-ashrabu al-qahwa. thumma adhhabu ilā al-ʿamal. fī al-masāʾ aqraʾu kitāban wa-anāmu fī as-sāʿa al-ḥādiya ʿashra."
+     }
+    },
+    {
+     "id": "ar-w-past",
+     "level": "B1",
+     "prompt": "Write about your last holiday or weekend, in the past tense.",
+     "minWords": 15,
+     "requirements": [
+      {
+       "label": "past-tense verbs (ذهبتُ، زرتُ، أكلتُ…)",
+       "any": [
+        "ذهبت",
+        "زرت",
+        "أكلت",
+        "رأيت",
+        "سافرت",
+        "شربت",
+        "لعبت",
+        "قرأت",
+        "شاهدت"
+       ]
+      },
+      {
+       "label": "a time expression (أمس، الأسبوع الماضي…)",
+       "any": [
+        "أمس",
+        "الأسبوع الماضي",
+        "السنة الماضية",
+        "في العطلة",
+        "نهاية الأسبوع"
+       ]
+      },
+      {
+       "label": "how it was (جميل، رائع، ممتع…)",
+       "any": [
+        "جميل",
+        "جميلة",
+        "رائع",
+        "رائعة",
+        "ممتع",
+        "ممتعة",
+        "ممل",
+        "مملة"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في نهاية الأسبوع ذهبتُ إلى البحر مع أصدقائي. سبحنا وأكلنا سمكاً في مطعم صغير. كانت الرحلة ممتعة جداً.",
+      "en": "At the weekend I went to the sea with my friends. We swam and ate fish in a small restaurant. The trip was a lot of fun.",
+      "tr": "fī nihāyat al-usbūʿ dhahabtu ilā al-baḥr maʿa aṣdiqāʾī. sabaḥnā wa-akalnā samakan fī maṭʿam ṣaghīr. kānat ar-riḥla mumtiʿa jiddan."
+     }
+    },
+    {
+     "id": "ar-w-opinion",
+     "level": "B1",
+     "prompt": "City or village: which is better to live in? Give your opinion, compare them, and give a reason.",
+     "minWords": 22,
+     "requirements": [
+      {
+       "label": "an opinion phrase (في رأيي، أعتقد أنّ)",
+       "any": [
+        "في رأيي",
+        "أعتقد أن",
+        "أظن أن"
+       ]
+      },
+      {
+       "label": "a comparative (أفضل، أهدأ، أكبر…)",
+       "any": [
+        "أفضل",
+        "أهدأ",
+        "أكبر",
+        "أجمل",
+        "أصغر",
+        "أسهل",
+        "أصعب",
+        "أغلى",
+        "أرخص"
+       ]
+      },
+      {
+       "label": "a reason (لأنّ، لذلك)",
+       "any": [
+        "لأن",
+        "لذلك"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في رأيي، الحياة في القرية أفضل من المدينة لأنّ القرية أهدأ والهواء أنظف. لكنّ المدينة أكبر وفيها عمل أكثر، لذلك يفضّل الشباب المدينة.",
+      "en": "In my opinion, village life is better than city life because the village is calmer and the air is cleaner. But the city is bigger and has more work, so young people prefer it.",
+      "tr": "fī raʾyī, al-ḥayāh fī al-qarya afḍal min al-madīna li-anna al-qarya ahdaʾ wa-l-hawāʾ anẓaf. lākinna al-madīna akbar wa-fīhā ʿamal akthar, li-dhālika yufaḍḍilu ash-shabāb al-madīna."
+     }
+    },
+    {
+     "id": "ar-w-story",
+     "level": "B1",
+     "prompt": "Tell a short story that begins 'One day…' (في يوم من الأيام).",
+     "minWords": 28,
+     "requirements": [
+      {
+       "label": "background with كان (كنتُ، كان، كانت…)",
+       "any": [
+        "كنت",
+        "كان",
+        "كانت",
+        "كانوا"
+       ]
+      },
+      {
+       "label": "time connectors (عندما، بينما، ثم، فجأة)",
+       "any": [
+        "عندما",
+        "بينما",
+        "ثم",
+        "فجأة"
+       ]
+      },
+      {
+       "label": "an ending (في النهاية، أخيراً)",
+       "any": [
+        "في النهاية",
+        "أخيرا"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في يوم من الأيام، كنتُ أمشي في السوق القديم. فجأةً رأيتُ قطة صغيرة تبكي. عندما اقتربتُ منها، ركضت إلى بيت قديم. ثم خرجت امرأة وشكرتني. في النهاية، أخذتُ القطة إلى بيتي.",
+      "en": "One day I was walking in the old market. Suddenly I saw a small cat crying. When I came close, it ran to an old house. Then a woman came out and thanked me. In the end, I took the cat home.",
+      "tr": "fī yawm min al-ayyām, kuntu amshī fī as-sūq al-qadīm. fajʾatan raʾaytu qiṭṭa ṣaghīra tabkī. ʿindamā iqtarabtu minhā, rakaḍat ilā bayt qadīm. thumma kharajat imraʾa wa-shakaratnī. fī an-nihāya, akhadhtu al-qiṭṭa ilā baytī."
+     }
+    },
+    {
+     "id": "ar-w-email",
+     "level": "B2",
+     "prompt": "Write a formal email asking a language school for information about an Arabic course.",
+     "minWords": 22,
+     "requirements": [
+      {
+       "label": "a formal opening (تحية طيبة، السيد…)",
+       "any": [
+        "تحية طيبة",
+        "السيد",
+        "السيدة",
+        "حضرة"
+       ]
+      },
+      {
+       "label": "a polite request (أودّ أن، أرجو، هل يمكن)",
+       "any": [
+        "أود أن",
+        "أرجو",
+        "هل يمكن",
+        "أريد أن"
+       ]
+      },
+      {
+       "label": "a formal closing (شكراً، مع الاحترام)",
+       "any": [
+        "شكرا",
+        "مع الاحترام",
+        "تفضلوا بقبول"
+       ]
+      }
+     ],
+     "model": {
+      "t": "تحية طيبة وبعد، أودّ أن أسأل عن دورة اللغة العربية للمبتدئين. هل يمكن أن ترسلوا لي مواعيد الدروس والأسعار؟ شكراً لكم مسبقاً، ومع الاحترام.",
+      "en": "Kind greetings. I would like to ask about the Arabic course for beginners. Could you send me the class times and prices? Thank you in advance, with respect.",
+      "tr": "taḥiyya ṭayyiba wa-baʿd, awaddu an asʾala ʿan dawrat al-lugha al-ʿarabiyya li-l-mubtadiʾīn. hal yumkin an tursilū lī mawāʿīd ad-durūs wa-l-asʿār? shukran lakum musbaqan, wa-maʿa al-iḥtirām."
+     }
+    },
+    {
+     "id": "ar-w-news",
+     "level": "C1",
+     "prompt": "Summarise a news story you read recently and give your view. Use reporting language and connectors.",
+     "minWords": 40,
+     "requirements": [
+      {
+       "label": "reporting or passive (تمّ، أعلن، وفقاً لـ…)",
+       "any": [
+        "تم",
+        "أعلن",
+        "أعلنت",
+        "وفقا",
+        "صرح",
+        "يقال"
+       ]
+      },
+      {
+       "label": "connectors (بالإضافة إلى، ومع ذلك، لذلك…)",
+       "any": [
+        "بالإضافة",
+        "علاوة على ذلك",
+        "ومع ذلك",
+        "لذلك",
+        "على الرغم"
+       ]
+      },
+      {
+       "label": "your view (في رأيي، أرى أنّ…)",
+       "any": [
+        "في رأيي",
+        "أعتقد أن",
+        "أرى أن"
+       ]
+      }
+     ],
+     "model": {
+      "t": "أعلنت وزارة التعليم أمس عن خطة لتدريس البرمجة في المدارس الابتدائية. ووفقاً للوزارة، سيتمّ تدريب ألف معلم هذا العام. بالإضافة إلى ذلك، ستحصل المدارس على أجهزة جديدة. في رأيي، الفكرة ممتازة، ومع ذلك يجب ألّا ننسى المدارس في القرى، لذلك أتمنى أن تكون الخطة عادلة.",
+      "en": "Yesterday the Ministry of Education announced a plan to teach programming in primary schools. According to the ministry, a thousand teachers will be trained this year. In addition, schools will get new devices. In my opinion, the idea is excellent; nevertheless, we must not forget village schools, so I hope the plan will be fair.",
+      "tr": "aʿlanat wizārat at-taʿlīm ams ʿan khuṭṭa li-tadrīs al-barmaja fī al-madāris al-ibtidāʾiyya. wa-wifqan li-l-wizāra, sa-yatimmu tadrīb alf muʿallim hādhā al-ʿām. bi-l-iḍāfa ilā dhālika, sa-taḥṣulu al-madāris ʿalā ajhiza jadīda. fī raʾyī, al-fikra mumtāza, wa-maʿa dhālika yajibu allā nansā al-madāris fī al-qurā, li-dhālika atamannā an takūna al-khuṭṭa ʿādila."
+     }
+    }
+   ],
+   "speakingPrompts": [
+    {
+     "id": "ar-s-intro",
+     "level": "A1",
+     "prompt": "Introduce yourself out loud: your name and where you are from.",
+     "minWords": 5,
+     "requirements": [
+      {
+       "label": "your name (اسمي…)",
+       "any": [
+        "اسمي"
+       ]
+      },
+      {
+       "label": "where you are from (أنا من…)",
+       "any": [
+        "أنا من",
+        "انا من"
+       ]
+      }
+     ],
+     "model": {
+      "t": "مرحباً، اسمي سام، أنا من كندا.",
+      "en": "Hello, my name is Sam, I'm from Canada.",
+      "tr": "marḥaban, ismī Sām, ana min Kanadā."
+     },
+     "starter": "اسمي… أنا من…"
+    },
+    {
+     "id": "ar-s-order",
+     "level": "A1",
+     "prompt": "Order a drink and something to eat at a café.",
+     "minWords": 4,
+     "requirements": [
+      {
+       "label": "I want (أريد، عايز، بدّي)",
+       "any": [
+        "أريد",
+        "عايز",
+        "بدي"
+       ]
+      },
+      {
+       "label": "please (من فضلك، لو سمحت)",
+       "any": [
+        "من فضلك",
+        "لو سمحت"
+       ]
+      },
+      {
+       "label": "a drink or food",
+       "any": [
+        "قهوة",
+        "شاي",
+        "ماء",
+        "عصير",
+        "خبز",
+        "حمص",
+        "فلافل"
+       ]
+      }
+     ],
+     "model": {
+      "t": "أريد قهوة وخبزاً من فضلك.",
+      "en": "I'd like coffee and bread, please.",
+      "tr": "urīdu qahwa wa-khubzan min faḍlak."
+     },
+     "starter": "أريد… من فضلك"
+    },
+    {
+     "id": "ar-s-day",
+     "level": "A2",
+     "prompt": "Say three things you do every day.",
+     "minWords": 8,
+     "requirements": [
+      {
+       "label": "present-tense verbs",
+       "any": [
+        "أذهب",
+        "آكل",
+        "أشرب",
+        "أعمل",
+        "أدرس",
+        "أنام",
+        "أقرأ"
+       ]
+      },
+      {
+       "label": "a time expression (كلّ يوم، في الصباح…)",
+       "any": [
+        "كل يوم",
+        "صباحا",
+        "في الصباح",
+        "مساء",
+        "في المساء"
+       ]
+      }
+     ],
+     "model": {
+      "t": "كلّ يوم أشرب القهوة في الصباح، ثم أذهب إلى العمل، وفي المساء أقرأ.",
+      "en": "Every day I drink coffee in the morning, then go to work, and in the evening I read.",
+      "tr": "kulla yawm ashrabu al-qahwa fī aṣ-ṣabāḥ, thumma adhhabu ilā al-ʿamal, wa-fī al-masāʾ aqraʾ."
+     },
+     "starter": "كلّ يوم أنا…"
+    },
+    {
+     "id": "ar-s-weekend",
+     "level": "A2",
+     "prompt": "What did you do last weekend?",
+     "minWords": 8,
+     "requirements": [
+      {
+       "label": "past-tense verbs",
+       "any": [
+        "ذهبت",
+        "زرت",
+        "أكلت",
+        "شاهدت",
+        "سافرت",
+        "لعبت",
+        "قرأت"
+       ]
+      },
+      {
+       "label": "a time expression",
+       "any": [
+        "أمس",
+        "نهاية الأسبوع",
+        "السبت",
+        "الجمعة"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في نهاية الأسبوع زرتُ جدتي وأكلنا معاً، ثم شاهدتُ فيلماً.",
+      "en": "At the weekend I visited my grandmother and we ate together, then I watched a film.",
+      "tr": "fī nihāyat al-usbūʿ zurtu jaddatī wa-akalnā maʿan, thumma shāhadtu filman."
+     },
+     "starter": "في نهاية الأسبوع…"
+    },
+    {
+     "id": "ar-s-opinion",
+     "level": "B1",
+     "prompt": "Which is better, summer or winter? Say why.",
+     "minWords": 10,
+     "requirements": [
+      {
+       "label": "an opinion (في رأيي، أعتقد، أحبّ)",
+       "any": [
+        "في رأيي",
+        "أعتقد",
+        "أظن",
+        "أحب"
+       ]
+      },
+      {
+       "label": "a comparative (أفضل، أجمل)",
+       "any": [
+        "أفضل",
+        "أجمل",
+        "أحسن"
+       ]
+      },
+      {
+       "label": "a reason (لأنّ)",
+       "any": [
+        "لأن"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في رأيي، الشتاء أفضل من الصيف لأنّ الجو بارد وأحبّ المطر.",
+      "en": "In my opinion, winter is better than summer because the weather is cool and I love the rain.",
+      "tr": "fī raʾyī, ash-shitāʾ afḍal min aṣ-ṣayf li-anna al-jaww bārid wa-uḥibbu al-maṭar."
+     },
+     "starter": "في رأيي…"
+    },
+    {
+     "id": "ar-s-plans",
+     "level": "B1",
+     "prompt": "Talk about your plans for next year.",
+     "minWords": 12,
+     "requirements": [
+      {
+       "label": "future or wishes (سوف، سأ…، أريد أن، أتمنى أن)",
+       "any": [
+        "سوف",
+        "سأسافر",
+        "سأدرس",
+        "سأعمل",
+        "سأذهب",
+        "أريد أن",
+        "أتمنى أن"
+       ]
+      },
+      {
+       "label": "a future time (السنة القادمة…)",
+       "any": [
+        "السنة القادمة",
+        "العام القادم",
+        "في المستقبل"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في السنة القادمة سوف أسافر إلى الأردن، وأتمنى أن أتكلّم العربية بطلاقة.",
+      "en": "Next year I will travel to Jordan, and I hope to speak Arabic fluently.",
+      "tr": "fī as-sana al-qādima sawfa usāfiru ilā al-Urdun, wa-atamannā an atakallama al-ʿarabiyya bi-ṭalāqa."
+     },
+     "starter": "في السنة القادمة سوف…"
+    }
+   ],
+   "levelHours": {
+    "A1": 200,
+    "A2": 450,
+    "B1": 900,
+    "B2": 1500,
+    "C1": 2200
+   }
   },
   {
    "id": "es",
@@ -7973,6 +12071,161 @@
      ]
     },
     {
+     "id": "es-health",
+     "title": "Health & the Body",
+     "nativeTitle": "Salud y cuerpo",
+     "icon": "cross.case",
+     "emoji": "🩺",
+     "summary": "Body parts, symptoms and health care in Mexico.",
+     "lessons": [
+      {
+       "id": "es-health-1",
+       "title": "The Body & Feeling Unwell",
+       "level": "A2",
+       "summary": "Doler, tener and estar for symptoms.",
+       "grammar": {
+        "title": "Doler, tener and estar for symptoms",
+        "body": [
+         "Doler works like gustar: the body part is the subject. Me duele la cabeza (my head hurts), Me duelen los pies (my feet hurt).",
+         "Use tener for many symptoms: tengo fiebre (I have a fever), tengo tos (a cough), tengo gripa (the flu or a bad cold; 'gripe' outside Mexico).",
+         "Use estar for states: estoy enfermo/a (I am sick), estoy mareado/a (I am dizzy)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Spanish"
+         ],
+         "rows": [
+          [
+           "My head hurts",
+           "Me duele la cabeza"
+          ],
+          [
+           "My feet hurt",
+           "Me duelen los pies"
+          ],
+          [
+           "I have a fever",
+           "Tengo fiebre"
+          ],
+          [
+           "I have the flu (MX)",
+           "Tengo gripa"
+          ],
+          [
+           "I'm dizzy",
+           "Estoy mareado / mareada"
+          ],
+          [
+           "I need a prescription",
+           "Necesito una receta"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "la cabeza",
+         "en": "head"
+        },
+        {
+         "t": "el estómago",
+         "en": "stomach"
+        },
+        {
+         "t": "la espalda",
+         "en": "back"
+        },
+        {
+         "t": "la muela",
+         "en": "molar ('dolor de muelas' = toothache)"
+        },
+        {
+         "t": "la gripa",
+         "en": "flu / bad cold (MX)"
+        },
+        {
+         "t": "la tos",
+         "en": "cough"
+        },
+        {
+         "t": "la receta",
+         "en": "prescription"
+        }
+       ],
+       "examples": [
+        {
+         "t": "Me duele el estómago desde anoche.",
+         "en": "My stomach has hurt since last night."
+        },
+        {
+         "t": "Tengo gripa y un poco de fiebre.",
+         "en": "I have the flu and a bit of a fever."
+        },
+        {
+         "t": "¡Que te mejores pronto!",
+         "en": "Get well soon!",
+         "note": "Que + subjunctive expresses a wish."
+        }
+       ],
+       "culture": {
+        "title": "Health care in Mexico",
+        "body": [
+         "Public health care is provided mainly by IMSS (for private-sector workers) and ISSSTE (for government employees). Many people also see private doctors.",
+         "Many pharmacies have a consultorio next door where a doctor sees patients quickly and cheaply.",
+         "Home remedies are popular: té de manzanilla (chamomile tea) for an upset stomach, and Vick VapoRub ('vaporú') for almost everything."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-health-1-q1",
+         "q": "'My feet hurt':",
+         "options": [
+          "Me duelen los pies",
+          "Me duele los pies",
+          "Yo duelo los pies",
+          "Tengo dolor pies"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "es-health-1-q2",
+         "q": "In Mexico, 'gripa' means…",
+         "options": [
+          "a doctor",
+          "a pill",
+          "the flu / a bad cold",
+          "a grip"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "es-health-1-q3",
+         "q": "'¡Que te mejores!' means…",
+         "options": [
+          "Improve your Spanish!",
+          "Cheers!",
+          "Get well soon!",
+          "What's better?"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "es-health-1-q4",
+         "q": "A consultorio next to a pharmacy is…",
+         "options": [
+          "a bank",
+          "a dentist only",
+          "a doctor's office",
+          "a gym"
+         ],
+         "answer": 2
+        }
+       ]
+      }
+     ]
+    },
+    {
      "id": "es-verb",
      "title": "Verbs & Daily Life",
      "nativeTitle": "Verbos y vida diaria",
@@ -8893,6 +13146,917 @@
      ]
     },
     {
+     "id": "es-work",
+     "title": "Work & Opinions",
+     "nativeTitle": "Trabajo y opiniones",
+     "icon": "briefcase",
+     "emoji": "💼",
+     "summary": "The office, the present perfect, opinions and comparisons.",
+     "lessons": [
+      {
+       "id": "es-work-1",
+       "title": "Work & the Office",
+       "level": "B1",
+       "summary": "Present perfect vs. preterite, Mexican style.",
+       "grammar": {
+        "title": "Present perfect vs. preterite in Mexico",
+        "body": [
+         "The present perfect is haber + participle (-ado / -ido): he trabajado, has comido. Irregular participles: hecho, dicho, visto, escrito, puesto, vuelto, abierto.",
+         "Mexicans use it for experiences and situations that continue: He trabajado aquí tres años (and still do), ¿Has ido a Oaxaca? (ever).",
+         "For finished actions, even today, Mexico prefers the preterite: ¿Ya comiste? (Spain: ¿Ya has comido?)."
+        ],
+        "table": {
+         "headers": [
+          "",
+          "haber + participle"
+         ],
+         "rows": [
+          [
+           "yo",
+           "he trabajado"
+          ],
+          [
+           "tú",
+           "has trabajado"
+          ],
+          [
+           "él / ella / usted",
+           "ha trabajado"
+          ],
+          [
+           "nosotros",
+           "hemos trabajado"
+          ],
+          [
+           "ellos / ustedes",
+           "han trabajado"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "la chamba",
+         "en": "job / work (MX, informal)"
+        },
+        {
+         "t": "el puesto",
+         "en": "position"
+        },
+        {
+         "t": "el jefe / la jefa",
+         "en": "boss"
+        },
+        {
+         "t": "la junta",
+         "en": "meeting (MX)"
+        },
+        {
+         "t": "el sueldo",
+         "en": "salary"
+        },
+        {
+         "t": "las prestaciones",
+         "en": "job benefits"
+        },
+        {
+         "t": "el aguinaldo",
+         "en": "year-end bonus"
+        }
+       ],
+       "examples": [
+        {
+         "t": "He trabajado en esta empresa desde 2020.",
+         "en": "I've worked at this company since 2020."
+        },
+        {
+         "t": "Tengo junta a las diez con mi jefa.",
+         "en": "I have a meeting at ten with my boss."
+        },
+        {
+         "t": "¿Ya mandaste el correo? — Sí, ya lo mandé.",
+         "en": "Did you send the email yet? — Yes, I sent it."
+        }
+       ],
+       "culture": {
+        "title": "Office life",
+        "body": [
+         "By law, employees in Mexico receive an aguinaldo (year-end bonus) of at least 15 days' pay, paid before December 20.",
+         "Titles matter: colleagues often say 'Licenciado/a', 'Ingeniero/a' or 'Contador/a' instead of first names.",
+         "Juntas (meetings) may start a little late and begin with friendly chat. Going straight to business can feel cold."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-work-1-q1",
+         "q": "'I have worked here for three years':",
+         "options": [
+          "Trabajo aquí tres años ya pasado",
+          "Tengo trabajado aquí",
+          "He trabajado aquí tres años",
+          "Estoy trabajado aquí"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "es-work-1-q2",
+         "q": "In Mexico, a 'junta' is…",
+         "options": [
+          "a contract",
+          "a meeting",
+          "a party",
+          "a joint"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "es-work-1-q3",
+         "q": "The aguinaldo is…",
+         "options": [
+          "a holiday",
+          "a year-end bonus",
+          "a uniform",
+          "a tax"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "es-work-1-q4",
+         "q": "In Mexico, 'Have you eaten yet?' is usually…",
+         "options": [
+          "¿Ya comiste?",
+          "¿Ya comerás?",
+          "¿Ya comes?",
+          "¿Ya has comido?"
+         ],
+         "answer": 0
+        }
+       ]
+      },
+      {
+       "id": "es-work-2",
+       "title": "Opinions & Comparisons",
+       "level": "B1",
+       "summary": "Creo que vs. no creo que, and comparing things.",
+       "grammar": {
+        "title": "Creo que vs. no creo que",
+        "body": [
+         "Creo que, pienso que and me parece que + indicative state an opinion: Creo que tienes razón.",
+         "Negative or doubtful opinions take the subjunctive: No creo que sea buena idea. Dudo que llegue a tiempo.",
+         "Comparisons: más… que (more… than), menos… que (less… than), tan… como (as… as). Irregular: mejor (better), peor (worse), mayor (older), menor (younger)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Spanish"
+         ],
+         "rows": [
+          [
+           "I think you're right",
+           "Creo que tienes razón"
+          ],
+          [
+           "I don't think it's a good idea",
+           "No creo que sea buena idea"
+          ],
+          [
+           "It seems to me that…",
+           "Me parece que…"
+          ],
+          [
+           "Mexico City is bigger than Monterrey",
+           "La CDMX es más grande que Monterrey"
+          ],
+          [
+           "Tacos are as good as tamales",
+           "Los tacos son tan buenos como los tamales"
+          ],
+          [
+           "This is the best",
+           "Este es el mejor"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "creo que",
+         "en": "I think that"
+        },
+        {
+         "t": "no creo que",
+         "en": "I don't think that (+ subjunctive)"
+        },
+        {
+         "t": "estoy de acuerdo",
+         "en": "I agree"
+        },
+        {
+         "t": "no estoy de acuerdo",
+         "en": "I disagree"
+        },
+        {
+         "t": "tienes razón",
+         "en": "you're right"
+        },
+        {
+         "t": "mejor / peor",
+         "en": "better / worse"
+        },
+        {
+         "t": "fíjate que…",
+         "en": "you know what… / the thing is…"
+        }
+       ],
+       "examples": [
+        {
+         "t": "Me parece que el metro es más rápido que el camión.",
+         "en": "It seems to me the Metro is faster than the bus."
+        },
+        {
+         "t": "No creo que llueva hoy.",
+         "en": "I don't think it'll rain today."
+        },
+        {
+         "t": "Fíjate que no estoy de acuerdo.",
+         "en": "You know, I don't agree.",
+         "note": "'Fíjate que…' softens what comes next. Very Mexican."
+        }
+       ],
+       "culture": {
+        "title": "Disagreeing, Mexican style",
+        "body": [
+         "Open confrontation is usually avoided. People soften disagreement with 'Sí, pero…', 'Fíjate que…' or '¿No crees que…?'.",
+         "A direct 'no' can feel rude, so you may hear 'lo veo difícil' (I see it as difficult) or 'a ver' (we'll see) instead.",
+         "Among friends, though, passionate debates about football (Chivas vs. América!) are a national pastime."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-work-2-q1",
+         "q": "'I don't think it's true':",
+         "options": [
+          "No creo que sea verdad",
+          "No creo que es verdad",
+          "No pienso es verdad",
+          "Creo no verdad"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "es-work-2-q2",
+         "q": "'Better' is…",
+         "options": [
+          "más bueno",
+          "mayor",
+          "mejor",
+          "buenísimo"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "es-work-2-q3",
+         "q": "'Lo veo difícil' often means…",
+         "options": [
+          "a definite yes",
+          "I can't see",
+          "a polite no",
+          "it's easy"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "es-work-2-q4",
+         "q": "'As… as' is…",
+         "options": [
+          "menos… que",
+          "tan… como",
+          "tanto que",
+          "más… que"
+         ],
+         "answer": 1
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "es-story",
+     "title": "Storytelling",
+     "nativeTitle": "Contar historias",
+     "icon": "book",
+     "emoji": "📜",
+     "summary": "Imperfect vs. preterite, relative clauses and Mexican legends.",
+     "lessons": [
+      {
+       "id": "es-story-1",
+       "title": "Telling Stories: Imperfect & Preterite",
+       "level": "B1",
+       "summary": "Set the scene, then move the story.",
+       "grammar": {
+        "title": "Setting the scene vs. moving the story",
+        "body": [
+         "The imperfect describes background, habits and descriptions: era, había, estaba, hacía frío.",
+         "The preterite tells completed events that move the story forward: llegó, vio, dijo.",
+         "Together: Estaba en casa cuando sonó el teléfono (I was at home when the phone rang).",
+         "Imperfect endings: -ar → -aba, -abas, -aba, -ábamos, -aban; -er / -ir → -ía, -ías, -ía, -íamos, -ían. Only three verbs are irregular: ser (era), ir (iba), ver (veía)."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Spanish"
+         ],
+         "rows": [
+          [
+           "Once upon a time there was…",
+           "Había una vez…"
+          ],
+          [
+           "It was night",
+           "Era de noche"
+          ],
+          [
+           "It was cold",
+           "Hacía frío"
+          ],
+          [
+           "I was walking when…",
+           "Caminaba cuando…"
+          ],
+          [
+           "…I saw a light",
+           "…vi una luz"
+          ],
+          [
+           "We used to go every summer",
+           "Íbamos cada verano"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "había una vez",
+         "en": "once upon a time"
+        },
+        {
+         "t": "de repente",
+         "en": "suddenly"
+        },
+        {
+         "t": "mientras",
+         "en": "while"
+        },
+        {
+         "t": "entonces",
+         "en": "then / so"
+        },
+        {
+         "t": "al final",
+         "en": "in the end"
+        },
+        {
+         "t": "la leyenda",
+         "en": "legend"
+        },
+        {
+         "t": "asustar",
+         "en": "to scare"
+        }
+       ],
+       "examples": [
+        {
+         "t": "Cuando era niña, vivía en Puebla con mis abuelos.",
+         "en": "When I was a girl, I lived in Puebla with my grandparents."
+        },
+        {
+         "t": "Mientras cenábamos, de repente se fue la luz.",
+         "en": "While we were having dinner, the power suddenly went out."
+        },
+        {
+         "t": "Al final, todos se rieron.",
+         "en": "In the end, everyone laughed."
+        }
+       ],
+       "culture": {
+        "title": "Legends of Mexico",
+        "body": [
+         "La Llorona, the weeping woman searching for her children, is the most famous Mexican legend. Parents warn children that she wanders near rivers at night.",
+         "In Guanajuato, the Callejón del Beso is an alley so narrow that, legend says, two lovers could kiss from opposite balconies.",
+         "Corridos are narrative ballads that tell stories of heroes, revolutions and outlaws."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-story-1-q1",
+         "q": "Background: 'It was night when…'",
+         "options": [
+          "Fue de noche",
+          "Es de noche",
+          "Era de noche",
+          "Será de noche"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "es-story-1-q2",
+         "q": "Estaba en casa cuando ___ el teléfono.",
+         "options": [
+          "sonará",
+          "suena",
+          "sonó",
+          "sonaba"
+         ],
+         "answer": 2,
+         "explain": "A completed event interrupting the background → preterite."
+        },
+        {
+         "id": "es-story-1-q3",
+         "q": "Which verb is irregular in the imperfect?",
+         "options": [
+          "comer",
+          "vivir",
+          "hablar",
+          "ir (iba)"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "es-story-1-q4",
+         "q": "La Llorona is…",
+         "options": [
+          "a type of song",
+          "a legend about a weeping woman",
+          "a Mexican dish",
+          "a city"
+         ],
+         "answer": 1
+        }
+       ]
+      },
+      {
+       "id": "es-story-2",
+       "title": "Relative Clauses & Connectors",
+       "level": "B2",
+       "summary": "Que, quien, lo que, cuyo, and aunque.",
+       "grammar": {
+        "title": "Linking ideas",
+        "body": [
+         "Que is the all-purpose relative: la película que vimos (the film we saw).",
+         "After prepositions use el / la que, los / las que or quien(es): la amiga con quien viajé, el edificio en el que trabajo.",
+         "Lo que means 'what / the thing that': Lo que me gusta es… Cuyo / cuya (whose) agrees with the thing owned: el autor cuya novela leí.",
+         "Aunque + indicative states a fact (although it is); aunque + subjunctive is hypothetical (even if): Aunque llueve, salgo / Aunque llueva, saldré."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Spanish"
+         ],
+         "rows": [
+          [
+           "the film (that) we saw",
+           "la película que vimos"
+          ],
+          [
+           "the friend I travelled with",
+           "la amiga con quien viajé"
+          ],
+          [
+           "the building where I work",
+           "el edificio en el que trabajo"
+          ],
+          [
+           "what I like",
+           "lo que me gusta"
+          ],
+          [
+           "the author whose novel I read",
+           "el autor cuya novela leí"
+          ],
+          [
+           "even if it rains",
+           "aunque llueva"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "lo que",
+         "en": "what / the thing that"
+        },
+        {
+         "t": "cuyo / cuya",
+         "en": "whose"
+        },
+        {
+         "t": "aunque",
+         "en": "although / even if"
+        },
+        {
+         "t": "sin embargo",
+         "en": "however"
+        },
+        {
+         "t": "por lo tanto",
+         "en": "therefore"
+        },
+        {
+         "t": "en cambio",
+         "en": "on the other hand"
+        },
+        {
+         "t": "o sea",
+         "en": "I mean / that is"
+        }
+       ],
+       "examples": [
+        {
+         "t": "Lo que más extraño de México es la comida.",
+         "en": "What I miss most about Mexico is the food."
+        },
+        {
+         "t": "Es un pueblo cuyas calles son de piedra.",
+         "en": "It is a town whose streets are made of stone."
+        },
+        {
+         "t": "Aunque esté cansado, voy a ir a la fiesta.",
+         "en": "Even if I'm tired, I'm going to go to the party."
+        }
+       ],
+       "culture": {
+        "title": "Stories in song",
+        "body": [
+         "Corridos grew popular as ballads of the Mexican Revolution (1910–1920), telling of figures like Pancho Villa.",
+         "Today 'corridos tumbados', which mix regional Mexican music with trap and hip-hop, are among the most-streamed songs in the world.",
+         "'O sea' is a classic filler, especially associated with the 'fresa' (posh) way of talking."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-story-2-q1",
+         "q": "'What I need is time':",
+         "options": [
+          "El cual necesito tiempo",
+          "Lo que necesito es tiempo",
+          "Cuyo necesito tiempo",
+          "Que necesito es tiempo"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "es-story-2-q2",
+         "q": "'The woman whose son…':",
+         "options": [
+          "la mujer quien hijo",
+          "la mujer cuya hijo",
+          "la mujer cuyo hijo",
+          "la mujer que su hijo de"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "es-story-2-q3",
+         "q": "Aunque ___ (llover), iré.",
+         "options": [
+          "llueva",
+          "lloverá",
+          "llueve",
+          "llovió"
+         ],
+         "answer": 0,
+         "explain": "Hypothetical (even if) → subjunctive."
+        },
+        {
+         "id": "es-story-2-q4",
+         "q": "'Sin embargo' means…",
+         "options": [
+          "therefore",
+          "meanwhile",
+          "however",
+          "although"
+         ],
+         "answer": 2
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "es-reg",
+     "title": "Regional Mexico & Slang",
+     "nativeTitle": "Variantes y caló",
+     "icon": "map",
+     "emoji": "🗺️",
+     "summary": "How Spanish changes across Mexico, and when slang is (and isn't) OK.",
+     "lessons": [
+      {
+       "id": "es-reg-1",
+       "title": "Words Across the Country",
+       "level": "B1",
+       "summary": "Chilango, norteño and yucateco Spanish.",
+       "grammar": {
+        "title": "Same country, different words",
+        "body": [
+         "Mexican Spanish varies by region in accent and vocabulary, but everyone understands standard Mexican Spanish from school and TV.",
+         "Northern speech (norteño) has a strong, open rhythm and words like 'plebe' (kids / the gang) and 'morro / morra' (boy / girl).",
+         "In Yucatán, Maya influence shows in words like 'huach' (a Mexican from outside the peninsula). At jarana dances someone shouts '¡Bomba!' before a funny rhyming verse.",
+         "In Mexico City, chilango speech has a sing-song intonation and favourites like 'güey', 'chido' and '¿qué onda?'."
+        ],
+        "table": {
+         "headers": [
+          "Region",
+          "Word",
+          "Meaning"
+         ],
+         "rows": [
+          [
+           "CDMX",
+           "chido",
+           "cool"
+          ],
+          [
+           "CDMX",
+           "¿qué onda?",
+           "what's up?"
+          ],
+          [
+           "North",
+           "plebe",
+           "kids / the gang"
+          ],
+          [
+           "North",
+           "morro / morra",
+           "boy / girl (informal)"
+          ],
+          [
+           "Yucatán",
+           "huach",
+           "outsider from central Mexico"
+          ],
+          [
+           "Jalisco",
+           "tapatío / tapatía",
+           "from Guadalajara"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "chilango / chilanga",
+         "en": "person from Mexico City"
+        },
+        {
+         "t": "tapatío / tapatía",
+         "en": "person from Guadalajara"
+        },
+        {
+         "t": "regio / regia",
+         "en": "person from Monterrey"
+        },
+        {
+         "t": "plebe",
+         "en": "kids / the gang (north)"
+        },
+        {
+         "t": "morro / morra",
+         "en": "boy / girl (informal)"
+        },
+        {
+         "t": "huach",
+         "en": "outsider (Yucatán)"
+        },
+        {
+         "t": "ándale",
+         "en": "come on / that's it"
+        }
+       ],
+       "examples": [
+        {
+         "t": "Mi amigo es regio y le encanta la carne asada.",
+         "en": "My friend is from Monterrey and loves carne asada."
+        },
+        {
+         "t": "¡Ándale, plebe, vámonos!",
+         "en": "Come on, guys, let's go!",
+         "note": "Northern flavour."
+        },
+        {
+         "t": "En Mérida me dicen huach porque soy de la capital.",
+         "en": "In Mérida they call me 'huach' because I'm from the capital."
+        }
+       ],
+       "culture": {
+        "title": "Food and identity",
+        "body": [
+         "Regional pride runs deep and often centres on food: carne asada in the north, birria in Jalisco, cochinita pibil in Yucatán, mole in Puebla and Oaxaca.",
+         "Chilango humour and Monterrey's business culture are favourite subjects of friendly rivalry.",
+         "Indigenous languages, including Maya in Yucatán and Zapotec and Mixtec in Oaxaca, are spoken alongside Spanish in many regions."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-reg-1-q1",
+         "q": "A 'regio' is from…",
+         "options": [
+          "Monterrey",
+          "Guadalajara",
+          "Mérida",
+          "Mexico City"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "es-reg-1-q2",
+         "q": "In the north, 'morra' means…",
+         "options": [
+          "beer",
+          "girl",
+          "mountain",
+          "money"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "es-reg-1-q3",
+         "q": "Which food is iconic in the north?",
+         "options": [
+          "cochinita pibil",
+          "mole poblano",
+          "tlayudas",
+          "carne asada"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "es-reg-1-q4",
+         "q": "In Yucatán, a 'huach' is…",
+         "options": [
+          "an outsider from central Mexico",
+          "a dance",
+          "a fish",
+          "a hat"
+         ],
+         "answer": 0
+        }
+       ]
+      },
+      {
+       "id": "es-reg-2",
+       "title": "Slang & Register",
+       "level": "B2",
+       "summary": "Everyday slang, vulgar words to recognise, and when to switch.",
+       "grammar": {
+        "title": "Knowing when to use slang",
+        "body": [
+         "Slang depends on who you're with. A useful rule: if you'd use usted with someone, avoid slang with them.",
+         "Some very common words are vulgar: 'no mames' (no way!), '¿qué pedo?' (what's up?) and 'pinche' (damn) are fine among close friends but rude elsewhere.",
+         "Softer alternatives: 'no manches' instead of 'no mames', '¿qué onda?' instead of '¿qué pedo?'."
+        ],
+        "table": {
+         "headers": [
+          "Word",
+          "Meaning",
+          "Register"
+         ],
+         "rows": [
+          [
+           "chido",
+           "cool",
+           "informal, OK"
+          ],
+          [
+           "chafa",
+           "lame / low-quality",
+           "informal, OK"
+          ],
+          [
+           "un chorro",
+           "a lot",
+           "informal, OK"
+          ],
+          [
+           "no manches",
+           "no way!",
+           "informal, OK"
+          ],
+          [
+           "no mames",
+           "no way!",
+           "vulgar"
+          ],
+          [
+           "naco",
+           "tacky",
+           "offensive (classist)"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "chafa",
+         "en": "lame / low-quality"
+        },
+        {
+         "t": "un chorro",
+         "en": "a lot"
+        },
+        {
+         "t": "neta",
+         "en": "truth / for real"
+        },
+        {
+         "t": "¡aguas!",
+         "en": "watch out!"
+        },
+        {
+         "t": "hacer la pinta",
+         "en": "to skip school"
+        },
+        {
+         "t": "buena onda",
+         "en": "nice / cool (person)"
+        },
+        {
+         "t": "de volada",
+         "en": "right away / quickly"
+        }
+       ],
+       "examples": [
+        {
+         "t": "Ese celular está bien chafa.",
+         "en": "That phone is really poor quality."
+        },
+        {
+         "t": "Hay un chorro de tráfico, ¡aguas!",
+         "en": "There's a ton of traffic, watch out!"
+        },
+        {
+         "t": "Ahorita lo hago, de volada.",
+         "en": "I'll do it right away."
+        }
+       ],
+       "culture": {
+        "title": "Respect and register",
+        "body": [
+         "Using slang well can make you sound warm and local; using it in the wrong place can sound disrespectful.",
+         "Words like 'naco' (tacky) and 'indio' used as insults carry classism and racism. Avoid them.",
+         "With elders, officials and in business, Mexicans switch to polished, courteous Spanish, and so should you."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-reg-2-q1",
+         "q": "'Un chorro' means…",
+         "options": [
+          "a lot",
+          "a jet of water only",
+          "a dog",
+          "a little"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "es-reg-2-q2",
+         "q": "The polite alternative to 'no mames' is…",
+         "options": [
+          "no mames, güey",
+          "pinche",
+          "no manches",
+          "¿qué pedo?"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "es-reg-2-q3",
+         "q": "'Chafa' means…",
+         "options": [
+          "expensive",
+          "fast",
+          "delicious",
+          "low-quality"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "es-reg-2-q4",
+         "q": "'De volada' means…",
+         "options": [
+          "on vacation",
+          "flying",
+          "slowly",
+          "right away"
+         ],
+         "answer": 3
+        }
+       ]
+      }
+     ]
+    },
+    {
      "id": "es-adv",
      "title": "Advanced Grammar",
      "nativeTitle": "Gramática avanzada",
@@ -9177,6 +14341,297 @@
           "Necesito que tú…",
           "Dame…",
           "Quiero ya…"
+         ],
+         "answer": 0
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "es-news",
+     "title": "News & Formal Spanish",
+     "nativeTitle": "Noticias y español formal",
+     "icon": "newspaper",
+     "emoji": "📰",
+     "summary": "The passive, reported speech, and formal letters and procedures.",
+     "lessons": [
+      {
+       "id": "es-news-1",
+       "title": "Reading the News",
+       "level": "B2",
+       "summary": "Passive voice, reported speech and attribution.",
+       "grammar": {
+        "title": "Passive and reported speech",
+        "body": [
+         "News often uses the passive with ser + participle: La ley fue aprobada (the law was passed), or the passive se: Se aprobó la ley.",
+         "Reported speech shifts tenses: 'Hay crisis' → Dijo que había crisis; 'Llegaremos' → Dijeron que llegarían.",
+         "Attribution: según (according to), de acuerdo con, informó, declaró, aseguró."
+        ],
+        "table": {
+         "headers": [
+          "Direct",
+          "Reported"
+         ],
+         "rows": [
+          [
+           "\"Estoy cansado.\"",
+           "Dijo que estaba cansado."
+          ],
+          [
+           "\"Vamos a ganar.\"",
+           "Dijeron que iban a ganar."
+          ],
+          [
+           "\"Lo haré.\"",
+           "Dijo que lo haría."
+          ],
+          [
+           "\"Llegué tarde.\"",
+           "Dijo que había llegado tarde."
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "el gobierno",
+         "en": "government"
+        },
+        {
+         "t": "las elecciones",
+         "en": "elections"
+        },
+        {
+         "t": "la Cámara de Diputados",
+         "en": "Chamber of Deputies"
+        },
+        {
+         "t": "la encuesta",
+         "en": "poll / survey"
+        },
+        {
+         "t": "según",
+         "en": "according to"
+        },
+        {
+         "t": "aprobar",
+         "en": "to approve / pass"
+        },
+        {
+         "t": "la reforma",
+         "en": "reform"
+        }
+       ],
+       "examples": [
+        {
+         "t": "La reforma fue aprobada por la Cámara de Diputados.",
+         "en": "The reform was passed by the Chamber of Deputies."
+        },
+        {
+         "t": "Según una encuesta, el 60% está a favor.",
+         "en": "According to a poll, 60% are in favour."
+        },
+        {
+         "t": "El secretario dijo que la economía crecería este año.",
+         "en": "The minister said the economy would grow this year.",
+         "note": "In Mexico, government ministers are called 'secretarios'."
+        }
+       ],
+       "culture": {
+        "title": "Mexican media",
+        "body": [
+         "Major newspapers include El Universal, Reforma, La Jornada and Milenio, each with a different editorial line.",
+         "Since 2018, the president has held near-daily morning press conferences known as 'las mañaneras'.",
+         "Mexico has been one of the most dangerous countries in the world for journalists, which shapes how news is reported."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-news-1-q1",
+         "q": "'The law was passed':",
+         "options": [
+          "La ley estuvo aprobada",
+          "La ley fue aprobada",
+          "La ley es aprobar",
+          "La ley fue aprobado"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "es-news-1-q2",
+         "q": "'Estoy cansada' → Dijo que ___ cansada.",
+         "options": [
+          "estará",
+          "estaba",
+          "estuvo",
+          "está"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "es-news-1-q3",
+         "q": "'Según' means…",
+         "options": [
+          "according to",
+          "despite",
+          "against",
+          "because"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "es-news-1-q4",
+         "q": "In Mexico, a 'secretario de Estado' is…",
+         "options": [
+          "a governor",
+          "a typist",
+          "a government minister",
+          "a senator"
+         ],
+         "answer": 2
+        }
+       ]
+      },
+      {
+       "id": "es-news-2",
+       "title": "Formal Writing & Trámites",
+       "level": "C1",
+       "summary": "Formal letters, the subjunctive in requests, and bureaucracy.",
+       "grammar": {
+        "title": "Register and formal connectors",
+        "body": [
+         "Formal writing uses usted / ustedes, longer sentences and precise connectors: además (moreover), no obstante (nevertheless), por consiguiente (consequently), cabe señalar que (it should be noted that).",
+         "Requests take the subjunctive: Le solicito que me envíe… (I request that you send me…), Le agradecería que… (I would be grateful if…).",
+         "Letters open with Estimado/a señor/a… or A quien corresponda (to whom it may concern) and close with Atentamente or Quedo a sus órdenes."
+        ],
+        "table": {
+         "headers": [
+          "English",
+          "Spanish"
+         ],
+         "rows": [
+          [
+           "To whom it may concern",
+           "A quien corresponda"
+          ],
+          [
+           "By means of this letter…",
+           "Por medio de la presente…"
+          ],
+          [
+           "I request that you…",
+           "Le solicito que…"
+          ],
+          [
+           "I would be grateful if…",
+           "Le agradecería que…"
+          ],
+          [
+           "Nevertheless",
+           "No obstante"
+          ],
+          [
+           "Sincerely",
+           "Atentamente"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "por medio de la presente",
+         "en": "by means of this letter"
+        },
+        {
+         "t": "a quien corresponda",
+         "en": "to whom it may concern"
+        },
+        {
+         "t": "no obstante",
+         "en": "nevertheless"
+        },
+        {
+         "t": "por consiguiente",
+         "en": "consequently"
+        },
+        {
+         "t": "cabe señalar que",
+         "en": "it should be noted that"
+        },
+        {
+         "t": "el trámite",
+         "en": "bureaucratic procedure"
+        },
+        {
+         "t": "atentamente",
+         "en": "sincerely"
+        }
+       ],
+       "examples": [
+        {
+         "t": "Por medio de la presente, le solicito una constancia de estudios.",
+         "en": "By means of this letter, I request a certificate of enrolment."
+        },
+        {
+         "t": "Le agradecería que me respondiera a la brevedad.",
+         "en": "I would be grateful if you could reply as soon as possible."
+        },
+        {
+         "t": "Sin otro particular, quedo a sus órdenes.",
+         "en": "With nothing further, I remain at your service."
+        }
+       ],
+       "culture": {
+        "title": "Trámites",
+        "body": [
+         "A trámite is any bureaucratic procedure, from renewing a passport to registering a business. Patience and photocopies are essential.",
+         "The CURP (Clave Única de Registro de Población) is the personal ID code asked for in most official procedures.",
+         "Formal Mexican letters are notably courteous: formulas like 'Sin otro particular' and 'Quedo a sus órdenes' are standard."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "es-news-2-q1",
+         "q": "'To whom it may concern':",
+         "options": [
+          "A quien corresponda",
+          "Para quien sea",
+          "Hola a todos",
+          "Querido señor"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "es-news-2-q2",
+         "q": "Le solicito que me ___ (enviar) el documento.",
+         "options": [
+          "envíe",
+          "enviaba",
+          "envía",
+          "enviará"
+         ],
+         "answer": 0
+        },
+        {
+         "id": "es-news-2-q3",
+         "q": "'No obstante' means…",
+         "options": [
+          "therefore",
+          "nevertheless",
+          "for example",
+          "moreover"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "es-news-2-q4",
+         "q": "A 'trámite' is…",
+         "options": [
+          "a bureaucratic procedure",
+          "a tram",
+          "a tax refund",
+          "a lawyer"
          ],
          "answer": 0
         }
@@ -10859,6 +16314,536 @@
        ]
       }
      ]
+    },
+    {
+     "id": "es-sc-doctor",
+     "title": "At the Doctor's Office",
+     "level": "B1",
+     "emoji": "🩺",
+     "icon": "stethoscope",
+     "setting": "A consultorio next to a pharmacy in Puebla. You have had a sore throat for three days.",
+     "goal": "Describe your symptoms, understand the treatment and ask about work.",
+     "steps": [
+      {
+       "speaker": "Doctor",
+       "line": {
+        "t": "Buenas tardes. ¿Qué le pasa?",
+        "en": "Good afternoon. What's wrong?"
+       },
+       "prompt": "Say you've had a sore throat and a fever for three days.",
+       "choices": [
+        {
+         "t": "Estoy garganta tres días.",
+         "en": "I am throat three days.",
+         "correct": false,
+         "feedback": "Use 'tengo dolor de garganta'."
+        },
+        {
+         "t": "Me duelo la fiebre.",
+         "en": "I hurt myself the fever.",
+         "correct": false,
+         "feedback": "Fevers don't hurt; you 'have' them: tengo fiebre."
+        },
+        {
+         "t": "Tengo dolor de garganta y fiebre desde hace tres días.",
+         "en": "I've had a sore throat and fever for three days.",
+         "correct": true,
+         "feedback": "'Desde hace' + time = for (and still)."
+        }
+       ]
+      },
+      {
+       "speaker": "Doctor",
+       "line": {
+        "t": "¿Ha tomado algún medicamento?",
+        "en": "Have you taken any medicine?"
+       },
+       "prompt": "Answer her.",
+       "choices": [
+        {
+         "t": "Sí, he tomado paracetamol, pero no me ha ayudado.",
+         "en": "Yes, I've taken paracetamol, but it hasn't helped.",
+         "correct": true,
+         "feedback": "Present perfect for a recent experience."
+        },
+        {
+         "t": "Tomaré mañana el metro.",
+         "en": "I'll take the Metro tomorrow.",
+         "correct": false,
+         "feedback": "Tomar is to take, but not the Metro here!"
+        },
+        {
+         "t": "No, no he tomado nada.",
+         "en": "No, I haven't taken anything.",
+         "correct": true,
+         "feedback": "Double negative: correct in Spanish."
+        }
+       ]
+      },
+      {
+       "speaker": "Doctor",
+       "line": {
+        "t": "Le voy a recetar un antibiótico. Tómelo cada ocho horas durante siete días y no lo deje aunque se sienta mejor.",
+        "en": "I'm going to prescribe an antibiotic. Take it every eight hours for seven days, and don't stop even if you feel better."
+       },
+       "prompt": "What should you do?",
+       "choices": [
+        {
+         "t": "",
+         "en": "Take it once and stop when you feel better",
+         "correct": false,
+         "feedback": "She said don't stop."
+        },
+        {
+         "t": "",
+         "en": "Take it every 8 hours for 7 days, even if you feel better",
+         "correct": true,
+         "feedback": "'Aunque se sienta mejor' = even if you feel better (subjunctive)."
+        },
+        {
+         "t": "",
+         "en": "Don't take anything for a week",
+         "correct": false,
+         "feedback": "She's prescribing an antibiotic."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Ask if you can go to work tomorrow.",
+       "choices": [
+        {
+         "t": "¿Fui a trabajar?",
+         "en": "Did I go to work?",
+         "correct": false,
+         "feedback": "That's the past."
+        },
+        {
+         "t": "¿Puedo ir a trabajar mañana?",
+         "en": "Can I go to work tomorrow?",
+         "correct": true,
+         "feedback": "Clear and correct."
+        },
+        {
+         "t": "¿Puedo trabajar el doctor?",
+         "en": "Can I work the doctor?",
+         "correct": false,
+         "feedback": "Mixed up!"
+        }
+       ]
+      },
+      {
+       "speaker": "Doctor",
+       "line": {
+        "t": "Mejor descanse dos días. Le doy una incapacidad.",
+        "en": "You'd better rest for two days. I'll give you a sick note.",
+        "note": "An 'incapacidad' is an official sick-leave certificate."
+       },
+       "prompt": "What did she say?",
+       "choices": [
+        {
+         "t": "",
+         "en": "Rest for two days; you get a sick-leave note",
+         "correct": true,
+         "feedback": "Incapacidad = sick leave, not incapacity forever!"
+        },
+        {
+         "t": "",
+         "en": "You're unable to work forever",
+         "correct": false,
+         "feedback": "It's just two days."
+        },
+        {
+         "t": "",
+         "en": "Go to work tomorrow",
+         "correct": false,
+         "feedback": "She said to rest."
+        }
+       ],
+       "mode": "understand"
+      }
+     ]
+    },
+    {
+     "id": "es-sc-rent",
+     "title": "Renting an Apartment",
+     "level": "B1",
+     "emoji": "🏢",
+     "icon": "building.2",
+     "setting": "You visit an apartment for rent in Guadalajara.",
+     "goal": "Ask about rent, requirements and services, and arrange a visit.",
+     "steps": [
+      {
+       "speaker": "Owner",
+       "line": {
+        "t": "Buenas, ¿viene por el depa?",
+        "en": "Hi, are you here about the apartment?",
+        "note": "'Depa' = departamento (apartment) in Mexico."
+       },
+       "prompt": "Say yes and ask about the rent.",
+       "choices": [
+        {
+         "t": "¿Dónde está la renta?",
+         "en": "Where is the rent?",
+         "correct": false,
+         "feedback": "Ask how much it is."
+        },
+        {
+         "t": "Sí, yo soy el depa.",
+         "en": "Yes, I am the apartment.",
+         "correct": false,
+         "feedback": "Careful with ser!"
+        },
+        {
+         "t": "Sí, buenas tardes. ¿Cuánto es la renta al mes?",
+         "en": "Yes, good afternoon. How much is the monthly rent?",
+         "correct": true,
+         "feedback": "Renta = rent in Mexico."
+        }
+       ]
+      },
+      {
+       "speaker": "Owner",
+       "line": {
+        "t": "Son doce mil al mes, más un mes de depósito, y necesito un aval o una póliza jurídica.",
+        "en": "It's twelve thousand a month, plus a month's deposit, and I need a guarantor or a rental guarantee policy."
+       },
+       "prompt": "What are the conditions?",
+       "choices": [
+        {
+         "t": "",
+         "en": "A 12,000 deposit only",
+         "correct": false,
+         "feedback": "There is monthly rent too."
+        },
+        {
+         "t": "",
+         "en": "1,200 a year with no deposit",
+         "correct": false,
+         "feedback": "Doce mil = 12,000, al mes = per month."
+        },
+        {
+         "t": "",
+         "en": "12,000 a month + one month's deposit + a guarantor or rental policy",
+         "correct": true,
+         "feedback": "An 'aval' (guarantor, often a property owner) is a common requirement in Mexico."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Ask whether utilities are included.",
+       "choices": [
+        {
+         "t": "¿Hay servicio de taxis?",
+         "en": "Is there a taxi service?",
+         "correct": false,
+         "feedback": "Wrong services!"
+        },
+        {
+         "t": "¿Los servicios son incluir?",
+         "en": "Are the services to include?",
+         "correct": false,
+         "feedback": "Use estar + incluidos."
+        },
+        {
+         "t": "¿Los servicios están incluidos? ¿La luz, el agua, el gas?",
+         "en": "Are utilities included? Electricity, water, gas?",
+         "correct": true,
+         "feedback": "In Mexico, 'la luz' = the electricity bill."
+        }
+       ]
+      },
+      {
+       "speaker": "Owner",
+       "line": {
+        "t": "El agua sí está incluida; la luz y el gas no.",
+        "en": "Water is included; electricity and gas are not."
+       },
+       "prompt": "Ask to see it this weekend.",
+       "choices": [
+        {
+         "t": "¿Podría verlo este fin de semana?",
+         "en": "Could I see it this weekend?",
+         "correct": true,
+         "feedback": "The conditional sounds polite."
+        },
+        {
+         "t": "¿Lo vi el fin de semana?",
+         "en": "Did I see it at the weekend?",
+         "correct": false,
+         "feedback": "That's the past."
+        },
+        {
+         "t": "Quiero verte siempre.",
+         "en": "I want to see you always.",
+         "correct": false,
+         "feedback": "Very romantic, but no!"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "es-sc-debate",
+     "title": "A Debate at the Office",
+     "level": "B2",
+     "emoji": "🗣️",
+     "icon": "person.3",
+     "setting": "A team meeting in Mexico City about working from home.",
+     "goal": "Agree, propose a compromise with the subjunctive, and close politely.",
+     "steps": [
+      {
+       "speaker": "Colleague",
+       "line": {
+        "t": "Creo que deberíamos trabajar desde casa todos los viernes.",
+        "en": "I think we should work from home every Friday."
+       },
+       "prompt": "Agree and give a reason.",
+       "choices": [
+        {
+         "t": "Estoy acuerdo con el viernes.",
+         "en": "I am agreement with Friday.",
+         "correct": false,
+         "feedback": "It's 'estoy de acuerdo'."
+        },
+        {
+         "t": "Estoy de acuerdo, porque así ahorraríamos tiempo de traslado.",
+         "en": "I agree, because that way we would save commuting time.",
+         "correct": true,
+         "feedback": "Conditional for a hypothetical benefit."
+        },
+        {
+         "t": "¡Qué pedo!",
+         "en": "What the heck!",
+         "correct": false,
+         "feedback": "Vulgar slang in a meeting? No!"
+        }
+       ]
+      },
+      {
+       "speaker": "Boss",
+       "line": {
+        "t": "No creo que sea buena idea; los clientes nos buscan los viernes.",
+        "en": "I don't think it's a good idea; clients look for us on Fridays."
+       },
+       "prompt": "Propose a compromise.",
+       "choices": [
+        {
+         "t": "Propongo que la mitad del equipo venga a la oficina los viernes.",
+         "en": "I propose that half the team come to the office on Fridays.",
+         "correct": true,
+         "feedback": "Proponer que + subjunctive (venga)."
+        },
+        {
+         "t": "Propongo que la mitad viene.",
+         "en": "I propose that half comes.",
+         "correct": false,
+         "feedback": "Proponer que needs the subjunctive: venga."
+        },
+        {
+         "t": "No, usted está mal.",
+         "en": "No, you're wrong.",
+         "correct": false,
+         "feedback": "Too blunt with the boss."
+        }
+       ]
+      },
+      {
+       "speaker": "Boss",
+       "line": {
+        "t": "Me parece razonable, siempre y cuando no afecte la atención al cliente.",
+        "en": "That seems reasonable, as long as it doesn't affect customer service."
+       },
+       "prompt": "What did the boss say?",
+       "choices": [
+        {
+         "t": "",
+         "en": "It's reasonable, as long as customer service isn't affected",
+         "correct": true,
+         "feedback": "'Siempre y cuando' + subjunctive = as long as."
+        },
+        {
+         "t": "",
+         "en": "The idea is completely rejected",
+         "correct": false,
+         "feedback": "'Me parece razonable' = it seems reasonable."
+        },
+        {
+         "t": "",
+         "en": "Everyone can work from home every day",
+         "correct": false,
+         "feedback": "Only the compromise was accepted."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Close the discussion politely.",
+       "choices": [
+        {
+         "t": "Ni modo, adiós.",
+         "en": "Oh well, bye.",
+         "correct": false,
+         "feedback": "Sounds like you lost the argument!"
+        },
+        {
+         "t": "Ya me voy.",
+         "en": "I'm leaving now.",
+         "correct": false,
+         "feedback": "A bit abrupt."
+        },
+        {
+         "t": "Perfecto, entonces lo probamos un mes y vemos cómo nos va.",
+         "en": "Great, then we'll try it for a month and see how it goes.",
+         "correct": true,
+         "feedback": "Positive and practical."
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "es-sc-customer",
+     "title": "Calling Customer Service",
+     "level": "B2",
+     "emoji": "📞",
+     "icon": "phone",
+     "setting": "You call your bank because a payment was charged twice.",
+     "goal": "Explain the problem, give your details and get a reference number.",
+     "steps": [
+      {
+       "speaker": "Agent",
+       "line": {
+        "t": "Gracias por llamar. ¿En qué le puedo ayudar?",
+        "en": "Thank you for calling. How can I help you?"
+       },
+       "prompt": "Explain you were charged twice.",
+       "choices": [
+        {
+         "t": "Quiero dos pagos más.",
+         "en": "I want two more payments.",
+         "correct": false,
+         "feedback": "The opposite!"
+        },
+        {
+         "t": "Me cobraron dos veces el mismo pago y quisiera un reembolso.",
+         "en": "I was charged twice for the same payment and I would like a refund.",
+         "correct": true,
+         "feedback": "Impersonal \"me cobraron\" = I was charged."
+        },
+        {
+         "t": "Me cobro dos veces yo.",
+         "en": "I charge myself twice.",
+         "correct": false,
+         "feedback": "Use \"me cobraron\" (they charged me)."
+        }
+       ]
+      },
+      {
+       "speaker": "Agent",
+       "line": {
+        "t": "¿Me podría proporcionar su número de cliente?",
+        "en": "Could you give me your customer number?"
+       },
+       "prompt": "Give it.",
+       "choices": [
+        {
+         "t": "¿Cuánto cuesta el número?",
+         "en": "How much does the number cost?",
+         "correct": false,
+         "feedback": "Not what she asked."
+        },
+        {
+         "t": "Claro, es el cuatro, cinco, ocho, dos, uno, nueve.",
+         "en": "Sure, it's four, five, eight, two, one, nine.",
+         "correct": true,
+         "feedback": "Read numbers digit by digit on the phone."
+        },
+        {
+         "t": "No tengo números.",
+         "en": "I don't have numbers.",
+         "correct": false,
+         "feedback": "Find your card!"
+        }
+       ]
+      },
+      {
+       "speaker": "Agent",
+       "line": {
+        "t": "Ya vi el cargo duplicado. El reembolso se verá reflejado en un plazo de cinco a siete días hábiles.",
+        "en": "I can see the duplicate charge. The refund will appear within five to seven business days."
+       },
+       "prompt": "When will you get the money back?",
+       "choices": [
+        {
+         "t": "",
+         "en": "Within 5 to 7 business days",
+         "correct": true,
+         "feedback": "'Días hábiles' = business days."
+        },
+        {
+         "t": "",
+         "en": "In 57 days",
+         "correct": false,
+         "feedback": "Cinco a siete = five to seven."
+        },
+        {
+         "t": "",
+         "en": "No refund is possible",
+         "correct": false,
+         "feedback": "She found the duplicate charge."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Ask for a reference number.",
+       "choices": [
+        {
+         "t": "¿Cuál es su número de celular personal?",
+         "en": "What's your personal cell number?",
+         "correct": false,
+         "feedback": "Not appropriate!"
+        },
+        {
+         "t": "Dame el folio ya.",
+         "en": "Give me the folio now.",
+         "correct": false,
+         "feedback": "Too rude for the phone."
+        },
+        {
+         "t": "¿Me podría dar un número de folio, por favor?",
+         "en": "Could you give me a reference number, please?",
+         "correct": true,
+         "feedback": "In Mexico a 'folio' is a reference or ticket number."
+        }
+       ]
+      },
+      {
+       "prompt": "Thank her and end the call.",
+       "choices": [
+        {
+         "t": "Bye.",
+         "en": "Bye.",
+         "correct": false,
+         "feedback": "Too casual for a formal call."
+        },
+        {
+         "t": "Cuelgue usted primero.",
+         "en": "You hang up first.",
+         "correct": false,
+         "feedback": "A strange thing to say!"
+        },
+        {
+         "t": "Muchas gracias por su ayuda, que tenga buen día.",
+         "en": "Thank you very much for your help, have a good day.",
+         "correct": true,
+         "feedback": "Que tenga + subjunctive: a polite wish."
+        }
+       ]
+      }
+     ]
     }
    ],
    "aptitude": [
@@ -11285,7 +17270,7 @@
     },
     {
      "t": "salud",
-     "en": "cheers; bless you"
+     "en": "health; cheers; bless you"
     },
     {
      "t": "ayuda",
@@ -12578,6 +18563,830 @@
     {
      "t": "posada",
      "en": "Christmas posada; inn"
+    },
+    {
+     "t": "cuerpo",
+     "en": "body"
+    },
+    {
+     "t": "cara",
+     "en": "face"
+    },
+    {
+     "t": "ojo",
+     "en": "eye"
+    },
+    {
+     "t": "oreja",
+     "en": "ear"
+    },
+    {
+     "t": "nariz",
+     "en": "nose"
+    },
+    {
+     "t": "boca",
+     "en": "mouth"
+    },
+    {
+     "t": "diente",
+     "en": "tooth"
+    },
+    {
+     "t": "muela",
+     "en": "molar; tooth"
+    },
+    {
+     "t": "mano",
+     "en": "hand"
+    },
+    {
+     "t": "brazo",
+     "en": "arm"
+    },
+    {
+     "t": "pierna",
+     "en": "leg"
+    },
+    {
+     "t": "pie",
+     "en": "foot"
+    },
+    {
+     "t": "espalda",
+     "en": "back"
+    },
+    {
+     "t": "estómago",
+     "en": "stomach"
+    },
+    {
+     "t": "corazón",
+     "en": "heart"
+    },
+    {
+     "t": "garganta",
+     "en": "throat"
+    },
+    {
+     "t": "sangre",
+     "en": "blood"
+    },
+    {
+     "t": "fiebre",
+     "en": "fever"
+    },
+    {
+     "t": "tos",
+     "en": "cough"
+    },
+    {
+     "t": "gripa",
+     "en": "flu; bad cold (MX)"
+    },
+    {
+     "t": "receta",
+     "en": "prescription; recipe"
+    },
+    {
+     "t": "pastilla",
+     "en": "pill"
+    },
+    {
+     "t": "enfermera",
+     "en": "nurse"
+    },
+    {
+     "t": "consultorio",
+     "en": "doctor's office"
+    },
+    {
+     "t": "dentista",
+     "en": "dentist"
+    },
+    {
+     "t": "me duele",
+     "en": "it hurts; my … hurts"
+    },
+    {
+     "t": "empresa",
+     "en": "company"
+    },
+    {
+     "t": "puesto",
+     "en": "position; job"
+    },
+    {
+     "t": "jefe",
+     "en": "boss"
+    },
+    {
+     "t": "jefa",
+     "en": "boss (f)"
+    },
+    {
+     "t": "compañero",
+     "en": "colleague; classmate"
+    },
+    {
+     "t": "sueldo",
+     "en": "salary"
+    },
+    {
+     "t": "junta",
+     "en": "meeting (MX)"
+    },
+    {
+     "t": "entrevista",
+     "en": "interview"
+    },
+    {
+     "t": "prestaciones",
+     "en": "job benefits"
+    },
+    {
+     "t": "aguinaldo",
+     "en": "year-end bonus"
+    },
+    {
+     "t": "contrato",
+     "en": "contract"
+    },
+    {
+     "t": "proyecto",
+     "en": "project"
+    },
+    {
+     "t": "correo",
+     "en": "email; mail"
+    },
+    {
+     "t": "computadora",
+     "en": "computer (MX)"
+    },
+    {
+     "t": "ingeniero",
+     "en": "engineer"
+    },
+    {
+     "t": "abogado",
+     "en": "lawyer"
+    },
+    {
+     "t": "contador",
+     "en": "accountant"
+    },
+    {
+     "t": "licenciado",
+     "en": "university graduate (title)"
+    },
+    {
+     "t": "vendedor",
+     "en": "seller; salesperson"
+    },
+    {
+     "t": "opinión",
+     "en": "opinion"
+    },
+    {
+     "t": "creer",
+     "en": "to believe; to think"
+    },
+    {
+     "t": "pensar",
+     "en": "to think"
+    },
+    {
+     "t": "parecer",
+     "en": "to seem"
+    },
+    {
+     "t": "creo que",
+     "en": "I think that"
+    },
+    {
+     "t": "estoy de acuerdo",
+     "en": "I agree"
+    },
+    {
+     "t": "enojado",
+     "en": "angry (MX)"
+    },
+    {
+     "t": "preocupado",
+     "en": "worried"
+    },
+    {
+     "t": "emocionado",
+     "en": "excited"
+    },
+    {
+     "t": "orgulloso",
+     "en": "proud"
+    },
+    {
+     "t": "aburrido",
+     "en": "bored; boring"
+    },
+    {
+     "t": "asustado",
+     "en": "scared"
+    },
+    {
+     "t": "nervioso",
+     "en": "nervous"
+    },
+    {
+     "t": "contento",
+     "en": "happy; content"
+    },
+    {
+     "t": "importante",
+     "en": "important"
+    },
+    {
+     "t": "posible",
+     "en": "possible"
+    },
+    {
+     "t": "imposible",
+     "en": "impossible"
+    },
+    {
+     "t": "verdad",
+     "en": "truth; true"
+    },
+    {
+     "t": "mentira",
+     "en": "lie"
+    },
+    {
+     "t": "error",
+     "en": "mistake; error"
+    },
+    {
+     "t": "razón",
+     "en": "reason"
+    },
+    {
+     "t": "tener razón",
+     "en": "to be right"
+    },
+    {
+     "t": "mejor",
+     "en": "better; best"
+    },
+    {
+     "t": "peor",
+     "en": "worse; worst"
+    },
+    {
+     "t": "lluvia",
+     "en": "rain"
+    },
+    {
+     "t": "llover",
+     "en": "to rain"
+    },
+    {
+     "t": "nieve",
+     "en": "snow"
+    },
+    {
+     "t": "viento",
+     "en": "wind"
+    },
+    {
+     "t": "nube",
+     "en": "cloud"
+    },
+    {
+     "t": "cielo",
+     "en": "sky"
+    },
+    {
+     "t": "árbol",
+     "en": "tree"
+    },
+    {
+     "t": "río",
+     "en": "river"
+    },
+    {
+     "t": "flor",
+     "en": "flower"
+    },
+    {
+     "t": "animal",
+     "en": "animal"
+    },
+    {
+     "t": "gato",
+     "en": "cat"
+    },
+    {
+     "t": "perro",
+     "en": "dog"
+    },
+    {
+     "t": "caballo",
+     "en": "horse"
+    },
+    {
+     "t": "pájaro",
+     "en": "bird"
+    },
+    {
+     "t": "serpiente",
+     "en": "snake"
+    },
+    {
+     "t": "víbora",
+     "en": "snake; viper (MX)"
+    },
+    {
+     "t": "verano",
+     "en": "summer"
+    },
+    {
+     "t": "invierno",
+     "en": "winter"
+    },
+    {
+     "t": "primavera",
+     "en": "spring (season)"
+    },
+    {
+     "t": "otoño",
+     "en": "autumn; fall"
+    },
+    {
+     "t": "calor",
+     "en": "heat"
+    },
+    {
+     "t": "hace calor",
+     "en": "it's hot"
+    },
+    {
+     "t": "hace frío",
+     "en": "it's cold"
+    },
+    {
+     "t": "cocina",
+     "en": "kitchen"
+    },
+    {
+     "t": "cama",
+     "en": "bed"
+    },
+    {
+     "t": "silla",
+     "en": "chair"
+    },
+    {
+     "t": "mesa",
+     "en": "table"
+    },
+    {
+     "t": "llave",
+     "en": "key"
+    },
+    {
+     "t": "ropa",
+     "en": "clothes"
+    },
+    {
+     "t": "camisa",
+     "en": "shirt"
+    },
+    {
+     "t": "playera",
+     "en": "T-shirt (MX)"
+    },
+    {
+     "t": "zapatos",
+     "en": "shoes"
+    },
+    {
+     "t": "rojo",
+     "en": "red"
+    },
+    {
+     "t": "azul",
+     "en": "blue"
+    },
+    {
+     "t": "verde",
+     "en": "green"
+    },
+    {
+     "t": "amarillo",
+     "en": "yellow"
+    },
+    {
+     "t": "blanco",
+     "en": "white"
+    },
+    {
+     "t": "negro",
+     "en": "black"
+    },
+    {
+     "t": "color",
+     "en": "colour; color"
+    },
+    {
+     "t": "departamento",
+     "en": "apartment (MX)"
+    },
+    {
+     "t": "depa",
+     "en": "apartment (MX, informal)"
+    },
+    {
+     "t": "renta",
+     "en": "rent (MX)"
+    },
+    {
+     "t": "decir",
+     "en": "to say; to tell"
+    },
+    {
+     "t": "preguntar",
+     "en": "to ask"
+    },
+    {
+     "t": "contestar",
+     "en": "to answer"
+    },
+    {
+     "t": "recordar",
+     "en": "to remember"
+    },
+    {
+     "t": "olvidar",
+     "en": "to forget"
+    },
+    {
+     "t": "empezar",
+     "en": "to begin; to start"
+    },
+    {
+     "t": "terminar",
+     "en": "to finish"
+    },
+    {
+     "t": "sentarse",
+     "en": "to sit down"
+    },
+    {
+     "t": "pararse",
+     "en": "to stand up (MX)"
+    },
+    {
+     "t": "lavar",
+     "en": "to wash"
+    },
+    {
+     "t": "dar",
+     "en": "to give"
+    },
+    {
+     "t": "poner",
+     "en": "to put"
+    },
+    {
+     "t": "traer",
+     "en": "to bring"
+    },
+    {
+     "t": "llevar",
+     "en": "to take; to carry"
+    },
+    {
+     "t": "enviar",
+     "en": "to send"
+    },
+    {
+     "t": "mandar",
+     "en": "to send (MX)"
+    },
+    {
+     "t": "reír",
+     "en": "to laugh"
+    },
+    {
+     "t": "llorar",
+     "en": "to cry"
+    },
+    {
+     "t": "ganar",
+     "en": "to win; to earn"
+    },
+    {
+     "t": "perder",
+     "en": "to lose"
+    },
+    {
+     "t": "aprender",
+     "en": "to learn"
+    },
+    {
+     "t": "enseñar",
+     "en": "to teach; to show"
+    },
+    {
+     "t": "usar",
+     "en": "to use"
+    },
+    {
+     "t": "cambiar",
+     "en": "to change"
+    },
+    {
+     "t": "vender",
+     "en": "to sell"
+    },
+    {
+     "t": "elegir",
+     "en": "to choose"
+    },
+    {
+     "t": "sentir",
+     "en": "to feel"
+    },
+    {
+     "t": "extrañar",
+     "en": "to miss (someone)"
+    },
+    {
+     "t": "gobierno",
+     "en": "government"
+    },
+    {
+     "t": "presidente",
+     "en": "president"
+    },
+    {
+     "t": "presidenta",
+     "en": "president (f)"
+    },
+    {
+     "t": "secretario",
+     "en": "minister (MX); secretary"
+    },
+    {
+     "t": "elecciones",
+     "en": "elections"
+    },
+    {
+     "t": "economía",
+     "en": "economy"
+    },
+    {
+     "t": "política",
+     "en": "politics; policy"
+    },
+    {
+     "t": "guerra",
+     "en": "war"
+    },
+    {
+     "t": "paz",
+     "en": "peace"
+    },
+    {
+     "t": "problema",
+     "en": "problem"
+    },
+    {
+     "t": "solución",
+     "en": "solution"
+    },
+    {
+     "t": "noticia",
+     "en": "news item"
+    },
+    {
+     "t": "noticias",
+     "en": "news"
+    },
+    {
+     "t": "periódico",
+     "en": "newspaper"
+    },
+    {
+     "t": "encuesta",
+     "en": "poll; survey"
+    },
+    {
+     "t": "ley",
+     "en": "law"
+    },
+    {
+     "t": "reforma",
+     "en": "reform"
+    },
+    {
+     "t": "sociedad",
+     "en": "society"
+    },
+    {
+     "t": "historia",
+     "en": "history; story"
+    },
+    {
+     "t": "cultura",
+     "en": "culture"
+    },
+    {
+     "t": "educación",
+     "en": "education"
+    },
+    {
+     "t": "medio ambiente",
+     "en": "environment"
+    },
+    {
+     "t": "tecnología",
+     "en": "technology"
+    },
+    {
+     "t": "internet",
+     "en": "internet"
+    },
+    {
+     "t": "según",
+     "en": "according to"
+    },
+    {
+     "t": "porque",
+     "en": "because"
+    },
+    {
+     "t": "si",
+     "en": "if"
+    },
+    {
+     "t": "aunque",
+     "en": "although; even if"
+    },
+    {
+     "t": "sin embargo",
+     "en": "however"
+    },
+    {
+     "t": "entonces",
+     "en": "then; so"
+    },
+    {
+     "t": "después",
+     "en": "after; later"
+    },
+    {
+     "t": "antes",
+     "en": "before"
+    },
+    {
+     "t": "luego",
+     "en": "later; then"
+    },
+    {
+     "t": "siempre",
+     "en": "always"
+    },
+    {
+     "t": "nunca",
+     "en": "never"
+    },
+    {
+     "t": "a veces",
+     "en": "sometimes"
+    },
+    {
+     "t": "tal vez",
+     "en": "maybe"
+    },
+    {
+     "t": "quizás",
+     "en": "maybe; perhaps"
+    },
+    {
+     "t": "ya",
+     "en": "already; now"
+    },
+    {
+     "t": "todavía",
+     "en": "still; yet"
+    },
+    {
+     "t": "mientras",
+     "en": "while"
+    },
+    {
+     "t": "además",
+     "en": "besides; moreover"
+    },
+    {
+     "t": "por eso",
+     "en": "that's why"
+    },
+    {
+     "t": "de repente",
+     "en": "suddenly"
+    },
+    {
+     "t": "pasado mañana",
+     "en": "the day after tomorrow"
+    },
+    {
+     "t": "la semana que entra",
+     "en": "next week (MX)"
+    },
+    {
+     "t": "el año pasado",
+     "en": "last year"
+    },
+    {
+     "t": "anoche",
+     "en": "last night"
+    },
+    {
+     "t": "temprano",
+     "en": "early"
+    },
+    {
+     "t": "chafa",
+     "en": "lame; low-quality (MX)"
+    },
+    {
+     "t": "un chorro",
+     "en": "a lot (MX)"
+    },
+    {
+     "t": "de volada",
+     "en": "right away (MX)"
+    },
+    {
+     "t": "ándale",
+     "en": "come on; that's it (MX)"
+    },
+    {
+     "t": "órale",
+     "en": "wow; OK; come on (MX)"
+    },
+    {
+     "t": "chela",
+     "en": "beer (MX slang)"
+    },
+    {
+     "t": "chamaco",
+     "en": "kid (MX)"
+    },
+    {
+     "t": "morro",
+     "en": "boy; young guy (MX)"
+    },
+    {
+     "t": "morra",
+     "en": "girl; young woman (MX)"
+    },
+    {
+     "t": "plebe",
+     "en": "kids; the gang (northern MX)"
+    },
+    {
+     "t": "regio",
+     "en": "person from Monterrey"
+    },
+    {
+     "t": "chilango",
+     "en": "person from Mexico City"
+    },
+    {
+     "t": "tapatío",
+     "en": "person from Guadalajara"
+    },
+    {
+     "t": "buena onda",
+     "en": "nice; cool (person)"
+    },
+    {
+     "t": "¿te late?",
+     "en": "are you in? (MX)"
+    },
+    {
+     "t": "sale",
+     "en": "OK; deal (MX)"
+    },
+    {
+     "t": "ni modo",
+     "en": "oh well (MX)"
+    },
+    {
+     "t": "¡que te mejores!",
+     "en": "get well soon!"
     }
    ],
    "media": [
@@ -12789,7 +19598,555 @@
       "culture"
      ]
     }
-   ]
+   ],
+   "writingPrompts": [
+    {
+     "id": "es-w-intro",
+     "level": "A1",
+     "prompt": "Introduce yourself: your name, where you are from, and what you do.",
+     "minWords": 10,
+     "requirements": [
+      {
+       "label": "your name (me llamo…)",
+       "any": [
+        "me llamo",
+        "mi nombre es"
+       ]
+      },
+      {
+       "label": "where you are from or live (soy de…, vivo en…)",
+       "any": [
+        "soy de",
+        "vivo en"
+       ]
+      },
+      {
+       "label": "what you do (trabajo, estudio…)",
+       "any": [
+        "trabajo",
+        "estudio",
+        "soy estudiante",
+        "soy maestro",
+        "soy maestra"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Me llamo Sam. Soy de Canadá, pero vivo en Guadalajara. Estudio español y trabajo en una cafetería.",
+      "en": "My name is Sam. I'm from Canada, but I live in Guadalajara. I study Spanish and work in a café."
+     }
+    },
+    {
+     "id": "es-w-family",
+     "level": "A1",
+     "prompt": "Describe your family: who is in it and one thing about each person.",
+     "minWords": 15,
+     "requirements": [
+      {
+       "label": "family members (mi mamá, mi hermano…)",
+       "any": [
+        "mi mamá",
+        "mi papá",
+        "mi hermano",
+        "mi hermana",
+        "mis papás",
+        "mi familia",
+        "mi esposo",
+        "mi esposa",
+        "mis hijos",
+        "mi hijo",
+        "mi hija"
+       ]
+      },
+      {
+       "label": "tengo or se llama",
+       "any": [
+        "tengo",
+        "se llama"
+       ]
+      },
+      {
+       "label": "a describing word (alto, simpática…)",
+       "any": [
+        "alto",
+        "alta",
+        "bajo",
+        "baja",
+        "simpático",
+        "simpática",
+        "bonito",
+        "bonita",
+        "chistoso",
+        "chistosa",
+        "trabajador",
+        "trabajadora",
+        "grande",
+        "pequeño",
+        "pequeña"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Mi familia es pequeña. Mi mamá se llama Rosa y es muy trabajadora. Tengo un hermano; es alto y chistoso.",
+      "en": "My family is small. My mom is called Rosa and she is very hard-working. I have a brother; he is tall and funny."
+     }
+    },
+    {
+     "id": "es-w-day",
+     "level": "A2",
+     "prompt": "Describe your daily routine from morning to night.",
+     "minWords": 20,
+     "requirements": [
+      {
+       "label": "reflexive verbs (me levanto, me baño…)",
+       "any": [
+        "me levanto",
+        "me baño",
+        "me despierto",
+        "me visto",
+        "me acuesto",
+        "me lavo"
+       ]
+      },
+      {
+       "label": "times (a las…, en la mañana…)",
+       "any": [
+        "a las",
+        "a la una",
+        "en la mañana",
+        "en la tarde",
+        "en la noche"
+       ]
+      },
+      {
+       "label": "sequence words (luego, después…)",
+       "any": [
+        "luego",
+        "después",
+        "primero",
+        "entonces",
+        "más tarde"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Me levanto a las seis y me baño. Luego desayuno chilaquiles y tomo el metro. En la tarde trabajo y en la noche me acuesto temprano.",
+      "en": "I get up at six and shower. Then I have chilaquiles for breakfast and take the Metro. In the afternoon I work and at night I go to bed early."
+     }
+    },
+    {
+     "id": "es-w-past",
+     "level": "A2",
+     "prompt": "Write about what you did last weekend.",
+     "minWords": 20,
+     "requirements": [
+      {
+       "label": "preterite verbs (fui, comí, vi…)",
+       "any": [
+        "fui",
+        "comí",
+        "visité",
+        "vi",
+        "hice",
+        "salí",
+        "jugué",
+        "estuve",
+        "compré"
+       ]
+      },
+      {
+       "label": "a time expression (el sábado, ayer…)",
+       "any": [
+        "el fin de semana",
+        "el sábado",
+        "el domingo",
+        "ayer",
+        "la semana pasada"
+       ]
+      },
+      {
+       "label": "how it was (estuvo…, me gustó…)",
+       "any": [
+        "estuvo",
+        "fue",
+        "me gustó",
+        "me encantó"
+       ]
+      }
+     ],
+     "model": {
+      "t": "El sábado fui a Coyoacán con mis amigos. Comimos tacos y vimos una exposición en la Casa Azul. Me encantó; estuvo bien padre.",
+      "en": "On Saturday I went to Coyoacán with my friends. We ate tacos and saw an exhibition at the Blue House. I loved it; it was really cool."
+     }
+    },
+    {
+     "id": "es-w-opinion",
+     "level": "B1",
+     "prompt": "City or small town: where is it better to live? Give your opinion, compare, and give reasons.",
+     "minWords": 35,
+     "requirements": [
+      {
+       "label": "an opinion (creo que, me parece que…)",
+       "any": [
+        "creo que",
+        "pienso que",
+        "me parece que",
+        "en mi opinión"
+       ]
+      },
+      {
+       "label": "a comparison (más, menos, mejor…)",
+       "any": [
+        "más",
+        "menos",
+        "mejor",
+        "peor",
+        "tan"
+       ]
+      },
+      {
+       "label": "a reason (porque, por eso…)",
+       "any": [
+        "porque",
+        "por eso",
+        "ya que"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Creo que vivir en un pueblo es mejor que vivir en la ciudad, porque la vida es más tranquila y la gente se conoce. Sin embargo, en la ciudad hay más trabajo, por eso muchos jóvenes se van.",
+      "en": "I think living in a small town is better than living in the city, because life is calmer and people know each other. However, there is more work in the city, so many young people leave."
+     }
+    },
+    {
+     "id": "es-w-story",
+     "level": "B1",
+     "prompt": "Tell a short story or legend in the past.",
+     "minWords": 40,
+     "requirements": [
+      {
+       "label": "imperfect for background (era, había, estaba…)",
+       "any": [
+        "era",
+        "había",
+        "estaba",
+        "vivía",
+        "tenía",
+        "hacía"
+       ]
+      },
+      {
+       "label": "events (de repente, un día, entonces…)",
+       "any": [
+        "de repente",
+        "un día",
+        "entonces"
+       ]
+      },
+      {
+       "label": "an ending (al final, por fin…)",
+       "any": [
+        "al final",
+        "por fin",
+        "finalmente"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Era una noche de lluvia y yo estaba sola en casa. De repente escuché a una mujer que lloraba cerca del río. Entonces salí con una lámpara, pero no había nadie. Al final, mi abuela me dijo que era La Llorona.",
+      "en": "It was a rainy night and I was home alone. Suddenly I heard a woman crying near the river. So I went out with a lamp, but there was no one there. In the end, my grandmother told me it was La Llorona."
+     }
+    },
+    {
+     "id": "es-w-email",
+     "level": "B2",
+     "prompt": "Write a formal email to a language school asking about a Spanish course.",
+     "minWords": 25,
+     "requirements": [
+      {
+       "label": "a formal opening (Estimado/a…, A quien corresponda)",
+       "any": [
+        "estimado",
+        "estimada",
+        "a quien corresponda",
+        "buenos días"
+       ]
+      },
+      {
+       "label": "a polite request (le agradecería, quisiera…)",
+       "any": [
+        "le agradecería",
+        "quisiera",
+        "me gustaría",
+        "podría"
+       ]
+      },
+      {
+       "label": "a formal closing (atentamente…)",
+       "any": [
+        "atentamente",
+        "saludos cordiales",
+        "quedo a sus órdenes",
+        "gracias de antemano"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Estimada coordinadora: Me gustaría recibir información sobre el curso intensivo de español. ¿Podría indicarme los horarios y el costo? Le agradecería mucho su respuesta. Atentamente, Sam",
+      "en": "Dear coordinator: I would like to receive information about the intensive Spanish course. Could you tell me the schedule and the cost? I would greatly appreciate your reply. Sincerely, Sam"
+     }
+    },
+    {
+     "id": "es-w-debate",
+     "level": "C1",
+     "prompt": "Argue for or against a four-day work week. Use the subjunctive, connectors and a conclusion.",
+     "minWords": 55,
+     "requirements": [
+      {
+       "label": "subjunctive triggers (no creo que, es importante que…)",
+       "any": [
+        "no creo que",
+        "es importante que",
+        "es necesario que",
+        "ojalá",
+        "aunque",
+        "para que"
+       ]
+      },
+      {
+       "label": "connectors (sin embargo, además, por lo tanto…)",
+       "any": [
+        "sin embargo",
+        "no obstante",
+        "además",
+        "por lo tanto",
+        "por consiguiente"
+       ]
+      },
+      {
+       "label": "a conclusion (en conclusión, en resumen…)",
+       "any": [
+        "en conclusión",
+        "en resumen",
+        "para concluir"
+       ]
+      }
+     ],
+     "model": {
+      "t": "La semana laboral de cuatro días tiene ventajas claras. Además de mejorar la salud mental, aumenta la productividad en muchas empresas. Sin embargo, no creo que funcione en todos los sectores, por ejemplo en los hospitales. Por lo tanto, es importante que cada empresa evalúe su caso. En conclusión, es una buena idea, siempre y cuando se aplique con flexibilidad.",
+      "en": "The four-day work week has clear advantages. As well as improving mental health, it increases productivity at many companies. However, I don't think it works in every sector, for example in hospitals. Therefore, it is important that each company evaluates its own case. In conclusion, it is a good idea as long as it is applied flexibly."
+     }
+    }
+   ],
+   "speakingPrompts": [
+    {
+     "id": "es-s-intro",
+     "level": "A1",
+     "prompt": "Introduce yourself out loud: your name and where you are from.",
+     "minWords": 5,
+     "requirements": [
+      {
+       "label": "your name (me llamo…)",
+       "any": [
+        "me llamo",
+        "mi nombre es",
+        "soy"
+       ]
+      },
+      {
+       "label": "where you are from (soy de…, vivo en…)",
+       "any": [
+        "soy de",
+        "vivo en"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Hola, me llamo Sam y soy de Canadá.",
+      "en": "Hi, my name is Sam and I'm from Canada."
+     },
+     "starter": "Me llamo… Soy de…"
+    },
+    {
+     "id": "es-s-order",
+     "level": "A1",
+     "prompt": "Order at a taquería.",
+     "minWords": 5,
+     "requirements": [
+      {
+       "label": "a polite order (me da, quisiera…)",
+       "any": [
+        "me da",
+        "quisiera",
+        "quiero"
+       ]
+      },
+      {
+       "label": "please (por favor)",
+       "any": [
+        "por favor"
+       ]
+      },
+      {
+       "label": "something to eat or drink",
+       "any": [
+        "tacos",
+        "agua",
+        "refresco",
+        "quesadilla",
+        "torta",
+        "horchata"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Me da tres tacos al pastor y un agua de horchata, por favor.",
+      "en": "Can I have three al pastor tacos and a horchata, please."
+     },
+     "starter": "Me da… por favor"
+    },
+    {
+     "id": "es-s-day",
+     "level": "A2",
+     "prompt": "Describe what you do every day.",
+     "minWords": 10,
+     "requirements": [
+      {
+       "label": "daily actions (me levanto, trabajo…)",
+       "any": [
+        "me levanto",
+        "me baño",
+        "desayuno",
+        "trabajo",
+        "estudio",
+        "como"
+       ]
+      },
+      {
+       "label": "time expressions (todos los días, a las…)",
+       "any": [
+        "todos los días",
+        "en la mañana",
+        "en la tarde",
+        "a las"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Todos los días me levanto a las siete, desayuno y trabajo hasta las cinco.",
+      "en": "Every day I get up at seven, have breakfast and work until five."
+     },
+     "starter": "Todos los días…"
+    },
+    {
+     "id": "es-s-weekend",
+     "level": "A2",
+     "prompt": "What did you do last weekend?",
+     "minWords": 10,
+     "requirements": [
+      {
+       "label": "preterite verbs (fui, comí, vi…)",
+       "any": [
+        "fui",
+        "comí",
+        "vi",
+        "visité",
+        "salí",
+        "jugué"
+       ]
+      },
+      {
+       "label": "when (el sábado, ayer…)",
+       "any": [
+        "el fin de semana",
+        "el sábado",
+        "el domingo",
+        "ayer"
+       ]
+      }
+     ],
+     "model": {
+      "t": "El fin de semana fui al mercado y comí unas quesadillas buenísimas.",
+      "en": "At the weekend I went to the market and ate some amazing quesadillas."
+     },
+     "starter": "El fin de semana…"
+    },
+    {
+     "id": "es-s-opinion",
+     "level": "B1",
+     "prompt": "Which do you prefer, the beach or the mountains? Why?",
+     "minWords": 15,
+     "requirements": [
+      {
+       "label": "an opinion (creo que, prefiero…)",
+       "any": [
+        "creo que",
+        "pienso que",
+        "me parece que",
+        "prefiero"
+       ]
+      },
+      {
+       "label": "a comparison (más, mejor…)",
+       "any": [
+        "más",
+        "mejor",
+        "menos"
+       ]
+      },
+      {
+       "label": "a reason (porque)",
+       "any": [
+        "porque"
+       ]
+      }
+     ],
+     "model": {
+      "t": "Prefiero la playa porque me gusta nadar y creo que es más relajante que la montaña.",
+      "en": "I prefer the beach because I like swimming, and I think it is more relaxing than the mountains."
+     },
+     "starter": "Creo que…"
+    },
+    {
+     "id": "es-s-plans",
+     "level": "B1",
+     "prompt": "Talk about your plans for next year.",
+     "minWords": 15,
+     "requirements": [
+      {
+       "label": "future or wishes (voy a, me gustaría, ojalá…)",
+       "any": [
+        "voy a",
+        "vamos a",
+        "me gustaría",
+        "quiero",
+        "ojalá"
+       ]
+      },
+      {
+       "label": "a future time (el próximo año…)",
+       "any": [
+        "el próximo año",
+        "el año que entra",
+        "en el futuro",
+        "este verano"
+       ]
+      }
+     ],
+     "model": {
+      "t": "El próximo año voy a viajar a Oaxaca y me gustaría hablar español con fluidez.",
+      "en": "Next year I am going to travel to Oaxaca and I would like to speak Spanish fluently."
+     },
+     "starter": "El próximo año voy a…"
+    }
+   ],
+   "levelHours": {
+    "A1": 90,
+    "A2": 190,
+    "B1": 375,
+    "B2": 550,
+    "C1": 750
+   }
   }
  ]
 }

@@ -10,7 +10,7 @@ struct SpeakPhrase: Hashable {
 }
 
 struct ChallengeItem: Hashable, Identifiable {
-    enum Kind: String { case choice, type, speak }
+    enum Kind: String { case choice, type, speak, dictation }
 
     var id: String = ""
     let kind: Kind
@@ -27,8 +27,10 @@ struct ChallengeItem: Hashable, Identifiable {
     var answerText: String = ""
     var alts: [String]?
     var hint: String?
-    // speak
+    // speak / dictation
     var en: String = ""
+    /// Listening item: play the audio first and show the text only on request.
+    var audio = false
 
     var writingTask: WritingTask { WritingTask(en: prompt, answer: answerText, alts: alts, hint: hint) }
 }
@@ -51,6 +53,7 @@ struct SkillFluency {
 struct FluencyReport {
     let reading: SkillFluency
     let writing: SkillFluency
+    let listening: SkillFluency
     let speaking: SkillFluency
     let overall: Int
     let overallBand: String
@@ -60,6 +63,7 @@ struct FluencyReport {
         switch name {
         case "reading": return reading
         case "writing": return writing
+        case "listening": return listening
         default: return speaking
         }
     }
@@ -95,7 +99,7 @@ struct SeededRandom {
 }
 
 extension Engine {
-    static let skills = ["reading", "writing", "speaking"]
+    static let skills = ["reading", "writing", "listening", "speaking"]
     static let speakPass = 70
 
     /// FNV-1a over UTF-16 code units, like the JavaScript hash().
@@ -193,9 +197,9 @@ extension Engine {
         return min(idx + 1, levels.count - 1)
     }
 
-    private static func levelIndex(_ level: String) -> Int { levels.firstIndex(of: level) ?? 0 }
+    static func levelIndex(_ level: String) -> Int { levels.firstIndex(of: level) ?? 0 }
 
-    /// Ten mixed items, the same all day: 4 reading, 3 writing, 2 speaking, 1 listening (counted as speaking).
+    /// Ten mixed items, the same all day: 3 reading, 3 writing, 2 speaking, 2 listening (dictation + comprehension).
     static func dailyChallenge(_ language: Language, _ lp: LangProgress, day: String) -> [ChallengeItem] {
         var rand = SeededRandom(seed: hash("\(language.id):\(day)"))
         let cap = workingLevelIndex(language, lp)
@@ -219,7 +223,7 @@ extension Engine {
         }
 
         // Reading
-        for v in rand.shuffled(vocab).prefix(2) {
+        for v in rand.shuffled(vocab).prefix(1) {
             let item = meaning(v, q: "What does this mean?")
             items.append(item)
         }
@@ -266,7 +270,13 @@ extension Engine {
             items.append(ChallengeItem(kind: .speak, skill: "speaking", t: p.phrase.t, tr: p.phrase.tr, en: p.phrase.en))
         }
 
-        // Listening comprehension from a scenario
+        // Listening: a dictation, then a scenario line to understand by ear
+        let allListen = listeningItems(language)
+        let dictPool = allListen.filter { levelIndex($0.level) <= cap && $0.phrase.t.split(separator: " ").count <= 6 }
+        if !allListen.isEmpty {
+            let dict = rand.pick(dictPool.isEmpty ? allListen : dictPool)
+            items.append(ChallengeItem(kind: .dictation, skill: "listening", t: dict.phrase.t, tr: dict.phrase.tr, en: dict.phrase.en))
+        }
         var listen: [Step] = []
         for sc in language.scenarios where levelIndex(sc.level) <= cap {
             for st in sc.steps where st.isUnderstand && st.line != nil { listen.append(st) }
@@ -274,10 +284,12 @@ extension Engine {
         if !listen.isEmpty {
             let st = rand.pick(listen)
             let choices = st.choices ?? []
-            items.append(ChallengeItem(
-                kind: .choice, skill: "speaking", q: "\(st.speaker ?? "Someone") says this. What does it mean?",
+            var item = ChallengeItem(
+                kind: .choice, skill: "listening", q: "Listen to \(st.speaker ?? "the speaker"). What do they say?",
                 t: st.line?.t, tr: st.line?.tr, options: choices.map(\.en), answer: choices.firstIndex { $0.correct } ?? 0
-            ))
+            )
+            item.audio = true
+            items.append(item)
         }
         for i in items.indices { items[i].id = "\(language.id)-\(day)-\(i)" }
         return items
@@ -313,23 +325,32 @@ extension Engine {
     private static let levelScore = ["A1": 10.0, "A2": 30.0, "B1": 50.0, "B2": 70.0, "C1": 90.0]
 
     /// Each skill: 60% coverage + 40% accuracy (average of the last 10 scored attempts).
-    /// Overall: mean of the three skills, blended 75/25 with the latest aptitude-test level.
+    /// Overall: mean of the four skills, blended 75/25 with the latest aptitude-test level.
     static func fluency(_ language: Language, _ lp: LangProgress) -> FluencyReport {
         let lessons = language.allLessons
         let letters = language.reading.letters
         let phrases = speakingPhrases(language)
+        let listen = listeningItems(language)
+        let deck = srsDeck(language, lp)
+        let passed = { (id: String) in (lp.prompts[id]?.best ?? 0) >= promptPass }
         let parts: [String: [FluencyPart]] = [
             "reading": [
                 FluencyPart(label: "Letters studied", done: letters.filter { (lp.letters[$0.char] ?? 0) > 0 }.count, total: letters.count),
                 FluencyPart(label: "Lessons completed", done: lessons.filter { lp.lessons[$0.id]?.done == true }.count, total: lessons.count),
+                FluencyPart(label: "Words learned (review)", done: deck.filter { (lp.srs[$0.phrase.t]?.box ?? 0) >= 3 }.count, total: deck.count),
             ],
             "writing": [
                 FluencyPart(label: "Writing tasks mastered", done: language.reading.writing.filter { lp.writing[$0.answer] == true }.count, total: language.reading.writing.count),
                 FluencyPart(label: "Letters traced", done: letters.filter { (lp.tracing[$0.char] ?? 0) > 0 }.count, total: letters.count),
+                FluencyPart(label: "Free-writing prompts passed", done: language.writingPrompts.filter { passed($0.id) }.count, total: language.writingPrompts.count),
+            ],
+            "listening": [
+                FluencyPart(label: "Lines understood", done: listen.filter { (lp.listening[$0.phrase.t]?.best ?? 0) >= listenPass }.count, total: listen.count),
             ],
             "speaking": [
                 FluencyPart(label: "Phrases spoken", done: phrases.filter { (lp.speaking[$0.phrase.t]?.best ?? 0) >= speakPass }.count, total: phrases.count),
                 FluencyPart(label: "Scenarios completed", done: language.scenarios.filter { lp.scenarios[$0.id] != nil }.count, total: language.scenarios.count),
+                FluencyPart(label: "Speaking prompts answered", done: language.speakingPrompts.filter { passed($0.id) }.count, total: language.speakingPrompts.count),
             ],
         ]
         func skill(_ name: String) -> SkillFluency {
@@ -341,18 +362,19 @@ extension Engine {
             return SkillFluency(score: score, band: band(score), coverage: Int((coverage * 100).rounded()),
                                 accuracy: accuracy.map { Int(($0 * 100).rounded()) }, samples: recent.count, parts: ps)
         }
-        let r = skill("reading"), w = skill("writing"), s = skill("speaking")
-        let base = Double(r.score + w.score + s.score) / 3
+        let r = skill("reading"), w = skill("writing"), l = skill("listening"), s = skill("speaking")
+        let base = Double(r.score + w.score + l.score + s.score) / 4
         let testLevel = lp.aptitude.last?.level
         let overall = Int((testLevel.flatMap { levelScore[$0] }.map { 0.75 * base + 0.25 * $0 } ?? base).rounded())
-        return FluencyReport(reading: r, writing: w, speaking: s, overall: overall, overallBand: band(overall), testLevel: testLevel)
+        return FluencyReport(reading: r, writing: w, listening: l, speaking: s, overall: overall, overallBand: band(overall), testLevel: testLevel)
     }
 
     /// Stores today's snapshot (one per day) for the trend chart.
     @discardableResult
     static func recordFluency(_ language: Language, _ lp: inout LangProgress, now: Date = Date()) -> FluencyReport {
         let f = fluency(language, lp)
-        let entry = FluencySnapshot(day: ProgressStore.day(now), reading: f.reading.score, writing: f.writing.score, speaking: f.speaking.score, overall: f.overall)
+        let entry = FluencySnapshot(day: ProgressStore.day(now), reading: f.reading.score, writing: f.writing.score,
+                                    listening: f.listening.score, speaking: f.speaking.score, overall: f.overall)
         if let last = lp.fluency.last, last.day == entry.day {
             lp.fluency[lp.fluency.count - 1] = entry
         } else {

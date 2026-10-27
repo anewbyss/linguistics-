@@ -28,11 +28,16 @@ enum Route: Hashable {
     case challenge(String)
     case speaking(String)
     case fluency(String)
+    case review(String)
+    case listening(String)
+    case writing(String)
     case progress
 }
 
 struct RootView: View {
     @EnvironmentObject var content: ContentStore
+    @EnvironmentObject var progress: ProgressStore
+    @Environment(\.scenePhase) private var scenePhase
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -42,6 +47,7 @@ struct RootView: View {
                     destination(route)
                 }
         }
+        .onChange(of: scenePhase) { phase in progress.isAppActive = phase == .active }
     }
 
     @ViewBuilder
@@ -77,6 +83,12 @@ struct RootView: View {
             if let lang = content.language(id) { SpeakingPracticeView(lang: lang) }
         case .fluency(let id):
             if let lang = content.language(id) { FluencyView(lang: lang) }
+        case .review(let id):
+            if let lang = content.language(id) { ReviewView(lang: lang) }
+        case .listening(let id):
+            if let lang = content.language(id) { ListeningPracticeView(lang: lang) }
+        case .writing(let id):
+            if let lang = content.language(id) { WritingStudioView(lang: lang) }
         case .progress:
             ProgressBackupView()
         }
@@ -88,6 +100,14 @@ final class Speaker {
     static let shared = Speaker()
     private let synth = AVSpeechSynthesizer()
 
+    static let rates: [(id: String, label: String, factor: Float)] = [("slow", "🐢 Slow", 0.6), ("normal", "Normal", 0.85), ("natural", "🐇 Natural", 1.05)]
+
+    /// Remembered speech speed: slow, normal or natural.
+    var rateName: String {
+        get { UserDefaults.standard.string(forKey: "lingua.rate") ?? "normal" }
+        set { UserDefaults.standard.set(newValue, forKey: "lingua.rate") }
+    }
+
     func speak(_ text: String, language: String) {
         let clean = text.replacingOccurrences(of: "\u{200D}", with: "")
         guard !clean.trimmingCharacters(in: .whitespaces).isEmpty else { return }
@@ -97,7 +117,8 @@ final class Speaker {
         if synth.isSpeaking { synth.stopSpeaking(at: .immediate) }
         let utterance = AVSpeechUtterance(string: clean)
         utterance.voice = AVSpeechSynthesisVoice(language: language) ?? AVSpeechSynthesisVoice(language: String(language.prefix(2)))
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.85
+        let factor = Self.rates.first { $0.id == rateName }?.factor ?? 0.85
+        utterance.rate = min(AVSpeechUtteranceMaximumSpeechRate, AVSpeechUtteranceDefaultSpeechRate * factor)
         synth.speak(utterance)
     }
 }

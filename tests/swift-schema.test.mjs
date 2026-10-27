@@ -15,6 +15,7 @@ const SCHEMA = {
     id: 'string', name: 'string', nativeName: 'string', subtitle: 'string', symbol: 'string', dir: 'string',
     speech: 'string', accent: 'string', translateSkipEn: '[string]', categories: '[Category]', reading: 'Reading',
     scenarios: '[Scenario]', aptitude: '[Question]', dictionary: '[Phrase]', media: '[MediaItem]',
+    writingPrompts: '[PracticePrompt]', speakingPrompts: '[PracticePrompt]', levelHours: '{int}',
   },
   Phrase: { t: 'string', tr: 'string?', en: 'string', note: 'string?' },
   TableData: { headers: '[string]', rows: '[[string]]' },
@@ -30,6 +31,8 @@ const SCHEMA = {
   Choice: { t: 'string', tr: 'string?', en: 'string', correct: 'bool', feedback: 'string' },
   Step: { speaker: 'string?', line: 'Phrase?', prompt: 'string?', mode: 'string?', choices: '[Choice]?' },
   Scenario: { id: 'string', title: 'string', level: 'string', emoji: 'string', icon: 'string', setting: 'string', goal: 'string', steps: '[Step]' },
+  PromptRequirement: { label: 'string', any: '[string]' },
+  PracticePrompt: { id: 'string', level: 'string', prompt: 'string', minWords: 'int', requirements: '[PromptRequirement]', model: 'Phrase', starter: 'string?' },
   MediaItem: { level: 'string', type: 'string', title: 'string', creator: 'string?', why: 'string', source: 'string', skills: '[string]' },
 };
 
@@ -43,6 +46,9 @@ function check(value, type, path) {
   if (type.startsWith('[')) {
     assert.ok(Array.isArray(value), `${path} should be an array`);
     value.forEach((v, i) => check(v, type.slice(1, -1), `${path}[${i}]`));
+  } else if (type.startsWith('{')) {
+    assert.ok(value && typeof value === 'object' && !Array.isArray(value), `${path} should be a dictionary`);
+    for (const [k, v] of Object.entries(value)) check(v, type.slice(1, -1), `${path}.${k}`);
   } else if (type === 'string') assert.equal(typeof value, 'string', `${path} should be a string`);
   else if (type === 'int') assert.ok(Number.isInteger(value), `${path} should be an integer`);
   else if (type === 'bool') assert.equal(typeof value, 'boolean', `${path} should be a boolean`);
@@ -67,7 +73,7 @@ test('Swift data matches the web data', () => {
 test('Swift sources have balanced brackets', () => {
   const files = ['Engine.swift', 'Models.swift', 'ProgressStore.swift', 'ContentStore.swift', 'LinguaApp.swift', 'Package.swift',
     'Views/Components.swift', 'Views/HomeViews.swift', 'Views/ReadingViews.swift', 'Views/PracticeViews.swift',
-    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift'];
+    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift'];
   for (const f of files) {
     let src = readFileSync(new URL(`../swift/Lingua.swiftpm/${f}`, import.meta.url), 'utf8');
     // Strip comments and string literals (including interpolations) before counting.
@@ -90,7 +96,7 @@ test('Swift type names do not shadow SwiftUI / Foundation types', () => {
   const dir = new URL('../swift/Lingua.swiftpm/', import.meta.url);
   const files = ['Engine.swift', 'Models.swift', 'ProgressStore.swift', 'ContentStore.swift', 'LinguaApp.swift',
     'Views/Components.swift', 'Views/HomeViews.swift', 'Views/ReadingViews.swift', 'Views/PracticeViews.swift',
-    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift'];
+    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift'];
   for (const f of files) {
     const src = readFileSync(new URL(f, dir), 'utf8');
     for (const m of src.matchAll(/^\s*(?:private |fileprivate )?(?:final )?(?:struct|class|enum|protocol)\s+(\w+)/gm)) {

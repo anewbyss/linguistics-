@@ -196,16 +196,16 @@ enum Engine {
 
     // MARK: Morphology fallbacks
 
-    private static let arPrefixes: [(String, String)] = [
+    static let arPrefixes: [(String, String)] = [
         ("وبال", "and with the"), ("وال", "and the"), ("بال", "with the"), ("فال", "so the"), ("كال", "like the"),
         ("لل", "for the"), ("ال", "the"), ("و", "and"), ("ب", "with"), ("ل", "for"), ("ف", "so"),
     ]
-    private static let arSuffixes: [(String, String)] = [
+    static let arSuffixes: [(String, String)] = [
         ("كما", "your"), ("هما", "their"), ("كم", "your"), ("هم", "their"), ("نا", "our"), ("ها", "her"),
         ("ك", "your"), ("ه", "his"), ("ي", "my"),
     ]
 
-    private static func lookupArabicWord(_ word: String, _ index: DictionaryIndex) -> (entry: Phrase, gloss: String, how: String)? {
+    static func lookupArabicWord(_ word: String, _ index: DictionaryIndex) -> (entry: Phrase, gloss: String, how: String)? {
         if let direct = index.toEn[word], let e = direct.first { return (e, glossOf(direct), "word") }
 
         func tryStem(_ stem: String) -> Phrase? {
@@ -243,7 +243,7 @@ enum Engine {
 
     private static let diminutive = try! NSRegularExpression(pattern: "^(.+?)c?it([oa])s?$")
 
-    private static func lookupSpanishWord(_ word: String, _ index: DictionaryIndex) -> (entry: Phrase, gloss: String, how: String)? {
+    static func lookupSpanishWord(_ word: String, _ index: DictionaryIndex) -> (entry: Phrase, gloss: String, how: String)? {
         if let direct = index.toEn[word], let e = direct.first { return (e, glossOf(direct), "word") }
         var variants: [String] = []
         if word.hasSuffix("es") { variants.append(String(word.dropLast(2))) }

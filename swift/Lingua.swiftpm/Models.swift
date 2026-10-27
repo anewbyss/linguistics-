@@ -24,6 +24,9 @@ struct Language: Decodable, Identifiable {
     let aptitude: [Question]
     let dictionary: [Phrase]
     let media: [MediaItem]
+    let writingPrompts: [PracticePrompt]
+    let speakingPrompts: [PracticePrompt]
+    let levelHours: [String: Int]
 
     var isArabic: Bool { id == "ar" }
     var isRTL: Bool { dir == "rtl" }
@@ -184,4 +187,20 @@ struct MediaItem: Decodable, Hashable, Identifiable {
     let skills: [String]
 
     var id: String { title }
+}
+
+struct PromptRequirement: Decodable, Hashable {
+    let label: String
+    let any: [String]
+}
+
+/// A free-writing or free-speaking task, checked by Engine.analyzePrompt.
+struct PracticePrompt: Decodable, Hashable, Identifiable {
+    let id: String
+    let level: String
+    let prompt: String
+    let minWords: Int
+    let requirements: [PromptRequirement]
+    let model: Phrase
+    let starter: String?
 }

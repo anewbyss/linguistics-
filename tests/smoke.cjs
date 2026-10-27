@@ -191,6 +191,7 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     for (const it of items) {
       if (it.type === 'choice') await srPage.locator(`[data-act="ch-pick"][data-i="${it.answer}"]`).click();
       else if (it.type === 'type') { await srPage.fill('#ch-input', it.answer); await srPage.locator('[data-act="ch-check"]').click(); }
+      else if (it.type === 'dictation') { await srPage.fill('#ch-input', it.t); await srPage.locator('[data-act="ch-dict"]').click(); }
       else { await srPage.evaluate((t) => { window.__say = t; }, it.t); await srPage.locator('[data-act="speak-listen"]').click(); }
       await srPage.locator('[data-act="ch-next"]').click();
     }
@@ -209,7 +210,8 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     await srPage.goto(base + `index.html#/${lang}/fluency`);
     await srPage.reload();
     await srPage.waitForSelector('.trend svg');
-    assert(await srPage.locator('.trend polyline').count() === 4, 'four trend lines');
+    assert(await srPage.locator('.trend polyline').count() === 5, 'five trend lines');
+    assert(await srPage.locator('.card h2', { hasText: 'Your path to fluency' }).count() === 1, 'path to fluency shown');
     const overall = Number((await srPage.locator('.score-big').first().innerText()).match(/\d+/)[0]);
     assert(overall > 0, `overall fluency rose (${overall})`);
     await srPage.locator('.trend .hit').last().hover();
@@ -217,6 +219,57 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `14-${lang}-fluency.png`), fullPage: true });
     await srPage.goto(base + `index.html#/${lang}/challenge`);
     assert(await srPage.locator('[data-act="ch-replay"]').count() === 1, 'challenge shows done state today');
+
+    // Review: lessons completed earlier unlock cards.
+    await srPage.goto(base + `index.html#/${lang}/review`);
+    let reviewed = 0;
+    while (await srPage.locator('[data-act="rv-flip"]').count() && reviewed < 30) {
+      await srPage.locator('[data-act="rv-flip"]').click();
+      await srPage.locator('[data-act="rv-grade"][data-g="good"]').click();
+      reviewed++;
+    }
+    assert(reviewed > 0, 'reviewed some cards');
+    assert(await srPage.locator('.hayya-tip').count() >= 1, 'Hayya summarises the review');
+    if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `15-${lang}-review.png`), fullPage: true });
+
+    // Listening: dictation and meaning.
+    await srPage.goto(base + `index.html#/${lang}/listen`);
+    const line = await srPage.evaluate((id) => {
+      const L = window.LINGUA_CONTENT.languages.find((l) => l.id === id);
+      return window.LinguaEngine.listeningItems(L).filter((x) => x.level === 'A1')[0].t;
+    }, lang);
+    await srPage.fill('#ls-input', line);
+    await srPage.locator('[data-act="ls-check"]').click();
+    assert(await srPage.locator('.feedback.good').count() === 1, 'dictation scored');
+    await srPage.locator('[data-act="ls-mode"][data-mode="meaning"]').click();
+    await srPage.locator('[data-act="ls-pick"]').first().click();
+    assert(await srPage.locator('.feedback').count() === 1, 'meaning answered');
+    await srPage.locator('[data-act="rate"][data-rate="slow"]').click();
+    assert(await srPage.evaluate(() => localStorage.getItem('lingua.rate')) === 'slow', 'speed remembered');
+    if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `16-${lang}-listen.png`), fullPage: true });
+
+    // Writing studio: the model answer passes; feedback lists requirements.
+    await srPage.goto(base + `index.html#/${lang}/write`);
+    await srPage.locator('[data-act="wr-open"]').first().click();
+    const model = await srPage.evaluate((id) => window.LINGUA_CONTENT.languages.find((l) => l.id === id).writingPrompts[0].model.t, lang);
+    await srPage.fill('#wr-input', model);
+    await srPage.locator('[data-act="wr-check"]').click();
+    assert(await srPage.locator('.feedback.good').count() === 1, 'model answer passes');
+    assert(await srPage.locator('.checklist li.ok').count() >= 2, 'requirements ticked');
+    if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `17-${lang}-write.png`), fullPage: true });
+
+    // Speaking prompts answered aloud (stubbed recogniser).
+    await srPage.goto(base + `index.html#/${lang}/speak`);
+    await srPage.locator('[data-act="sp-tab"][data-tab="answer"]').click();
+    const spoken = await srPage.evaluate((id) => window.LINGUA_CONTENT.languages.find((l) => l.id === id).speakingPrompts[0].model.t, lang);
+    await srPage.evaluate((t) => { window.__say = t; }, spoken);
+    await srPage.locator('[data-act="ans-listen"]').click();
+    await srPage.waitForSelector('.checklist');
+    assert(await srPage.locator('.feedback.good').count() >= 1, 'spoken answer passes');
+    if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `18-${lang}-answer.png`), fullPage: true });
+
+    await srPage.goto(base + `index.html#/${lang}`);
+    assert(await srPage.locator('.hayya-tip').count() === 1, 'coach tip on home');
   }
   await srPage.goto(base + 'index.html#/');
   assert(await srPage.locator('.lang-card .chip.done').count() === 2, 'landing shows both challenges done');
@@ -253,7 +306,7 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
 
   step('mobile layout has no horizontal scroll');
   await page.setViewportSize({ width: 375, height: 800 });
-  for (const hash of ['/', '/ar', '/ar/read', '/es/lesson/es-greet-1', '/es/translate', '/ar/fluency', '/es/challenge', '/ar/speak']) {
+  for (const hash of ['/', '/ar', '/ar/read', '/es/lesson/es-greet-1', '/es/translate', '/ar/fluency', '/es/challenge', '/ar/speak', '/es/review', '/ar/listen', '/es/write']) {
     await go(hash);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     assert(overflow <= 1, `no horizontal overflow on ${hash} (${overflow}px)`);

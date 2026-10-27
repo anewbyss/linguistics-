@@ -5,20 +5,22 @@ A language-learning app for **Arabic** (Modern Standard Arabic with everyday Egy
 - **Web app** (`web/`): a PWA that works offline, runs in any modern browser, and can be installed to a phone's home screen.
 - **Swift Playgrounds app** (`swift/Lingua.swiftpm`): a native SwiftUI app for iPad, iPhone and Mac.
 
-A landing screen leads to a separate menu for each language.
+A landing screen leads to a separate menu for each language. Your coach is **Hayya**, a feathered snake: هيّا (*hayyā*) means "let's go!" in Arabic, and the feathers nod to Quetzalcóatl, the feathered serpent of Mexico.
 
 ## Features (in both apps)
 
 | | Arabic | Mexican Spanish |
 |---|---|---|
-| **Lesson categories** (grammar + culture, A1–B2) | 8 categories, 16 lessons | 8 categories, 16 lessons |
+| **Lesson categories** (grammar + culture, A1–C1) | 14 categories, 27 lessons, including an Egyptian and a Levantine dialect track | 13 categories, 25 lessons, including Mexican regional speech and slang |
 | **Reading & writing** | 28 letters with all four joined forms, vowel marks, word reading, typing with an on-screen Arabic keyboard, finger tracing with scoring, letter quiz | Letters and Mexican pronunciation, accent rules, place-name reading, typing with accent keys, tracing, accent quiz |
-| **Real-world scenarios** (branching role-play) | 7 (Amman café, Cairo taxi, souq, family dinner, directions, iftar, pharmacy) | 7 (taquería, CDMX Metro, market, pharmacy, Día de Muertos, weekend plans, job interview) |
+| **Real-world scenarios** (branching role-play) | 12 (adds the doctor, a job interview, discussing the news, koshari in Cairo, manoushe in Beirut) | 11 (adds the doctor, renting a flat, a debate, a customer-service call) |
 | **Aptitude test** (placement A1–C1, broken down by level and skill) | 20 questions | 20 questions |
-| **Offline translator** (both directions, phrasebook, saved words) | 290 entries with prefix and suffix handling (و، ال، ـي…) | 361 entries with plurals and diminutives |
+| **Offline translator** (both directions, phrasebook, saved words) | 478 entries with prefix and suffix handling (و، ال، ـي…) | 567 entries with plurals and diminutives |
+| **Listening** (dictation and meaning checks, three speeds) | 124 lines | 116 lines |
+| **Free-writing / free-speaking prompts** with automatic feedback | 8 / 6 | 8 / 6 |
 | **Media picks by level** (A1–C1) | 18 | 18 |
 
-**Daily challenge.** A new 10-item challenge each day per language: 4 reading, 3 writing (two typed answers and a spelling check), 2 phrases to say aloud and 1 line to understand from a scenario.
+**Daily challenge.** A new 10-item challenge each day per language: 3 reading, 3 writing (two typed answers and a spelling check), 2 listening (a dictation and a line to understand by ear) and 2 phrases to say aloud.
 - Items are drawn from your current level, and the challenge stays the same all day.
 - Your first completion each day counts towards fluency, XP and a challenge streak. You can replay it for practice without it being scored.
 - Both apps use the same seeded generator, so they build the same challenge for the same day and progress.
@@ -28,9 +30,17 @@ A landing screen leads to a separate menu for each language.
 - **Web app:** uses the browser's speech recognition, which may need an internet connection.
 - **No microphone or recognition:** "I said it ✓" records a self-check. It counts as practice but never changes your accuracy.
 
-**Progress to fluency.** Reading, writing, speaking and overall scores (0–100), each with an estimated CEFR band, a breakdown of what counts, and a trend chart with a table view.
+**Review (spaced repetition).** Vocabulary from finished lessons and words saved in the translator come back after 1, 3, 7, 14, 30, 60 and 120 days, and start again when you forget them.
+
+**Listening.** Dictation (type what you hear, scored by similarity) and meaning checks on lesson and scenario lines, at slow, normal or natural speed.
+
+**Writing Studio and spoken answers.** Open-ended prompts from A1 to C1 (introduce yourself, tell a story, write a formal email, summarise the news…). Automatic feedback checks the required points, length, unknown words and missing accents or hamza, then shows a model answer. Speaking Practice has an "Answer questions" tab that transcribes a spoken answer and checks it the same way.
+
+**Path to fluency.** Active study time (counted only while you're using the app) against rough hour estimates for each level based on US Foreign Service Institute figures (Arabic is a Category IV language, Spanish Category I), with what you can do at each level and how to practise beyond the app.
+
+**Progress to fluency.** Reading, writing, listening, speaking and overall scores (0–100), each with an estimated CEFR band, a breakdown of what counts, and a trend chart with a table view.
 - **Each skill:** 60% coverage (how much of the course you've practised in that skill) plus 40% accuracy (the average of your last 10 scored attempts).
-- **Overall:** the average of the three skills, blended 25% with your latest aptitude-test level.
+- **Overall:** the average of the four skills, blended 25% with your latest aptitude-test level.
 - It's a study estimate, not an official CEFR certificate.
 
 **Apple Pencil and stylus.**
@@ -67,8 +77,8 @@ The course content is embedded in `ContentData.swift`, so there are no bundle re
 
 ```
 content/              ← edit lessons, scenarios, tests, dictionary and media here
-  arabic.mjs
-  spanish.mjs
+  arabic.mjs, arabic-more.mjs     (B1–C1, dialects, prompts, level hours)
+  spanish.mjs, spanish-more.mjs
   helpers.mjs
   dist/lingua-content.json   (generated)
 scripts/build-content.mjs    validates content and generates both apps' data
@@ -80,6 +90,7 @@ web/
 swift/Lingua.swiftpm/
   Engine.swift               Swift port of engine.js (translator, placement, writing)
   Fluency.swift              daily challenge, speech scoring and fluency (port of engine.js)
+  Practice.swift             listening, spaced repetition, prompt feedback, study time
   Speech.swift               on-device speech recognition
   ProgressStore.swift        persistence + backup import/export
   Models.swift, ContentStore.swift, LinguaApp.swift, Views/
@@ -103,6 +114,7 @@ When writing a quiz or test question, put the **correct option first**. The buil
 - scenario steps with no correct choice
 - writing tasks that reject their own answer
 - levels with no media picks
+- writing or speaking prompts whose model answer fails its own requirements
 
 ## Tests
 
@@ -117,6 +129,8 @@ npm run test:e2e  # drives the whole web app in headless Chromium (needs Playwri
 
 ## Notes and limits
 
+- **No app alone makes you fully fluent.** This one now covers A1–C1 in all four skills, but real fluency also needs hundreds of hours of native listening and regular conversation with people. The Path to fluency section shows how to add those.
+- **Free-writing feedback is automatic,** so it checks required points, vocabulary, length and accents, not every grammar point. Compare with the model answer and, if you can, show your writing to a tutor.
 - **The translator is dictionary-based, not machine translation.** It matches whole phrases first, then glosses word by word. It handles common Arabic prefixes and possessive suffixes and Spanish plurals and diminutives, and it marks unknown words. It does not reorder grammar. That keeps it fully offline and transparent, but treat its output as a study aid.
 - **Speech recognition** quality depends on the device and browser. Safari and Chrome support it, Firefox doesn't, and Chrome sends audio to an online service. Scores compare the transcript with the target text, so they reflect intelligibility rather than accent detail.
 - **Speech** uses the voices installed on the device (Web Speech API / AVSpeechSynthesizer). If a device has no Arabic or Mexican Spanish voice, the listen buttons fall back to a related voice or stay silent.

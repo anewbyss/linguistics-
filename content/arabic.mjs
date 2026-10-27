@@ -1,4 +1,5 @@
 import { P, Q, A, C, M, T } from './helpers.mjs';
+import * as more from './arabic-more.mjs';
 
 const categories = [
   {
@@ -1107,7 +1108,7 @@ const dictionary = [
   ['كيف', 'kayfa', 'how'], ['لماذا', 'limādhā', 'why'], ['كم', 'kam', 'how many; how much'], ['بكم', 'bikam', 'how much (price)'], ['هل', 'hal', '(yes/no question)'],
   ['أب', 'ab', 'father'], ['أم', 'umm', 'mother'], ['أخ', 'akh', 'brother'], ['أخت', 'ukht', 'sister'], ['ابن', 'ibn', 'son'],
   ['بنت', 'bint', 'girl; daughter'], ['ولد', 'walad', 'boy; child'], ['عائلة', 'ʿāʾila', 'family'], ['زوج', 'zawj', 'husband'],
-  ['زوجة', 'zawja', 'wife'], ['جد', 'jadd', 'grandfather'], ['جدة', 'jadda', 'grandmother'], ['صديق', 'ṣadīq', 'friend'], ['رجل', 'rajul', 'man'], ['امرأة', 'imraʾa', 'woman'],
+  ['زوجة', 'zawja', 'wife'], ['جد', 'jadd', 'grandfather'], ['جدة', 'jadda', 'grandmother'], ['صديق', 'ṣadīq', 'friend'], ['رجل', 'rajul / rijl', 'man; leg'], ['امرأة', 'imraʾa', 'woman'],
   ['قهوة', 'qahwa', 'coffee'], ['شاي', 'shāy', 'tea'], ['ماء', 'māʾ', 'water'], ['خبز', 'khubz', 'bread'], ['حليب', 'ḥalīb', 'milk'],
   ['سكر', 'sukkar', 'sugar'], ['لحم', 'laḥm', 'meat'], ['دجاج', 'dajāj', 'chicken'], ['سمك', 'samak', 'fish'], ['أرز', 'aruzz', 'rice'],
   ['فاكهة', 'fākiha', 'fruit'], ['تفاح', 'tuffāḥ', 'apple; apples'], ['برتقال', 'burtuqāl', 'orange; oranges'], ['خضار', 'khuḍār', 'vegetables'],
@@ -1181,6 +1182,14 @@ const media = [
   M('C1', 'TV', 'Al Jazeera Documentary (الجزيرة الوثائقية)', 'Al Jazeera', 'Long-form MSA narration on history, science and society.', 'YouTube / satellite', ['listening']),
 ];
 
+function orderCategories(list, order) {
+  return order.map((id) => {
+    const c = list.find((x) => x.id === id);
+    if (!c) throw new Error(`missing category ${id}`);
+    return c;
+  });
+}
+
 export default {
   id: 'ar',
   name: 'Arabic',
@@ -1191,5 +1200,11 @@ export default {
   speech: 'ar-SA',
   accent: '#0f766e',
   translateSkipEn: ['a', 'an', 'the', 'is', 'am', 'are'],
-  categories, reading, scenarios, aptitude, dictionary, media,
+  categories: orderCategories([...categories, ...more.categories], ["ar-greet", "ar-noun", "ar-num", "ar-food", "ar-health", "ar-verb", "ar-dir", "ar-egy", "ar-lev", "ar-cult", "ar-work", "ar-story", "ar-adv", "ar-news"]),
+  reading, aptitude, media,
+  scenarios: [...scenarios, ...more.scenarios],
+  dictionary: [...dictionary, ...more.dictionary],
+  writingPrompts: more.writingPrompts,
+  speakingPrompts: more.speakingPrompts,
+  levelHours: more.levelHours,
 };

@@ -6,6 +6,16 @@
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="112" fill="url(#g)"/>
-  <text x="170" y="320" font-size="220" text-anchor="middle" fill="#fff" font-family="Geeza Pro, Noto Naskh Arabic, Tahoma, serif">ع</text>
-  <text x="350" y="330" font-size="210" text-anchor="middle" fill="#fff" font-family="Helvetica, Arial, sans-serif" font-weight="700">ñ</text>
+  <g transform="translate(36 30) scale(3.65)">
+    <path d="M14 104 C 8 84, 40 80, 52 88 S 90 100, 94 78 S 70 56, 76 40" fill="none" stroke="#7ee0b0" stroke-width="15" stroke-linecap="round"/>
+    <path d="M14 104 C 8 84, 40 80, 52 88 S 90 100, 94 78 S 70 56, 76 40" fill="none" stroke="#ffffff" stroke-opacity=".6" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.1 11"/>
+    <ellipse cx="66" cy="13" rx="4" ry="9" transform="rotate(-30 66 13)" fill="#eda100"/>
+    <ellipse cx="80" cy="9" rx="4" ry="10" fill="#eb6834"/>
+    <ellipse cx="94" cy="13" rx="4" ry="9" transform="rotate(30 94 13)" fill="#e87ba4"/>
+    <ellipse cx="81" cy="29" rx="17" ry="14" fill="#7ee0b0"/>
+    <circle cx="74" cy="26" r="4.6" fill="#fff"/><circle cx="87" cy="26" r="4.6" fill="#fff"/>
+    <circle cx="75" cy="26.6" r="2.3" fill="#1d1d1b"/><circle cx="88" cy="26.6" r="2.3" fill="#1d1d1b"/>
+    <path d="M75 35 Q81 40 87 35" fill="none" stroke="#1d1d1b" stroke-width="2" stroke-linecap="round"/>
+    <path d="M81 41 v6 m0 0 l-3 3 m3 -3 l3 3" fill="none" stroke="#e34948" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
 </svg>

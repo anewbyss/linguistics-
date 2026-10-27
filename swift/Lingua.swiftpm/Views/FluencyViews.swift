@@ -87,6 +87,7 @@ struct SpeakingPracticeView: View {
     @StateObject private var listener = SpeechListener()
     @State private var index = 0
     @State private var started = false
+    @State private var tab = "repeat"
 
     var body: some View {
         let phrases = Engine.speakingPhrases(lang)
@@ -96,6 +97,21 @@ struct SpeakingPracticeView: View {
         let record = lp.speaking[item.phrase.t]
         ScrollView {
             VStack(spacing: 14) {
+                Picker("Mode", selection: $tab) {
+                    Text("Repeat phrases").tag("repeat")
+                    Text("Answer questions").tag("answer")
+                }
+                .pickerStyle(.segmented)
+                .onChange(of: tab) { _ in listener.reset() }
+                SpeedPicker()
+
+                if tab == "answer" {
+                    if lang.speakingPrompts.isEmpty {
+                        Text("No speaking prompts yet.").card()
+                    } else {
+                        AnswerPromptView(lang: lang, listener: listener)
+                    }
+                } else {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Listen to the model, then tap “Say it” and repeat. Scores of \(Engine.speakPass)% or more count towards your speaking fluency.")
                         .font(.subheadline)
@@ -124,6 +140,7 @@ struct SpeakingPracticeView: View {
                     }
                 }
                 .card()
+                }
             }
             .padding()
             .frame(maxWidth: 760)
@@ -169,6 +186,8 @@ struct DailyChallengeView: View {
     @State private var typeResult: WritingCheck?
     @State private var attempts = 0
     @State private var replay = false
+    @State private var showText = false
+    @State private var dictScore: Int?
     @State private var summary: ChallengeRecord?
 
     private var today: String { ProgressStore.day(Date()) }
@@ -207,9 +226,10 @@ struct DailyChallengeView: View {
             Text("⚡ Daily Challenge").font(.title2.bold())
             Text(Date().formatted(date: .complete, time: .omitted)).foregroundColor(.secondary)
             Text("Ten quick items drawn from what you've been learning, at your level:")
-            Text("📖 4 reading: meanings, a word to read, a lesson question")
+            Text("📖 3 reading: meanings, a word to read, a lesson question")
             Text("✍️ 3 writing: two typed answers and a spelling check")
-            Text("🎙️ 3 speaking & listening: two phrases to say and one line to understand")
+            Text("🎧 2 listening: a dictation and a line to understand by ear")
+            Text("🎙️ 2 speaking: phrases to say out loud")
             Text("The challenge stays the same all day. Your first completion counts towards your fluency and challenge streak.")
                 .font(.caption).foregroundColor(.secondary)
             Button("Start today's challenge") { phase = 1 }
@@ -233,6 +253,7 @@ struct DailyChallengeView: View {
             case .choice: choice(it)
             case .type: typing(it)
             case .speak: speaking(it)
+            case .dictation: dictation(it)
             }
             if answered {
                 Button(index + 1 < items.count ? "Next →" : "Finish") { next() }
@@ -246,17 +267,30 @@ struct DailyChallengeView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(it.q).font(.headline)
             if let t = it.t {
-                HStack {
-                    TargetText(text: t, lang: lang, size: 24)
-                    Spacer()
-                    SpeakButton(text: t, lang: lang)
+                if it.audio && !showText && !answered {
+                    HStack {
+                        Button {
+                            Speaker.shared.speak(t, language: lang.speech)
+                        } label: { Label("Play", systemImage: "play.fill") }
+                            .buttonStyle(.borderedProminent)
+                        Button("Show text") { showText = true }.buttonStyle(.bordered)
+                    }
+                } else {
+                    HStack {
+                        TargetText(text: t, lang: lang, size: 24)
+                        Spacer()
+                        SpeakButton(text: t, lang: lang)
+                    }
+                    if let tr = it.tr { Text(tr).font(.subheadline.italic()).foregroundColor(lang.color) }
                 }
-                if let tr = it.tr { Text(tr).font(.subheadline.italic()).foregroundColor(lang.color) }
             }
             ForEach(Array(it.options.enumerated()), id: \.offset) { i, option in
                 Button {
                     guard !answered else { return }
                     picked = i
+                    if it.audio, !replay, let t = it.t {
+                        progress.recordListening(lang, line: t, score: i == it.answer ? (showText ? 60 : 100) : 0)
+                    }
                     answer(ChallengeResult(skill: it.skill, correct: i == it.answer, measured: true))
                 } label: {
                     Text(option)
@@ -333,6 +367,44 @@ struct DailyChallengeView: View {
         }
     }
 
+    private func dictation(_ it: ChallengeItem) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Listen and type exactly what you hear").font(.headline)
+            Button {
+                Speaker.shared.speak(it.t ?? "", language: lang.speech)
+            } label: { Label("Play", systemImage: "play.fill") }
+                .buttonStyle(.borderedProminent)
+            TextField(lang.isArabic ? "اكتب هنا" : "Escribe aquí", text: $typed)
+                .font(.system(size: lang.isArabic ? 26 : 20))
+                .multilineTextAlignment(lang.isRTL ? .trailing : .leading)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .padding(10)
+                .background(RoundedRectangle(cornerRadius: 12).fill(Color(uiColor: .tertiarySystemFill)))
+                .disabled(answered)
+                .onSubmit { checkDictation(it) }
+            if !answered {
+                if let keys = lang.reading.keyboard { KeyPad(keys: keys, lang: lang, text: $typed) }
+                Button("Check") { checkDictation(it) }.buttonStyle(.borderedProminent)
+            }
+            if let s = dictScore {
+                Text(s >= Engine.listenPass ? "✓ Great listening! Score: \(s)%" : "Not quite. Score: \(s)%")
+                    .font(.subheadline.bold()).foregroundColor(s >= Engine.listenPass ? .green : .orange)
+                Text(it.t ?? "").font(.system(size: lang.isArabic ? 26 : 20, weight: .medium))
+                if let tr = it.tr { Text(tr).font(.subheadline.italic()).foregroundColor(lang.color) }
+                Text(it.en).font(.subheadline)
+            }
+        }
+    }
+
+    private func checkDictation(_ it: ChallengeItem) {
+        guard !answered else { return }
+        let s = Engine.dictationScore(typed, it.t ?? "", lang: lang.id)
+        dictScore = s
+        if !replay { progress.recordListening(lang, line: it.t ?? "", score: s) }
+        answer(ChallengeResult(skill: it.skill, correct: s >= Engine.listenPass, measured: true))
+    }
+
     private func check(_ it: ChallengeItem) {
         guard !answered else { return }
         let r = Engine.checkWriting(typed, task: it.writingTask, lang: lang.id)
@@ -354,6 +426,8 @@ struct DailyChallengeView: View {
         typed = ""
         typeResult = nil
         attempts = 0
+        showText = false
+        dictScore = nil
         listener.reset()
     }
 
@@ -403,6 +477,8 @@ struct DailyChallengeView: View {
                             typed = ""
                             typeResult = nil
                             attempts = 0
+                            showText = false
+                            dictScore = nil
                             phase = 1
                         }
                         .buttonStyle(.bordered)
@@ -434,17 +510,19 @@ func skillLabel(_ skill: String) -> String {
     case "reading": return "📖 Reading"
     case "writing": return "✍️ Writing"
     case "speaking": return "🎙️ Speaking"
+    case "listening": return "🎧 Listening"
     default: return "🏁 Overall"
     }
 }
 
 // MARK: - Fluency
 
-/// Validated categorical slots 1–4, stepped separately for light and dark mode.
+/// Validated categorical slots 1–5, stepped separately for light and dark mode.
 private func seriesColor(_ skill: String) -> Color {
     let pairs: [String: (UInt32, UInt32)] = [
         "Overall": (0x2a78d6, 0x3987e5), "Reading": (0xeb6834, 0xd95926),
         "Writing": (0x1baf7a, 0x199e70), "Speaking": (0xeda100, 0xc98500),
+        "Listening": (0xe87ba4, 0xd55181),
     ]
     let (light, dark) = pairs[skill] ?? (0x888888, 0x888888)
     func ui(_ v: UInt32) -> UIColor {
@@ -477,7 +555,7 @@ struct FluencyTrendChart: View {
     private var points: [FluencyPoint] {
         entries.flatMap { e -> [FluencyPoint] in
             let d = date(e.day)
-            return [("Overall", e.overall), ("Reading", e.reading), ("Writing", e.writing), ("Speaking", e.speaking)]
+            return [("Overall", e.overall), ("Reading", e.reading), ("Writing", e.writing), ("Speaking", e.speaking), ("Listening", e.listening)]
                 .map { FluencyPoint(id: "\(e.day)-\($0.0)", date: d, skill: $0.0, value: $0.1) }
         }
     }
@@ -507,6 +585,7 @@ struct FluencyTrendChart: View {
             .chartForegroundStyleScale([
                 "Overall": seriesColor("Overall"), "Reading": seriesColor("Reading"),
                 "Writing": seriesColor("Writing"), "Speaking": seriesColor("Speaking"),
+                "Listening": seriesColor("Listening"),
             ])
             .chartYScale(domain: 0...100)
             .chartLegend(position: .top, alignment: .leading)
@@ -528,7 +607,7 @@ struct FluencyTrendChart: View {
             .frame(height: 230)
             .accessibilityLabel("Fluency scores over time")
 
-            Text(selected.map { "\($0.day): overall \($0.overall) · reading \($0.reading) · writing \($0.writing) · speaking \($0.speaking)" } ?? "Touch the chart to see a day's scores.")
+            Text(selected.map { "\($0.day): overall \($0.overall) · reading \($0.reading) · writing \($0.writing) · listening \($0.listening) · speaking \($0.speaking)" } ?? "Touch the chart to see a day's scores.")
                 .font(.caption)
                 .foregroundColor(.secondary)
 
@@ -536,7 +615,7 @@ struct FluencyTrendChart: View {
                 VStack(spacing: 4) {
                     HStack {
                         Text("Day").frame(maxWidth: .infinity, alignment: .leading)
-                        Text("Overall"); Text("Read"); Text("Write"); Text("Speak")
+                        Text("Overall"); Text("Read"); Text("Write"); Text("Listen"); Text("Speak")
                     }
                     .font(.caption.bold())
                     ForEach(Array(entries.reversed()), id: \.day) { e in
@@ -545,6 +624,7 @@ struct FluencyTrendChart: View {
                             Text("\(e.overall)").frame(width: 48)
                             Text("\(e.reading)").frame(width: 40)
                             Text("\(e.writing)").frame(width: 40)
+                            Text("\(e.listening)").frame(width: 44)
                             Text("\(e.speaking)").frame(width: 44)
                         }
                         .font(.caption)
@@ -562,8 +642,9 @@ struct FluencyView: View {
 
     private let tips = [
         "reading": "Study letters, finish lessons and do letter / accent quizzes.",
-        "writing": "Do the Write and Trace exercises in Reading & Writing.",
-        "speaking": "Use Speaking Practice and play the real-world scenarios.",
+        "writing": "Do the Write and Trace exercises, then free-write in the Writing Studio.",
+        "listening": "Do dictations and meaning checks in Listening, starting slow.",
+        "speaking": "Use Speaking Practice (repeat and answer questions) and play the scenarios.",
     ]
 
     var body: some View {
@@ -575,16 +656,23 @@ struct FluencyView: View {
                     Text("Overall fluency").foregroundColor(.secondary)
                     Text("\(f.overall)").font(.system(size: 56, weight: .bold)).foregroundColor(lang.color)
                     Text("Estimated level \(f.overallBand) · \(Engine.levelNames[f.overallBand] ?? "")").font(.title3.bold())
-                    Text(f.testLevel.map { "The average of reading, writing and speaking, blended with your latest aptitude test (\($0))." }
-                         ?? "The average of reading, writing and speaking. Take the aptitude test to include it.")
+                    Text(f.testLevel.map { "The average of reading, writing, listening and speaking, blended with your latest aptitude test (\($0))." }
+                         ?? "The average of reading, writing, listening and speaking. Take the aptitude test to include it.")
                         .font(.caption).foregroundColor(.secondary).multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity)
                 .card()
 
+                HayyaTip(text: f.overall < 20 ? "Every expert started here. Little and often beats cramming: 15 minutes a day adds up fast."
+                         : f.overall < 60 ? "You're building real momentum. Keep all four skills moving, and start talking with real people."
+                         : "Impressive! Now live in the language: native media, conversations and reading every day.",
+                         mood: f.overall < 60 ? .happy : .cheer, color: lang.color)
+
                 ForEach(Engine.skills, id: \.self) { name in
                     skillCard(name, f.skill(name))
                 }
+
+                PathToFluencyView(lang: lang, lp: lp)
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Your trend").font(.headline)
@@ -600,9 +688,10 @@ struct FluencyView: View {
                 DisclosureGroup("How fluency is calculated") {
                     VStack(alignment: .leading, spacing: 6) {
                         Text("Each skill scores 0–100: 60% coverage (how much of the course you've practised in that skill) plus 40% accuracy (the average of your last 10 scored attempts). Bands: under 20 = A1, under 40 = A2, under 60 = B1, under 80 = B2, 80+ = C1.")
-                        Text("Reading: letters studied and lessons completed; accuracy from lesson quizzes, letter / accent quizzes and challenge reading items.")
-                        Text("Writing: writing tasks mastered and letters traced; accuracy from typed answers, tracing scores and challenge writing items.")
-                        Text("Speaking: phrases spoken well (\(Engine.speakPass)+) and scenarios completed; accuracy from pronunciation scores, scenario first-try scores and challenge speaking items.")
+                        Text("Reading: letters studied, lessons completed and words learned in Review; accuracy from lesson quizzes, letter / accent quizzes and challenge reading items.")
+                        Text("Writing: writing tasks mastered, letters traced and free-writing prompts passed; accuracy from typed answers, tracing scores and challenge writing items.")
+                        Text("Listening: lines understood (\(Engine.listenPass)+); accuracy from dictation and meaning checks and challenge listening items.")
+                        Text("Speaking: phrases spoken well (\(Engine.speakPass)+), scenarios completed and speaking prompts answered; accuracy from pronunciation scores, scenario first-try scores and challenge speaking items.")
                         Text("This is a study estimate, not an official CEFR certificate.").foregroundColor(.secondary)
                     }
                     .font(.caption)
@@ -639,12 +728,21 @@ struct FluencyView: View {
             fluencyRow("Recent accuracy", Double(s.accuracy ?? 0), 100, s.accuracy.map { "\($0)%" } ?? "none yet")
             Text(s.samples > 0 ? "Based on your last \(s.samples) scored attempts. \(tips[name] ?? "")" : "No scored attempts yet, so this skill can reach at most 60. \(tips[name] ?? "")")
                 .font(.caption).foregroundColor(.secondary)
-            NavigationLink(value: name == "speaking" ? Route.speaking(lang.id) : Route.reading(lang.id)) {
+            NavigationLink(value: practiceRoute(name)) {
                 Text("Practise \(name)")
             }
             .buttonStyle(.bordered)
         }
         .card()
+    }
+
+    private func practiceRoute(_ name: String) -> Route {
+        switch name {
+        case "speaking": return .speaking(lang.id)
+        case "listening": return .listening(lang.id)
+        case "writing": return .writing(lang.id)
+        default: return .reading(lang.id)
+        }
     }
 
     private func fluencyRow(_ label: String, _ value: Double, _ total: Double, _ detail: String) -> some View {
@@ -668,7 +766,7 @@ struct FluencySummaryRow: View {
                 Spacer()
                 LevelBadge(level: report.overallBand, color: lang.color)
             }
-            ForEach(["reading", "writing", "speaking", "overall"], id: \.self) { name in
+            ForEach(["reading", "writing", "listening", "speaking", "overall"], id: \.self) { name in
                 let score = name == "overall" ? report.overall : report.skill(name).score
                 HStack {
                     Text(skillLabel(name)).font(.caption).frame(width: 100, alignment: .leading)

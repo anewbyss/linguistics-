@@ -156,11 +156,35 @@ function compileLanguage(lang) {
   });
   for (const l of LEVELS) if (!media.some((m) => m.level === l)) fail(`${lang.id}: no media for level ${l}`);
 
-  return {
+  const compilePrompts = (list, kind) => (list || []).map((pr) => {
+    const where = `${lang.id} ${kind} ${pr.id}`;
+    uniq(pr.id, where);
+    if (!LEVELS.includes(pr.level)) fail(`${where}: bad level`);
+    if (!pr.prompt || !pr.minWords || !pr.requirements?.length) fail(`${where}: needs prompt, minWords and requirements`);
+    pr.requirements.forEach((r, i) => { if (!r.label || !r.any?.length) fail(`${where}: requirement ${i} needs a label and alternatives`); });
+    checkPhrase(pr.model, `${where} model`);
+    const out = { id: pr.id, level: pr.level, prompt: pr.prompt, minWords: pr.minWords, requirements: pr.requirements, model: pr.model };
+    if (pr.starter) out.starter = pr.starter;
+    return out;
+  });
+  const writingPrompts = compilePrompts(lang.writingPrompts, 'writing prompt');
+  const speakingPrompts = compilePrompts(lang.speakingPrompts, 'speaking prompt');
+  if (!lang.levelHours || LEVELS.some((l) => !Number.isFinite(lang.levelHours[l]))) fail(`${lang.id}: levelHours needs a number for every level`);
+
+  const compiled = {
     id: lang.id, name: lang.name, nativeName: lang.nativeName, subtitle: lang.subtitle, symbol: lang.symbol,
     dir: lang.dir, speech: lang.speech, accent: lang.accent, translateSkipEn: lang.translateSkipEn,
-    categories, reading, scenarios, aptitude, dictionary, media,
+    categories, reading, scenarios, aptitude, dictionary, media, writingPrompts, speakingPrompts, levelHours: lang.levelHours,
   };
+  // Every model answer must satisfy its own prompt, or the checker would mark correct work as wrong.
+  for (const pr of [...writingPrompts, ...speakingPrompts]) {
+    const a = engine.analyzePrompt(pr.model.t, pr, compiled);
+    const missing = a.requirements.filter((r) => !r.met).map((r) => r.label);
+    if (missing.length) fail(`${lang.id} prompt ${pr.id}: model answer misses ${missing.join(', ')}`);
+    if (a.words < pr.minWords) fail(`${lang.id} prompt ${pr.id}: model answer has ${a.words} words, needs ${pr.minWords}`);
+    if (a.unknown.length) warnings.push(`${lang.id} prompt ${pr.id}: model words not found in course: ${a.unknown.join(' ')}`);
+  }
+  return compiled;
 }
 
 const library = { version: 1, levels: LEVELS, languages: [compileLanguage(arabic), compileLanguage(spanish)] };
@@ -201,7 +225,8 @@ if (check && stale.length) {
 const counts = library.languages.map((l) => {
   const lessons = l.categories.reduce((n, c) => n + c.lessons.length, 0);
   return `${l.id}: ${l.categories.length} categories, ${lessons} lessons, ${l.scenarios.length} scenarios, ` +
-    `${l.aptitude.length} test questions, ${l.dictionary.length} dictionary entries, ${l.media.length} media picks`;
+    `${l.aptitude.length} test questions, ${l.dictionary.length} dictionary entries, ${l.media.length} media picks, ` +
+    `${l.writingPrompts.length} writing + ${l.speakingPrompts.length} speaking prompts, ${engine.listeningItems(l).length} listening lines`;
 });
 console.log((check ? 'Content up to date. ' : 'Built content. ') + '\n  ' + counts.join('\n  '));
 if (warnings.length) console.log('Warnings:\n  ' + warnings.join('\n  '));

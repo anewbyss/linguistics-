@@ -23,6 +23,10 @@
   let progress = loadProgress();
 
   let savedTimer = null;
+  /** Persist without the "Saved" flash (used by the study-time heartbeat). */
+  function saveQuiet() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(progress)); } catch (err) { storageOK = false; }
+  }
   function save() {
     progress.updatedAt = new Date().toISOString();
     const langId = route()[0];
@@ -68,13 +72,19 @@
   const allLessons = (lang) => lang.categories.flatMap((c) => c.lessons.map((l) => ({ ...l, cat: c })));
   const isAr = (lang) => lang.id === 'ar';
 
+  const RATES = { slow: 0.6, normal: 0.85, natural: 1.05 };
+  let rateName = 'normal';
+  try { rateName = localStorage.getItem('lingua.rate') || 'normal'; } catch (err) { /* default */ }
+  if (!RATES[rateName]) rateName = 'normal';
+  const speedControl = () => (canSpeak ? `<div class="seg small" role="group" aria-label="Speech speed">${Object.keys(RATES).map((k) => `<button aria-pressed="${rateName === k}" data-act="rate" data-rate="${k}">${k === 'slow' ? '🐢 Slow' : k === 'normal' ? 'Normal' : '🐇 Natural'}</button>`).join('')}</div>` : '');
+
   function speak(text, code) {
     if (!canSpeak || !text) return;
     try {
       speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(text.replace(/‍/g, ''));
       u.lang = code;
-      u.rate = 0.85;
+      u.rate = RATES[rateName];
       const voices = speechSynthesis.getVoices();
       const v = voices.find((x) => x.lang === code) || voices.find((x) => x.lang && x.lang.slice(0, 2) === code.slice(0, 2));
       if (v) u.voice = v;
@@ -100,6 +110,44 @@
     if (!t) return '';
     return `<div class="table-wrap"><table><thead><tr>${t.headers.map((x) => `<th>${h(x)}</th>`).join('')}</tr></thead>
       <tbody>${t.rows.map((r) => `<tr>${r.map(cellHtml).join('')}</tr>`).join('')}</tbody></table></div>`;
+  }
+
+  // ---------------------------------------------------------------- Hayya, the feathered snake
+  // "هيّا" (hayyā) means "let's go!" in Arabic; the feathers nod to Quetzalcóatl, Mexico's feathered serpent.
+  function mascot(mood = 'happy', size = 72) {
+    const think = mood === 'think';
+    const eyes = mood === 'sleep'
+      ? '<path d="M70 27 q4 3 8 0 M83 27 q4 3 8 0" class="hy-line"/>'
+      : `<circle cx="74" cy="26" r="4.6" class="hy-eye"/><circle cx="87" cy="26" r="4.6" class="hy-eye"/>
+         <circle cx="${think ? 73 : 75}" cy="${think ? 24.5 : 26.6}" r="2.3" class="hy-pupil"/><circle cx="${think ? 86 : 88}" cy="${think ? 24.5 : 26.6}" r="2.3" class="hy-pupil"/>`;
+    const mouth = mood === 'cheer' ? '<path d="M74 35 Q81 45 88 35 Z" class="hy-mouth"/>'
+      : think ? '<path d="M77 37 h7" class="hy-line"/>' : '<path d="M75 35 Q81 40 87 35" class="hy-line"/>';
+    const tongue = mood === 'happy' || mood === 'cheer' ? '<path d="M81 41 v6 m0 0 l-3 3 m3 -3 l3 3" class="hy-tongue"/>' : '';
+    const body = 'M14 104 C 8 84, 40 80, 52 88 S 90 100, 94 78 S 70 56, 76 40';
+    return `<svg class="hayya" width="${size}" height="${size}" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+      <path d="${body}" class="hy-body"/><path d="${body}" class="hy-scales"/>
+      <ellipse cx="66" cy="13" rx="4" ry="9" transform="rotate(-30 66 13)" class="hy-f1"/><ellipse cx="80" cy="9" rx="4" ry="10" class="hy-f2"/>
+      <ellipse cx="94" cy="13" rx="4" ry="9" transform="rotate(30 94 13)" class="hy-f3"/>
+      <ellipse cx="81" cy="29" rx="17" ry="14" class="hy-head"/>${eyes}
+      <circle cx="68" cy="34" r="2.6" class="hy-blush"/><circle cx="94" cy="34" r="2.6" class="hy-blush"/>${mouth}${tongue}</svg>`;
+  }
+  /** Hayya with a speech bubble; pass href to make the whole tip a link. */
+  function hayya(text, { mood = 'happy', href = null, size = 64 } = {}) {
+    const inner = `${mascot(mood, size)}<div class="say"><b>Hayya</b><span>${text}</span></div>`;
+    return href ? `<a class="hayya-tip" href="${href}">${inner}</a>` : `<div class="hayya-tip">${inner}</div>`;
+  }
+
+  /** One suggestion for what to do next, based on reviews, the challenge and the weakest skill. */
+  function coachTip(lang) {
+    const d = lp(lang.id);
+    const day = E.localDay();
+    const st = E.srsStats(lang, d, day);
+    if (st.due > 0) return hayya(`You have <b>${st.due}</b> word${st.due === 1 ? '' : 's'} due for review. A few minutes now keeps them from slipping away. Tap to start.`, { href: `#/${lang.id}/review` });
+    if (!d.challenges[day]) return hayya("Today's challenge is ready: ten quick items across reading, writing, listening and speaking. ¡Vámonos! / يلا!", { href: `#/${lang.id}/challenge`, mood: 'cheer' });
+    const f = E.fluency(lang, d);
+    const weakest = E.SKILLS.slice().sort((a, b) => f[a].score - f[b].score)[0];
+    const where = { reading: ['review', 'Review your words or finish a lesson'], writing: ['write', 'Try a prompt in the Writing Studio'], listening: ['listen', 'Do a few dictations in Listening'], speaking: ['speak', 'Answer a speaking prompt out loud'] }[weakest];
+    return hayya(`Challenge done, nice! Your ${SKILL_META[weakest].label.toLowerCase()} is your weakest skill right now (${f[weakest].score}/100). ${where[1]}.`, { href: `#/${lang.id}/${where[0]}`, mood: 'think' });
   }
 
   // ---------------------------------------------------------------- quiz component
@@ -199,6 +247,9 @@
       case 'challenge': return challengeView(lang);
       case 'speak': return speakView(lang);
       case 'fluency': return fluencyView(lang);
+      case 'review': return reviewView(lang);
+      case 'listen': return listenView(lang);
+      case 'write': return writeView(lang);
       default: return langHome(lang);
     }
   }
@@ -223,9 +274,11 @@
         </div></a>`;
     }).join('');
     return `<section class="hero">
+        <div class="hero-mascot">${mascot('cheer', 120)}</div>
         <h1>Learn Arabic &amp; Mexican Spanish</h1>
-        <p>Grammar and culture lessons, reading and writing practice, real-world conversations, placement tests and an offline translator. Your progress saves automatically.</p>
+        <p>Lessons from your first letters to C1, a dialect track, daily challenges, spaced review, listening, writing and speaking practice, and fluency tracking. Your progress saves automatically.</p>
       </section>
+      ${hayya("Hi, I'm Hayya, a feathered snake. My name is Arabic for “let's go!” (هيّا), and my feathers come from Quetzalcóatl, Mexico's feathered serpent. Pick a language and I'll keep you on track.", { size: 56 })}
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">${cards}</div>
       <div class="grid tight" style="margin-top:1.2rem">
         <div class="card center"><div class="score-big">${progress.xp}</div><div class="muted small">XP earned</div></div>
@@ -254,7 +307,14 @@
     const d = lp(lang.id);
     const s = E.languageStats(lang, d);
     const next = nextLesson(lang);
+    const sr = E.srsStats(lang, d, E.localDay());
+    const listenAll = E.listeningItems(lang);
+    const listenDone = listenAll.filter((x) => d.listening[x.t] && d.listening[x.t].best >= E.LISTEN_PASS).length;
+    const wpDone = (lang.writingPrompts || []).filter((pr) => d.prompts[pr.id] && d.prompts[pr.id].best >= E.PROMPT_PASS).length;
     const tiles = [
+      ['review', '🔁', 'Review', 'Spaced repetition: words come back just before you forget them', sr.due ? `${sr.due} due now · ${sr.learned}/${sr.total} learned` : `${sr.learned}/${sr.total} learned · ${sr.newAvailable} new ready`],
+      ['listen', '🎧', 'Listening', 'Dictation and comprehension at slow or natural speed', `${listenDone}/${listenAll.length} lines understood`],
+      ['write', '📝', 'Writing Studio', 'Free writing with automatic checks and a model answer', `${wpDone}/${(lang.writingPrompts || []).length} prompts passed`],
       ['read', isAr(lang) ? 'ع' : '✍️', 'Reading & Writing', isAr(lang) ? 'Alphabet, vowel marks, tracing and typing' : 'Pronunciation, accents and writing practice', `${s.lettersDone}/${s.lettersTotal} letters · ${s.writingDone}/${s.writingTotal} written`],
       ['speak', '🎙️', 'Speaking Practice', 'Listen, repeat and get a pronunciation score', `${E.speakingPhrases(lang).filter((p) => d.speaking[p.t] && d.speaking[p.t].best >= E.SPEAK_PASS).length}/${E.speakingPhrases(lang).length} phrases spoken`],
       ['scenarios', '🎭', 'Real-World Scenarios', 'Role-play cafés, taxis, markets and more', `${s.scenariosDone}/${s.scenariosTotal} completed`],
@@ -276,6 +336,7 @@
         ${bar(s.percent)}
         <div class="small" style="margin-top:.4rem;opacity:.9">${s.percent}% of the course complete</div>
       </section>
+      <div style="margin-bottom:1rem">${coachTip(lang)}</div>
       <div class="grid" style="margin-bottom:1rem">${challengeCard(lang)}${fluencyCard(lang)}</div>
       ${next ? `<a class="tile" href="#/${lang.id}/lesson/${next.id}" style="margin-bottom:1rem"><span class="small muted">Continue learning</span>
         <span class="title">${next.cat.emoji} ${h(next.title)}</span><span class="sub">${h(next.cat.title)} · ${h(next.summary)}</span><span class="meta">${levelChip(next.level)}</span></a>` : ''}
@@ -759,9 +820,10 @@
 
   // ---------------------------------------------------------------- fluency
   const SKILL_META = {
-    reading: { label: 'Reading', icon: '📖', series: 'var(--series-2)', tip: 'Study letters, finish lessons and do letter / accent quizzes.', link: 'read' },
-    writing: { label: 'Writing', icon: '✍️', series: 'var(--series-3)', tip: 'Do the Write and Trace exercises in Reading & Writing.', link: 'read' },
-    speaking: { label: 'Speaking', icon: '🎙️', series: 'var(--series-4)', tip: 'Use Speaking Practice and play the real-world scenarios.', link: 'speak' },
+    reading: { label: 'Reading', icon: '📖', series: 'var(--series-2)', tip: 'Finish lessons, review your words and do letter / accent quizzes.', link: 'review' },
+    writing: { label: 'Writing', icon: '✍️', series: 'var(--series-3)', tip: 'Do the Write and Trace exercises, and free writing in the Writing Studio.', link: 'write' },
+    listening: { label: 'Listening', icon: '🎧', series: 'var(--series-5)', tip: 'Do dictations and comprehension in Listening, and play the scenarios.', link: 'listen' },
+    speaking: { label: 'Speaking', icon: '🎙️', series: 'var(--series-4)', tip: 'Repeat phrases and answer prompts in Speaking Practice, and play the scenarios.', link: 'speak' },
     overall: { label: 'Overall', icon: '🏁', series: 'var(--series-1)' },
   };
 
@@ -770,25 +832,27 @@
     const row = (k) => `<div class="lvl" style="grid-template-columns:6.5rem 1fr 4.2rem"><span>${SKILL_META[k].icon} ${SKILL_META[k].label}</span>${bar(f[k].score)}<span class="small"><b>${f[k].score}</b> · ${f[k].band}</span></div>`;
     return `<a class="tile level-bars" href="#/${lang.id}/fluency"><span class="title">Progress to fluency</span>
       <span class="sub">Estimated level <b>${h(f.overall.band)}</b>. Tap for details and your trend.</span>
-      <div style="margin-top:.5rem">${['reading', 'writing', 'speaking', 'overall'].map(row).join('')}</div></a>`;
+      <div style="margin-top:.5rem">${[...E.SKILLS, 'overall'].map(row).join('')}</div></a>`;
   }
 
   function trendChart(entries) {
     if (entries.length < 2) {
       return '<p class="small muted">Your trend appears here after you practise on two different days.</p>';
     }
-    const W = 640, H = 220, L = 34, Rr = 70, T = 12, B = 26;
+    const W = 640, H = 220, L = 34, Rr = 96, T = 12, B = 26;
     const xs = (i) => L + (i * (W - L - Rr)) / (entries.length - 1);
     const ys = (v) => T + ((100 - v) * (H - T - B)) / 100;
-    const keys = ['overall', 'reading', 'writing', 'speaking'];
+    const keys = ['overall', 'reading', 'writing', 'listening', 'speaking'];
     const grid = [0, 25, 50, 75, 100].map((v) => `<line x1="${L}" x2="${W - Rr}" y1="${ys(v)}" y2="${ys(v)}" class="grid"/><text x="${L - 6}" y="${ys(v) + 4}" text-anchor="end" class="axis">${v}</text>`).join('');
     const lines = keys.map((k) => `<polyline fill="none" stroke="${SKILL_META[k].series}" stroke-width="${k === 'overall' ? 3 : 2}" stroke-linejoin="round" stroke-linecap="round" points="${entries.map((e, i) => `${xs(i)},${ys(e[k])}`).join(' ')}"/>`).join('');
     // Direct end labels, nudged apart so they don't collide.
     const ends = keys.map((k) => ({ k, y: ys(entries[entries.length - 1][k]) })).sort((a, b) => a.y - b.y);
-    for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 18) ends[i].y = ends[i - 1].y + 18;
+    for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 17) ends[i].y = ends[i - 1].y + 17;
+    const overflow = ends.length ? ends[ends.length - 1].y - (H - B) : 0;
+    if (overflow > 0) ends.forEach((e) => { e.y -= overflow; });
     const labels = ends.map((e) => `<text x="${W - Rr + 6}" y="${e.y + 4}" class="lbl">${SKILL_META[e.k].label}</text>`).join('');
     const first = entries[0].day, last = entries[entries.length - 1].day;
-    const hits = entries.map((e, i) => `<rect class="hit" x="${xs(i) - (W - L - Rr) / (entries.length - 1) / 2}" y="${T}" width="${(W - L - Rr) / (entries.length - 1)}" height="${H - T - B}" data-tip="${h(`${e.day}: overall ${e.overall} · reading ${e.reading} · writing ${e.writing} · speaking ${e.speaking}`)}" data-x="${xs(i)}"/>`).join('');
+    const hits = entries.map((e, i) => `<rect class="hit" x="${xs(i) - (W - L - Rr) / (entries.length - 1) / 2}" y="${T}" width="${(W - L - Rr) / (entries.length - 1)}" height="${H - T - B}" data-tip="${h(`${e.day}: overall ${e.overall} · reading ${e.reading} · writing ${e.writing} · listening ${e.listening} · speaking ${e.speaking}`)}" data-x="${xs(i)}"/>`).join('');
     return `<div class="trend" role="img" aria-label="Fluency scores over time, ${first} to ${last}">
       <div class="legend">${keys.map((k) => `<span><i style="background:${SKILL_META[k].series}"></i>${SKILL_META[k].label}</span>`).join('')}</div>
       <svg viewBox="0 0 ${W} ${H}">${grid}${lines}${labels}
@@ -814,17 +878,198 @@
     const rows = d.fluency.slice().reverse().slice(0, 30);
     return `<div class="card center"><p class="muted" style="margin:0">Overall fluency</p><div class="score-big">${f.overall.score}<span class="small muted">/100</span></div>
         <h2>Estimated level ${h(f.overall.band)} · ${h(E.LEVEL_NAMES[f.overall.band])}</h2>
-        <p class="small muted">The average of reading, writing and speaking${f.overall.testLevel ? `, blended with your latest aptitude test (${h(f.overall.testLevel)})` : ''}. ${f.overall.testLevel ? '' : `<a href="#/${lang.id}/test">Take the aptitude test</a> to include it.`}</p></div>
-      <div class="grid">${['reading', 'writing', 'speaking'].map(skill).join('')}</div>
+        <p class="small muted">The average of reading, writing, listening and speaking${f.overall.testLevel ? `, blended with your latest aptitude test (${h(f.overall.testLevel)})` : ''}. ${f.overall.testLevel ? '' : `<a href="#/${lang.id}/test">Take the aptitude test</a> to include it.`}</p></div>
+      ${hayya(f.overall.score >= 80 ? 'You are in C1 territory here. Now the biggest gains come from real conversations and native media. Go talk to people!' : `Steady practice wins. Your lowest skill is ${SKILL_META[E.SKILLS.slice().sort((a, b) => f[a].score - f[b].score)[0]].label.toLowerCase()}: a few minutes on it each day lifts your overall score fastest.`, { mood: f.overall.score >= 80 ? 'cheer' : 'think' })}
+      <div class="grid two" style="margin-top:1rem">${E.SKILLS.map(skill).join('')}</div>
+      ${pathToFluency(lang, d)}
       <div class="card"><h2>Your trend</h2>${trendChart(d.fluency.slice(-60))}
-        ${rows.length ? `<details><summary class="small">Show as a table</summary><div class="table-wrap"><table><thead><tr><th>Day</th><th>Overall</th><th>Reading</th><th>Writing</th><th>Speaking</th></tr></thead>
-          <tbody>${rows.map((r) => `<tr><td>${h(r.day)}</td><td>${r.overall}</td><td>${r.reading}</td><td>${r.writing}</td><td>${r.speaking}</td></tr>`).join('')}</tbody></table></div></details>` : ''}</div>
+        ${rows.length ? `<details><summary class="small">Show as a table</summary><div class="table-wrap"><table><thead><tr><th>Day</th><th>Overall</th><th>Reading</th><th>Writing</th><th>Listening</th><th>Speaking</th></tr></thead>
+          <tbody>${rows.map((r) => `<tr><td>${h(r.day)}</td><td>${r.overall}</td><td>${r.reading}</td><td>${r.writing}</td><td>${r.listening}</td><td>${r.speaking}</td></tr>`).join('')}</tbody></table></div></details>` : ''}</div>
       <details class="card"><summary><b>How fluency is calculated</b></summary>
         <p class="small" style="margin-top:.6rem">Each skill scores 0–100: <b>60% coverage</b> (how much of the course you've practised in that skill) plus <b>40% accuracy</b> (the average of your last 10 scored attempts). Bands: under 20 = A1, under 40 = A2, under 60 = B1, under 80 = B2, 80+ = C1.</p>
-        <ul class="small"><li><b>Reading:</b> letters studied and lessons completed; accuracy from lesson quizzes, letter / accent quizzes and challenge reading items.</li>
-        <li><b>Writing:</b> writing tasks mastered and letters traced; accuracy from typed answers, tracing scores and challenge writing items.</li>
-        <li><b>Speaking:</b> phrases spoken well (score ${E.SPEAK_PASS}+) and scenarios completed; accuracy from pronunciation scores, scenario first-try scores and challenge speaking items.</li></ul>
+        <ul class="small"><li><b>Reading:</b> letters studied, lessons completed and words learned in Review; accuracy from lesson quizzes, reviews, letter / accent quizzes and challenge reading items.</li>
+        <li><b>Writing:</b> writing tasks mastered, letters traced and Writing Studio prompts passed; accuracy from typed answers, tracing, free writing and challenge writing items.</li>
+        <li><b>Listening:</b> lines understood (dictation ${E.LISTEN_PASS}%+ or a correct comprehension answer); accuracy from listening practice and challenge listening items.</li>
+        <li><b>Speaking:</b> phrases spoken well (${E.SPEAK_PASS}%+), scenarios completed and speaking prompts answered; accuracy from pronunciation scores, spoken answers, scenarios and challenge speaking items.</li></ul>
         <p class="small muted">This is a study estimate, not an official CEFR certificate.</p></details>`;
+  }
+
+  const LEVEL_CAN_DO = {
+    A1: 'Read the script, introduce yourself, order food and handle basic greetings.',
+    A2: 'Get around town, shop, describe your routine and family, and understand slow, clear speech.',
+    B1: 'Tell stories, give opinions, handle most travel situations and follow one dialect in everyday talk.',
+    B2: 'Follow the news and films with some effort, debate, and write clear formal emails.',
+    C1: 'Read literature, follow fast native speech and express yourself fluently and precisely.',
+  };
+
+  function pathToFluency(lang, d) {
+    const t = E.studyTime(lang, d);
+    const hrs = (m) => (m >= 60 ? `${(m / 60).toFixed(1)} h` : `${m} min`);
+    const rows = E.LEVELS.map((l) => {
+      const need = t.levelHours[l];
+      const done = Math.min(100, Math.round((t.hours / need) * 100));
+      return `<tr><td>${levelChip(l)}</td><td class="num">${need} h</td><td style="min-width:7rem">${bar(done)}</td><td class="small">${h(LEVEL_CAN_DO[l])}</td></tr>`;
+    }).join('');
+    return `<div class="card"><h2>🧭 Your path to fluency</h2>
+      <div class="row" style="gap:1.5rem;margin:.4rem 0 .8rem"><div><div class="score-big" style="font-size:2rem">${hrs(t.minutes)}</div><div class="small muted">active study time in this app</div></div>
+        <div><div class="score-big" style="font-size:2rem">${hrs(t.weekMinutes)}</div><div class="small muted">in the last 7 days</div></div></div>
+      <p class="small">Rough total study hours an English speaker needs to reach each level of ${h(lang.name)}, based on US Foreign Service Institute and guided-learning-hour estimates. Time counts while you're actively using this app.</p>
+      <div class="table-wrap"><table><thead><tr><th>Level</th><th>Hours</th><th>Your time</th><th>What you can do</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <h3 style="margin-top:1rem">Beyond the app</h3>
+      <ul class="small">
+        <li><b>Talk to people every week.</b> A tutor (for example on italki or Preply) or a language exchange (Tandem, HelloTalk, local meetups) is the fastest way to fluency. Bring this app's scenarios and speaking prompts as conversation topics.</li>
+        <li><b>Listen for hours.</b> Climb the Media Picks ladder: move up a level when you understand most of what you hear.</li>
+        <li><b>Read real texts.</b> News sites, children's books, then novels. Save new words in the translator and they'll appear in Review.</li>
+        ${isAr(lang) ? '<li><b>Pick a dialect.</b> Use the Egyptian or Levantine lessons, then watch shows in that dialect.</li>' : '<li><b>Spend time in Mexico if you can.</b> Even a week of immersion makes everything here click.</li>'}
+      </ul></div>`;
+  }
+
+  // ---------------------------------------------------------------- review (spaced repetition)
+  function reviewView(lang) {
+    setChrome('Review', `#/${lang.id}`, lang.id);
+    const d = lp(lang.id);
+    const day = E.localDay();
+    if (!view) view = { queue: E.srsQueue(lang, d, day), i: 0, flipped: false, requeued: new Set(), first: {}, busy: true };
+    const st = E.srsStats(lang, d, day);
+    const header = `<div class="card"><div class="row spread"><h1 style="margin:0">🔁 Review</h1><span class="chip">${st.learned}/${st.total} words learned</span></div>
+      <p class="small muted" style="margin-top:.4rem">Cards come back after 1, 3, 7, 14, 30, 60 and 120 days as you get them right, and start again when you don't. New words unlock when you finish lessons or save them in the translator.</p></div>`;
+    if (!view.queue.length || view.i >= view.queue.length) {
+      const graded = Object.values(view.first);
+      const good = graded.filter((g) => g !== 'again').length;
+      if (graded.length && !view.logged) {
+        view.logged = true;
+        E.logPractice(d, 'reading', pct(good, graded.length));
+        award(graded.length);
+      }
+      return header + (graded.length
+        ? hayya(`Done! You remembered <b>${good} of ${graded.length}</b> on the first try. See you at the next review. 🐍`, { mood: 'cheer' })
+        : hayya(st.newAvailable || st.due ? 'Ready when you are.' : 'All caught up! Finish a lesson to unlock its words, or save words in the translator to add them here.', { mood: 'sleep' }))
+        + `<div class="row" style="margin-top:1rem"><a class="btn primary" href="#/${lang.id}">Back to ${h(lang.name)}</a>${st.due || st.newAvailable ? '<button class="btn" data-act="rv-more">Review more</button>' : ''}</div>`;
+    }
+    const card = view.queue[view.i];
+    const rec = d.srs[card.t];
+    const recall = rec && rec.seen >= 2 && card.t.length % 2 === 0;
+    const front = recall
+      ? `<div class="muted small">How do you say…</div><div class="big" style="font-size:1.8rem">${h(card.en)}</div>`
+      : `<div class="big ${isAr(lang) ? 'ar' : ''}" lang="${lang.id}" dir="${lang.dir}">${h(card.t)}</div>`;
+    const back = `<div class="big ${isAr(lang) ? 'ar' : ''}" lang="${lang.id}" dir="${lang.dir}" style="font-size:${isAr(lang) ? '2.6rem' : '2.2rem'}">${h(card.t)}</div>
+      ${card.tr ? `<div class="reveal-tr">${h(card.tr)}</div>` : ''}<div style="font-size:1.15rem">${h(card.en)}</div>`;
+    return header + `<div class="card flash">
+      <div class="progress-label">Card ${view.i + 1} of ${view.queue.length} · ${rec ? `box ${rec.box}` : 'new word'}</div>
+      ${view.flipped ? back : front}
+      <div class="row" style="justify-content:center;margin-top:1rem">${speakBtn(card.t, lang)}
+        ${view.flipped
+          ? `<button class="btn" data-act="rv-grade" data-g="again">↺ Again</button><button class="btn primary" data-act="rv-grade" data-g="good">✓ Good</button><button class="btn" data-act="rv-grade" data-g="easy">⚡ Easy</button>`
+          : '<button class="btn primary" data-act="rv-flip">Show answer</button>'}</div></div>`;
+  }
+
+  // ---------------------------------------------------------------- listening
+  function listenView(lang) {
+    setChrome('Listening', `#/${lang.id}`, lang.id);
+    const d = lp(lang.id);
+    const all = E.listeningItems(lang);
+    if (!view) {
+      const cap = E.LEVELS[Math.max(0, E.LEVELS.indexOf(E.fluency(lang, d).overall.band))];
+      view = { mode: 'dictation', level: cap, i: -1, typed: '', result: null, picked: null, options: null, showText: !canSpeak, busy: true };
+    }
+    const pool = all.filter((x) => E.LEVELS.indexOf(x.level) <= E.LEVELS.indexOf(view.level));
+    if (view.i < 0 || view.i >= pool.length) view.i = Math.max(0, pool.findIndex((x) => !(d.listening[x.t] && d.listening[x.t].best >= E.LISTEN_PASS)));
+    const it = pool[view.i];
+    const understood = all.filter((x) => d.listening[x.t] && d.listening[x.t].best >= E.LISTEN_PASS).length;
+    if (view.mode === 'meaning' && !view.options) {
+      const wrong = shuffle(pool.filter((x) => x.en !== it.en)).slice(0, 3).map((x) => x.en);
+      view.options = shuffle([it.en, ...wrong]);
+    }
+    const textBlock = `<div class="big ${isAr(lang) ? 'ar' : ''}" lang="${lang.id}" dir="${lang.dir}" style="font-size:${isAr(lang) ? '2rem' : '1.6rem'}">${h(it.t)}</div>${it.tr ? `<div class="reveal-tr">${h(it.tr)}</div>` : ''}`;
+    let body;
+    if (view.mode === 'dictation') {
+      const r = view.result;
+      body = `<p class="quiz-q">Listen and type exactly what you hear.</p>
+        <input class="input ${isAr(lang) ? 'ar' : ''}" id="ls-input" dir="${lang.dir}" lang="${lang.id}" autocomplete="off" autocapitalize="off" spellcheck="false" value="${h(view.typed)}" ${r ? 'disabled' : ''}>
+        ${r ? '' : keyboard(lang, 'ls-input')}
+        ${r ? `<div class="feedback ${r >= E.LISTEN_PASS ? 'good' : 'bad'}">${r >= E.LISTEN_PASS ? '✓ Great listening!' : 'Not quite. Compare with the line below.'} Score: ${r}%</div>
+          <div class="flash" style="padding:.6rem 0">${textBlock}<div>${h(it.en)}</div></div>` : (view.showText ? `<div class="flash" style="padding:.6rem 0">${textBlock}</div>` : '')}
+        <div class="row" style="margin-top:.8rem">${r ? '' : '<button class="btn primary" data-act="ls-check">Check</button>'}</div>`;
+    } else {
+      const answered = view.picked !== null;
+      body = `<p class="quiz-q">Listen. What does it mean?</p>
+        ${view.showText || answered ? `<div class="flash" style="padding:.4rem 0">${textBlock}</div>` : ''}
+        <div class="options">${view.options.map((o, i) => {
+          let cls = 'option';
+          if (answered) { if (o === it.en) cls += ' correct'; else if (i === view.picked) cls += ' wrong'; }
+          return `<button class="${cls}" data-act="ls-pick" data-i="${i}" ${answered ? 'disabled' : ''}>${h(o)}</button>`;
+        }).join('')}</div>
+        ${answered ? `<div class="feedback ${view.options[view.picked] === it.en ? 'good' : 'bad'}">${view.options[view.picked] === it.en ? '✓ Correct!' : `✗ It means: ${h(it.en)}`}</div>` : ''}`;
+    }
+    return `<div class="card"><div class="row spread"><h1 style="margin:0">🎧 Listening</h1><span class="chip">${understood}/${all.length} lines understood</span></div>
+        <p class="small muted" style="margin-top:.4rem">Real fluency needs hours of listening. Start slow, then switch to natural speed. The voice comes from your device, so it's clearer than real street speech; add native media from Media Picks too.</p>
+        <div class="row" style="margin-top:.6rem">
+          <div class="seg" role="group" aria-label="Exercise">${[['dictation', 'Dictation'], ['meaning', 'What does it mean?']].map(([k, l]) => `<button aria-pressed="${view.mode === k}" data-act="ls-mode" data-mode="${k}">${l}</button>`).join('')}</div>
+          ${speedControl()}
+          <label class="small muted">Up to <select class="btn" data-change="ls-level">${E.LEVELS.map((l) => `<option ${l === view.level ? 'selected' : ''}>${l}</option>`).join('')}</select></label></div></div>
+      ${canSpeak ? '' : `<div class="banner" style="border-radius:12px;margin-bottom:1rem">Your device has no voice for ${h(lang.name)}, so the text is shown instead. Read it aloud yourself, then answer.</div>`}
+      <div class="card">
+        <div class="row spread small muted"><span>Line ${view.i + 1} of ${pool.length} · ${levelChip(it.level)}</span><span>${d.listening[it.t] ? `Best ${d.listening[it.t].best}%` : 'Not tried yet'}</span></div>
+        <div class="row" style="justify-content:center;margin:.8rem 0">
+          ${canSpeak ? `<button class="btn primary" data-act="speak" data-text="${h(it.t)}" data-code="${h(lang.speech)}" style="font-size:1.1rem">▶ Play</button>` : ''}
+          ${canSpeak && !view.showText && view.picked === null && !view.result ? '<button class="btn" data-act="ls-show">Show text</button>' : ''}</div>
+        ${body}
+        <div class="row" style="justify-content:center;margin-top:1rem">
+          <button class="btn" data-act="ls-step" data-d="-1" ${view.i === 0 ? 'disabled' : ''}>← Previous</button>
+          <button class="btn" data-act="ls-step" data-d="1" ${view.i >= pool.length - 1 ? 'disabled' : ''}>Next →</button></div></div>`;
+  }
+
+  function recordListening(lang, t, score) {
+    const d = lp(lang.id);
+    const prev = d.listening[t];
+    const firstPass = !(prev && prev.best >= E.LISTEN_PASS) && score >= E.LISTEN_PASS;
+    d.listening[t] = { best: Math.max(score, prev ? prev.best : 0) };
+    E.logPractice(d, 'listening', score);
+    if (firstPass) award(3); else save();
+  }
+
+  // ---------------------------------------------------------------- writing studio
+  function promptFeedback(r, pr, lang) {
+    return `<div class="feedback ${r.passed ? 'good' : 'bad'}"><b>${r.passed ? '✓ Well done!' : 'Good start. Check the points below.'}</b> Score: ${r.score}%
+        <span class="detail">${r.words} words (aim for ${pr.minWords}+)</span></div>
+      <ul class="checklist">${r.requirements.map((q) => `<li class="${q.met ? 'ok' : 'no'}">${q.met ? '✓' : '○'} ${h(q.label)}</li>`).join('')}</ul>
+      ${r.accentHints.length ? `<p class="small"><b>Check ${isAr(lang) ? 'the hamza / spelling' : 'the accents'}:</b> ${r.accentHints.map((x) => `<span lang="${lang.id}" dir="auto">${h(x.word)} → <b>${h(x.suggestion)}</b></span>`).join(', ')}</p>` : ''}
+      ${r.unknown.length ? `<p class="small"><b>Words the course doesn't know</b> (check the spelling, or they may be names): <span lang="${lang.id}" dir="auto">${r.unknown.map(h).join(', ')}</span></p>` : ''}
+      <details ${r.passed ? '' : 'open'}><summary class="small"><b>Model answer</b></summary><div class="phrases wide" style="margin-top:.5rem">${phrase(pr.model, lang)}</div></details>
+      <p class="small muted">Automatic checks can't judge every grammar point. Compare with the model, and if you can, show your writing to a tutor or native speaker.</p>`;
+  }
+
+  function recordPrompt(lang, id, score, self, skill) {
+    const d = lp(lang.id);
+    const prev = d.prompts[id];
+    const firstPass = !(prev && prev.best >= E.PROMPT_PASS) && score >= E.PROMPT_PASS;
+    if (!prev || score > prev.best || (prev.self && !self)) d.prompts[id] = self ? { best: Math.max(score, prev ? prev.best : 0), self: true } : { best: Math.max(score, prev && !prev.self ? prev.best : 0) };
+    if (!self) E.logPractice(d, skill, score);
+    if (firstPass) award(10); else save();
+  }
+
+  function writeView(lang) {
+    setChrome('Writing Studio', `#/${lang.id}`, lang.id);
+    const d = lp(lang.id);
+    const prompts = lang.writingPrompts || [];
+    if (!view) view = { pid: null, text: '', result: null, busy: true };
+    if (!view.pid) {
+      return `<div class="card"><h1>📝 Writing Studio</h1>
+          <p class="muted">Write freely in ${h(lang.name)}. You'll get automatic feedback on the required points, length, spelling and ${isAr(lang) ? 'hamza' : 'accents'}, plus a model answer to compare with.</p></div>
+        <div class="grid">${prompts.map((pr) => {
+          const rec = d.prompts[pr.id];
+          return `<button class="tile" data-act="wr-open" data-id="${pr.id}"><span class="title">${h(pr.prompt)}</span>
+            <span class="meta">${levelChip(pr.level)}<span class="chip">${pr.minWords}+ words</span>${rec ? `<span class="chip ${rec.best >= E.PROMPT_PASS ? 'done' : ''}">Best ${rec.best}%</span>` : ''}</span></button>`;
+        }).join('')}</div>`;
+    }
+    const pr = prompts.find((x) => x.id === view.pid);
+    return `<div class="card"><div class="row spread"><span>${levelChip(pr.level)}</span><button class="btn" data-act="wr-back">← All prompts</button></div>
+        <h2 style="margin-top:.6rem">${h(pr.prompt)}</h2>
+        <p class="small muted">Include: ${pr.requirements.map((q) => h(q.label)).join(' · ')}</p>
+        <textarea class="input ${isAr(lang) ? 'ar' : ''}" id="wr-input" dir="${lang.dir}" lang="${lang.id}" spellcheck="false" style="min-height:9rem">${h(view.text)}</textarea>
+        ${keyboard(lang, 'wr-input')}
+        <div class="row" style="margin-top:.8rem"><button class="btn primary" data-act="wr-check">Check my writing</button><span class="small muted" id="wr-count">${E.analyzePrompt(view.text, pr, lang, index(lang.id)).words} words</span></div>
+        ${view.result ? `<div style="margin-top:1rem">${promptFeedback(view.result, pr, lang)}</div>` : ''}</div>`;
   }
 
   // ---------------------------------------------------------------- speech recognition
@@ -832,20 +1077,24 @@
   let activeRec = null;
 
   /** Listen once in the target language; calls back with alternative transcripts or an error code. */
-  function listen(code, onResult, onError) {
+  function listen(code, onResult, onError, continuous) {
     if (!SR) { onError('unsupported'); return; }
     if (activeRec) { try { activeRec.abort(); } catch (err) { /* already stopped */ } }
     const rec = new SR();
     activeRec = rec;
     rec.lang = code;
     rec.interimResults = false;
-    rec.maxAlternatives = 5;
-    rec.continuous = false;
+    rec.maxAlternatives = continuous ? 1 : 5;
+    rec.continuous = !!continuous;
     let settled = false;
+    const heard = [];
     const settle = (fn) => { if (settled) return; settled = true; activeRec = null; fn(); };
-    rec.onresult = (e) => settle(() => onResult([...e.results[0]].map((a) => a.transcript)));
-    rec.onerror = (e) => settle(() => onError(e.error || 'error'));
-    rec.onend = () => settle(() => onError('no-speech'));
+    rec.onresult = (e) => {
+      if (!continuous) { settle(() => onResult([...e.results[0]].map((a) => a.transcript))); return; }
+      for (let i = e.resultIndex || 0; i < e.results.length; i++) if (e.results[i].isFinal !== false) heard[i] = e.results[i][0].transcript;
+    };
+    rec.onerror = (e) => settle(() => (heard.length ? onResult([heard.join(' ')]) : onError(e.error || 'error')));
+    rec.onend = () => settle(() => (heard.length ? onResult([heard.filter(Boolean).join(' ')]) : onError('no-speech')));
     try { rec.start(); } catch (err) { settle(() => onError('error')); }
   }
 
@@ -907,14 +1156,17 @@
     const all = E.speakingPhrases(lang);
     if (!view) {
       const firstUnspoken = all.findIndex((p) => !(d.speaking[p.t] && d.speaking[p.t].best >= E.SPEAK_PASS));
-      view = { i: Math.max(0, firstUnspoken), speak: { status: 'idle' }, busy: true };
+      view = { tab: 'repeat', i: Math.max(0, firstUnspoken), speak: { status: 'idle' }, pi: 0, answer: { status: 'idle' }, typed: '', busy: true };
     }
+    const tabs = `<div class="seg" role="tablist" style="margin-bottom:1rem">${[['repeat', 'Repeat phrases'], ['answer', 'Answer questions']].map(([k, l]) => `<button role="tab" aria-pressed="${view.tab === k}" data-act="sp-tab" data-tab="${k}">${l}</button>`).join('')} ${speedControl()}</div>`;
+    if (view.tab === 'answer') return answerView(lang, tabs);
     const p = all[view.i];
     const spoken = all.filter((x) => d.speaking[x.t] && d.speaking[x.t].best >= E.SPEAK_PASS).length;
     const rec = d.speaking[p.t];
     const lesson = allLessons(lang).find((l) => l.id === p.lesson);
     return `<div class="card"><div class="row spread"><h1 style="margin:0">🎙️ Speaking Practice</h1><span class="chip">${spoken}/${all.length} spoken well</span></div>
         <p class="muted small" style="margin-top:.4rem">Listen to the model, then tap <b>Say it</b> and repeat. Scores of ${E.SPEAK_PASS}% or more count towards your speaking fluency.</p></div>
+      ${tabs}
       <div class="card">
         <div class="row spread small muted"><span>Phrase ${view.i + 1} of ${all.length} · ${levelChip(p.level)} ${lesson ? h(lesson.title) : ''}</span>
           <span>${rec ? `Best: ${rec.best}%${rec.self ? ' (self-checked)' : ''}` : 'Not tried yet'}</span></div>
@@ -924,13 +1176,45 @@
           <button class="btn" data-act="sp-step" data-d="1" ${view.i >= all.length - 1 ? 'disabled' : ''}>Next →</button></div></div>`;
   }
 
+  function answerView(lang, tabs) {
+    const d = lp(lang.id);
+    const prompts = lang.speakingPrompts || [];
+    const pr = prompts[view.pi];
+    const a = view.answer;
+    const rec = d.prompts[pr.id];
+    const result = a.result ? promptFeedback(a.result, pr, lang) : '';
+    return `<div class="card"><div class="row spread"><h1 style="margin:0">🎙️ Speaking Practice</h1><span class="chip">${prompts.filter((x) => d.prompts[x.id] && d.prompts[x.id].best >= E.PROMPT_PASS).length}/${prompts.length} prompts answered</span></div>
+        <p class="muted small" style="margin-top:.4rem">Answer in your own words, out loud. The app transcribes what you say and checks it for the key points.</p></div>
+      ${tabs}
+      <div class="card">
+        <div class="row spread small muted"><span>Prompt ${view.pi + 1} of ${prompts.length} · ${levelChip(pr.level)}</span><span>${rec ? `Best ${rec.best}%${rec.self ? ' (self-checked)' : ''}` : 'Not tried yet'}</span></div>
+        <h2 style="margin-top:.5rem">${h(pr.prompt)}</h2>
+        ${pr.starter ? `<p class="small">Start with: <span lang="${lang.id}" dir="${lang.dir}" class="${isAr(lang) ? 'ar' : ''}" style="font-size:1.1rem">${h(pr.starter)}</span></p>` : ''}
+        <p class="small muted">Include: ${pr.requirements.map((q) => h(q.label)).join(' · ')}</p>
+        <div class="row" style="justify-content:center;margin:.6rem 0">
+          ${SR ? (a.status === 'listening'
+            ? '<button class="btn primary" data-act="ans-stop">⏹ I’m done speaking</button><span class="small muted">Listening…</span>'
+            : '<button class="btn primary" data-act="ans-listen">🎙️ Answer aloud</button>') : ''}
+          <button class="btn" data-act="ans-self">I answered aloud ✓</button></div>
+        ${a.transcript ? `<p class="small">I heard: <span lang="${lang.id}" dir="${lang.dir}">“${h(a.transcript)}”</span></p>` : ''}
+        ${a.message ? `<div class="feedback bad">${h(a.message)}</div>` : ''}
+        ${a.status === 'self' ? '<div class="feedback good">✓ Marked as practised (self-checked). It counts as practice, but only transcribed answers change your accuracy.</div>' : ''}
+        <details ${SR ? '' : 'open'}><summary class="small">Or type what you said</summary>
+          <textarea class="input ${isAr(lang) ? 'ar' : ''}" id="ans-text" dir="${lang.dir}" lang="${lang.id}" style="min-height:4rem;margin-top:.5rem">${h(view.typed)}</textarea>
+          <button class="btn" data-act="ans-typed" style="margin-top:.4rem">Check</button></details>
+        ${result ? `<div style="margin-top:1rem">${result}</div>` : ''}
+        <div class="row" style="justify-content:center;margin-top:1rem">
+          <button class="btn" data-act="ans-step" data-d="-1" ${view.pi === 0 ? 'disabled' : ''}>← Previous</button>
+          <button class="btn" data-act="ans-step" data-d="1" ${view.pi >= prompts.length - 1 ? 'disabled' : ''}>Next →</button></div></div>`;
+  }
+
   // ---------------------------------------------------------------- daily challenge
   function challengeCard(lang) {
     const d = lp(lang.id);
     const today = d.challenges[E.localDay()];
     const streak = E.challengeStreak(d);
     return `<a class="tile" href="#/${lang.id}/challenge"><span class="emoji">⚡</span><span class="title">Daily Challenge</span>
-      <span class="sub">${today ? `Done today: ${today.score}/${today.total}. A new one unlocks tomorrow.` : '10 quick items: reading, writing and speaking. About 5 minutes.'}</span>
+      <span class="sub">${today ? `Done today: ${today.score}/${today.total}. A new one unlocks tomorrow.` : '10 quick items: reading, writing, listening and speaking. About 5 minutes.'}</span>
       <span class="meta"><span class="chip ${today ? 'done' : ''}">${today ? '✓ Completed' : 'Ready'}</span><span class="chip">🔥 ${streak}-day challenge streak</span></span></a>`;
   }
 
@@ -943,15 +1227,15 @@
     if (view.phase === 'intro') {
       return `<div class="card"><h1>⚡ Daily Challenge</h1><p class="muted">${new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}</p>
         <p>Ten quick items drawn from what you've been learning, at your level:</p>
-        <ul><li>📖 4 reading: meanings, a word to read, a lesson question</li><li>✍️ 3 writing: two typed answers and a spelling check</li><li>🎙️ 3 speaking &amp; listening: two phrases to say and one line to understand</li></ul>
+        <ul><li>📖 3 reading: a meaning, a word to read and a lesson question</li><li>✍️ 3 writing: two typed answers and a spelling check</li><li>🎧 2 listening: a dictation and a line to understand by ear</li><li>🎙️ 2 speaking: two phrases to say aloud</li></ul>
         <p class="small muted">Everyone learning ${h(lang.name)} on this device gets the same challenge all day. Your first completion counts towards your fluency and challenge streak.</p>
         <button class="btn primary" data-act="ch-start">Start today's challenge</button></div>`;
     }
     if (view.phase === 'done') {
       const rec = view.replay ? view.summary : todayRec || view.summary;
-      const skills = ['reading', 'writing', 'speaking'].filter((k) => rec.bySkill[k]);
+      const skills = E.SKILLS.filter((k) => rec.bySkill[k]);
       return `<div class="card center"><p class="muted" style="margin:0">Today's challenge</p><div class="score-big">${rec.score}/${rec.total}</div>
-          <p>${rec.score === rec.total ? 'Perfect score! 🎉' : rec.score >= rec.total * 0.7 ? 'Great work!' : 'Good effort. Every day counts.'}</p>
+          ${hayya(rec.score === rec.total ? 'Perfect score! I’m doing a happy wiggle. 🐍' : rec.score >= rec.total * 0.7 ? 'Great work! Come back tomorrow to keep the streak going.' : 'Good effort. Every day counts, and tomorrow’s challenge will feel easier.', { mood: rec.score >= rec.total * 0.7 ? 'cheer' : 'happy' })}
           <p class="small">🔥 ${E.challengeStreak(d)}-day challenge streak · a new challenge unlocks tomorrow</p>
           <div class="row" style="justify-content:center"><button class="btn" data-act="ch-replay">Practise again (not scored)</button><a class="btn primary" href="#/${lang.id}/fluency">See your fluency</a></div></div>
         <div class="card level-bars"><h3>By skill</h3>${skills.map((k) => `<div class="lvl" style="grid-template-columns:7rem 1fr 3rem"><span>${SKILL_META[k].icon} ${SKILL_META[k].label}</span>${bar(pct(rec.bySkill[k].c, rec.bySkill[k].t))}<span>${rec.bySkill[k].c}/${rec.bySkill[k].t}</span></div>`).join('')}</div>`;
@@ -959,15 +1243,25 @@
     const it = view.items[view.i];
     const answered = view.results.length > view.i;
     let body = '';
+    const hideText = it.audio && canSpeak && !answered && !view.showText;
     if (it.type === 'choice') {
       body = `<div class="quiz-q">${h(it.q)}</div>
-        ${it.t ? `<div class="quiz-t">${tText(it.t, lang, E.hasArabic(it.t) && isAr(lang) ? 'ar' : '')}${speakBtn(it.t, lang)}</div>${it.tr ? `<div class="reveal-tr" style="margin:-.5rem 0 .6rem">${h(it.tr)}</div>` : ''}` : ''}
+        ${it.audio && canSpeak ? `<div class="row" style="margin-bottom:.6rem"><button class="btn primary" data-act="speak" data-text="${h(it.t)}" data-code="${h(lang.speech)}">▶ Play</button>${hideText ? '<button class="btn" data-act="ch-show">Show text</button>' : ''}</div>` : ''}
+        ${it.t && !hideText ? `<div class="quiz-t">${tText(it.t, lang, E.hasArabic(it.t) && isAr(lang) ? 'ar' : '')}${speakBtn(it.t, lang)}</div>${it.tr ? `<div class="reveal-tr" style="margin:-.5rem 0 .6rem">${h(it.tr)}</div>` : ''}` : ''}
         <div class="options">${it.options.map((o, i) => {
           let cls = 'option';
           if (answered) { if (i === it.answer) cls += ' correct'; else if (i === view.picked) cls += ' wrong'; }
           return `<button class="${cls}" data-act="ch-pick" data-i="${i}" ${E.hasArabic(o) ? 'lang="ar" dir="auto"' : ''} ${answered ? 'disabled' : ''}>${h(o)}</button>`;
         }).join('')}</div>
         ${answered ? `<div class="feedback ${view.results[view.i].correct ? 'good' : 'bad'}">${view.results[view.i].correct ? '✓ Correct!' : `✗ The answer is: ${h(it.options[it.answer])}`}${it.explain ? `<span class="detail">${h(it.explain)}</span>` : ''}</div>` : ''}`;
+    } else if (it.type === 'dictation') {
+      const r = view.dictScore;
+      body = `<div class="quiz-q">Listen and type what you hear.</div>
+        <div class="row" style="margin-bottom:.6rem">${canSpeak ? `<button class="btn primary" data-act="speak" data-text="${h(it.t)}" data-code="${h(lang.speech)}">▶ Play</button>` : `<span class="small muted">No voice on this device, so here is the text: <span lang="${lang.id}" dir="${lang.dir}">${h(it.t)}</span></span>`}</div>
+        <input class="input ${isAr(lang) ? 'ar' : ''}" id="ch-input" dir="${lang.dir}" lang="${lang.id}" autocomplete="off" autocapitalize="off" spellcheck="false" value="${h(view.typed)}" ${answered ? 'disabled' : ''}>
+        ${answered ? '' : keyboard(lang, 'ch-input')}
+        ${r != null ? `<div class="feedback ${r >= E.LISTEN_PASS ? 'good' : 'bad'}">${r >= E.LISTEN_PASS ? '✓ Great listening!' : 'Not quite.'} Score: ${r}%<span class="detail"><span lang="${lang.id}" dir="${lang.dir}">${h(it.t)}</span>${it.tr ? ` · <i>${h(it.tr)}</i>` : ''} · ${h(it.en)}</span></div>` : ''}
+        ${answered ? '' : '<div class="row" style="margin-top:.8rem"><button class="btn primary" data-act="ch-dict">Check</button></div>'}`;
     } else if (it.type === 'type') {
       const r = view.typeResult;
       body = `<div class="quiz-q">${h(it.prompt)}</div>
@@ -1124,6 +1418,96 @@
         challengeAnswer({ skill: it.skill, correct: true, measured: false });
       }
     },
+    rate: (el) => { rateName = el.dataset.rate; try { localStorage.setItem('lingua.rate', rateName); } catch (err) { /* per-session */ } render(); },
+    'sp-tab': (el) => { view.tab = el.dataset.tab; render(); },
+    'ans-step': (el) => { view.pi += Number(el.dataset.d); view.answer = { status: 'idle' }; view.typed = ''; render(); },
+    'ans-listen': () => {
+      const lang = LANGS[route()[0]];
+      const pr = lang.speakingPrompts[view.pi];
+      view.answer = { status: 'listening' };
+      render();
+      listen(lang.speech, (alts) => {
+        const transcript = alts[0] || '';
+        const result = E.analyzePrompt(transcript, pr, lang, index(lang.id));
+        view.answer = { status: 'scored', transcript, result };
+        recordPrompt(lang, pr.id, result.score, false, 'speaking');
+        render();
+      }, (code) => { view.answer = { status: 'error', message: SR_MESSAGES[code] || "Speech recognition didn't work this time. Try again, or type what you said." }; render(); }, true);
+    },
+    'ans-stop': () => { if (activeRec) { try { activeRec.stop(); } catch (err) { /* already stopped */ } } },
+    'ans-self': () => {
+      const lang = LANGS[route()[0]];
+      recordPrompt(lang, lang.speakingPrompts[view.pi].id, E.PROMPT_PASS, true, 'speaking');
+      view.answer = { status: 'self' };
+      render();
+    },
+    'ans-typed': () => {
+      const lang = LANGS[route()[0]];
+      const pr = lang.speakingPrompts[view.pi];
+      view.typed = document.getElementById('ans-text').value;
+      const result = E.analyzePrompt(view.typed, pr, lang, index(lang.id));
+      // Typing isn't speaking, so a typed answer counts as a self-check for speaking accuracy.
+      recordPrompt(lang, pr.id, result.score, true, 'speaking');
+      view.answer = { status: 'scored', transcript: '', result };
+      render();
+    },
+    'rv-flip': () => { view.flipped = true; render(); },
+    'rv-grade': (el) => {
+      const lang = LANGS[route()[0]];
+      const d = lp(lang.id);
+      const card = view.queue[view.i];
+      const g = el.dataset.g;
+      if (!(card.t in view.first)) view.first[card.t] = g;
+      E.srsGrade(d, card.t, g, E.localDay());
+      if (g === 'again' && !view.requeued.has(card.t)) { view.requeued.add(card.t); view.queue.push(card); }
+      view.i++;
+      view.flipped = false;
+      save();
+      render();
+    },
+    'rv-more': () => { view = null; render(); },
+    'ls-mode': (el) => { view.mode = el.dataset.mode; view.typed = ''; view.result = null; view.picked = null; view.options = null; render(); },
+    'ls-step': (el) => { view.i += Number(el.dataset.d); view.typed = ''; view.result = null; view.picked = null; view.options = null; view.showText = !canSpeak; render(); },
+    'ls-show': () => { view.showText = true; render(); },
+    'ls-check': () => {
+      const lang = LANGS[route()[0]];
+      const pool = E.listeningItems(lang).filter((x) => E.LEVELS.indexOf(x.level) <= E.LEVELS.indexOf(view.level));
+      const it = pool[view.i];
+      view.typed = document.getElementById('ls-input').value;
+      view.result = E.dictationScore(view.typed, it.t, lang.id);
+      recordListening(lang, it.t, view.result);
+      render();
+    },
+    'ls-pick': (el) => {
+      const lang = LANGS[route()[0]];
+      if (view.picked !== null) return;
+      const pool = E.listeningItems(lang).filter((x) => E.LEVELS.indexOf(x.level) <= E.LEVELS.indexOf(view.level));
+      const it = pool[view.i];
+      view.picked = Number(el.dataset.i);
+      // Reading the text first makes it a reading task, so it scores lower.
+      const correct = view.options[view.picked] === it.en;
+      recordListening(lang, it.t, correct ? (view.showText && canSpeak ? 60 : 100) : 0);
+      render();
+    },
+    'wr-open': (el) => { view.pid = el.dataset.id; view.text = ''; view.result = null; render(); },
+    'wr-back': () => { view.pid = null; view.result = null; render(); },
+    'wr-check': () => {
+      const lang = LANGS[route()[0]];
+      const pr = lang.writingPrompts.find((x) => x.id === view.pid);
+      view.text = document.getElementById('wr-input').value;
+      view.result = E.analyzePrompt(view.text, pr, lang, index(lang.id));
+      recordPrompt(lang, pr.id, view.result.score, false, 'writing');
+      render();
+    },
+    'ch-show': () => { view.showText = true; render(); },
+    'ch-dict': () => {
+      const lang = LANGS[route()[0]];
+      const it = view.items[view.i];
+      view.typed = document.getElementById('ch-input').value;
+      view.dictScore = E.dictationScore(view.typed, it.t, lang.id);
+      if (!view.replay) recordListening(lang, it.t, view.dictScore);
+      challengeAnswer({ skill: it.skill, correct: view.dictScore >= E.LISTEN_PASS, measured: true });
+    },
     'sp-step': (el) => { view.i += Number(el.dataset.d); view.speak = { status: 'idle' }; render(); },
     'ch-start': () => { view.phase = 'run'; render(); },
     'ch-replay': () => {
@@ -1135,7 +1519,9 @@
       const it = view.items[view.i];
       if (view.results[view.i]) return;
       view.picked = Number(el.dataset.i);
-      challengeAnswer({ skill: it.skill, correct: view.picked === it.answer, measured: true });
+      const correct = view.picked === it.answer;
+      if (it.audio && !view.replay) recordListening(LANGS[route()[0]], it.t, correct ? (view.showText && canSpeak ? 60 : 100) : 0);
+      challengeAnswer({ skill: it.skill, correct, measured: true });
     },
     'ch-check': () => {
       const lang = LANGS[route()[0]];
@@ -1149,7 +1535,7 @@
       const lang = LANGS[route()[0]];
       if (view.i + 1 >= view.items.length) { challengeFinish(lang); return; }
       view.i++;
-      Object.assign(view, { picked: null, typed: '', typeResult: null, speak: { status: 'idle' }, attempts: 0 });
+      Object.assign(view, { picked: null, typed: '', typeResult: null, dictScore: null, showText: false, speak: { status: 'idle' }, attempts: 0 });
       render();
     },
     'pen-mode': () => { penMode = penMode === 'auto' ? 'any' : 'auto'; updatePenNote(); },
@@ -1292,6 +1678,7 @@
   const changes = {
     'trace-select': (el) => { view.trace = el.value; view.form = 0; view.traceScore = null; render(); },
     'sc-en': (el) => { view.showEn = el.checked; render(); },
+    'ls-level': (el) => { view.level = el.value; view.i = -1; view.typed = ''; view.result = null; view.picked = null; view.options = null; render(); },
     import: (el) => {
       const file = el.files && el.files[0];
       if (!file) return;
@@ -1322,11 +1709,22 @@
       view.input = e.target.value;
     } else if (e.target.id === 'ch-input' && view) {
       view.typed = e.target.value;
+    } else if (e.target.id === 'ls-input' && view) {
+      view.typed = e.target.value;
+    } else if (e.target.id === 'wr-input' && view) {
+      view.text = e.target.value;
+      const lang = LANGS[route()[0]];
+      const pr = lang.writingPrompts.find((x) => x.id === view.pid);
+      const el = document.getElementById('wr-count');
+      if (el && pr) el.textContent = `${E.analyzePrompt(view.text, pr, lang, index(lang.id)).words} words`;
+    } else if (e.target.id === 'ans-text' && view) {
+      view.typed = e.target.value;
     }
   });
   app.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && e.target.id === 'write-input') { e.preventDefault(); actions['write-check'](); }
-    if (e.key === 'Enter' && e.target.id === 'ch-input') { e.preventDefault(); actions['ch-check'](); }
+    if (e.key === 'Enter' && e.target.id === 'ch-input') { e.preventDefault(); actions[view.items[view.i].type === 'dictation' ? 'ch-dict' : 'ch-check'](); }
+    if (e.key === 'Enter' && e.target.id === 'ls-input') { e.preventDefault(); actions['ls-check'](); }
   });
 
   function setupTrend() {
@@ -1345,6 +1743,16 @@
     const ti = document.getElementById('tr-input');
     if (ti && E.hasArabic(ti.value)) ti.classList.add('ar');
   }
+
+  // Study time: count a minute while the page is visible and the learner did something in the last two minutes.
+  let lastInteraction = Date.now();
+  ['pointerdown', 'keydown', 'input'].forEach((ev) => document.addEventListener(ev, () => { lastInteraction = Date.now(); }, { passive: true }));
+  setInterval(() => {
+    const id = route()[0];
+    if (!LANGS[id] || document.visibilityState !== 'visible' || Date.now() - lastInteraction > 120000) return;
+    E.logMinute(lp(id), E.localDay());
+    saveQuiet();
+  }, 60000);
 
   window.addEventListener('hashchange', render);
   updateChips();

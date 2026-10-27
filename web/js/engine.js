@@ -319,7 +319,8 @@
   function emptyLang() {
     return {
       lessons: {}, scenarios: {}, aptitude: [], letters: {}, writing: {}, saved: [], lastVisit: null,
-      tracing: {}, speaking: {}, practice: { reading: [], writing: [], speaking: [] }, challenges: {}, fluency: [],
+      tracing: {}, speaking: {}, practice: { reading: [], writing: [], listening: [], speaking: [] }, challenges: {}, fluency: [],
+      listening: {}, srs: {}, prompts: {}, minutes: {},
     };
   }
   function emptyProgress() {
@@ -379,8 +380,19 @@
           };
         }
       }
+      if (isObj(src.listening)) for (const [k, v] of Object.entries(src.listening)) if (isObj(v)) dst.listening[k] = { best: clampPct(v.best) };
+      if (isObj(src.srs)) for (const [k, v] of Object.entries(src.srs)) {
+        if (isObj(v) && typeof v.due === 'string') dst.srs[k] = { box: Math.max(0, Math.min(SRS_DAYS.length - 1, v.box | 0)), due: v.due, seen: Math.max(0, v.seen | 0) };
+      }
+      if (isObj(src.prompts)) for (const [k, v] of Object.entries(src.prompts)) {
+        if (isObj(v)) dst.prompts[k] = v.self ? { best: clampPct(v.best), self: true } : { best: clampPct(v.best) };
+      }
+      if (isObj(src.minutes)) {
+        const days = Object.keys(src.minutes).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && Number.isFinite(src.minutes[d])).sort().slice(-MINUTES_KEEP);
+        for (const d of days) dst.minutes[d] = Math.max(0, Math.min(1440, src.minutes[d] | 0));
+      }
       if (Array.isArray(src.fluency)) dst.fluency = src.fluency.filter((f) => isObj(f) && typeof f.day === 'string')
-        .map((f) => ({ day: f.day, reading: clampPct(f.reading), writing: clampPct(f.writing), speaking: clampPct(f.speaking), overall: clampPct(f.overall) }))
+        .map((f) => ({ day: f.day, reading: clampPct(f.reading), writing: clampPct(f.writing), listening: clampPct(f.listening), speaking: clampPct(f.speaking), overall: clampPct(f.overall) }))
         .slice(-FLUENCY_KEEP);
       p.languages[id] = dst;
     }
@@ -428,8 +440,12 @@
   }
 
   // ---------- practice log ----------
-  const SKILLS = ['reading', 'writing', 'speaking'];
+  const SKILLS = ['reading', 'writing', 'listening', 'speaking'];
   const PRACTICE_KEEP = 30;
+  const MINUTES_KEEP = 400;
+  const SRS_DAYS = [0, 1, 3, 7, 14, 30, 60, 120];
+  const LISTEN_PASS = 80;
+  const PROMPT_PASS = 70;
   const CHALLENGE_KEEP = 60;
   const FLUENCY_KEEP = 180;
 
@@ -538,8 +554,9 @@
 
   /**
    * Ten mixed items, the same all day for a given language and date:
-   * 4 reading, 3 writing, 2 speaking and 1 listening-comprehension (counted as speaking).
-   * Item types: choice {q, t?, tr?, options, answer, explain?}, type {prompt, answer, alts?, hint?}, speak {t, tr?, en}.
+   * 3 reading, 3 writing, 2 listening (dictation + comprehension) and 2 speaking.
+   * Item types: choice {q, t?, tr?, options, answer, explain?, audio?}, type {prompt, answer, alts?, hint?},
+   * dictation {t, tr?, en}, speak {t, tr?, en}.
    */
   function dailyChallenge(language, lp, day) {
     const rand = seeded(hash(`${language.id}:${day}`));
@@ -560,7 +577,7 @@
       return item;
     };
     // Reading
-    seededShuffle(vocab, rand).slice(0, 2).forEach((v) => items.push(meaning(v, false)));
+    seededShuffle(vocab, rand).slice(0, 1).forEach((v) => items.push(meaning(v, false)));
     const word = pick(language.reading.words);
     items.push({ ...meaning(word, false), q: 'Read this word. What does it mean?' });
     const lq = pick(pick(pool).quiz);
@@ -589,7 +606,10 @@
     // Speaking
     const speakPool = speakingPhrases(language).filter((p) => LEVELS.indexOf(p.level) <= cap && p.t.split(' ').length <= 5);
     seededShuffle(speakPool, rand).slice(0, 2).forEach((p) => items.push({ type: 'speak', skill: 'speaking', t: p.t, ...(p.tr ? { tr: p.tr } : {}), en: p.en }));
-    // Listening comprehension from a scenario
+    // Listening: dictation, then comprehension of a scenario line (audio first, text on request)
+    const dictPool = listeningItems(language).filter((x) => LEVELS.indexOf(x.level) <= cap && x.t.split(' ').length <= 6);
+    const dict = pick(dictPool.length ? dictPool : listeningItems(language));
+    items.push({ type: 'dictation', skill: 'listening', t: dict.t, ...(dict.tr ? { tr: dict.tr } : {}), en: dict.en });
     const listen = [];
     for (const sc of language.scenarios) {
       if (LEVELS.indexOf(sc.level) > cap) continue;
@@ -598,7 +618,7 @@
     const pickL = listen.length ? pick(listen) : null;
     if (pickL) {
       const options = pickL.st.choices.map((c) => c.en);
-      const item = { type: 'choice', skill: 'speaking', q: `${pickL.st.speaker || 'Someone'} says this. What does it mean?`, t: pickL.st.line.t, options, answer: pickL.st.choices.findIndex((c) => c.correct) };
+      const item = { type: 'choice', skill: 'listening', audio: true, q: `Listen to ${pickL.st.speaker || 'the speaker'}. What do they say?`, t: pickL.st.line.t, options, answer: pickL.st.choices.findIndex((c) => c.correct) };
       if (pickL.st.line.tr) item.tr = pickL.st.line.tr;
       items.push(item);
     }
@@ -615,6 +635,199 @@
     return n;
   }
 
+  // ---------- listening ----------
+  /** Lines to listen to: lesson examples and what people say in scenarios. */
+  function listeningItems(language) {
+    const seen = new Set();
+    const out = [];
+    const add = (p, level, source) => {
+      if (!p || !p.t || seen.has(p.t) || /[\/…]|\.\.\./.test(p.t)) return;
+      seen.add(p.t);
+      out.push({ t: p.t, ...(p.tr ? { tr: p.tr } : {}), en: p.en, level, source });
+    };
+    for (const cat of language.categories) for (const l of cat.lessons) for (const p of l.examples) add(p, l.level, l.id);
+    for (const sc of language.scenarios) for (const st of sc.steps) add(st.line, sc.level, sc.id);
+    return out;
+  }
+
+  /** Score a dictation attempt 0–100 against the line (accents and vowel marks don't count against you). */
+  function dictationScore(typed, target, lang) {
+    return similarity(typed, target, lang);
+  }
+
+  // ---------- spaced repetition ----------
+  function addDays(day, n) {
+    const d = new Date(`${day}T12:00:00`);
+    d.setDate(d.getDate() + n);
+    return localDay(d);
+  }
+
+  /** Every vocabulary card: lesson vocabulary (in course order) plus saved words. */
+  function srsDeck(language, lp) {
+    const seen = new Set();
+    const out = [];
+    for (const cat of language.categories) {
+      for (const l of cat.lessons) {
+        for (const v of l.vocab) {
+          if (seen.has(v.t) || /…|\.\.\./.test(v.t)) continue;
+          seen.add(v.t);
+          out.push({ t: v.t, ...(v.tr ? { tr: v.tr } : {}), en: v.en, lesson: l.id, level: l.level });
+        }
+      }
+    }
+    for (const sv of lp.saved) {
+      if (seen.has(sv.t)) continue;
+      seen.add(sv.t);
+      out.push({ t: sv.t, ...(sv.tr ? { tr: sv.tr } : {}), en: sv.en, lesson: null, level: null });
+    }
+    return out;
+  }
+
+  /**
+   * Today's review queue: cards that are due (oldest first), then new cards from lessons you've
+   * finished and words you've saved, up to `newLimit`.
+   */
+  function srsQueue(language, lp, day, newLimit) {
+    const limit = newLimit == null ? 10 : newLimit;
+    const deck = srsDeck(language, lp);
+    const due = deck.filter((c) => lp.srs[c.t] && lp.srs[c.t].due <= day)
+      .sort((a, b) => (lp.srs[a.t].due < lp.srs[b.t].due ? -1 : lp.srs[a.t].due > lp.srs[b.t].due ? 1 : 0));
+    const unlocked = (c) => (c.lesson ? !!(lp.lessons[c.lesson] && lp.lessons[c.lesson].done) : true);
+    const fresh = deck.filter((c) => !lp.srs[c.t] && unlocked(c)).slice(0, limit);
+    return [...due, ...fresh];
+  }
+
+  /** Grade a card: 'again' (back to the start), 'good' (next box) or 'easy' (skip a box). */
+  function srsGrade(lp, cardT, grade, day) {
+    const prev = lp.srs[cardT] || { box: 0, due: day, seen: 0 };
+    let box = prev.box;
+    if (grade === 'again') box = 0;
+    else if (grade === 'easy') box = Math.min(SRS_DAYS.length - 1, box + 2);
+    else box = Math.min(SRS_DAYS.length - 1, box + 1);
+    lp.srs[cardT] = { box, due: addDays(day, grade === 'again' ? 0 : SRS_DAYS[box]), seen: prev.seen + 1 };
+    return lp.srs[cardT];
+  }
+
+  function srsStats(language, lp, day) {
+    const deck = srsDeck(language, lp);
+    const learned = deck.filter((c) => lp.srs[c.t] && lp.srs[c.t].box >= 3).length;
+    const due = deck.filter((c) => lp.srs[c.t] && lp.srs[c.t].due <= day).length;
+    const unlockedNew = srsQueue(language, lp, day, Infinity).length - due;
+    return { total: deck.length, learned, due, newAvailable: unlockedNew, started: deck.filter((c) => lp.srs[c.t]).length };
+  }
+
+  // ---------- free writing & speaking ----------
+  const knownCache = new Map();
+  /** Every word that appears anywhere in the course for this language (loose form → strict spellings). */
+  function knownWords(language) {
+    if (knownCache.has(language)) return knownCache.get(language);
+    const map = new Map();
+    const addText = (text) => {
+      if (!text) return;
+      String(text).split(/\s+/).forEach((w) => {
+        const strict = normalizeStrict(w, language.id);
+        const loose = normalize(w, language.id);
+        if (!loose || /\d/.test(loose)) return;
+        if (!map.has(loose)) map.set(loose, new Set());
+        map.get(loose).add(strict);
+      });
+    };
+    const addP = (p) => { if (p) addText(p.t); };
+    language.dictionary.forEach((e) => String(e.t).split(' / ').forEach(addText));
+    for (const c of language.categories) for (const l of c.lessons) {
+      l.vocab.forEach((v) => String(v.t).split(' / ').forEach(addText));
+      l.examples.forEach(addP);
+      l.quiz.forEach((q) => { addText(q.t); q.options.forEach(addText); });
+      (l.grammar.table ? l.grammar.table.rows.flat() : []).forEach(addText);
+    }
+    language.reading.words.forEach(addP);
+    language.reading.writing.forEach((w) => { addText(w.answer); (w.alts || []).forEach(addText); });
+    for (const sc of language.scenarios) for (const st of sc.steps) { addP(st.line); (st.choices || []).forEach((c) => addText(c.t)); }
+    for (const pr of [...(language.writingPrompts || []), ...(language.speakingPrompts || [])]) addP(pr.model);
+    knownCache.set(language, map);
+    return map;
+  }
+
+  function isKnownWord(token, language, index) {
+    const map = knownWords(language);
+    if (map.has(token)) return true;
+    const hit = language.id === 'ar' ? lookupArabicWord(token, index) : lookupSpanishWord(token, index);
+    if (hit) return true;
+    if (language.id === 'ar') {
+      for (const [p] of AR_PREFIXES) if (token.startsWith(p) && map.has(token.slice(p.length))) return true;
+      for (const [sfx] of AR_SUFFIXES) if (token.endsWith(sfx) && map.has(token.slice(0, -sfx.length))) return true;
+    } else {
+      for (const end of ['s', 'es', 'mente']) if (token.endsWith(end) && map.has(token.slice(0, -end.length))) return true;
+    }
+    return false;
+  }
+
+  /** Does the text use any of the alternatives? Arabic tokens are also checked without a leading و / ف. */
+  function meetsRequirement(normText, req, lang) {
+    const padded = ` ${normText} `;
+    const stripped = lang === 'ar' ? ` ${normText.split(' ').map((w) => (w.length > 2 && /^[وف]/.test(w) ? w.slice(1) : w)).join(' ')} ` : padded;
+    return req.any.some((alt) => {
+      const a = normalize(alt, lang);
+      return a && (padded.includes(` ${a} `) || stripped.includes(` ${a} `));
+    });
+  }
+
+  /**
+   * Automatic feedback on free writing or a spoken answer. It checks the prompt's requirements,
+   * length, words the course doesn't know (possible misspellings) and missing accents / hamza.
+   * It cannot judge grammar fully, so the model answer is always shown too.
+   */
+  function analyzePrompt(text, prompt, language, index) {
+    index = index || buildIndex(language);
+    const lang = language.id;
+    const norm = normalize(text, lang);
+    const rawWords = String(text || '').split(/\s+/).filter((w) => normalize(w, lang));
+    const words = rawWords.length;
+    const requirements = prompt.requirements.map((r) => ({ label: r.label, met: meetsRequirement(norm, r, lang) }));
+    const map = knownWords(language);
+    const unknown = [];
+    const accentHints = [];
+    const seenU = new Set();
+    for (const w of rawWords) {
+      const loose = normalize(w, lang);
+      const strict = normalizeStrict(w, lang);
+      if (!loose || /\d/.test(loose) || seenU.has(loose)) continue;
+      seenU.add(loose);
+      if (loose.length <= 1) continue;
+      if (map.has(loose)) {
+        const spellings = map.get(loose);
+        if (!spellings.has(strict) && strict) accentHints.push({ word: w.replace(/[¿¡?!.,;:"'“”«»()]/g, ''), suggestion: [...spellings][0] });
+      } else if (!isKnownWord(loose, language, index)) {
+        unknown.push(w.replace(/[¿¡?!.,;:"'“”«»()]/g, ''));
+      }
+    }
+    const met = requirements.filter((r) => r.met).length;
+    const lengthPart = Math.min(1, words / Math.max(1, prompt.minWords));
+    const knownPart = words ? Math.max(0, 1 - unknown.length / Math.max(1, seenU.size)) : 0;
+    const score = words ? Math.round(100 * (0.5 * (met / requirements.length) + 0.3 * lengthPart + 0.2 * knownPart)) : 0;
+    return { words, minWords: prompt.minWords, requirements, unknown, accentHints, score, passed: score >= PROMPT_PASS };
+  }
+
+  // ---------- study time ----------
+  /** Add one active minute for `day`. */
+  function logMinute(lp, day) {
+    lp.minutes[day] = (lp.minutes[day] || 0) + 1;
+    const days = Object.keys(lp.minutes).sort();
+    for (const old of days.slice(0, Math.max(0, days.length - MINUTES_KEEP))) delete lp.minutes[old];
+  }
+
+  /** Total and recent study time, compared with the rough hours each level takes. */
+  function studyTime(language, lp, now) {
+    const total = Object.values(lp.minutes).reduce((a, b) => a + b, 0);
+    let week = 0;
+    const d = new Date(now || Date.now());
+    for (let i = 0; i < 7; i++) { week += lp.minutes[localDay(d)] || 0; d.setDate(d.getDate() - 1); }
+    const hours = total / 60;
+    const levelHours = language.levelHours || {};
+    const next = LEVELS.find((l) => (levelHours[l] || 0) > hours) || null;
+    return { minutes: total, hours, weekMinutes: week, levelHours, nextLevel: next, nextLevelHours: next ? levelHours[next] : null };
+  }
+
   // ---------- fluency ----------
   const BAND_EDGES = [[20, 'A1'], [40, 'A2'], [60, 'B1'], [80, 'B2'], [101, 'C1']];
   const LEVEL_SCORE = { A1: 10, A2: 30, B1: 50, B2: 70, C1: 90 };
@@ -623,26 +836,36 @@
   /**
    * Fluency per skill, 0–100: 60% coverage (how much of the course you've practised) +
    * 40% accuracy (average of your last 10 measured results). Without measured results a skill tops out at 60.
-   * Overall = average of the three skills, blended 75/25 with the latest aptitude-test level when there is one.
+   * Overall = average of the four skills, blended 75/25 with the latest aptitude-test level when there is one.
    */
   function fluency(language, lp) {
     const lessons = language.categories.flatMap((c) => c.lessons);
     const letters = language.reading.letters;
     const phrases = speakingPhrases(language);
+    const listen = listeningItems(language);
+    const deck = srsDeck(language, lp);
+    const wPrompts = language.writingPrompts || [];
+    const sPrompts = language.speakingPrompts || [];
     const part = (label, done, total) => ({ label, done, total });
     const cov = (parts) => parts.reduce((s, p) => s + (p.total ? Math.min(1, p.done / p.total) : 0), 0) / parts.length;
     const parts = {
       reading: [
         part('Letters studied', letters.filter((l) => (lp.letters[l.char] || 0) > 0).length, letters.length),
         part('Lessons completed', lessons.filter((l) => lp.lessons[l.id] && lp.lessons[l.id].done).length, lessons.length),
+        part('Words learned (review)', deck.filter((c) => lp.srs[c.t] && lp.srs[c.t].box >= 3).length, deck.length),
       ],
       writing: [
         part('Writing tasks mastered', language.reading.writing.filter((w) => lp.writing[w.answer]).length, language.reading.writing.length),
         part('Letters traced', letters.filter((l) => (lp.tracing[l.char] || 0) > 0).length, letters.length),
+        part('Free-writing prompts passed', wPrompts.filter((pr) => lp.prompts[pr.id] && lp.prompts[pr.id].best >= PROMPT_PASS).length, wPrompts.length),
+      ],
+      listening: [
+        part('Lines understood', listen.filter((x) => lp.listening[x.t] && lp.listening[x.t].best >= LISTEN_PASS).length, listen.length),
       ],
       speaking: [
         part('Phrases spoken', phrases.filter((p) => lp.speaking[p.t] && lp.speaking[p.t].best >= SPEAK_PASS).length, phrases.length),
         part('Scenarios completed', language.scenarios.filter((s) => lp.scenarios[s.id]).length, language.scenarios.length),
+        part('Speaking prompts answered', sPrompts.filter((pr) => lp.prompts[pr.id] && lp.prompts[pr.id].best >= PROMPT_PASS).length, sPrompts.length),
       ],
     };
     const result = {};
@@ -653,7 +876,7 @@
       const score = Math.round(100 * (0.6 * coverage + 0.4 * (accuracy || 0)));
       result[skill] = { score, band: band(score), coverage: Math.round(coverage * 100), accuracy: accuracy === null ? null : Math.round(accuracy * 100), samples: recent.length, parts: parts[skill] };
     }
-    const base = (result.reading.score + result.writing.score + result.speaking.score) / 3;
+    const base = SKILLS.reduce((sum, k) => sum + result[k].score, 0) / SKILLS.length;
     const last = lp.aptitude.length ? lp.aptitude[lp.aptitude.length - 1] : null;
     const overall = Math.round(last ? 0.75 * base + 0.25 * LEVEL_SCORE[last.level] : base);
     result.overall = { score: overall, band: band(overall), testLevel: last ? last.level : null };
@@ -664,7 +887,7 @@
   function recordFluency(language, lp, now) {
     const f = fluency(language, lp);
     const day = localDay(now);
-    const entry = { day, reading: f.reading.score, writing: f.writing.score, speaking: f.speaking.score, overall: f.overall.score };
+    const entry = { day, reading: f.reading.score, writing: f.writing.score, listening: f.listening.score, speaking: f.speaking.score, overall: f.overall.score };
     const lastEntry = lp.fluency[lp.fluency.length - 1];
     if (lastEntry && lastEntry.day === day) lp.fluency[lp.fluency.length - 1] = entry;
     else lp.fluency.push(entry);
@@ -673,7 +896,8 @@
   }
 
   return {
-    LEVELS, LEVEL_NAMES, PASS, SKILLS, SPEAK_PASS,
+    LEVELS, LEVEL_NAMES, PASS, SKILLS, SPEAK_PASS, LISTEN_PASS, PROMPT_PASS, SRS_DAYS,
+    listeningItems, dictationScore, addDays, srsDeck, srsQueue, srsGrade, srsStats, analyzePrompt, logMinute, studyTime,
     logPractice, speakingPhrases, similarity, misspellings, dailyChallenge, challengeStreak, fluency, recordFluency,
     normalize, normalizeStrict, hasArabic, englishKeys, primaryEnglish, glossOf,
     buildIndex, translate, detectDirection, checkWriting, placement,

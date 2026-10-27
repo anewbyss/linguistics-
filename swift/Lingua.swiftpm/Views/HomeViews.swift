@@ -9,6 +9,7 @@ struct LandingView: View {
         ScrollView {
             VStack(spacing: 18) {
                 VStack(spacing: 8) {
+                    HayyaMascot(mood: .cheer, size: 110)
                     Text("Learn Arabic & Mexican Spanish")
                         .font(.largeTitle.bold())
                         .multilineTextAlignment(.center)
@@ -18,6 +19,8 @@ struct LandingView: View {
                         .multilineTextAlignment(.center)
                 }
                 .padding(.top, 8)
+
+                HayyaTip(text: "Hi, I'm Hayya, a feathered snake! هيّا means “let's go!” in Arabic, and my feathers come from Quetzalcóatl, the feathered serpent of Mexico. Pick a language and I'll coach you all the way to fluency.")
 
                 ForEach(content.languages) { lang in
                     NavigationLink(value: Route.language(lang.id)) {
@@ -140,12 +143,18 @@ struct LanguageHomeView: View {
                 }
             }
 
+            Section {
+                CoachTip(lang: lang)
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(Color.clear)
+            }
+
             Section("Today") {
                 let todayRecord = lp.challenges[ProgressStore.day(Date())]
                 NavigationLink(value: Route.challenge(lang.id)) {
                     MenuRow(emoji: "⚡", title: "Daily Challenge",
                             detail: todayRecord.map { "Done today: \($0.score)/\($0.total) · 🔥 \(Engine.challengeStreak(lp))-day streak" }
-                                ?? "10 quick items: reading, writing, speaking · 🔥 \(Engine.challengeStreak(lp))-day streak")
+                                ?? "10 quick items: reading, writing, listening, speaking · 🔥 \(Engine.challengeStreak(lp))-day streak")
                 }
                 NavigationLink(value: Route.fluency(lang.id)) {
                     FluencySummaryRow(lang: lang, report: Engine.fluency(lang, lp))
@@ -153,8 +162,18 @@ struct LanguageHomeView: View {
             }
 
             Section("Practice") {
+                let srs = Engine.srsStats(lang, lp, day: ProgressStore.day(Date()))
+                NavigationLink(value: Route.review(lang.id)) {
+                    MenuRow(emoji: "🔁", title: "Review", detail: "\(srs.due) due · \(srs.newAvailable) new · \(srs.learned)/\(srs.total) words learned")
+                }
+                NavigationLink(value: Route.listening(lang.id)) {
+                    MenuRow(emoji: "🎧", title: "Listening", detail: "Dictation and meaning checks at three speeds")
+                }
                 NavigationLink(value: Route.speaking(lang.id)) {
-                    MenuRow(emoji: "🎙️", title: "Speaking Practice", detail: "Listen, repeat and get a pronunciation score")
+                    MenuRow(emoji: "🎙️", title: "Speaking Practice", detail: "Repeat phrases and answer questions out loud")
+                }
+                NavigationLink(value: Route.writing(lang.id)) {
+                    MenuRow(emoji: "📝", title: "Writing Studio", detail: "\(lang.writingPrompts.count) free-writing prompts with feedback")
                 }
                 NavigationLink(value: Route.reading(lang.id)) {
                     MenuRow(emoji: lang.isArabic ? "ع" : "✍️", title: "Reading & Writing",

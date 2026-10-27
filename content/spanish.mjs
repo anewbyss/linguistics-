@@ -1,4 +1,5 @@
 import { P, Q, A, C, M, T } from './helpers.mjs';
+import * as more from './spanish-more.mjs';
 
 const S = (t, en, note) => P(t, '', en, note);
 
@@ -1077,7 +1078,7 @@ const dictionary = [
   ['¿dónde está?', 'where is'], ['¿dónde está el baño?', 'where is the bathroom'], ['no entiendo', "I don't understand; I do not understand"],
   ['no sé', "I don't know; I do not know"], ['¿habla inglés?', 'do you speak English'], ['hablo un poco de español', 'I speak a little Spanish'],
   ['la cuenta, por favor', 'the check please; the bill please'], ['buen provecho', 'enjoy your meal'], ['provecho', 'enjoy your meal'],
-  ['me llamo', 'my name is'], ['¿cómo te llamas?', 'what is your name'], ['soy de', 'I am from'], ['salud', 'cheers; bless you'],
+  ['me llamo', 'my name is'], ['¿cómo te llamas?', 'what is your name'], ['soy de', 'I am from'], ['salud', 'health; cheers; bless you'],
   ['ayuda', 'help'], ['¡aguas!', 'watch out (MX)'], ['¿a cómo?', 'how much (MX market)'], ['ahorita', 'right now; in a bit (MX)'],
   ['qué padre', 'how cool (MX)'], ['chido', 'cool (MX)'], ['neta', 'truth; really (MX)'], ['no manches', 'no way (MX)'],
   ['chamba', 'job; work (MX)'], ['lana', 'money (MX slang)'], ['güey', 'dude (MX, informal)'], ['cuate', 'buddy (MX)'], ['padre', 'father; cool (MX)'],
@@ -1161,6 +1162,14 @@ const media = [
   M('C1', 'Podcast', 'Leyendas Legendarias', 'Mexican comedy podcast', 'A hugely popular Mexican comedy podcast about true crime and the paranormal. Fast, slangy and very funny.', 'Podcast apps', ['listening', 'culture']),
 ];
 
+function orderCategories(list, order) {
+  return order.map((id) => {
+    const c = list.find((x) => x.id === id);
+    if (!c) throw new Error(`missing category ${id}`);
+    return c;
+  });
+}
+
 export default {
   id: 'es',
   name: 'Mexican Spanish',
@@ -1171,7 +1180,11 @@ export default {
   speech: 'es-MX',
   accent: '#c2185b',
   translateSkipEn: ['an'],
-  categories, reading, scenarios, aptitude,
-  dictionary: dictionary.map(([t, en]) => [t, '', en]),
-  media,
+  categories: orderCategories([...categories, ...more.categories], ["es-greet", "es-ser", "es-num", "es-food", "es-health", "es-verb", "es-dir", "es-cult", "es-work", "es-story", "es-reg", "es-adv", "es-news"]),
+  reading, aptitude, media,
+  scenarios: [...scenarios, ...more.scenarios],
+  dictionary: [...dictionary, ...more.dictionary].map(([t, en]) => [t, '', en]),
+  writingPrompts: more.writingPrompts,
+  speakingPrompts: more.speakingPrompts,
+  levelHours: more.levelHours,
 };
