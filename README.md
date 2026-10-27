@@ -18,6 +18,10 @@ A landing screen leads to a separate menu for each language.
 | **Offline translator** (both directions, phrasebook, saved words) | 290 entries with prefix and suffix handling (و، ال، ـي…) | 361 entries with plurals and diminutives |
 | **Media picks by level** (A1–C1) | 18 | 18 |
 
+**Apple Pencil and stylus.**
+- **Swift app:** tracing uses PencilKit, so Apple Pencil gets pressure, tilt and palm rejection. Once a Pencil touch is detected, finger and palm touches are ignored; a toggle turns finger drawing back on. Double-tapping Apple Pencil (2nd generation or Pro) switches to the eraser, following the system setting.
+- **Web app:** works with any stylus that browsers report as a pen, including Apple Pencil in Safari and Windows/Android pens. Pressure changes line width, and finger or palm touches are ignored after a pen is used.
+
 Every lesson has a grammar explanation (with tables), key vocabulary, example sentences, a culture section and a quiz. Phrases have transliteration (Arabic) and text-to-speech using the device's offline voices.
 
 **Progress saving.** Progress is saved after every answer: lessons, best scores, scenarios, test history, letters practised, writing tasks, saved words, XP and a daily streak.

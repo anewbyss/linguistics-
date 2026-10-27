@@ -423,7 +423,8 @@
           <select id="trace-select" class="btn" data-change="trace-select">${r.letters.map((x) => `<option value="${h(x.char)}" ${x.char === L.char ? 'selected' : ''}>${h(x.char)} · ${h(x.name)}</option>`).join('')}</select>
           ${L.forms ? `<div class="seg">${['Isolated', 'Initial', 'Medial', 'Final'].map((lbl, i) => `<button aria-pressed="${view.form === i}" data-act="trace-form" data-i="${i}">${lbl}</button>`).join('')}</div>` : ''}
         </div>
-        <p class="small muted" style="margin-top:.6rem">Trace over the grey shape with your finger, mouse or pen${isAr(lang) ? '. Draw the main body first, then the dots' : ''}.</p>
+        <p class="small muted" style="margin-top:.6rem">Trace over the grey shape with your finger, mouse, Apple Pencil or stylus${isAr(lang) ? '. Draw the main body first, then the dots' : ''}. A stylus draws thicker when you press harder.</p>
+        <p class="small" id="pen-note" hidden></p>
         <div class="trace-wrap"><canvas id="trace-guide" data-glyph="${h(forms[view.form] || L.char)}" aria-label="Letter to trace"></canvas><canvas id="trace-ink"></canvas></div>
         ${view.traceScore !== null ? `<div class="feedback ${view.traceScore >= 70 ? 'good' : 'bad'}">${view.traceScore >= 70 ? '✓ Nice tracing!' : 'Keep going. Try to cover the whole shape and stay inside the lines.'} Score: ${view.traceScore}%</div>` : ''}
         <div class="row" style="margin-top:.8rem;justify-content:center">
@@ -454,6 +455,16 @@
   }
 
   // Tracing canvas
+  let penSeen = false;      // a stylus has been used this session
+  let penMode = 'auto';     // 'auto': ignore finger touches after a stylus is seen; 'any': accept all input
+  function updatePenNote() {
+    const el = document.getElementById('pen-note');
+    if (!el) return;
+    el.hidden = !penSeen;
+    el.innerHTML = penMode === 'auto'
+      ? '✏️ Stylus detected: finger and palm touches are ignored while you trace. <button class="btn" data-act="pen-mode">Allow finger drawing</button>'
+      : '✏️ Finger and stylus both draw. <button class="btn" data-act="pen-mode">Stylus only</button>';
+  }
   function setupTrace() {
     const guide = document.getElementById('trace-guide');
     const ink = document.getElementById('trace-ink');
@@ -486,11 +497,39 @@
     ictx.lineCap = 'round';
     ictx.lineJoin = 'round';
     ictx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#0f766e';
-    let drawing = false;
+    // Apple Pencil / stylus: pressure sets line width; once a pen is seen, finger and palm
+    // touches are ignored (palm rejection) unless the learner allows finger drawing again.
+    let activeId = null;
+    let last = null;
     const pos = (e) => { const b = ink.getBoundingClientRect(); return [(e.clientX - b.left) * (size / b.width), (e.clientY - b.top) * (size / b.height)]; };
-    ink.onpointerdown = (e) => { drawing = true; ink.setPointerCapture(e.pointerId); const [x, y] = pos(e); ictx.beginPath(); ictx.moveTo(x, y); ictx.lineTo(x + 0.1, y + 0.1); ictx.stroke(); };
-    ink.onpointermove = (e) => { if (!drawing) return; const [x, y] = pos(e); ictx.lineTo(x, y); ictx.stroke(); };
-    ink.onpointerup = ink.onpointercancel = () => { drawing = false; };
+    const widthFor = (e) => (e.pointerType === 'pen' ? brush * (0.45 + 0.9 * Math.max(0.15, e.pressure || 0.5)) : brush);
+    const accepts = (e) => !(e.pointerType === 'touch' && penSeen && penMode === 'auto');
+    const segment = (e) => {
+      const [x, y] = pos(e);
+      ictx.lineWidth = widthFor(e);
+      ictx.beginPath();
+      ictx.moveTo(last[0], last[1]);
+      ictx.lineTo(x, y);
+      ictx.stroke();
+      last = [x, y];
+    };
+    ink.onpointerdown = (e) => {
+      if (e.pointerType === 'pen' && !penSeen) { penSeen = true; updatePenNote(); }
+      if (activeId !== null || !accepts(e)) return;
+      e.preventDefault();
+      activeId = e.pointerId;
+      try { ink.setPointerCapture(e.pointerId); } catch (err) { /* capture is optional */ }
+      last = pos(e);
+      last = [last[0] - 0.1, last[1] - 0.1];
+      segment(e);
+    };
+    ink.onpointermove = (e) => {
+      if (e.pointerId !== activeId) return;
+      const events = e.getCoalescedEvents ? e.getCoalescedEvents() : [];
+      (events.length ? events : [e]).forEach(segment);
+    };
+    ink.onpointerup = ink.onpointercancel = (e) => { if (e.pointerId === activeId) { activeId = null; last = null; } };
+    updatePenNote();
     view.traceCheck = () => {
       const w = ink.width, hgt = ink.height;
       const mk = (stroke) => { const c = document.createElement('canvas'); c.width = w; c.height = hgt; const x = c.getContext('2d'); drawGlyph(x, '#000', stroke); return x.getImageData(0, 0, w, hgt).data; };
@@ -757,6 +796,7 @@
     'letter-close': () => { view.letter = null; render(); },
     'trace-letter': (el) => { view.tab = 'trace'; view.trace = el.dataset.char; view.form = 0; view.traceScore = null; render(); },
     'trace-form': (el) => { view.form = Number(el.dataset.i); view.traceScore = null; render(); },
+    'pen-mode': () => { penMode = penMode === 'auto' ? 'any' : 'auto'; updatePenNote(); },
     'trace-clear': () => { view.traceScore = null; render(); },
     'trace-check': () => {
       const lang = LANGS[route()[0]];

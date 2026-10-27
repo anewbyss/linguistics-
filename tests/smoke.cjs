@@ -86,6 +86,35 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     await page.mouse.up();
     await page.locator('[data-act="trace-check"]').click();
     assert(await page.locator('.feedback').count() === 1, 'trace scored');
+
+    step(`${lang}: stylus pressure + palm rejection`);
+    await page.locator('[data-act="trace-clear"]').click();
+    const inkPixels = () => page.evaluate(() => {
+      const c = document.getElementById('trace-ink');
+      const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+      let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 100) n++; return n;
+    });
+    const stroke = (type, pressure, y) => page.evaluate(([type, pressure, y]) => {
+      const c = document.getElementById('trace-ink');
+      const b = c.getBoundingClientRect();
+      const fire = (name, x) => c.dispatchEvent(new PointerEvent(name, { pointerType: type, pointerId: type === 'pen' ? 7 : 8, pressure, bubbles: true, clientX: b.left + b.width * x, clientY: b.top + b.height * y }));
+      fire('pointerdown', 0.2);
+      for (let i = 1; i <= 10; i++) fire('pointermove', 0.2 + i * 0.05);
+      fire('pointerup', 0.7);
+    }, [type, pressure, y]);
+    await stroke('pen', 0.2, 0.3);
+    const light = await inkPixels();
+    await stroke('pen', 1.0, 0.7);
+    const heavy = (await inkPixels()) - light;
+    assert(light > 0 && heavy > light * 1.5, `harder pen pressure draws a thicker line (${light} vs ${heavy})`);
+    assert(await page.locator('#pen-note').isVisible(), 'stylus note shown');
+    const beforeTouch = await inkPixels();
+    await stroke('touch', 0, 0.5);
+    assert(await inkPixels() === beforeTouch, 'finger/palm touch ignored after stylus');
+    await page.locator('[data-act="pen-mode"]').click();
+    await stroke('touch', 0, 0.5);
+    assert(await inkPixels() > beforeTouch, 'finger drawing works again when allowed');
+    await page.locator('[data-act="pen-mode"]').click();
     await shot(`05-${lang}-trace`);
 
     step(`${lang}: scenario`);

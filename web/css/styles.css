@@ -260,7 +260,9 @@ textarea.input { min-height: 6rem; resize: vertical; }
 .trace-wrap { position: relative; width: 100%; max-width: 360px; aspect-ratio: 1; margin: 0.6rem auto; }
 .trace-wrap canvas {
   position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 16px; touch-action: none;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
 }
+#pen-note .btn { min-height: 2rem; padding: 0.2rem 0.6rem; margin-left: 0.4rem; font-size: 0.85rem; }
 #trace-guide { background: var(--surface-2); }
 
 /* Scenario chat */

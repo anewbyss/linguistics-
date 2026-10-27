@@ -1,5 +1,7 @@
 import SwiftUI
 import UIKit
+import UIKit.UIGestureRecognizerSubclass
+import PencilKit
 
 enum ReadingTab: String, CaseIterable, Identifiable {
     case letters, marks, read, write, trace, quiz
@@ -287,16 +289,19 @@ struct WritingPracticeView: View {
     }
 }
 
-/// Finger / Pencil tracing over a letter, scored by comparing the ink with the glyph shape.
+/// Tracing over a letter with Apple Pencil (pressure, tilt, palm rejection), finger or mouse.
+/// The ink is scored by comparing it with the glyph shape.
 @MainActor
 struct TracingView: View {
     let lang: Language
     @Binding var char: String
     @EnvironmentObject var progress: ProgressStore
     @State private var form = 0
-    @State private var strokes: [[CGPoint]] = []
-    @State private var current: [CGPoint] = []
+    @State private var drawing = PKDrawing()
+    @State private var clearToken = 0
     @State private var score: Int?
+    @State private var pencilSeen = false
+    @State private var allowFinger = false
 
     private let size: CGFloat = 300
     private var brush: CGFloat { size * 0.055 }
@@ -331,26 +336,31 @@ struct TracingView: View {
                 }
                 .pickerStyle(.segmented)
             }
-            Text("Trace over the grey shape\(lang.isArabic ? ". Draw the main body first, then the dots" : "").")
+            Text("Trace over the grey shape with Apple Pencil or your finger\(lang.isArabic ? ". Draw the main body first, then the dots" : ""). Press harder for a thicker line; double-tap Apple Pencil (2nd gen / Pro) to switch to the eraser.")
                 .font(.caption).foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
 
             ZStack {
                 RoundedRectangle(cornerRadius: 16).fill(Color(uiColor: .tertiarySystemFill))
                 glyphView(Color.secondary.opacity(0.35))
-                ForEach(Array((strokes + [current]).enumerated()), id: \.offset) { _, s in
-                    strokePath(s).stroke(lang.color, style: StrokeStyle(lineWidth: brush, lineCap: .round, lineJoin: .round))
-                }
+                PencilCanvas(
+                    drawing: $drawing,
+                    clearToken: clearToken,
+                    color: UIColor(lang.color),
+                    width: brush,
+                    pencilOnly: pencilSeen && !allowFinger,
+                    onPencilDetected: { if !pencilSeen { pencilSeen = true } }
+                )
             }
             .frame(width: size, height: size)
-            .contentShape(Rectangle())
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in current.append(value.location) }
-                    .onEnded { _ in
-                        strokes.append(current)
-                        current = []
-                    }
-            )
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+
+            if pencilSeen {
+                Toggle(isOn: $allowFinger) {
+                    Text(allowFinger ? "✏️ Finger and Pencil both draw" : "✏️ Apple Pencil detected: finger and palm touches are ignored")
+                        .font(.caption)
+                }
+            }
 
             if let s = score {
                 Text(s >= 70 ? "✓ Nice tracing! Score: \(s)%" : "Keep going. Cover the whole shape and stay inside the lines. Score: \(s)%")
@@ -382,18 +392,9 @@ struct TracingView: View {
             .frame(width: size, height: size)
     }
 
-    private func strokePath(_ points: [CGPoint]) -> Path {
-        Path { p in
-            guard let first = points.first else { return }
-            p.move(to: first)
-            if points.count == 1 { p.addLine(to: CGPoint(x: first.x + 0.1, y: first.y + 0.1)) }
-            for pt in points.dropFirst() { p.addLine(to: pt) }
-        }
-    }
-
     private func clear() {
-        strokes = []
-        current = []
+        drawing = PKDrawing()
+        clearToken += 1
         score = nil
     }
 
@@ -413,8 +414,8 @@ struct TracingView: View {
     }
 
     private func traceScore() -> Int {
+        if drawing.strokes.isEmpty { return 0 }
         let r = brush * 0.8
-        let shapeView = glyphView(.black)
         let zoneView = ZStack {
             glyphView(.black)
             ForEach(0..<8, id: \.self) { i in
@@ -422,12 +423,9 @@ struct TracingView: View {
                     .offset(x: CGFloat(cos(Double(i) * .pi / 4)) * r, y: CGFloat(sin(Double(i) * .pi / 4)) * r)
             }
         }
-        let inkView = ZStack {
-            ForEach(Array(strokes.enumerated()), id: \.offset) { _, s in
-                strokePath(s).stroke(Color.black, style: StrokeStyle(lineWidth: brush, lineCap: .round, lineJoin: .round))
-            }
-        }
-        guard let shape = alphaMask(shapeView), let zone = alphaMask(zoneView), let ink = alphaMask(inkView) else { return 0 }
+        let inkImage = drawing.image(from: CGRect(x: 0, y: 0, width: size, height: size), scale: 1).cgImage
+        guard let shapeImage = render(glyphView(.black)), let zoneImage = render(zoneView), let inkCG = inkImage,
+              let shape = alphaMask(shapeImage), let zone = alphaMask(zoneImage), let ink = alphaMask(inkCG) else { return 0 }
         let w = Int(size)
         var glyphPx = 0, covered = 0, inkPx = 0, inside = 0
         for y in stride(from: 0, to: w, by: 2) {
@@ -450,11 +448,14 @@ struct TracingView: View {
         return Int((100 * (0.55 * coverage + 0.45 * precision)).rounded())
     }
 
-    /// Renders a view at 1× into an alpha channel buffer of size × size.
-    private func alphaMask<V: View>(_ view: V) -> [UInt8]? {
+    private func render<V: View>(_ view: V) -> CGImage? {
         let renderer = ImageRenderer(content: view.frame(width: size, height: size))
         renderer.scale = 1
-        guard let cg = renderer.cgImage else { return nil }
+        return renderer.cgImage
+    }
+
+    /// Redraws an image at size × size and returns its alpha channel.
+    private func alphaMask(_ cg: CGImage) -> [UInt8]? {
         let w = Int(size)
         guard let ctx = CGContext(data: nil, width: w, height: w, bitsPerComponent: 8, bytesPerRow: w * 4,
                                   space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return nil }
@@ -464,6 +465,107 @@ struct TracingView: View {
         var out = [UInt8](repeating: 0, count: w * w)
         for i in 0..<(w * w) { out[i] = px[i * 4 + 3] }
         return out
+    }
+}
+
+/// PencilKit canvas. Apple Pencil gets pressure and tilt; `pencilOnly` turns on palm rejection.
+/// Double-tapping Apple Pencil toggles the eraser (respecting the user's system setting).
+struct PencilCanvas: UIViewRepresentable {
+    @Binding var drawing: PKDrawing
+    let clearToken: Int
+    let color: UIColor
+    let width: CGFloat
+    let pencilOnly: Bool
+    var onPencilDetected: () -> Void
+
+    func makeCoordinator() -> Coordinator { Coordinator(self) }
+
+    func makeUIView(context: Context) -> PKCanvasView {
+        let canvas = PKCanvasView()
+        canvas.backgroundColor = .clear
+        canvas.isOpaque = false
+        canvas.isScrollEnabled = false
+        canvas.drawing = drawing
+        canvas.delegate = context.coordinator
+
+        let detector = PencilDetector(target: nil, action: nil)
+        detector.onPencil = { [weak coordinator = context.coordinator] in coordinator?.parent.onPencilDetected() }
+        canvas.addGestureRecognizer(detector)
+
+        #if !targetEnvironment(macCatalyst)
+        let interaction = UIPencilInteraction()
+        interaction.delegate = context.coordinator
+        canvas.addInteraction(interaction)
+        #endif
+
+        context.coordinator.apply(to: canvas)
+        return canvas
+    }
+
+    func updateUIView(_ canvas: PKCanvasView, context: Context) {
+        let coordinator = context.coordinator
+        coordinator.parent = self
+        if coordinator.clearToken != clearToken {
+            coordinator.clearToken = clearToken
+            coordinator.erasing = false
+            canvas.drawing = PKDrawing()
+        }
+        coordinator.apply(to: canvas)
+    }
+
+    final class Coordinator: NSObject, PKCanvasViewDelegate {
+        var parent: PencilCanvas
+        var clearToken: Int
+        var erasing = false
+        weak var canvas: PKCanvasView?
+
+        init(_ parent: PencilCanvas) {
+            self.parent = parent
+            self.clearToken = parent.clearToken
+        }
+
+        func apply(to canvas: PKCanvasView) {
+            self.canvas = canvas
+            canvas.tool = erasing ? PKEraserTool(.vector) : PKInkingTool(.pen, color: parent.color, width: parent.width)
+            canvas.drawingPolicy = parent.pencilOnly ? .pencilOnly : .anyInput
+        }
+
+        func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
+            let updated = canvasView.drawing
+            // Deferred: this also fires while SwiftUI is updating the view (e.g. on clear).
+            DispatchQueue.main.async { self.parent.drawing = updated }
+        }
+
+        func toggleEraser() {
+            guard let canvas = canvas else { return }
+            erasing.toggle()
+            apply(to: canvas)
+        }
+    }
+}
+
+#if !targetEnvironment(macCatalyst)
+extension PencilCanvas.Coordinator: UIPencilInteractionDelegate {
+    func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
+        if UIPencilInteraction.preferredTapAction != .ignore { toggleEraser() }
+    }
+}
+#endif
+
+/// Watches touches without interfering, and reports when one comes from Apple Pencil.
+final class PencilDetector: UIGestureRecognizer {
+    var onPencil: (() -> Void)?
+
+    override init(target: Any?, action: Selector?) {
+        super.init(target: target, action: action)
+        cancelsTouchesInView = false
+        delaysTouchesBegan = false
+        delaysTouchesEnded = false
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        if touches.contains(where: { $0.type == .pencil }) { onPencil?() }
+        state = .failed
     }
 }
 
