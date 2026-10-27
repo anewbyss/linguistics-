@@ -225,9 +225,10 @@ struct ScenarioPlayView: View {
             let score = Engine.percent(firstTry, choiceSteps)
             let first = progress.lang(lang.id).scenarios[scenario.id] == nil
             let sid = scenario.id
-            progress.update(lang.id, xp: firstTry * 5 + (first ? 15 : 0)) { lp in
+            progress.update(lang, xp: firstTry * 5 + (first ? 15 : 0)) { lp in
                 let best = max(score, lp.scenarios[sid]?.best ?? 0)
                 lp.scenarios[sid] = ScenarioRecord(best: best, at: ProgressStore.isoNow())
+                lp.logPractice("speaking", score)
             }
         }
     }
@@ -315,7 +316,7 @@ struct TranslatorView: View {
                         HStack {
                             PhraseRow(phrase: p, lang: lang)
                             Button {
-                                progress.update(lang.id) { lp in
+                                progress.update(lang) { lp in
                                     if i < lp.saved.count { lp.saved.remove(at: i) }
                                 }
                             } label: { Image(systemName: "xmark.circle.fill").foregroundColor(.secondary) }
@@ -363,7 +364,7 @@ struct TranslatorView: View {
                 Spacer()
                 if r.coverage > 0 {
                     Button(isSaved ? "★ Saved" : "☆ Save") {
-                        progress.update(lang.id, xp: 1) { lp in
+                        progress.update(lang, xp: 1) { lp in
                             if !lp.saved.contains(where: { $0.t == item.t }) { lp.saved.insert(item, at: 0) }
                         }
                     }
@@ -463,7 +464,7 @@ struct AptitudeView: View {
         answers = picked
         result = r
         phase = 2
-        progress.update(lang.id, xp: 25) { lp in
+        progress.update(lang, xp: 25) { lp in
             lp.aptitude.append(AptitudeRecord(at: ProgressStore.isoNow(), level: r.level, score: r.score, total: r.total, bySkill: r.bySkill))
             if lp.aptitude.count > 20 { lp.aptitude.removeFirst(lp.aptitude.count - 20) }
         }

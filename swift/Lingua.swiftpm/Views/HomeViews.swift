@@ -21,7 +21,9 @@ struct LandingView: View {
 
                 ForEach(content.languages) { lang in
                     NavigationLink(value: Route.language(lang.id)) {
-                        LanguageCard(lang: lang, stats: Engine.stats(lang, progress.lang(lang.id)))
+                        LanguageCard(lang: lang, stats: Engine.stats(lang, progress.lang(lang.id)),
+                                     fluency: Engine.fluency(lang, progress.lang(lang.id)),
+                                     challengeDone: progress.lang(lang.id).challenges[ProgressStore.day(Date())] != nil)
                     }
                     .buttonStyle(.plain)
                 }
@@ -54,6 +56,8 @@ struct LandingView: View {
 struct LanguageCard: View {
     let lang: Language
     let stats: LanguageStats
+    let fluency: FluencyReport
+    let challengeDone: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -78,9 +82,16 @@ struct LanguageCard: View {
                 Text(lang.nativeName).font(.title3).foregroundColor(.secondary)
                 Text(lang.subtitle).font(.subheadline).foregroundColor(.secondary)
                 ProgressView(value: Double(stats.percent), total: 100).tint(lang.color)
-                Text("\(stats.lessonsDone)/\(stats.lessonsTotal) lessons · \(stats.scenariosDone)/\(stats.scenariosTotal) scenarios · \(stats.percent)%")
+                Text("\(stats.lessonsDone)/\(stats.lessonsTotal) lessons · \(stats.scenariosDone)/\(stats.scenariosTotal) scenarios · \(stats.percent)% of course")
                     .font(.caption)
                     .foregroundColor(.secondary)
+                HStack {
+                    Text("Fluency \(fluency.overall)/100 · \(fluency.overallBand)").font(.subheadline.bold())
+                    Spacer()
+                    Text(challengeDone ? "✓ Daily challenge done" : "⚡ Daily challenge ready")
+                        .font(.caption.bold())
+                        .foregroundColor(challengeDone ? .green : lang.color)
+                }
             }
             .padding()
         }
@@ -129,7 +140,22 @@ struct LanguageHomeView: View {
                 }
             }
 
+            Section("Today") {
+                let todayRecord = lp.challenges[ProgressStore.day(Date())]
+                NavigationLink(value: Route.challenge(lang.id)) {
+                    MenuRow(emoji: "⚡", title: "Daily Challenge",
+                            detail: todayRecord.map { "Done today: \($0.score)/\($0.total) · 🔥 \(Engine.challengeStreak(lp))-day streak" }
+                                ?? "10 quick items: reading, writing, speaking · 🔥 \(Engine.challengeStreak(lp))-day streak")
+                }
+                NavigationLink(value: Route.fluency(lang.id)) {
+                    FluencySummaryRow(lang: lang, report: Engine.fluency(lang, lp))
+                }
+            }
+
             Section("Practice") {
+                NavigationLink(value: Route.speaking(lang.id)) {
+                    MenuRow(emoji: "🎙️", title: "Speaking Practice", detail: "Listen, repeat and get a pronunciation score")
+                }
                 NavigationLink(value: Route.reading(lang.id)) {
                     MenuRow(emoji: lang.isArabic ? "ع" : "✍️", title: "Reading & Writing",
                             detail: "\(stats.lettersDone)/\(stats.lettersTotal) letters · \(stats.writingDone)/\(stats.writingTotal) written")
@@ -159,6 +185,7 @@ struct LanguageHomeView: View {
         }
         .navigationTitle(lang.name)
         .tint(lang.color)
+        .onAppear { progress.refreshFluency(lang) }
     }
 }
 
@@ -272,9 +299,10 @@ struct LessonView: View {
                     QuizView(questions: lesson.quiz, mode: .practice, lang: lang) { correct, _ in
                         let score = Engine.percent(correct, lesson.quiz.count)
                         let first = record?.done != true
-                        progress.update(lang.id, xp: correct * 10 + (first ? 20 : 0)) { lp in
+                        progress.update(lang, xp: correct * 10 + (first ? 20 : 0)) { lp in
                             let best = max(score, lp.lessons[lesson.id]?.best ?? 0)
                             lp.lessons[lesson.id] = LessonRecord(best: best, done: true, at: ProgressStore.isoNow())
+                            lp.logPractice("reading", score)
                         }
                     }
                 }

@@ -25,6 +25,8 @@
   let savedTimer = null;
   function save() {
     progress.updatedAt = new Date().toISOString();
+    const langId = route()[0];
+    if (LANGS[langId]) E.recordFluency(LANGS[langId], lp(langId));
     try {
       localStorage.setItem(STORE_KEY, JSON.stringify(progress));
       storageOK = true;
@@ -194,6 +196,9 @@
       case 'translate': return translateView(lang);
       case 'test': return testView(lang);
       case 'media': return mediaView(lang);
+      case 'challenge': return challengeView(lang);
+      case 'speak': return speakView(lang);
+      case 'fluency': return fluencyView(lang);
       default: return langHome(lang);
     }
   }
@@ -203,6 +208,8 @@
     setChrome('Lingua', null, null);
     const cards = LIB.languages.map((lang) => {
       const s = E.languageStats(lang, lp(lang.id));
+      const f = E.fluency(lang, lp(lang.id));
+      const doneToday = !!lp(lang.id).challenges[E.localDay()];
       return `<a class="lang-card" data-lang="${lang.id}" href="#/${lang.id}">
         <div class="banner-art" aria-hidden="true">${h(lang.symbol)}</div>
         <div class="body">
@@ -210,7 +217,9 @@
           <div class="native" lang="${lang.id}" dir="${lang.dir}">${h(lang.nativeName)}</div>
           <p class="muted small" style="margin:.4rem 0 .8rem">${h(lang.subtitle)}</p>
           ${bar(s.percent)}
-          <div class="row spread small muted" style="margin-top:.4rem"><span>${s.lessonsDone}/${s.lessonsTotal} lessons · ${s.scenariosDone}/${s.scenariosTotal} scenarios</span><span>${s.percent}%</span></div>
+          <div class="row spread small muted" style="margin-top:.4rem"><span>${s.lessonsDone}/${s.lessonsTotal} lessons · ${s.scenariosDone}/${s.scenariosTotal} scenarios</span><span>${s.percent}% of course</span></div>
+          <div class="row spread small" style="margin-top:.6rem"><span>Fluency <b>${f.overall.score}</b>/100 · ${h(f.overall.band)}</span>
+            <span class="chip ${doneToday ? 'done' : ''}">${doneToday ? '✓ Daily challenge done' : '⚡ Daily challenge ready'}</span></div>
         </div></a>`;
     }).join('');
     return `<section class="hero">
@@ -247,6 +256,7 @@
     const next = nextLesson(lang);
     const tiles = [
       ['read', isAr(lang) ? 'ع' : '✍️', 'Reading & Writing', isAr(lang) ? 'Alphabet, vowel marks, tracing and typing' : 'Pronunciation, accents and writing practice', `${s.lettersDone}/${s.lettersTotal} letters · ${s.writingDone}/${s.writingTotal} written`],
+      ['speak', '🎙️', 'Speaking Practice', 'Listen, repeat and get a pronunciation score', `${E.speakingPhrases(lang).filter((p) => d.speaking[p.t] && d.speaking[p.t].best >= E.SPEAK_PASS).length}/${E.speakingPhrases(lang).length} phrases spoken`],
       ['scenarios', '🎭', 'Real-World Scenarios', 'Role-play cafés, taxis, markets and more', `${s.scenariosDone}/${s.scenariosTotal} completed`],
       ['translate', '🔄', 'Offline Translator', 'Dictionary and phrasebook, no internet needed', `${lang.dictionary.length} entries`],
       ['test', '🎯', 'Aptitude Test', 'Find your level (A1–C1)', s.level ? `Last result: ${s.level}` : 'Not taken yet'],
@@ -266,6 +276,7 @@
         ${bar(s.percent)}
         <div class="small" style="margin-top:.4rem;opacity:.9">${s.percent}% of the course complete</div>
       </section>
+      <div class="grid" style="margin-bottom:1rem">${challengeCard(lang)}${fluencyCard(lang)}</div>
       ${next ? `<a class="tile" href="#/${lang.id}/lesson/${next.id}" style="margin-bottom:1rem"><span class="small muted">Continue learning</span>
         <span class="title">${next.cat.emoji} ${h(next.title)}</span><span class="sub">${h(next.cat.title)} · ${h(next.summary)}</span><span class="meta">${levelChip(next.level)}</span></a>` : ''}
       <div class="grid">${tiles}</div>
@@ -308,6 +319,7 @@
           const prev = d.lessons[l.id];
           const first = !(prev && prev.done);
           d.lessons[l.id] = { best: Math.max(score, prev ? prev.best : 0), done: true, at: new Date().toISOString() };
+          E.logPractice(d, 'reading', score);
           award(q.correct * 10 + (first ? 20 : 0));
         }),
       };
@@ -431,11 +443,11 @@
           <button class="btn" data-act="trace-clear">Clear</button>
           <button class="btn primary" data-act="trace-check">Check</button>
           <button class="btn" data-act="trace-next">Next letter →</button></div>
-        <p class="center small muted">Practised: ${d.letters[L.char] || 0}×</p></div>`;
+        <p class="center small muted">Traced successfully: ${d.tracing[L.char] || 0}×</p></div>`;
     } else if (view.tab === 'quiz') {
       if (!view.quiz) {
         const qs = isAr(lang) ? letterQuiz(lang) : accentQuiz(lang);
-        view.quiz = newQuiz(qs, 'practice', (q) => { award(q.correct * 5); });
+        view.quiz = newQuiz(qs, 'practice', (q) => { E.logPractice(d, 'reading', pct(q.correct, q.questions.length)); award(q.correct * 5); });
       }
       const q = view.quiz;
       body = `<div class="card">${q.done ? `<div class="center"><div class="score-big">${pct(q.correct, q.questions.length)}%</div><p>${q.correct} of ${q.questions.length} correct.</p>
@@ -644,6 +656,7 @@
       const score = pct(view.firstTry, view.choiceSteps);
       const prev = d.scenarios[s.id];
       d.scenarios[s.id] = { best: Math.max(score, prev ? prev.best : 0), at: new Date().toISOString() };
+      E.logPractice(d, 'speaking', score);
       award(view.firstTry * 5 + (prev ? 0 : 15));
     }
     render();
@@ -743,6 +756,265 @@
         <div class="small muted">📍 ${h(m.source)}</div><div class="tags">${m.skills.map((s) => `<span>${h(s)}</span>`).join('')}</div></div>`).join('')}</div>`;
   }
 
+  // ---------------------------------------------------------------- fluency
+  const SKILL_META = {
+    reading: { label: 'Reading', icon: '📖', series: 'var(--series-2)', tip: 'Study letters, finish lessons and do letter / accent quizzes.', link: 'read' },
+    writing: { label: 'Writing', icon: '✍️', series: 'var(--series-3)', tip: 'Do the Write and Trace exercises in Reading & Writing.', link: 'read' },
+    speaking: { label: 'Speaking', icon: '🎙️', series: 'var(--series-4)', tip: 'Use Speaking Practice and play the real-world scenarios.', link: 'speak' },
+    overall: { label: 'Overall', icon: '🏁', series: 'var(--series-1)' },
+  };
+
+  function fluencyCard(lang) {
+    const f = E.fluency(lang, lp(lang.id));
+    const row = (k) => `<div class="lvl" style="grid-template-columns:6.5rem 1fr 4.2rem"><span>${SKILL_META[k].icon} ${SKILL_META[k].label}</span>${bar(f[k].score)}<span class="small"><b>${f[k].score}</b> · ${f[k].band}</span></div>`;
+    return `<a class="tile level-bars" href="#/${lang.id}/fluency"><span class="title">Progress to fluency</span>
+      <span class="sub">Estimated level <b>${h(f.overall.band)}</b>. Tap for details and your trend.</span>
+      <div style="margin-top:.5rem">${['reading', 'writing', 'speaking', 'overall'].map(row).join('')}</div></a>`;
+  }
+
+  function trendChart(entries) {
+    if (entries.length < 2) {
+      return '<p class="small muted">Your trend appears here after you practise on two different days.</p>';
+    }
+    const W = 640, H = 220, L = 34, Rr = 70, T = 12, B = 26;
+    const xs = (i) => L + (i * (W - L - Rr)) / (entries.length - 1);
+    const ys = (v) => T + ((100 - v) * (H - T - B)) / 100;
+    const keys = ['overall', 'reading', 'writing', 'speaking'];
+    const grid = [0, 25, 50, 75, 100].map((v) => `<line x1="${L}" x2="${W - Rr}" y1="${ys(v)}" y2="${ys(v)}" class="grid"/><text x="${L - 6}" y="${ys(v) + 4}" text-anchor="end" class="axis">${v}</text>`).join('');
+    const lines = keys.map((k) => `<polyline fill="none" stroke="${SKILL_META[k].series}" stroke-width="${k === 'overall' ? 3 : 2}" stroke-linejoin="round" stroke-linecap="round" points="${entries.map((e, i) => `${xs(i)},${ys(e[k])}`).join(' ')}"/>`).join('');
+    // Direct end labels, nudged apart so they don't collide.
+    const ends = keys.map((k) => ({ k, y: ys(entries[entries.length - 1][k]) })).sort((a, b) => a.y - b.y);
+    for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 18) ends[i].y = ends[i - 1].y + 18;
+    const labels = ends.map((e) => `<text x="${W - Rr + 6}" y="${e.y + 4}" class="lbl">${SKILL_META[e.k].label}</text>`).join('');
+    const first = entries[0].day, last = entries[entries.length - 1].day;
+    const hits = entries.map((e, i) => `<rect class="hit" x="${xs(i) - (W - L - Rr) / (entries.length - 1) / 2}" y="${T}" width="${(W - L - Rr) / (entries.length - 1)}" height="${H - T - B}" data-tip="${h(`${e.day}: overall ${e.overall} · reading ${e.reading} · writing ${e.writing} · speaking ${e.speaking}`)}" data-x="${xs(i)}"/>`).join('');
+    return `<div class="trend" role="img" aria-label="Fluency scores over time, ${first} to ${last}">
+      <div class="legend">${keys.map((k) => `<span><i style="background:${SKILL_META[k].series}"></i>${SKILL_META[k].label}</span>`).join('')}</div>
+      <svg viewBox="0 0 ${W} ${H}">${grid}${lines}${labels}
+        <line class="cross" x1="0" x2="0" y1="${T}" y2="${H - B}" visibility="hidden"/>
+        <text x="${L}" y="${H - 6}" class="axis">${h(first)}</text><text x="${W - Rr}" y="${H - 6}" text-anchor="end" class="axis">${h(last)}</text>${hits}</svg>
+      <div class="tip small" aria-live="polite"></div></div>`;
+  }
+
+  function fluencyView(lang) {
+    setChrome('Progress to Fluency', `#/${lang.id}`, lang.id);
+    const d = lp(lang.id);
+    const f = E.fluency(lang, d);
+    const skill = (k) => {
+      const x = f[k];
+      return `<div class="card"><div class="row spread"><h2 style="margin:0">${SKILL_META[k].icon} ${SKILL_META[k].label}</h2><span class="chip level">${x.band}</span></div>
+        <div class="score-big" style="margin:.4rem 0">${x.score}<span class="small muted">/100</span></div>${bar(x.score)}
+        <div class="level-bars small" style="margin-top:.8rem">
+          ${x.parts.map((p) => `<div class="lvl" style="grid-template-columns:9.5rem 1fr 4rem"><span>${h(p.label)}</span>${bar(pct(p.done, p.total))}<span>${p.done}/${p.total}</span></div>`).join('')}
+          <div class="lvl" style="grid-template-columns:9.5rem 1fr 4rem"><span>Recent accuracy</span>${bar(x.accuracy || 0)}<span>${x.accuracy === null ? 'none yet' : `${x.accuracy}%`}</span></div></div>
+        <p class="small muted" style="margin-top:.6rem">${x.samples ? `Based on your last ${x.samples} scored attempts.` : 'No scored attempts yet, so this skill can reach at most 60.'} ${h(SKILL_META[k].tip)}</p>
+        <a class="btn" href="#/${lang.id}/${SKILL_META[k].link}">Practise ${SKILL_META[k].label.toLowerCase()}</a></div>`;
+    };
+    const rows = d.fluency.slice().reverse().slice(0, 30);
+    return `<div class="card center"><p class="muted" style="margin:0">Overall fluency</p><div class="score-big">${f.overall.score}<span class="small muted">/100</span></div>
+        <h2>Estimated level ${h(f.overall.band)} · ${h(E.LEVEL_NAMES[f.overall.band])}</h2>
+        <p class="small muted">The average of reading, writing and speaking${f.overall.testLevel ? `, blended with your latest aptitude test (${h(f.overall.testLevel)})` : ''}. ${f.overall.testLevel ? '' : `<a href="#/${lang.id}/test">Take the aptitude test</a> to include it.`}</p></div>
+      <div class="grid">${['reading', 'writing', 'speaking'].map(skill).join('')}</div>
+      <div class="card"><h2>Your trend</h2>${trendChart(d.fluency.slice(-60))}
+        ${rows.length ? `<details><summary class="small">Show as a table</summary><div class="table-wrap"><table><thead><tr><th>Day</th><th>Overall</th><th>Reading</th><th>Writing</th><th>Speaking</th></tr></thead>
+          <tbody>${rows.map((r) => `<tr><td>${h(r.day)}</td><td>${r.overall}</td><td>${r.reading}</td><td>${r.writing}</td><td>${r.speaking}</td></tr>`).join('')}</tbody></table></div></details>` : ''}</div>
+      <details class="card"><summary><b>How fluency is calculated</b></summary>
+        <p class="small" style="margin-top:.6rem">Each skill scores 0–100: <b>60% coverage</b> (how much of the course you've practised in that skill) plus <b>40% accuracy</b> (the average of your last 10 scored attempts). Bands: under 20 = A1, under 40 = A2, under 60 = B1, under 80 = B2, 80+ = C1.</p>
+        <ul class="small"><li><b>Reading:</b> letters studied and lessons completed; accuracy from lesson quizzes, letter / accent quizzes and challenge reading items.</li>
+        <li><b>Writing:</b> writing tasks mastered and letters traced; accuracy from typed answers, tracing scores and challenge writing items.</li>
+        <li><b>Speaking:</b> phrases spoken well (score ${E.SPEAK_PASS}+) and scenarios completed; accuracy from pronunciation scores, scenario first-try scores and challenge speaking items.</li></ul>
+        <p class="small muted">This is a study estimate, not an official CEFR certificate.</p></details>`;
+  }
+
+  // ---------------------------------------------------------------- speech recognition
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let activeRec = null;
+
+  /** Listen once in the target language; calls back with alternative transcripts or an error code. */
+  function listen(code, onResult, onError) {
+    if (!SR) { onError('unsupported'); return; }
+    if (activeRec) { try { activeRec.abort(); } catch (err) { /* already stopped */ } }
+    const rec = new SR();
+    activeRec = rec;
+    rec.lang = code;
+    rec.interimResults = false;
+    rec.maxAlternatives = 5;
+    rec.continuous = false;
+    let settled = false;
+    const settle = (fn) => { if (settled) return; settled = true; activeRec = null; fn(); };
+    rec.onresult = (e) => settle(() => onResult([...e.results[0]].map((a) => a.transcript)));
+    rec.onerror = (e) => settle(() => onError(e.error || 'error'));
+    rec.onend = () => settle(() => onError('no-speech'));
+    try { rec.start(); } catch (err) { settle(() => onError('error')); }
+  }
+
+  const SR_MESSAGES = {
+    unsupported: "This browser doesn't support speech recognition. Say the phrase aloud, then check yourself.",
+    'not-allowed': 'Microphone access was blocked. Allow it in your browser settings, or check yourself.',
+    'service-not-allowed': 'Speech recognition is turned off in this browser. Check yourself instead.',
+    network: 'Speech recognition needs an internet connection in this browser. Check yourself instead.',
+    'no-speech': "I didn't hear anything. Tap the microphone and speak after the beep.",
+    'language-not-supported': "This browser can't recognise this language. Check yourself instead.",
+  };
+
+  /** Shared listen / record / score panel. st: {status, transcript, score, message}. */
+  function speakPanel(p, lang, st) {
+    const result = st.status === 'scored'
+      ? `<div class="feedback ${st.score >= E.SPEAK_PASS ? 'good' : 'bad'}">${st.score >= E.SPEAK_PASS ? '✓ Great pronunciation!' : 'Close. Listen again and try once more.'} Score: ${st.score}%
+          <span class="detail">I heard: <span lang="${lang.id}" dir="${lang.dir}">“${h(st.transcript)}”</span></span></div>` : '';
+    const self = st.status === 'self' ? '<div class="feedback good">✓ Marked as practised (self-checked). Self-checks count as practice, but only scored attempts change your accuracy.</div>' : '';
+    const msg = st.message ? `<div class="feedback bad">${h(st.message)}</div>` : '';
+    return `<div class="flash" style="padding:.6rem 0">
+        <div class="big ${isAr(lang) ? 'ar' : ''}" lang="${lang.id}" dir="${lang.dir}" style="font-size:${isAr(lang) ? '2.4rem' : '2rem'}">${h(p.t)}</div>
+        ${p.tr ? `<div class="reveal-tr">${h(p.tr)}</div>` : ''}<div class="muted">${h(p.en)}</div></div>
+      <div class="row" style="justify-content:center">
+        ${canSpeak ? `<button class="btn" data-act="speak" data-text="${h(p.t)}" data-code="${h(lang.speech)}">🔊 Listen</button>` : ''}
+        ${SR ? `<button class="btn primary" data-act="speak-listen" ${st.status === 'listening' ? 'disabled' : ''}>${st.status === 'listening' ? '🎙️ Listening…' : '🎙️ Say it'}</button>` : ''}
+        <button class="btn" data-act="speak-self" title="Use this if you can't use the microphone">I said it ✓</button></div>
+      ${result}${self}${msg}
+      ${!SR ? `<p class="small muted center">${h(SR_MESSAGES.unsupported)}</p>` : '<p class="small muted center">Speech is recognised by your browser and may need an internet connection.</p>'}`;
+  }
+
+  function recordSpeaking(lang, phraseT, score, self) {
+    const d = lp(lang.id);
+    const prev = d.speaking[phraseT];
+    const firstPass = !(prev && prev.best >= E.SPEAK_PASS) && score >= E.SPEAK_PASS;
+    if (!prev || score > prev.best || (prev.self && !self)) d.speaking[phraseT] = self ? { best: Math.max(score, prev ? prev.best : 0), self: true } : { best: Math.max(score, prev && !prev.self ? prev.best : 0) };
+    if (!self) E.logPractice(d, 'speaking', score);
+    if (firstPass) award(3); else save();
+  }
+
+  function startListening(lang, phrase, onScored) {
+    view.speak = { status: 'listening' };
+    render();
+    listen(lang.speech, (alts) => {
+      const score = Math.max(...alts.map((a) => E.similarity(a, phrase.t, lang.id)));
+      const best = alts.reduce((b, a) => (E.similarity(a, phrase.t, lang.id) > E.similarity(b, phrase.t, lang.id) ? a : b), alts[0] || '');
+      view.speak = { status: 'scored', transcript: best, score };
+      onScored(score);
+      render();
+    }, (code) => {
+      view.speak = { status: 'error', message: SR_MESSAGES[code] || "Speech recognition didn't work this time. Try again, or check yourself." };
+      render();
+    });
+  }
+
+  // ---------------------------------------------------------------- speaking practice
+  function speakView(lang) {
+    setChrome('Speaking Practice', `#/${lang.id}`, lang.id);
+    const d = lp(lang.id);
+    const all = E.speakingPhrases(lang);
+    if (!view) {
+      const firstUnspoken = all.findIndex((p) => !(d.speaking[p.t] && d.speaking[p.t].best >= E.SPEAK_PASS));
+      view = { i: Math.max(0, firstUnspoken), speak: { status: 'idle' }, busy: true };
+    }
+    const p = all[view.i];
+    const spoken = all.filter((x) => d.speaking[x.t] && d.speaking[x.t].best >= E.SPEAK_PASS).length;
+    const rec = d.speaking[p.t];
+    const lesson = allLessons(lang).find((l) => l.id === p.lesson);
+    return `<div class="card"><div class="row spread"><h1 style="margin:0">🎙️ Speaking Practice</h1><span class="chip">${spoken}/${all.length} spoken well</span></div>
+        <p class="muted small" style="margin-top:.4rem">Listen to the model, then tap <b>Say it</b> and repeat. Scores of ${E.SPEAK_PASS}% or more count towards your speaking fluency.</p></div>
+      <div class="card">
+        <div class="row spread small muted"><span>Phrase ${view.i + 1} of ${all.length} · ${levelChip(p.level)} ${lesson ? h(lesson.title) : ''}</span>
+          <span>${rec ? `Best: ${rec.best}%${rec.self ? ' (self-checked)' : ''}` : 'Not tried yet'}</span></div>
+        ${speakPanel(p, lang, view.speak)}
+        <div class="row" style="justify-content:center;margin-top:1rem">
+          <button class="btn" data-act="sp-step" data-d="-1" ${view.i === 0 ? 'disabled' : ''}>← Previous</button>
+          <button class="btn" data-act="sp-step" data-d="1" ${view.i >= all.length - 1 ? 'disabled' : ''}>Next →</button></div></div>`;
+  }
+
+  // ---------------------------------------------------------------- daily challenge
+  function challengeCard(lang) {
+    const d = lp(lang.id);
+    const today = d.challenges[E.localDay()];
+    const streak = E.challengeStreak(d);
+    return `<a class="tile" href="#/${lang.id}/challenge"><span class="emoji">⚡</span><span class="title">Daily Challenge</span>
+      <span class="sub">${today ? `Done today: ${today.score}/${today.total}. A new one unlocks tomorrow.` : '10 quick items: reading, writing and speaking. About 5 minutes.'}</span>
+      <span class="meta"><span class="chip ${today ? 'done' : ''}">${today ? '✓ Completed' : 'Ready'}</span><span class="chip">🔥 ${streak}-day challenge streak</span></span></a>`;
+  }
+
+  function challengeView(lang) {
+    setChrome('Daily Challenge', `#/${lang.id}`, lang.id);
+    const d = lp(lang.id);
+    const day = E.localDay();
+    const todayRec = d.challenges[day];
+    if (!view) view = { phase: todayRec ? 'done' : 'intro', items: E.dailyChallenge(lang, d, day), i: 0, results: [], picked: null, typed: '', typeResult: null, speak: { status: 'idle' }, replay: false, busy: true };
+    if (view.phase === 'intro') {
+      return `<div class="card"><h1>⚡ Daily Challenge</h1><p class="muted">${new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+        <p>Ten quick items drawn from what you've been learning, at your level:</p>
+        <ul><li>📖 4 reading: meanings, a word to read, a lesson question</li><li>✍️ 3 writing: two typed answers and a spelling check</li><li>🎙️ 3 speaking &amp; listening: two phrases to say and one line to understand</li></ul>
+        <p class="small muted">Everyone learning ${h(lang.name)} on this device gets the same challenge all day. Your first completion counts towards your fluency and challenge streak.</p>
+        <button class="btn primary" data-act="ch-start">Start today's challenge</button></div>`;
+    }
+    if (view.phase === 'done') {
+      const rec = view.replay ? view.summary : todayRec || view.summary;
+      const skills = ['reading', 'writing', 'speaking'].filter((k) => rec.bySkill[k]);
+      return `<div class="card center"><p class="muted" style="margin:0">Today's challenge</p><div class="score-big">${rec.score}/${rec.total}</div>
+          <p>${rec.score === rec.total ? 'Perfect score! 🎉' : rec.score >= rec.total * 0.7 ? 'Great work!' : 'Good effort. Every day counts.'}</p>
+          <p class="small">🔥 ${E.challengeStreak(d)}-day challenge streak · a new challenge unlocks tomorrow</p>
+          <div class="row" style="justify-content:center"><button class="btn" data-act="ch-replay">Practise again (not scored)</button><a class="btn primary" href="#/${lang.id}/fluency">See your fluency</a></div></div>
+        <div class="card level-bars"><h3>By skill</h3>${skills.map((k) => `<div class="lvl" style="grid-template-columns:7rem 1fr 3rem"><span>${SKILL_META[k].icon} ${SKILL_META[k].label}</span>${bar(pct(rec.bySkill[k].c, rec.bySkill[k].t))}<span>${rec.bySkill[k].c}/${rec.bySkill[k].t}</span></div>`).join('')}</div>`;
+    }
+    const it = view.items[view.i];
+    const answered = view.results.length > view.i;
+    let body = '';
+    if (it.type === 'choice') {
+      body = `<div class="quiz-q">${h(it.q)}</div>
+        ${it.t ? `<div class="quiz-t">${tText(it.t, lang, E.hasArabic(it.t) && isAr(lang) ? 'ar' : '')}${speakBtn(it.t, lang)}</div>${it.tr ? `<div class="reveal-tr" style="margin:-.5rem 0 .6rem">${h(it.tr)}</div>` : ''}` : ''}
+        <div class="options">${it.options.map((o, i) => {
+          let cls = 'option';
+          if (answered) { if (i === it.answer) cls += ' correct'; else if (i === view.picked) cls += ' wrong'; }
+          return `<button class="${cls}" data-act="ch-pick" data-i="${i}" ${E.hasArabic(o) ? 'lang="ar" dir="auto"' : ''} ${answered ? 'disabled' : ''}>${h(o)}</button>`;
+        }).join('')}</div>
+        ${answered ? `<div class="feedback ${view.results[view.i].correct ? 'good' : 'bad'}">${view.results[view.i].correct ? '✓ Correct!' : `✗ The answer is: ${h(it.options[it.answer])}`}${it.explain ? `<span class="detail">${h(it.explain)}</span>` : ''}</div>` : ''}`;
+    } else if (it.type === 'type') {
+      const r = view.typeResult;
+      body = `<div class="quiz-q">${h(it.prompt)}</div>
+        <input class="input ${isAr(lang) ? 'ar' : ''}" id="ch-input" dir="${lang.dir}" lang="${lang.id}" autocomplete="off" autocapitalize="off" spellcheck="false" value="${h(view.typed)}" ${answered ? 'disabled' : ''}>
+        ${answered ? '' : keyboard(lang, 'ch-input')}
+        ${it.hint && !answered ? `<p class="small muted" style="margin-top:.5rem">Hint: ${h(it.hint)}</p>` : ''}
+        ${r ? `<div class="feedback ${r.ok ? 'good' : 'bad'}">${r.ok ? (r.perfect ? '✓ Perfect!' : `✓ Correct, but check the ${isAr(lang) ? 'spelling' : 'accents'}: ${h(r.expected)}`) : `✗ The answer is: <span lang="${lang.id}" dir="${lang.dir}">${h(it.answer)}</span>`}</div>` : ''}
+        ${answered ? '' : '<div class="row" style="margin-top:.8rem"><button class="btn primary" data-act="ch-check">Check</button></div>'}`;
+    } else {
+      body = `<div class="quiz-q">Say this out loud</div>${speakPanel(it, lang, view.speak)}
+        ${answered ? '' : '<div class="row" style="justify-content:center;margin-top:.6rem"><button class="btn" data-act="ch-skip">Skip (can\'t speak right now)</button></div>'}`;
+    }
+    return `<div class="card">
+      <div class="row spread"><span class="progress-label">Item ${view.i + 1} of ${view.items.length} · ${SKILL_META[it.skill].icon} ${SKILL_META[it.skill].label}</span>${view.replay ? '<span class="chip">Practice replay</span>' : ''}</div>
+      ${bar(pct(view.i, view.items.length))}<div style="margin-top:.9rem">${body}</div>
+      ${answered ? `<div class="row" style="margin-top:.9rem"><button class="btn primary" data-act="ch-next">${view.i + 1 < view.items.length ? 'Next →' : 'Finish'}</button></div>` : ''}</div>`;
+  }
+
+  function challengeAnswer(result) {
+    view.results[view.i] = result;
+    render();
+  }
+
+  function challengeFinish(lang) {
+    const d = lp(lang.id);
+    const counted = view.results.filter((r) => !r.skipped);
+    const bySkill = {};
+    for (const r of counted) {
+      const s = (bySkill[r.skill] = bySkill[r.skill] || { c: 0, t: 0 });
+      s.t++; if (r.correct) s.c++;
+    }
+    const summary = { score: counted.filter((r) => r.correct).length, total: counted.length, bySkill };
+    view.summary = summary;
+    view.phase = 'done';
+    const day = E.localDay();
+    if (!view.replay && !d.challenges[day]) {
+      d.challenges[day] = summary;
+      const days = Object.keys(d.challenges).sort();
+      for (const old of days.slice(0, Math.max(0, days.length - 60))) delete d.challenges[old];
+      for (const skill of E.SKILLS) {
+        const measured = counted.filter((r) => r.skill === skill && r.measured);
+        if (measured.length) E.logPractice(d, skill, pct(measured.filter((r) => r.correct).length, measured.length));
+      }
+      award(summary.score * 10 + 30);
+    }
+    render();
+  }
+
   // ---------------------------------------------------------------- progress & backup
   function progressView() {
     setChrome('Progress & Backup', '#/', null);
@@ -796,17 +1068,77 @@
     'letter-close': () => { view.letter = null; render(); },
     'trace-letter': (el) => { view.tab = 'trace'; view.trace = el.dataset.char; view.form = 0; view.traceScore = null; render(); },
     'trace-form': (el) => { view.form = Number(el.dataset.i); view.traceScore = null; render(); },
+    'speak-listen': () => {
+      const lang = LANGS[route()[0]];
+      if (route()[1] === 'speak') {
+        const p = E.speakingPhrases(lang)[view.i];
+        startListening(lang, p, (score) => recordSpeaking(lang, p.t, score, false));
+      } else {
+        const it = view.items[view.i];
+        if (view.results[view.i]) return;
+        startListening(lang, it, (score) => {
+          if (!view.replay) recordSpeaking(lang, it.t, score, false);
+          if (score >= E.SPEAK_PASS || (view.attempts = (view.attempts || 0) + 1) >= 3) {
+            view.results[view.i] = { skill: it.skill, correct: score >= E.SPEAK_PASS, measured: true };
+          }
+        });
+      }
+    },
+    'speak-self': () => {
+      const lang = LANGS[route()[0]];
+      if (route()[1] === 'speak') {
+        const p = E.speakingPhrases(lang)[view.i];
+        recordSpeaking(lang, p.t, E.SPEAK_PASS, true);
+        view.speak = { status: 'self' };
+        render();
+      } else {
+        const it = view.items[view.i];
+        if (view.results[view.i]) return;
+        if (!view.replay) recordSpeaking(lang, it.t, E.SPEAK_PASS, true);
+        view.speak = { status: 'self' };
+        challengeAnswer({ skill: it.skill, correct: true, measured: false });
+      }
+    },
+    'sp-step': (el) => { view.i += Number(el.dataset.d); view.speak = { status: 'idle' }; render(); },
+    'ch-start': () => { view.phase = 'run'; render(); },
+    'ch-replay': () => {
+      const lang = LANGS[route()[0]];
+      view = { phase: 'run', items: E.dailyChallenge(lang, lp(lang.id), E.localDay()), i: 0, results: [], picked: null, typed: '', typeResult: null, speak: { status: 'idle' }, replay: true, busy: true };
+      render();
+    },
+    'ch-pick': (el) => {
+      const it = view.items[view.i];
+      if (view.results[view.i]) return;
+      view.picked = Number(el.dataset.i);
+      challengeAnswer({ skill: it.skill, correct: view.picked === it.answer, measured: true });
+    },
+    'ch-check': () => {
+      const lang = LANGS[route()[0]];
+      const it = view.items[view.i];
+      view.typed = document.getElementById('ch-input').value;
+      view.typeResult = E.checkWriting(view.typed, it, lang.id);
+      challengeAnswer({ skill: it.skill, correct: view.typeResult.ok, measured: true });
+    },
+    'ch-skip': () => { const it = view.items[view.i]; challengeAnswer({ skill: it.skill, correct: false, measured: false, skipped: true }); },
+    'ch-next': () => {
+      const lang = LANGS[route()[0]];
+      if (view.i + 1 >= view.items.length) { challengeFinish(lang); return; }
+      view.i++;
+      Object.assign(view, { picked: null, typed: '', typeResult: null, speak: { status: 'idle' }, attempts: 0 });
+      render();
+    },
     'pen-mode': () => { penMode = penMode === 'auto' ? 'any' : 'auto'; updatePenNote(); },
     'trace-clear': () => { view.traceScore = null; render(); },
     'trace-check': () => {
       const lang = LANGS[route()[0]];
       const score = view.traceCheck ? view.traceCheck() : 0;
       view.traceScore = score;
+      const d = lp(lang.id);
+      E.logPractice(d, 'writing', score);
       if (score >= 70) {
-        const d = lp(lang.id);
-        d.letters[view.trace] = (d.letters[view.trace] || 0) + 1;
+        d.tracing[view.trace] = (d.tracing[view.trace] || 0) + 1;
         award(3);
-      }
+      } else save();
       const keep = app.querySelector('#trace-ink').toDataURL();
       render();
       const ink = app.querySelector('#trace-ink');
@@ -829,12 +1161,13 @@
       const task = lang.reading.writing[view.task];
       view.input = document.getElementById('write-input').value;
       view.result = E.checkWriting(view.input, task, lang.id);
+      const d = lp(lang.id);
+      E.logPractice(d, 'writing', view.result.perfect ? 100 : view.result.ok ? 80 : 0);
       if (view.result.ok) {
-        const d = lp(lang.id);
         const first = !d.writing[task.answer];
         d.writing[task.answer] = true;
         if (first) award(5); else save();
-      }
+      } else save();
       render();
     },
     'readquiz-new': () => { view.quiz = null; render(); },
@@ -953,14 +1286,28 @@
       e.target.classList.toggle('ar', E.hasArabic(view.text));
     } else if (e.target.id === 'write-input' && view) {
       view.input = e.target.value;
+    } else if (e.target.id === 'ch-input' && view) {
+      view.typed = e.target.value;
     }
   });
   app.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && e.target.id === 'write-input') { e.preventDefault(); actions['write-check'](); }
+    if (e.key === 'Enter' && e.target.id === 'ch-input') { e.preventDefault(); actions['ch-check'](); }
   });
+
+  function setupTrend() {
+    const box = app.querySelector('.trend');
+    if (!box) return;
+    const tip = box.querySelector('.tip');
+    const cross = box.querySelector('.cross');
+    const show = (el) => { tip.textContent = el.dataset.tip; cross.setAttribute('x1', el.dataset.x); cross.setAttribute('x2', el.dataset.x); cross.setAttribute('visibility', 'visible'); };
+    box.querySelectorAll('.hit').forEach((el) => { el.addEventListener('pointerenter', () => show(el)); el.addEventListener('pointerdown', () => show(el)); });
+    box.addEventListener('pointerleave', () => { cross.setAttribute('visibility', 'hidden'); tip.textContent = ''; });
+  }
 
   function afterRender() {
     setupTrace();
+    setupTrend();
     const ti = document.getElementById('tr-input');
     if (ti && E.hasArabic(ti.value)) ti.classList.add('ar');
   }

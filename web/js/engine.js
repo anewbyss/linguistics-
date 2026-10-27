@@ -317,7 +317,10 @@
 
   // ---------- progress ----------
   function emptyLang() {
-    return { lessons: {}, scenarios: {}, aptitude: [], letters: {}, writing: {}, saved: [], lastVisit: null };
+    return {
+      lessons: {}, scenarios: {}, aptitude: [], letters: {}, writing: {}, saved: [], lastVisit: null,
+      tracing: {}, speaking: {}, practice: { reading: [], writing: [], speaking: [] }, challenges: {}, fluency: [],
+    };
   }
   function emptyProgress() {
     return { version: 1, xp: 0, streak: { count: 0, last: null }, languages: { ar: emptyLang(), es: emptyLang() }, updatedAt: null };
@@ -357,6 +360,28 @@
       if (Array.isArray(src.saved)) dst.saved = src.saved.filter((s) => isObj(s) && typeof s.t === 'string' && typeof s.en === 'string')
         .map((s) => (s.tr ? { t: s.t, tr: String(s.tr), en: s.en } : { t: s.t, en: s.en })).slice(0, 500);
       dst.lastVisit = typeof src.lastVisit === 'string' ? src.lastVisit : null;
+      if (isObj(src.tracing)) for (const [k, v] of Object.entries(src.tracing)) if (Number.isFinite(v)) dst.tracing[k] = Math.max(0, Math.floor(v));
+      if (isObj(src.speaking)) for (const [k, v] of Object.entries(src.speaking)) {
+        if (isObj(v)) dst.speaking[k] = v.self ? { best: clampPct(v.best), self: true } : { best: clampPct(v.best) };
+      }
+      if (isObj(src.practice)) for (const skill of SKILLS) {
+        const list = src.practice[skill];
+        if (Array.isArray(list)) dst.practice[skill] = list.filter(Number.isFinite).map(clampPct).slice(-PRACTICE_KEEP);
+      }
+      if (isObj(src.challenges)) {
+        const days = Object.keys(src.challenges).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && isObj(src.challenges[d])).sort().slice(-CHALLENGE_KEEP);
+        for (const d of days) {
+          const c = src.challenges[d];
+          dst.challenges[d] = {
+            score: Number.isFinite(c.score) ? Math.max(0, c.score | 0) : 0,
+            total: Number.isFinite(c.total) ? Math.max(0, c.total | 0) : 0,
+            bySkill: isObj(c.bySkill) ? Object.fromEntries(Object.entries(c.bySkill).filter(([, v]) => isObj(v)).map(([k, v]) => [k, { c: v.c | 0, t: v.t | 0 }])) : {},
+          };
+        }
+      }
+      if (Array.isArray(src.fluency)) dst.fluency = src.fluency.filter((f) => isObj(f) && typeof f.day === 'string')
+        .map((f) => ({ day: f.day, reading: clampPct(f.reading), writing: clampPct(f.writing), speaking: clampPct(f.speaking), overall: clampPct(f.overall) }))
+        .slice(-FLUENCY_KEEP);
       p.languages[id] = dst;
     }
     return p;
@@ -402,8 +427,254 @@
     };
   }
 
+  // ---------- practice log ----------
+  const SKILLS = ['reading', 'writing', 'speaking'];
+  const PRACTICE_KEEP = 30;
+  const CHALLENGE_KEEP = 60;
+  const FLUENCY_KEEP = 180;
+
+  /** Record a measured result (0–100) for a skill; recent results drive the accuracy part of fluency. */
+  function logPractice(lp, skill, pct) {
+    if (!SKILLS.includes(skill) || !Number.isFinite(pct)) return;
+    lp.practice[skill].push(clampPct(pct));
+    lp.practice[skill] = lp.practice[skill].slice(-PRACTICE_KEEP);
+  }
+
+  // ---------- speaking ----------
+  /** Phrases suitable for speaking practice: lesson vocabulary and examples without slashes or ellipses. */
+  function speakingPhrases(language) {
+    const seen = new Set();
+    const out = [];
+    for (const cat of language.categories) {
+      for (const lesson of cat.lessons) {
+        for (const p of [...lesson.vocab, ...lesson.examples]) {
+          if (/[\/…]|\.\.\./.test(p.t) || seen.has(p.t)) continue;
+          seen.add(p.t);
+          out.push({ ...p, level: lesson.level, lesson: lesson.id });
+        }
+      }
+    }
+    return out;
+  }
+
+  function levenshtein(a, b) {
+    const x = [...a], y = [...b];
+    let prev = Array.from({ length: y.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= x.length; i++) {
+      const cur = [i];
+      for (let j = 1; j <= y.length; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (x[i - 1] === y[j - 1] ? 0 : 1));
+      }
+      prev = cur;
+    }
+    return prev[y.length];
+  }
+
+  /** How close a spoken transcript is to the target phrase, 0–100 (spaces, case, accents and vowel marks ignored). */
+  function similarity(said, target, lang) {
+    const a = normalize(said, lang).replace(/ /g, '');
+    const b = normalize(target, lang).replace(/ /g, '');
+    if (!a || !b) return 0;
+    return Math.round(100 * (1 - levenshtein(a, b) / Math.max([...a].length, [...b].length)));
+  }
+  const SPEAK_PASS = 70;
+
+  // ---------- seeded randomness (daily challenge) ----------
+  function hash(str) {
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function seeded(seed) {
+    // mulberry32
+    return () => {
+      seed = (seed + 0x6d2b79f5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function seededShuffle(list, rand) {
+    const a = list.slice();
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  }
+
+  // Arabic letters that differ only by dots: swapping them makes convincing misspellings.
+  const DOT_GROUPS = ['بتثني', 'جحخ', 'دذ', 'رز', 'سش', 'صض', 'طظ', 'عغ', 'فق'];
+  const ACUTE = { a: 'á', e: 'é', i: 'í', o: 'ó', u: 'ú' };
+
+  /** Plausible misspellings of a word (Arabic: dot swaps; Spanish: moved / missing accents). */
+  function misspellings(word, lang) {
+    const out = new Set();
+    const chars = [...word];
+    if (lang === 'ar') {
+      chars.forEach((ch, i) => {
+        const group = DOT_GROUPS.find((g) => g.includes(ch));
+        if (!group) return;
+        for (const alt of group) if (alt !== ch) out.add([...chars.slice(0, i), alt, ...chars.slice(i + 1)].join(''));
+      });
+    } else {
+      const bare = word.normalize('NFD').replace(/́/g, '').normalize('NFC');
+      out.add(bare);
+      [...bare].forEach((ch, i) => {
+        if (ACUTE[ch]) { const b = [...bare]; b[i] = ACUTE[ch]; out.add(b.join('')); }
+      });
+    }
+    out.delete(word);
+    return [...out];
+  }
+
+  /** Highest level the learner is working at: their test result or hardest finished lesson, plus one. */
+  function workingLevelIndex(language, lp) {
+    let idx = 0;
+    const last = lp.aptitude.length ? lp.aptitude[lp.aptitude.length - 1] : null;
+    if (last) idx = Math.max(idx, LEVELS.indexOf(last.level));
+    for (const c of language.categories) for (const l of c.lessons) {
+      if (lp.lessons[l.id] && lp.lessons[l.id].done) idx = Math.max(idx, LEVELS.indexOf(l.level));
+    }
+    return Math.min(idx + 1, LEVELS.length - 1);
+  }
+
+  /**
+   * Ten mixed items, the same all day for a given language and date:
+   * 4 reading, 3 writing, 2 speaking and 1 listening-comprehension (counted as speaking).
+   * Item types: choice {q, t?, tr?, options, answer, explain?}, type {prompt, answer, alts?, hint?}, speak {t, tr?, en}.
+   */
+  function dailyChallenge(language, lp, day) {
+    const rand = seeded(hash(`${language.id}:${day}`));
+    const pick = (arr) => arr[Math.floor(rand() * arr.length)];
+    const cap = workingLevelIndex(language, lp);
+    const lessons = language.categories.flatMap((c) => c.lessons);
+    let pool = lessons.filter((l) => LEVELS.indexOf(l.level) <= cap);
+    if (pool.length < 4) pool = lessons.slice(0, 4);
+    const vocab = [];
+    const seenV = new Set();
+    for (const l of pool) for (const v of l.vocab) if (!seenV.has(v.en) && !/…|\.\.\./.test(v.t)) { seenV.add(v.en); vocab.push(v); }
+    const items = [];
+    const meaning = (p, withTr) => {
+      const wrong = seededShuffle(vocab.filter((v) => v.en !== p.en), rand).slice(0, 3).map((v) => v.en);
+      const options = seededShuffle([p.en, ...wrong], rand);
+      const item = { type: 'choice', skill: 'reading', q: 'What does this mean?', t: p.t, options, answer: options.indexOf(p.en) };
+      if (withTr && p.tr) item.tr = p.tr;
+      return item;
+    };
+    // Reading
+    seededShuffle(vocab, rand).slice(0, 2).forEach((v) => items.push(meaning(v, false)));
+    const word = pick(language.reading.words);
+    items.push({ ...meaning(word, false), q: 'Read this word. What does it mean?' });
+    const lq = pick(pick(pool).quiz);
+    items.push({ type: 'choice', skill: 'reading', q: lq.q, ...(lq.t ? { t: lq.t } : {}), options: lq.options, answer: lq.answer, ...(lq.explain ? { explain: lq.explain } : {}) });
+    // Writing
+    seededShuffle(language.reading.writing, rand).slice(0, 2).forEach((w) => {
+      const item = { type: 'type', skill: 'writing', prompt: `Write “${w.en}” in ${language.name}`, answer: w.answer };
+      if (w.alts) item.alts = w.alts;
+      if (w.hint) item.hint = w.hint;
+      items.push(item);
+    });
+    // A "misspelling" that is itself a real word (como / cómo) would be a wrong distractor.
+    const real = new Set([...language.dictionary, ...language.reading.words].map((e) => normalizeStrict(e.t, language.id)));
+    const wrongSpellings = (w) => misspellings(w, language.id).filter((m) => !real.has(normalizeStrict(m, language.id)));
+    const spellPool = (language.id === 'ar'
+      ? language.reading.words.map((w) => ({ t: normalizeStrict(w.t, 'ar'), en: w.en }))
+      : language.dictionary.filter((e) => /[áéíóú]/.test(e.t) && /^[a-zñüáéíóú]+$/i.test(e.t) && e.t.length > 3))
+      .filter((w) => wrongSpellings(w.t).length >= 3);
+    const sp = pick(spellPool);
+    const wrongSp = seededShuffle(wrongSpellings(sp.t), rand).slice(0, 3);
+    const spOptions = seededShuffle([sp.t, ...wrongSp], rand);
+    items.push({
+      type: 'choice', skill: 'writing', q: `Which is the correct spelling of “${primaryEnglish(sp.en)}”?`, options: spOptions, answer: spOptions.indexOf(sp.t),
+      explain: language.id === 'ar' ? 'Watch the dots: they are the only difference between many Arabic letters.' : 'The written accent marks the stressed syllable.',
+    });
+    // Speaking
+    const speakPool = speakingPhrases(language).filter((p) => LEVELS.indexOf(p.level) <= cap && p.t.split(' ').length <= 5);
+    seededShuffle(speakPool, rand).slice(0, 2).forEach((p) => items.push({ type: 'speak', skill: 'speaking', t: p.t, ...(p.tr ? { tr: p.tr } : {}), en: p.en }));
+    // Listening comprehension from a scenario
+    const listen = [];
+    for (const sc of language.scenarios) {
+      if (LEVELS.indexOf(sc.level) > cap) continue;
+      for (const st of sc.steps) if (st.mode === 'understand' && st.line) listen.push({ sc, st });
+    }
+    const pickL = listen.length ? pick(listen) : null;
+    if (pickL) {
+      const options = pickL.st.choices.map((c) => c.en);
+      const item = { type: 'choice', skill: 'speaking', q: `${pickL.st.speaker || 'Someone'} says this. What does it mean?`, t: pickL.st.line.t, options, answer: pickL.st.choices.findIndex((c) => c.correct) };
+      if (pickL.st.line.tr) item.tr = pickL.st.line.tr;
+      items.push(item);
+    }
+    return items.map((it, i) => ({ id: `${language.id}-${day}-${i}`, ...it }));
+  }
+
+  /** Consecutive days (ending today or yesterday) with a completed daily challenge. */
+  function challengeStreak(lp, now) {
+    const done = new Set(Object.keys(lp.challenges));
+    const d = new Date(now || Date.now());
+    if (!done.has(localDay(d))) d.setDate(d.getDate() - 1);
+    let n = 0;
+    while (done.has(localDay(d))) { n++; d.setDate(d.getDate() - 1); }
+    return n;
+  }
+
+  // ---------- fluency ----------
+  const BAND_EDGES = [[20, 'A1'], [40, 'A2'], [60, 'B1'], [80, 'B2'], [101, 'C1']];
+  const LEVEL_SCORE = { A1: 10, A2: 30, B1: 50, B2: 70, C1: 90 };
+  const band = (score) => BAND_EDGES.find(([edge]) => score < edge)[1];
+
+  /**
+   * Fluency per skill, 0–100: 60% coverage (how much of the course you've practised) +
+   * 40% accuracy (average of your last 10 measured results). Without measured results a skill tops out at 60.
+   * Overall = average of the three skills, blended 75/25 with the latest aptitude-test level when there is one.
+   */
+  function fluency(language, lp) {
+    const lessons = language.categories.flatMap((c) => c.lessons);
+    const letters = language.reading.letters;
+    const phrases = speakingPhrases(language);
+    const part = (label, done, total) => ({ label, done, total });
+    const cov = (parts) => parts.reduce((s, p) => s + (p.total ? Math.min(1, p.done / p.total) : 0), 0) / parts.length;
+    const parts = {
+      reading: [
+        part('Letters studied', letters.filter((l) => (lp.letters[l.char] || 0) > 0).length, letters.length),
+        part('Lessons completed', lessons.filter((l) => lp.lessons[l.id] && lp.lessons[l.id].done).length, lessons.length),
+      ],
+      writing: [
+        part('Writing tasks mastered', language.reading.writing.filter((w) => lp.writing[w.answer]).length, language.reading.writing.length),
+        part('Letters traced', letters.filter((l) => (lp.tracing[l.char] || 0) > 0).length, letters.length),
+      ],
+      speaking: [
+        part('Phrases spoken', phrases.filter((p) => lp.speaking[p.t] && lp.speaking[p.t].best >= SPEAK_PASS).length, phrases.length),
+        part('Scenarios completed', language.scenarios.filter((s) => lp.scenarios[s.id]).length, language.scenarios.length),
+      ],
+    };
+    const result = {};
+    for (const skill of SKILLS) {
+      const recent = lp.practice[skill].slice(-10);
+      const accuracy = recent.length ? recent.reduce((a, b) => a + b, 0) / recent.length / 100 : null;
+      const coverage = cov(parts[skill]);
+      const score = Math.round(100 * (0.6 * coverage + 0.4 * (accuracy || 0)));
+      result[skill] = { score, band: band(score), coverage: Math.round(coverage * 100), accuracy: accuracy === null ? null : Math.round(accuracy * 100), samples: recent.length, parts: parts[skill] };
+    }
+    const base = (result.reading.score + result.writing.score + result.speaking.score) / 3;
+    const last = lp.aptitude.length ? lp.aptitude[lp.aptitude.length - 1] : null;
+    const overall = Math.round(last ? 0.75 * base + 0.25 * LEVEL_SCORE[last.level] : base);
+    result.overall = { score: overall, band: band(overall), testLevel: last ? last.level : null };
+    return result;
+  }
+
+  /** Store today's fluency snapshot (one per day) for the progress-over-time chart. */
+  function recordFluency(language, lp, now) {
+    const f = fluency(language, lp);
+    const day = localDay(now);
+    const entry = { day, reading: f.reading.score, writing: f.writing.score, speaking: f.speaking.score, overall: f.overall.score };
+    const lastEntry = lp.fluency[lp.fluency.length - 1];
+    if (lastEntry && lastEntry.day === day) lp.fluency[lp.fluency.length - 1] = entry;
+    else lp.fluency.push(entry);
+    lp.fluency = lp.fluency.slice(-FLUENCY_KEEP);
+    return f;
+  }
+
   return {
-    LEVELS, LEVEL_NAMES, PASS,
+    LEVELS, LEVEL_NAMES, PASS, SKILLS, SPEAK_PASS,
+    logPractice, speakingPhrases, similarity, misspellings, dailyChallenge, challengeStreak, fluency, recordFluency,
     normalize, normalizeStrict, hasArabic, englishKeys, primaryEnglish, glossOf,
     buildIndex, translate, detectDirection, checkWriting, placement,
     emptyProgress, emptyLang, sanitizeProgress, touchStreak, localDay, languageStats,

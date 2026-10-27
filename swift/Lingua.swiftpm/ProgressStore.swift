@@ -70,6 +70,95 @@ struct AptitudeRecord: Codable, Hashable {
     }
 }
 
+struct SpeakRecord: Codable, Hashable {
+    var best: Int
+    var selfChecked: Bool?
+
+    init(best: Int, selfChecked: Bool? = nil) {
+        self.best = best
+        self.selfChecked = selfChecked
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case best
+        case selfChecked = "self"
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        best = min(100, max(0, (try? c.decodeIfPresent(Int.self, forKey: .best)) ?? 0))
+        selfChecked = (try? c.decodeIfPresent(Bool.self, forKey: .selfChecked)) == true ? true : nil
+    }
+}
+
+/// Recent scored results per skill (0–100); drives the accuracy half of fluency.
+struct PracticeLog: Codable, Hashable {
+    var reading: [Int] = []
+    var writing: [Int] = []
+    var speaking: [Int] = []
+
+    init() {}
+
+    enum CodingKeys: String, CodingKey { case reading, writing, speaking }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        func load(_ key: CodingKeys) -> [Int] {
+            Array(((try? c.decodeIfPresent([Int].self, forKey: key)) ?? []).map { min(100, max(0, $0)) }.suffix(30))
+        }
+        reading = load(.reading)
+        writing = load(.writing)
+        speaking = load(.speaking)
+    }
+
+    func list(_ skill: String) -> [Int] {
+        switch skill {
+        case "reading": return reading
+        case "writing": return writing
+        default: return speaking
+        }
+    }
+
+    mutating func log(_ skill: String, _ pct: Int) {
+        let v = min(100, max(0, pct))
+        switch skill {
+        case "reading": reading = Array((reading + [v]).suffix(30))
+        case "writing": writing = Array((writing + [v]).suffix(30))
+        case "speaking": speaking = Array((speaking + [v]).suffix(30))
+        default: break
+        }
+    }
+}
+
+struct ChallengeRecord: Codable, Hashable {
+    var score: Int
+    var total: Int
+    var bySkill: [String: SkillScore]
+
+    init(score: Int, total: Int, bySkill: [String: SkillScore]) {
+        self.score = score
+        self.total = total
+        self.bySkill = bySkill
+    }
+
+    enum CodingKeys: String, CodingKey { case score, total, bySkill }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        score = max(0, (try? c.decodeIfPresent(Int.self, forKey: .score)) ?? 0)
+        total = max(0, (try? c.decodeIfPresent(Int.self, forKey: .total)) ?? 0)
+        bySkill = (try? c.decodeIfPresent([String: SkillScore].self, forKey: .bySkill)) ?? [:]
+    }
+}
+
+struct FluencySnapshot: Codable, Hashable {
+    var day: String
+    var reading: Int
+    var writing: Int
+    var speaking: Int
+    var overall: Int
+}
+
 struct Streak: Codable, Hashable {
     var count: Int = 0
     var last: String?
@@ -83,10 +172,22 @@ struct LangProgress: Codable {
     var writing: [String: Bool] = [:]
     var saved: [Phrase] = []
     var lastVisit: String?
+    var tracing: [String: Int] = [:]
+    var speaking: [String: SpeakRecord] = [:]
+    var practice = PracticeLog()
+    var challenges: [String: ChallengeRecord] = [:]
+    var fluency: [FluencySnapshot] = []
 
     init() {}
 
-    enum CodingKeys: String, CodingKey { case lessons, scenarios, aptitude, letters, writing, saved, lastVisit }
+    enum CodingKeys: String, CodingKey {
+        case lessons, scenarios, aptitude, letters, writing, saved, lastVisit
+        case tracing, speaking, practice, challenges, fluency
+    }
+
+    mutating func logPractice(_ skill: String, _ pct: Int) {
+        practice.log(skill, pct)
+    }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -97,6 +198,11 @@ struct LangProgress: Codable {
         writing = (try? c.decodeIfPresent([String: Bool].self, forKey: .writing)) ?? [:]
         saved = Array(((try? c.decodeIfPresent([Phrase].self, forKey: .saved)) ?? []).prefix(500))
         lastVisit = try? c.decodeIfPresent(String.self, forKey: .lastVisit)
+        tracing = (try? c.decodeIfPresent([String: Int].self, forKey: .tracing)) ?? [:]
+        speaking = (try? c.decodeIfPresent([String: SpeakRecord].self, forKey: .speaking)) ?? [:]
+        practice = (try? c.decodeIfPresent(PracticeLog.self, forKey: .practice)) ?? PracticeLog()
+        challenges = (try? c.decodeIfPresent([String: ChallengeRecord].self, forKey: .challenges)) ?? [:]
+        fluency = Array(((try? c.decodeIfPresent([FluencySnapshot].self, forKey: .fluency)) ?? []).suffix(180))
     }
 }
 
@@ -147,16 +253,38 @@ final class ProgressStore: ObservableObject {
         data.languages[id] ?? LangProgress()
     }
 
-    /// Applies a change to one language's progress, awards XP and saves.
-    func update(_ id: String, xp: Int = 0, _ change: (inout LangProgress) -> Void) {
-        var lp = data.languages[id] ?? LangProgress()
+    /// Applies a change to one language's progress, refreshes today's fluency snapshot, awards XP and saves.
+    func update(_ language: Language, xp: Int = 0, _ change: (inout LangProgress) -> Void) {
+        var lp = data.languages[language.id] ?? LangProgress()
         change(&lp)
-        data.languages[id] = lp
+        Engine.recordFluency(language, &lp)
+        data.languages[language.id] = lp
         if xp > 0 {
             data.xp += xp
             touchStreak()
         }
         save()
+    }
+
+    /// Saves a speaking attempt. Self-checks count as practice for coverage but never change accuracy.
+    func recordSpeaking(_ language: Language, phrase: String, score: Int, selfChecked: Bool) {
+        let prev = lang(language.id).speaking[phrase]
+        let firstPass = (prev?.best ?? 0) < Engine.speakPass && score >= Engine.speakPass
+        update(language, xp: firstPass ? 3 : 0) { lp in
+            let prevBest = prev?.best ?? 0
+            let prevSelf = prev?.selfChecked == true
+            if prev == nil || score > prevBest || (prevSelf && !selfChecked) {
+                lp.speaking[phrase] = selfChecked
+                    ? SpeakRecord(best: max(score, prevBest), selfChecked: true)
+                    : SpeakRecord(best: max(score, prevSelf ? 0 : prevBest))
+            }
+            if !selfChecked { lp.logPractice("speaking", score) }
+        }
+    }
+
+    /// Records today's fluency snapshot without changing anything else.
+    func refreshFluency(_ language: Language) {
+        update(language) { _ in }
     }
 
     func touchStreak(now: Date = Date()) {

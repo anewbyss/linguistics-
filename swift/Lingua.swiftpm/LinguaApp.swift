@@ -25,6 +25,9 @@ enum Route: Hashable {
     case translator(String)
     case aptitude(String)
     case media(String)
+    case challenge(String)
+    case speaking(String)
+    case fluency(String)
     case progress
 }
 
@@ -68,6 +71,12 @@ struct RootView: View {
             if let lang = content.language(id) { AptitudeView(lang: lang) }
         case .media(let id):
             if let lang = content.language(id) { MediaView(lang: lang) }
+        case .challenge(let id):
+            if let lang = content.language(id) { DailyChallengeView(lang: lang) }
+        case .speaking(let id):
+            if let lang = content.language(id) { SpeakingPracticeView(lang: lang) }
+        case .fluency(let id):
+            if let lang = content.language(id) { FluencyView(lang: lang) }
         case .progress:
             ProgressBackupView()
         }

@@ -155,6 +155,73 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     await shot(`09-${lang}-media`);
   }
 
+  step('speaking practice + daily challenge + fluency (with stubbed speech recognition)');
+  const srPage = await context.newPage();
+  srPage.on('pageerror', (e) => errors.push('sr ' + e.message));
+  await srPage.addInitScript(() => {
+    // Fake recogniser: "hears" whatever the test puts in window.__say.
+    const Fake = class {
+      start() { setTimeout(() => { this.onresult && this.onresult({ results: [[{ transcript: window.__say || '' }]] }); this.onend && this.onend(); }, 20); }
+      abort() {}
+    };
+    window.SpeechRecognition = Fake;
+    window.webkitSpeechRecognition = Fake;
+  });
+  for (const lang of ['ar', 'es']) {
+    await srPage.goto(base + `index.html#/${lang}/speak`);
+    await srPage.waitForSelector('[data-act="speak-listen"]');
+    const target = await srPage.locator('.flash .big').innerText();
+    await srPage.evaluate((t) => { window.__say = t; }, target);
+    await srPage.locator('[data-act="speak-listen"]').click();
+    await srPage.waitForSelector('.feedback.good');
+    assert((await srPage.locator('.feedback.good').innerText()).includes('100%'), 'exact speech scores 100');
+    await srPage.evaluate(() => { window.__say = 'zzzz qqqq'; });
+    await srPage.locator('[data-act="sp-step"][data-d="1"]').click();
+    await srPage.locator('[data-act="speak-listen"]').click();
+    await srPage.waitForSelector('.feedback.bad');
+    if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `12-${lang}-speak.png`), fullPage: true });
+
+    await srPage.goto(base + `index.html#/${lang}/challenge`);
+    const items = await srPage.evaluate((id) => {
+      const L = window.LINGUA_CONTENT.languages.find((l) => l.id === id);
+      const p = JSON.parse(localStorage.getItem('lingua.progress.v1'));
+      return window.LinguaEngine.dailyChallenge(L, window.LinguaEngine.sanitizeProgress(p).languages[id], window.LinguaEngine.localDay());
+    }, lang);
+    await srPage.locator('[data-act="ch-start"]').click();
+    for (const it of items) {
+      if (it.type === 'choice') await srPage.locator(`[data-act="ch-pick"][data-i="${it.answer}"]`).click();
+      else if (it.type === 'type') { await srPage.fill('#ch-input', it.answer); await srPage.locator('[data-act="ch-check"]').click(); }
+      else { await srPage.evaluate((t) => { window.__say = t; }, it.t); await srPage.locator('[data-act="speak-listen"]').click(); }
+      await srPage.locator('[data-act="ch-next"]').click();
+    }
+    assert(await srPage.locator('.score-big').innerText() === '10/10', 'perfect daily challenge');
+    if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `13-${lang}-challenge.png`), fullPage: true });
+    const lpNow = await srPage.evaluate((id) => JSON.parse(localStorage.getItem('lingua.progress.v1')).languages[id], lang);
+    assert(Object.keys(lpNow.challenges).length === 1, 'challenge saved');
+    assert(lpNow.practice.speaking.length > 0 && lpNow.practice.reading.length > 0, 'practice logged');
+
+    // Add an earlier snapshot so the trend chart has two days to draw.
+    await srPage.evaluate((id) => {
+      const p = JSON.parse(localStorage.getItem('lingua.progress.v1'));
+      p.languages[id].fluency.unshift({ day: '2026-01-01', reading: 5, writing: 2, speaking: 0, overall: 2 });
+      localStorage.setItem('lingua.progress.v1', JSON.stringify(p));
+    }, lang);
+    await srPage.goto(base + `index.html#/${lang}/fluency`);
+    await srPage.reload();
+    await srPage.waitForSelector('.trend svg');
+    assert(await srPage.locator('.trend polyline').count() === 4, 'four trend lines');
+    const overall = Number((await srPage.locator('.score-big').first().innerText()).match(/\d+/)[0]);
+    assert(overall > 0, `overall fluency rose (${overall})`);
+    await srPage.locator('.trend .hit').last().hover();
+    assert((await srPage.locator('.trend .tip').innerText()).includes('overall'), 'chart tooltip');
+    if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `14-${lang}-fluency.png`), fullPage: true });
+    await srPage.goto(base + `index.html#/${lang}/challenge`);
+    assert(await srPage.locator('[data-act="ch-replay"]').count() === 1, 'challenge shows done state today');
+  }
+  await srPage.goto(base + 'index.html#/');
+  assert(await srPage.locator('.lang-card .chip.done').count() === 2, 'landing shows both challenges done');
+  await srPage.close();
+
   step('progress persists across reload');
   await go('/progress');
   await page.reload();
@@ -177,7 +244,7 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
 
   step('mobile layout has no horizontal scroll');
   await page.setViewportSize({ width: 375, height: 800 });
-  for (const hash of ['/', '/ar', '/ar/read', '/es/lesson/es-greet-1', '/es/translate']) {
+  for (const hash of ['/', '/ar', '/ar/read', '/es/lesson/es-greet-1', '/es/translate', '/ar/fluency', '/es/challenge', '/ar/speak']) {
     await go(hash);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     assert(overflow <= 1, `no horizontal overflow on ${hash} (${overflow}px)`);

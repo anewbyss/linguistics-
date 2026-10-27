@@ -81,7 +81,7 @@ struct ReadingView: View {
                 ForEach(lang.reading.letters) { letter in
                     Button {
                         let first = (lp.letters[letter.char] ?? 0) == 0
-                        progress.update(lang.id, xp: first ? 2 : 0) { $0.letters[letter.char, default: 0] += 1 }
+                        progress.update(lang, xp: first ? 2 : 0) { $0.letters[letter.char, default: 0] += 1 }
                         selected = letter
                     } label: {
                         VStack(spacing: 2) {
@@ -276,9 +276,11 @@ struct WritingPracticeView: View {
     private func check(_ task: WritingTask) {
         let r = Engine.checkWriting(input, task: task, lang: lang.id)
         result = r
-        guard r.ok else { return }
-        let first = progress.lang(lang.id).writing[task.answer] != true
-        progress.update(lang.id, xp: first ? 5 : 0) { $0.writing[task.answer] = true }
+        let first = r.ok && progress.lang(lang.id).writing[task.answer] != true
+        progress.update(lang, xp: first ? 5 : 0) { lp in
+            lp.logPractice("writing", r.perfect ? 100 : r.ok ? 80 : 0)
+            if r.ok { lp.writing[task.answer] = true }
+        }
     }
 
     private func move(_ d: Int) {
@@ -373,7 +375,7 @@ struct TracingView: View {
                 Button("Check") { check() }.buttonStyle(.borderedProminent).tint(lang.color)
                 Button("Next →") { nextLetter() }.buttonStyle(.bordered)
             }
-            Text("Practised: \(progress.lang(lang.id).letters[letter.char] ?? 0)×")
+            Text("Traced successfully: \(progress.lang(lang.id).tracing[letter.char] ?? 0)×")
                 .font(.caption).foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -407,9 +409,10 @@ struct TracingView: View {
     private func check() {
         let s = traceScore()
         score = s
-        if s >= 70 {
-            let c = letter.char
-            progress.update(lang.id, xp: 3) { $0.letters[c, default: 0] += 1 }
+        let c = letter.char
+        progress.update(lang, xp: s >= 70 ? 3 : 0) { lp in
+            lp.logPractice("writing", s)
+            if s >= 70 { lp.tracing[c, default: 0] += 1 }
         }
     }
 
@@ -581,7 +584,8 @@ struct ReadingQuizView: View {
                 ProgressView()
             } else {
                 QuizView(questions: questions, mode: .practice, lang: lang) { correct, _ in
-                    progress.update(lang.id, xp: correct * 5) { _ in }
+                    let pct = Engine.percent(correct, questions.count)
+                    progress.update(lang, xp: correct * 5) { $0.logPractice("reading", pct) }
                 }
                 .id(key)
                 Button("New quiz") { regenerate() }.buttonStyle(.bordered)

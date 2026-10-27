@@ -18,6 +18,21 @@ A landing screen leads to a separate menu for each language.
 | **Offline translator** (both directions, phrasebook, saved words) | 290 entries with prefix and suffix handling (و، ال، ـي…) | 361 entries with plurals and diminutives |
 | **Media picks by level** (A1–C1) | 18 | 18 |
 
+**Daily challenge.** A new 10-item challenge each day per language: 4 reading, 3 writing (two typed answers and a spelling check), 2 phrases to say aloud and 1 line to understand from a scenario.
+- Items are drawn from your current level, and the challenge stays the same all day.
+- Your first completion each day counts towards fluency, XP and a challenge streak. You can replay it for practice without it being scored.
+- Both apps use the same seeded generator, so they build the same challenge for the same day and progress.
+
+**Speaking practice.** Listen to a model phrase (text-to-speech), say it, and get a pronunciation score from speech recognition, compared with the target phrase. Scores of 70% or more count as "spoken well".
+- **Swift app:** uses Apple's Speech framework, on-device (offline) when the device supports the language.
+- **Web app:** uses the browser's speech recognition, which may need an internet connection.
+- **No microphone or recognition:** "I said it ✓" records a self-check. It counts as practice but never changes your accuracy.
+
+**Progress to fluency.** Reading, writing, speaking and overall scores (0–100), each with an estimated CEFR band, a breakdown of what counts, and a trend chart with a table view.
+- **Each skill:** 60% coverage (how much of the course you've practised in that skill) plus 40% accuracy (the average of your last 10 scored attempts).
+- **Overall:** the average of the three skills, blended 25% with your latest aptitude-test level.
+- It's a study estimate, not an official CEFR certificate.
+
 **Apple Pencil and stylus.**
 - **Swift app:** tracing uses PencilKit, so Apple Pencil gets pressure, tilt and palm rejection. Once a Pencil touch is detected, finger and palm touches are ignored; a toggle turns finger drawing back on. Double-tapping Apple Pencil (2nd generation or Pro) switches to the eraser, following the system setting.
 - **Web app:** works with any stylus that browsers report as a pen, including Apple Pencil in Safari and Windows/Android pens. Pressure changes line width, and finger or palm touches are ignored after a pen is used.
@@ -57,11 +72,13 @@ content/              ← edit lessons, scenarios, tests, dictionary and media h
 scripts/build-content.mjs    validates content and generates both apps' data
 web/
   index.html, css/, js/app.js  UI
-  js/engine.js               translator, placement scoring, writing check, progress (shared with tests)
+  js/engine.js               translator, placement, writing check, daily challenge, fluency, progress (shared with tests)
   data/content.js            (generated)
   sw.js, manifest.webmanifest
 swift/Lingua.swiftpm/
-  Engine.swift               Swift port of engine.js
+  Engine.swift               Swift port of engine.js (translator, placement, writing)
+  Fluency.swift              daily challenge, speech scoring and fluency (port of engine.js)
+  Speech.swift               on-device speech recognition
   ProgressStore.swift        persistence + backup import/export
   Models.swift, ContentStore.swift, LinguaApp.swift, Views/
   ContentData.swift          (generated)
@@ -99,6 +116,7 @@ npm run test:e2e  # drives the whole web app in headless Chromium (needs Playwri
 ## Notes and limits
 
 - **The translator is dictionary-based, not machine translation.** It matches whole phrases first, then glosses word by word. It handles common Arabic prefixes and possessive suffixes and Spanish plurals and diminutives, and it marks unknown words. It does not reorder grammar. That keeps it fully offline and transparent, but treat its output as a study aid.
+- **Speech recognition** quality depends on the device and browser. Safari and Chrome support it, Firefox doesn't, and Chrome sends audio to an online service. Scores compare the transcript with the target text, so they reflect intelligibility rather than accent detail.
 - **Speech** uses the voices installed on the device (Web Speech API / AVSpeechSynthesizer). If a device has no Arabic or Mexican Spanish voice, the listen buttons fall back to a related voice or stay silent.
 - **The Swift code has not been compiled yet.** It was written against iOS 16 SwiftUI APIs and its data is validated by the schema test, but the environment it was written in had no Swift toolchain. Please report any compile error that Swift Playgrounds shows.
 - The content was written with care, but a review by native speakers (especially of the dialect notes) is recommended before wider use.
