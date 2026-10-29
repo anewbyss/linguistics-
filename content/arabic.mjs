@@ -1,5 +1,6 @@
 import { P, Q, A, C, M, T } from './helpers.mjs';
 import * as more from './arabic-more.mjs';
+import * as kitaab from './arabic-kitaab.mjs';
 
 const categories = [
   {
@@ -1190,6 +1191,12 @@ function orderCategories(list, order) {
   });
 }
 
+// Later lists only add words the earlier ones don't already have.
+function mergeDictionary(...lists) {
+  const seen = new Set();
+  return lists.flat().filter(([t]) => !seen.has(t) && seen.add(t));
+}
+
 export default {
   id: 'ar',
   name: 'Arabic',
@@ -1200,11 +1207,12 @@ export default {
   speech: 'ar-SA',
   accent: '#0f766e',
   translateSkipEn: ['a', 'an', 'the', 'is', 'am', 'are'],
-  categories: orderCategories([...categories, ...more.categories], ["ar-greet", "ar-noun", "ar-num", "ar-food", "ar-health", "ar-verb", "ar-dir", "ar-egy", "ar-lev", "ar-cult", "ar-work", "ar-story", "ar-adv", "ar-news"]),
-  reading, aptitude, media,
-  scenarios: [...scenarios, ...more.scenarios],
-  dictionary: [...dictionary, ...more.dictionary],
-  writingPrompts: more.writingPrompts,
-  speakingPrompts: more.speakingPrompts,
+  categories: orderCategories([...categories, ...more.categories, ...kitaab.categories], ["ar-greet", "ar-noun", "ar-num", "ar-food", "ar-health", "ar-verb", "ar-dir", "ar-egy", "ar-lev", "ar-cult", "ar-work", "ar-kitaab", "ar-story", "ar-adv", "ar-news"]),
+  reading, aptitude,
+  media: [...media, ...kitaab.media],
+  scenarios: [...scenarios, ...more.scenarios, ...kitaab.scenarios],
+  dictionary: mergeDictionary(dictionary, more.dictionary, kitaab.dictionary),
+  writingPrompts: [...more.writingPrompts, ...kitaab.writingPrompts],
+  speakingPrompts: [...more.speakingPrompts, ...kitaab.speakingPrompts],
   levelHours: more.levelHours,
 };

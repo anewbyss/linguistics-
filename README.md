@@ -11,13 +11,13 @@ A landing screen leads to a separate menu for each language. Your coach is **Hay
 
 | | Arabic | Mexican Spanish |
 |---|---|---|
-| **Lesson categories** (grammar + culture, A1–C1) | 14 categories, 27 lessons, including an Egyptian and a Levantine dialect track | 13 categories, 25 lessons, including Mexican regional speech and slang |
+| **Lesson categories** (grammar + culture, A1–C1) | 15 categories, 32 lessons, including an Egyptian and a Levantine dialect track and an Al-Kitaab Part Two companion | 13 categories, 25 lessons, including Mexican regional speech and slang |
 | **Reading & writing** | 28 letters with all four joined forms, vowel marks, word reading, typing with an on-screen Arabic keyboard, finger tracing with scoring, letter quiz | Letters and Mexican pronunciation, accent rules, place-name reading, typing with accent keys, tracing, accent quiz |
-| **Real-world scenarios** (branching role-play) | 12 (adds the doctor, a job interview, discussing the news, koshari in Cairo, manoushe in Beirut) | 11 (adds the doctor, renting a flat, a debate, a customer-service call) |
+| **Real-world scenarios** (branching role-play) | 14 (adds the doctor, a job interview, discussing the news, koshari in Cairo, manoushe in Beirut, renting a flat in Damascus, a wedding invitation in Amman) | 11 (adds the doctor, renting a flat, a debate, a customer-service call) |
 | **Aptitude test** (placement A1–C1, broken down by level and skill) | 20 questions | 20 questions |
-| **Offline translator** (both directions, phrasebook, saved words) | 478 entries with prefix and suffix handling (و، ال، ـي…) | 567 entries with plurals and diminutives |
-| **Listening** (dictation and meaning checks, three speeds) | 124 lines | 116 lines |
-| **Free-writing / free-speaking prompts** with automatic feedback | 8 / 6 | 8 / 6 |
+| **Offline translator** (both directions, phrasebook, saved words) | 605 entries with prefix and suffix handling (و، ال، ـي…) | 567 entries with plurals and diminutives |
+| **Listening** (dictation and meaning checks, three speeds) | 151 lines | 116 lines |
+| **Free-writing / free-speaking prompts** with automatic feedback | 12 / 8 | 8 / 6 |
 | **Media picks by level** (A1–C1) | 18 | 18 |
 
 **Daily challenge.** A new 10-item challenge each day per language: 3 reading, 3 writing (two typed answers and a spelling check), 2 listening (a dictation and a line to understand by ear) and 2 phrases to say aloud.
@@ -29,6 +29,14 @@ A landing screen leads to a separate menu for each language. Your coach is **Hay
 - **Swift app:** uses Apple's Speech framework, on-device (offline) when the device supports the language.
 - **Web app:** uses the browser's speech recognition, which may need an internet connection.
 - **No microphone or recognition:** "I said it ✓" records a self-check. It counts as practice but never changes your accuracy.
+
+**Al-Kitaab companion (Arabic).** Five lessons that follow *Al-Kitaab fii Taʿallum al-ʿArabiyya, Part Two* (3rd ed.), Lessons 1–4. They cover:
+- Topics: housing, Arabs in America, the market, occasions, and month names.
+- Grammar: verb patterns, nouns of place, relative clauses, negation, colours, كان and its sisters, and case endings.
+- Vocabulary notes that give the Levantine and Egyptian words.
+- Matching scenarios and writing and speaking prompts.
+
+All of this is written for this app. It reproduces no text, exercises or dialogues from the book, and it isn't affiliated with the publisher. Use it alongside the book.
 
 **Review (spaced repetition).** Vocabulary from finished lessons and words saved in the translator come back after 1, 3, 7, 14, 30, 60 and 120 days, and start again when you forget them.
 
@@ -78,6 +86,7 @@ The course content is embedded in `ContentData.swift`, so there are no bundle re
 ```
 content/              ← edit lessons, scenarios, tests, dictionary and media here
   arabic.mjs, arabic-more.mjs     (B1–C1, dialects, prompts, level hours)
+  arabic-kitaab.mjs               (Al-Kitaab Part Two companion)
   spanish.mjs, spanish-more.mjs
   helpers.mjs
   dist/lingua-content.json   (generated)

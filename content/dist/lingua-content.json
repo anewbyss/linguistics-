@@ -3578,6 +3578,1124 @@
      ]
     },
     {
+     "id": "ar-kitaab",
+     "title": "Al-Kitaab Part Two Companion",
+     "nativeTitle": "رفيق «الكتاب» – الجزء الثاني",
+     "icon": "books.vertical",
+     "emoji": "📘",
+     "summary": "Practice that follows Al-Kitaab Part Two, Lessons 1–4: housing, Arabs in America, the market, occasions and calendars. Vocabulary notes give the Levantine and Egyptian words. Written for this app; not affiliated with the publisher.",
+     "lessons": [
+      {
+       "id": "ar-kit-1",
+       "title": "Housing & Settling Down",
+       "level": "B1",
+       "summary": "Verb patterns (أوزان), nouns of place and describing where things are. Goes with Al-Kitaab 2, Lesson 1.",
+       "grammar": {
+        "title": "Verb patterns, nouns of place, and \"the house has…\"",
+        "body": [
+         "Almost every Arabic word is a three-letter root (جذر) poured into a pattern (وزن). Learn the ten verb patterns once and you can predict the shape, and often the meaning, of thousands of words.",
+         "Patterns shift meaning in typical directions. Form II often acts on someone else (درس to study → درّس to teach); Form V is often its reflexive partner (ذكّر to remind → تذكّر to remember); Form X often means seeking or taking (أجر wage, rent → استأجر to rent).",
+         "The examples in the table: كتب to write, درّس to teach, ساعد to help, أرسل to send, تذكّر to remember, تعاون to cooperate, انكسر to break (by itself), انتقل to move house, استأجر to rent.",
+         "Nouns of place use مَفعَل or مَفعِل, plural مَفاعِل: مطبخ kitchen (from طبخ to cook), مكتب office, مسبح swimming pool, منزل residence. Plurals: مطابخ، مكاتب، منازل.",
+         "To say what a place has, put the place first and use في, not عند: في الشقة ثلاث غرف (the flat has three rooms), أمام البيت حديقة (there is a garden in front of the house). An indefinite noun cannot start the sentence, so the place phrase comes first."
+        ],
+        "table": {
+         "headers": [
+          "Form",
+          "Past",
+          "Present",
+          "Verbal noun",
+          "Example"
+         ],
+         "rows": [
+          [
+           "I",
+           "فَعَلَ",
+           "يفعَل",
+           "(varies)",
+           "كتب"
+          ],
+          [
+           "II",
+           "فعّل",
+           "يُفعّل",
+           "تفعيل",
+           "درّس"
+          ],
+          [
+           "III",
+           "فاعَل",
+           "يُفاعِل",
+           "مُفاعَلة",
+           "ساعد"
+          ],
+          [
+           "IV",
+           "أفعَل",
+           "يُفعِل",
+           "إفعال",
+           "أرسل"
+          ],
+          [
+           "V",
+           "تفعّل",
+           "يتفعّل",
+           "تفعُّل",
+           "تذكّر"
+          ],
+          [
+           "VI",
+           "تفاعَل",
+           "يتفاعَل",
+           "تفاعُل",
+           "تعاون"
+          ],
+          [
+           "VII",
+           "انفعَل",
+           "ينفعِل",
+           "انفعال",
+           "انكسر"
+          ],
+          [
+           "VIII",
+           "افتعَل",
+           "يفتعِل",
+           "افتعال",
+           "انتقل"
+          ],
+          [
+           "X",
+           "استفعَل",
+           "يستفعِل",
+           "استفعال",
+           "استأجر"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "شقة",
+         "en": "apartment, flat",
+         "tr": "shaqqa",
+         "note": "Plural شقق. The same word in Levantine and Egyptian."
+        },
+        {
+         "t": "طابق",
+         "en": "floor, storey",
+         "tr": "ṭābiq",
+         "note": "Egyptian: دور dōr."
+        },
+        {
+         "t": "مطبخ",
+         "en": "kitchen",
+         "tr": "maṭbakh",
+         "note": "A noun of place from طبخ (to cook)."
+        },
+        {
+         "t": "استأجر",
+         "en": "to rent",
+         "tr": "istaʾjara",
+         "note": "Egyptian: أجّر aggar."
+        },
+        {
+         "t": "الإيجار",
+         "en": "the rent",
+         "tr": "al-ījār"
+        },
+        {
+         "t": "حديقة",
+         "en": "garden, park",
+         "tr": "ḥadīqa",
+         "note": "Levantine and Egyptian: جنينة."
+        },
+        {
+         "t": "بجانب",
+         "en": "next to",
+         "tr": "bi-jānib",
+         "note": "Spoken: جنب janb (Egyptian gamb)."
+        },
+        {
+         "t": "وراء",
+         "en": "behind",
+         "tr": "warāʾ",
+         "note": "Spoken: ورا wara."
+        },
+        {
+         "t": "ترك",
+         "en": "to leave (someone or something)",
+         "tr": "taraka",
+         "note": "Egyptian: ساب sāb."
+        },
+        {
+         "t": "الخصوصية",
+         "en": "privacy",
+         "tr": "al-khuṣūṣiyya"
+        },
+        {
+         "t": "الاستقلال",
+         "en": "independence",
+         "tr": "al-istiqlāl"
+        },
+        {
+         "t": "سمسار",
+         "en": "property agent, middleman",
+         "tr": "simsār"
+        }
+       ],
+       "examples": [
+        {
+         "t": "في شقتنا غرفتا نوم ومطبخ صغير.",
+         "en": "Our flat has two bedrooms and a small kitchen.",
+         "tr": "fī shaqqatinā ghurfatā nawm wa-maṭbakh ṣaghīr.",
+         "note": "The place phrase comes first: في شقتنا…"
+        },
+        {
+         "t": "أمام البناية حديقة عامة.",
+         "en": "There is a public park in front of the building.",
+         "tr": "amāma al-bināya ḥadīqa ʿāmma."
+        },
+        {
+         "t": "نستأجر شقة في الطابق الثالث، والإيجار معقول.",
+         "en": "We rent a flat on the third floor, and the rent is reasonable.",
+         "tr": "nastaʾjiru shaqqa fī aṭ-ṭābiq ath-thālith, wa-l-ījār maʿqūl."
+        },
+        {
+         "t": "بدّي شقة قريبة من الجامعة.",
+         "en": "I want a flat near the university. (Levantine)",
+         "tr": "biddī shaʾʾa ʾarībe mn ij-jāmʿa."
+        }
+       ],
+       "culture": {
+        "title": "Finding a flat and \"establishing a home\"",
+        "body": [
+         "In many Arab cities people find flats through a سمسار (simsār), an informal agent paid a commission, or by asking the بوّاب (bawwāb), the building caretaker common in Egypt, who knows which flats are empty.",
+         "Word of mouth matters: ask friends, colleagues and shopkeepers in the neighbourhood before you search online.",
+         "تأسيس بيت (taʾsīs bayt, establishing a household) is traditionally a key step before marriage: the couple, often with family help, prepares a permanent, fully furnished home. High housing costs make this hard for many young people, so some newlyweds live with the husband's family in بيت العائلة (the family house), at least at first.",
+         "Someone with news to share may open with خير؟ (khēr?), literally \"good?\", meaning \"I hope it's good news?\""
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-kit-1-q1",
+         "q": "مطبخ (kitchen) comes from طبخ (to cook). Which pattern makes nouns of place?",
+         "options": [
+          "مفعول",
+          "تفعيل",
+          "مَفعَل",
+          "فاعِل"
+         ],
+         "answer": 2,
+         "explain": "مَفعَل / مَفعِل: مكتب، مسبح، منزل."
+        },
+        {
+         "id": "ar-kit-1-q2",
+         "q": "Which sentence says 'The house has a garden'?",
+         "options": [
+          "حديقة البيت في.",
+          "في البيت حديقة.",
+          "عند البيت حديقة.",
+          "البيت حديقة."
+         ],
+         "answer": 1,
+         "explain": "Places \"have\" things with في, and the place phrase comes first."
+        },
+        {
+         "id": "ar-kit-1-q3",
+         "q": "استأجر (to rent) is which verb form?",
+         "options": [
+          "Form V (تفعّل)",
+          "Form VIII (افتعل)",
+          "Form X (استفعل)",
+          "Form II (فعّل)"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-kit-1-q4",
+         "q": "In Egyptian Arabic, 'floor, storey' is…",
+         "options": [
+          "بيت",
+          "سطح",
+          "دور",
+          "طابق"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-kit-1-q5",
+         "q": "A سمسار is…",
+         "options": [
+          "a building caretaker",
+          "an informal property agent",
+          "a removal van",
+          "a landlord"
+         ],
+         "answer": 1,
+         "explain": "The caretaker is the بوّاب."
+        }
+       ]
+      },
+      {
+       "id": "ar-kit-2",
+       "title": "Arabs in America",
+       "level": "B1",
+       "summary": "Relative clauses (الذي، التي، الذين / اللي) and negation in formal and spoken Arabic. Goes with Al-Kitaab 2, Lesson 2.",
+       "grammar": {
+        "title": "Relative clauses, and negation in formal and spoken Arabic",
+        "body": [
+         "An indefinite noun is described by a whole sentence with no linking word: عندي صديق يسكن في ديترويت (I have a friend who lives in Detroit).",
+         "A definite noun needs a relative pronoun that agrees with it: الذي (masculine), التي (feminine and non-human plurals), الذين (human masculine plural). الطالبة التي تجلس بجانبي = the student who sits next to me.",
+         "When the noun is the object, or follows a preposition, the clause repeats it as a pronoun: الكتاب الذي قرأتُهُ (the book that I read [it]); الشارع الذي أسكن فيه (the street I live on [in it]).",
+         "Spoken Arabic uses one word for all of them: اللي (illi). الناس اللي بيسكنوا هون = the people who live here.",
+         "ما (what, whatever) and مَن (who, whoever) need no noun before them: افعل ما تريد (do what you want); مَن يعرف؟ (who knows?).",
+         "Formal Arabic negates each tense differently (table below). In speech, ما and مش (Levantine also مو) do most of the work."
+        ],
+        "table": {
+         "headers": [
+          "Time",
+          "Formal (فصحى)",
+          "Levantine",
+          "Egyptian"
+         ],
+         "rows": [
+          [
+           "Past",
+           "لم + jussive: لم أذهب",
+           "ما رحت",
+           "ما رُحتش"
+          ],
+          [
+           "Present",
+           "لا + present: لا أعرف",
+           "ما بعرف",
+           "ما بعرفش"
+          ],
+          [
+           "Future",
+           "لن + subjunctive: لن أسافر",
+           "ما رح سافر",
+           "مش حسافر"
+          ],
+          [
+           "No verb",
+           "ليس: لستُ مصرياً",
+           "مو مصري",
+           "مش مصري"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "هاجر",
+         "en": "to emigrate, immigrate",
+         "tr": "hājara",
+         "note": "Verbal noun الهجرة."
+        },
+        {
+         "t": "مهاجر",
+         "en": "immigrant, emigrant",
+         "tr": "muhājir"
+        },
+        {
+         "t": "جالية",
+         "en": "expatriate or immigrant community",
+         "tr": "jāliya",
+         "note": "Plural جاليات."
+        },
+        {
+         "t": "هوية",
+         "en": "identity; ID card",
+         "tr": "huwiyya"
+        },
+        {
+         "t": "بحث عن",
+         "en": "to look for",
+         "tr": "baḥatha ʿan",
+         "note": "Levantine and Egyptian: دوّر على dawwar ʿala."
+        },
+        {
+         "t": "بقي",
+         "en": "to stay, remain",
+         "tr": "baqiya",
+         "note": "Egyptian: قعد ʾaʿad."
+        },
+        {
+         "t": "ملابس",
+         "en": "clothes",
+         "tr": "malābis",
+         "note": "Levantine: تياب tyāb; Egyptian: هدوم hdūm."
+        },
+        {
+         "t": "حرية",
+         "en": "freedom",
+         "tr": "ḥurriyya"
+        },
+        {
+         "t": "أجنبي",
+         "en": "foreign; foreigner",
+         "tr": "ajnabī",
+         "note": "Plural أجانب."
+        },
+        {
+         "t": "شمال",
+         "en": "north",
+         "tr": "shamāl",
+         "note": "In Levantine and Egyptian speech شمال also means \"left\"."
+        },
+        {
+         "t": "جنوب",
+         "en": "south",
+         "tr": "janūb"
+        },
+        {
+         "t": "غضب",
+         "en": "to get angry",
+         "tr": "ghaḍiba",
+         "note": "Spoken: زعل zaʿil."
+        }
+       ],
+       "examples": [
+        {
+         "t": "هاجر جدّي من لبنان إلى أمريكا سنة ١٩٢٠.",
+         "en": "My grandfather emigrated from Lebanon to America in 1920.",
+         "tr": "hājara jaddī min Lubnān ilā Amrīkā sanat alf wa-tisʿumiʾa wa-ʿishrīn."
+        },
+        {
+         "t": "المدينة التي أسكن فيها فيها جالية عربية كبيرة.",
+         "en": "The city I live in has a large Arab community.",
+         "tr": "al-madīna allatī askunu fīhā fīhā jāliya ʿarabiyya kabīra.",
+         "note": "The first فيها points back to the city; the second means \"it has\"."
+        },
+        {
+         "t": "لم أجد العمل الذي كنتُ أبحث عنه.",
+         "en": "I didn't find the job I was looking for.",
+         "tr": "lam ajid al-ʿamal alladhī kuntu abḥathu ʿanhu."
+        },
+        {
+         "t": "الناس اللي بيحكوا عربي هون كتار.",
+         "en": "Lots of people here speak Arabic. (Levantine)",
+         "tr": "in-nās illi biḥku ʿarabi hōn ktār."
+        }
+       ],
+       "culture": {
+        "title": "Arab Americans",
+        "body": [
+         "Arabic-speaking immigrants began arriving in the United States in large numbers in the late 1800s, mostly Christians from Mount Lebanon and Ottoman Syria. Later waves came from Palestine, Iraq, Yemen, Egypt and elsewhere.",
+         "Dearborn, Michigan, next to Detroit, has one of the best-known Arab American communities, with Arabic shop signs and the Arab American National Museum. Southern California and the New York area also have large communities.",
+         "Writers of the early 20th-century مهجر (diaspora), such as Kahlil Gibran (جبران خليل جبران) and Mikhail Naimy (ميخائيل نعيمة), founded the Pen League in New York and helped shape modern Arabic literature.",
+         "Younger Arab Americans often describe their هوية (identity) in layers: Arab, American, both, or tied to a particular country or faith. It is a frequent theme in Arabic media about the diaspora."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-kit-2-q1",
+         "q": "'The woman who lives next to us' needs…",
+         "options": [
+          "الذين",
+          "التي",
+          "الذي",
+          "no relative word"
+         ],
+         "answer": 1,
+         "explain": "المرأة is definite and feminine."
+        },
+        {
+         "id": "ar-kit-2-q2",
+         "q": "Which is correct for 'I have a friend who speaks Arabic'?",
+         "options": [
+          "عندي صديق التي يتكلم العربية.",
+          "عندي صديق الذي يتكلم العربية.",
+          "عندي صديق يتكلم العربية.",
+          "عندي الصديق يتكلم العربية."
+         ],
+         "answer": 2,
+         "explain": "صديق is indefinite, so no relative pronoun."
+        },
+        {
+         "id": "ar-kit-2-q3",
+         "q": "In spoken Arabic, الذي / التي / الذين are all…",
+         "options": [
+          "ما",
+          "اللي",
+          "إنّو",
+          "مش"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-kit-2-q4",
+         "q": "Formal 'I did not go' is…",
+         "options": [
+          "لا ذهبتُ",
+          "لم أذهب",
+          "ليس أذهب",
+          "لن أذهب"
+         ],
+         "answer": 1
+        },
+        {
+         "id": "ar-kit-2-q5",
+         "q": "جالية means…",
+         "options": [
+          "a mosque",
+          "a neighbourhood market",
+          "an immigrant community",
+          "a passport"
+         ],
+         "answer": 2
+        }
+       ]
+      },
+      {
+       "id": "ar-kit-3",
+       "title": "From Home to the Market",
+       "level": "B1",
+       "summary": "Form II and V pairs, colours, كان and its sisters, and \"it is … to\". Goes with Al-Kitaab 2, Lesson 3.",
+       "grammar": {
+        "title": "Form II / V pairs, colours, and كان and its sisters",
+        "body": [
+         "Form II (فعّل) usually does something to someone or something; Form V (تفعّل) is its reflexive partner: غيّر to change something → تغيّر to change (itself); علّم to teach → تعلّم to learn; عرّف to introduce → تعرّف على to get to know.",
+         "Basic colours have their own patterns (table below): masculine أفعل, feminine فعلاء, human plural فُعل. Other colours are nisba adjectives ending in ـي: بنّي brown (from بُنّ, coffee beans), برتقالي orange, رمادي grey, وردي pink.",
+         "كان and its \"sisters\", ليس (is not), ما زال (still) and أصبح / صار (became), put their predicate in the accusative: أصبح الجوّ بارداً (the weather became cold).",
+         "Followed by a present-tense verb they describe habits and changes: كنتُ أشتري الخبز كل يوم (I used to buy bread every day); ما زلتُ أبحث (I am still looking).",
+         "\"It is … to …\" is من الـ + adjective + أن: من الصعب أن أجد… (it is hard to find…), من السهل أن، من الممكن أن، من المهم أن. Spoken Arabic drops من: صعب إنّي لاقي…"
+        ],
+        "table": {
+         "headers": [
+          "Masculine",
+          "Feminine",
+          "Plural (people)",
+          "Meaning"
+         ],
+         "rows": [
+          [
+           "أحمر",
+           "حمراء",
+           "حُمر",
+           "red"
+          ],
+          [
+           "أزرق",
+           "زرقاء",
+           "زُرق",
+           "blue"
+          ],
+          [
+           "أخضر",
+           "خضراء",
+           "خُضر",
+           "green"
+          ],
+          [
+           "أصفر",
+           "صفراء",
+           "صُفر",
+           "yellow"
+          ],
+          [
+           "أبيض",
+           "بيضاء",
+           "بِيض",
+           "white"
+          ],
+          [
+           "أسود",
+           "سوداء",
+           "سُود",
+           "black"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "اشترى",
+         "en": "to buy",
+         "tr": "ishtarā",
+         "note": "Present يشتري."
+        },
+        {
+         "t": "باع",
+         "en": "to sell",
+         "tr": "bāʿa",
+         "note": "Present يبيع."
+        },
+        {
+         "t": "سعر",
+         "en": "price",
+         "tr": "siʿr",
+         "note": "Plural أسعار."
+        },
+        {
+         "t": "رخيص",
+         "en": "cheap",
+         "tr": "rakhīṣ"
+        },
+        {
+         "t": "غالي",
+         "en": "expensive",
+         "tr": "ghālī",
+         "note": "Formal Arabic writes غالٍ without the ي when indefinite."
+        },
+        {
+         "t": "أصلح",
+         "en": "to repair",
+         "tr": "aṣlaḥa",
+         "note": "Spoken: صلّح ṣallaḥ."
+        },
+        {
+         "t": "غسل",
+         "en": "to wash (something)",
+         "tr": "ghasala"
+        },
+        {
+         "t": "مفروشات",
+         "en": "furniture",
+         "tr": "mafrūshāt",
+         "note": "Levantine: فرش farsh; Egyptian: عفش ʿafsh."
+        },
+        {
+         "t": "خزانة",
+         "en": "wardrobe, closet",
+         "tr": "khizāna",
+         "note": "Egyptian: دولاب dulāb."
+        },
+        {
+         "t": "ثلاجة",
+         "en": "refrigerator",
+         "tr": "thallāja",
+         "note": "Levantine: برّاد barrād; Egyptian: تلاجة tallāga."
+        },
+        {
+         "t": "لون",
+         "en": "colour",
+         "tr": "lawn",
+         "note": "Plural ألوان."
+        },
+        {
+         "t": "يسار",
+         "en": "left",
+         "tr": "yasār",
+         "note": "Spoken: شمال shmāl."
+        }
+       ],
+       "examples": [
+        {
+         "t": "اشتريتُ قميصاً أزرق وتنورة حمراء.",
+         "en": "I bought a blue shirt and a red skirt.",
+         "tr": "ishtaraytu qamīṣan azraq wa-tannūra ḥamrāʾ.",
+         "note": "The colour agrees with its noun: أزرق (masculine), حمراء (feminine)."
+        },
+        {
+         "t": "ما زالت الأسعار غالية.",
+         "en": "Prices are still high.",
+         "tr": "mā zālat al-asʿār ghāliya."
+        },
+        {
+         "t": "من الصعب أن أجد ثلاجة رخيصة.",
+         "en": "It's hard to find a cheap fridge.",
+         "tr": "min aṣ-ṣaʿb an ajida thallāja rakhīṣa."
+        },
+        {
+         "t": "قدّيش حقّو؟ — المحلّ محلّك!",
+         "en": "How much is it? — The shop is yours! (a polite welcome, not a gift)",
+         "tr": "ʾaddēsh ḥaʾʾo? — il-maḥall maḥallak!"
+        }
+       ],
+       "culture": {
+        "title": "The traditional souq",
+        "body": [
+         "A traditional Arab souq is a network of smaller markets, each specialising in one kind of goods: spices, gold, fabric, copper. Lanes are often named after what they sell, and the main market usually sits beside the city's great mosque.",
+         "Damascus's Souq al-Hamidiyya (سوق الحميدية), a long covered market from the Ottoman era named after Sultan Abdul Hamid, leads to the Umayyad Mosque. Nearby are specialised markets such as al-Buzuriyya (البزورية) for spices and sweets.",
+         "Prices for many goods are agreed by bargaining. Shopkeepers selling the same goods sit side by side and often send customers to each other rather than compete.",
+         "Many old markets have a حمّام, a public steam bath with several rooms. It is still part of everyday life in parts of North Africa and a popular experience in old Damascus, Aleppo and Cairo.",
+         "Shop phrases: يعطيك العافية (said to someone working; reply: الله يعافيك), مبروك (said on a purchase too; reply: الله يبارك فيك), تكرم عينك (with pleasure, Levantine)."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-kit-3-q1",
+         "q": "تعلّم (to learn) is the Form V partner of…",
+         "options": [
+          "معلّم (teacher)",
+          "استعلم (to inquire)",
+          "علّم (to teach)",
+          "عَلِم (to know)"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-kit-3-q2",
+         "q": "'A red car' (سيارة is feminine) is…",
+         "options": [
+          "سيارة أحمر",
+          "سيارة حُمر",
+          "سيارة حمراء",
+          "سيارة أحمرة"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-kit-3-q3",
+         "q": "ما زلتُ أبحث عن شقة means…",
+         "options": [
+          "I never looked for a flat",
+          "I will look for a flat",
+          "I'm still looking for a flat",
+          "I stopped looking for a flat"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-kit-3-q4",
+         "q": "After أصبح, a predicate adjective is…",
+         "options": [
+          "always a verb",
+          "nominative (-un)",
+          "genitive (-in)",
+          "accusative (-an)"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-kit-3-q5",
+         "q": "In Levantine and Egyptian speech, 'left' is…",
+         "options": [
+          "شمال",
+          "يسار",
+          "يمين",
+          "جنوب"
+         ],
+         "answer": 0
+        }
+       ]
+      },
+      {
+       "id": "ar-kit-4",
+       "title": "Occasions & Preparations",
+       "level": "B2",
+       "summary": "Case endings (الإعراب), the genitive and the five nouns, with wishes for every occasion. Goes with Al-Kitaab 2, Lesson 4.",
+       "grammar": {
+        "title": "Case endings (الإعراب) and the genitive",
+        "body": [
+         "Formal Arabic marks a noun's role with short-vowel endings, written only in fully vowelled texts (the Quran, poetry, children's books) and heard in formal speeches and the news: nominative (مرفوع) -u, accusative (منصوب) -a, genitive (مجرور) -i.",
+         "Indefinite nouns double the vowel (tanwīn): -un, -an, -in. Only accusative -an is normally visible, written with an extra alif: كتاباً.",
+         "The genitive marks (1) nouns after a preposition: في البيتِ، منذ الصباحِ; and (2) every noun of an iḍāfa after the first: بطاقةُ دعوةٍ، كتابُ الطالبِ.",
+         "Masculine human plurals have two forms: -ūna (nominative) and -īna (accusative and genitive): المهندسون / المهندسين. Spoken Arabic uses only -īn.",
+         "Five special nouns, including أب and أخ, lengthen the case vowel when they are possessed: هذا أبو خالد، رأيتُ أبا خالد، مع أبي خالد. That is why kunyas change in formal sentences."
+        ],
+        "table": {
+         "headers": [
+          "Case",
+          "Definite",
+          "Indefinite",
+          "Used for"
+         ],
+         "rows": [
+          [
+           "Nominative مرفوع",
+           "الطالبُ",
+           "طالبٌ",
+           "subjects and predicates"
+          ],
+          [
+           "Accusative منصوب",
+           "الطالبَ",
+           "طالباً",
+           "objects, the predicate of كان, adverbs"
+          ],
+          [
+           "Genitive مجرور",
+           "الطالبِ",
+           "طالبٍ",
+           "after prepositions and in iḍāfa"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "حفلة",
+         "en": "party, celebration",
+         "tr": "ḥafla",
+         "note": "Plural حفلات."
+        },
+        {
+         "t": "عرس",
+         "en": "wedding",
+         "tr": "ʿurs",
+         "note": "Egyptian: فرح faraḥ."
+        },
+        {
+         "t": "دعا",
+         "en": "to invite; to call; to pray",
+         "tr": "daʿā",
+         "note": "Present يدعو. Spoken: عزم ʿazam."
+        },
+        {
+         "t": "بطاقة دعوة",
+         "en": "invitation card",
+         "tr": "biṭāqat daʿwa",
+         "note": "Levantine: كرت دعوة kart daʿwe."
+        },
+        {
+         "t": "صام",
+         "en": "to fast",
+         "tr": "ṣāma",
+         "note": "Present يصوم."
+        },
+        {
+         "t": "أفطر",
+         "en": "to break a fast; to have breakfast",
+         "tr": "afṭara"
+        },
+        {
+         "t": "السحور",
+         "en": "the meal before dawn in Ramadan",
+         "tr": "as-saḥūr"
+        },
+        {
+         "t": "رحلة",
+         "en": "trip, flight",
+         "tr": "riḥla"
+        },
+        {
+         "t": "قلق",
+         "en": "anxiety, worry",
+         "tr": "qalaq"
+        },
+        {
+         "t": "اعتاد على",
+         "en": "to get used to",
+         "tr": "iʿtāda ʿalā",
+         "note": "Spoken: تعوّد على tʿawwad ʿala."
+        },
+        {
+         "t": "اجتمع مع",
+         "en": "to meet with",
+         "tr": "ijtamaʿa maʿa"
+        },
+        {
+         "t": "اختلف عن",
+         "en": "to differ from",
+         "tr": "ikhtalafa ʿan",
+         "note": "اختلف مع = to disagree with."
+        }
+       ],
+       "examples": [
+        {
+         "t": "كل عام وأنتم بخير!",
+         "en": "Happy holidays! (literally: every year, and may you be well)",
+         "tr": "kull ʿām wa-antum bi-khayr!",
+         "note": "Reply: وأنتم بخير. Levantine: كل سنة وانتو سالمين; Egyptian: كل سنة وانتو طيبين."
+        },
+        {
+         "t": "دعانا أصدقاؤنا إلى حفلة عرس ابنتهم.",
+         "en": "Our friends invited us to their daughter's wedding party.",
+         "tr": "daʿānā aṣdiqāʾunā ilā ḥaflat ʿurs ibnatihim."
+        },
+        {
+         "t": "في رمضان نصوم من الفجر إلى المغرب.",
+         "en": "In Ramadan we fast from dawn to sunset.",
+         "tr": "fī Ramaḍān naṣūmu min al-fajr ilā al-maghrib."
+        },
+        {
+         "t": "مبروك! — الله يبارك فيك، عقبال عندك!",
+         "en": "Congratulations! — Thank you, may it be your turn next!",
+         "tr": "mabrūk! — aḷḷa ybārik fīk, ʿuʾbāl ʿandak!"
+        }
+       ],
+       "culture": {
+        "title": "A wish for every occasion, and the kunya",
+        "body": [
+         "For holidays and birthdays say كل عام وأنتم بخير (or a spoken version). For weddings, graduations, a new baby or a new car say مبروك, answered with الله يبارك فيك. After a wedding مبروك, the reply often adds عقبالك / عقبال عندك (may you be next!).",
+         "In Ramadan, Muslims fast from dawn to sunset, eat سحور before dawn and break the fast at إفطار. Evenings are social: family visits, special sweets, and TV series (مسلسلات) made for the month. Greet people with رمضان كريم (reply: الله أكرم) or رمضان مبارك.",
+         "Many people are called by a kunya (كنية): أبو or أم plus the name of their eldest son, or daughter if there are no sons, as in أبو خالد and أم خالد. It sounds warm and respectful. Some names come with a traditional kunya: a man named حسين is often called أبو علي."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-kit-4-q1",
+         "q": "Which underlined word would be genitive (مجرور)?",
+         "options": [
+          "جميلاً in كان الجوّ جميلاً",
+          "الطالب in جاء الطالب",
+          "كتاباً in قرأتُ كتاباً",
+          "البيت in في البيت"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-kit-4-q2",
+         "q": "In مع أبي خالد, the word أبي is…",
+         "options": [
+          "'my father'",
+          "nominative",
+          "accusative",
+          "genitive, after مع"
+         ],
+         "answer": 3,
+         "explain": "Before a name in an iḍāfa, أب takes a long vowel: أبو / أبا / أبي."
+        },
+        {
+         "id": "ar-kit-4-q3",
+         "q": "Someone says 'كل عام وأنتم بخير'. You reply…",
+         "options": [
+          "سلامتك",
+          "الله يعافيك",
+          "تكرم عينك",
+          "وأنتم بخير"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-kit-4-q4",
+         "q": "Egyptians call a wedding…",
+         "options": [
+          "حفلة",
+          "عرس",
+          "سحور",
+          "فرح"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-kit-4-q5",
+         "q": "السحور is…",
+         "options": [
+          "the meal before dawn in Ramadan",
+          "the meal at sunset",
+          "a kind of sweet",
+          "a wedding dinner"
+         ],
+         "answer": 0
+        }
+       ]
+      },
+      {
+       "id": "ar-kit-5",
+       "title": "Calendars: Three Sets of Months",
+       "level": "A2",
+       "summary": "Egyptian, Levantine and Hijri month names, and why Ramadan moves. Goes with the calendar section of Al-Kitaab 2, Lesson 4.",
+       "grammar": {
+        "title": "Three ways to name the months",
+        "body": [
+         "Egypt, Sudan and Morocco use month names borrowed from European languages: يناير، فبراير، مارس… (Tunisia and Algeria use French-style جانفي، فيفري…).",
+         "Syria, Lebanon, Jordan, Palestine and Iraq use older names of Syriac origin: كانون الثاني (January), شباط (February), آذار (March)… Newspapers often print both: آذار (مارس).",
+         "The Islamic (Hijri) calendar is lunar: twelve months of 29 or 30 days, about 11 days shorter than the solar year. Year 1 began with the Prophet's migration (الهجرة) from Mecca to Medina in 622 CE.",
+         "Dates are often marked هـ (Hijri) or م (ميلادي, Gregorian), and Gulf countries use both calendars side by side."
+        ],
+        "table": {
+         "headers": [
+          "No.",
+          "Egypt & Morocco",
+          "Levant & Iraq",
+          "Hijri months, in order"
+         ],
+         "rows": [
+          [
+           "1",
+           "يناير",
+           "كانون الثاني",
+           "مُحرّم"
+          ],
+          [
+           "2",
+           "فبراير",
+           "شباط",
+           "صفر"
+          ],
+          [
+           "3",
+           "مارس",
+           "آذار",
+           "ربيع الأول"
+          ],
+          [
+           "4",
+           "أبريل",
+           "نيسان",
+           "ربيع الآخر"
+          ],
+          [
+           "5",
+           "مايو",
+           "أيار",
+           "جمادى الأولى"
+          ],
+          [
+           "6",
+           "يونيو",
+           "حزيران",
+           "جمادى الآخرة"
+          ],
+          [
+           "7",
+           "يوليو",
+           "تموز",
+           "رجب"
+          ],
+          [
+           "8",
+           "أغسطس",
+           "آب",
+           "شعبان"
+          ],
+          [
+           "9",
+           "سبتمبر",
+           "أيلول",
+           "رمضان"
+          ],
+          [
+           "10",
+           "أكتوبر",
+           "تشرين الأول",
+           "شوّال"
+          ],
+          [
+           "11",
+           "نوفمبر",
+           "تشرين الثاني",
+           "ذو القعدة"
+          ],
+          [
+           "12",
+           "ديسمبر",
+           "كانون الأول",
+           "ذو الحجة"
+          ]
+         ]
+        }
+       },
+       "vocab": [
+        {
+         "t": "شهر",
+         "en": "month",
+         "tr": "shahr",
+         "note": "Plural أشهر or شهور."
+        },
+        {
+         "t": "السنة الهجرية",
+         "en": "the Hijri (Islamic) year",
+         "tr": "as-sana al-hijriyya"
+        },
+        {
+         "t": "السنة الميلادية",
+         "en": "the Gregorian year",
+         "tr": "as-sana al-mīlādiyya"
+        },
+        {
+         "t": "رمضان",
+         "en": "Ramadan, the month of fasting",
+         "tr": "Ramaḍān"
+        },
+        {
+         "t": "عيد الفطر",
+         "en": "Eid al-Fitr, the feast after Ramadan",
+         "tr": "ʿīd al-fiṭr",
+         "note": "On 1 Shawwal."
+        },
+        {
+         "t": "عيد الأضحى",
+         "en": "Eid al-Adha, the Feast of the Sacrifice",
+         "tr": "ʿīd al-aḍḥā",
+         "note": "On 10 Dhu al-Hijja, during the Hajj."
+        },
+        {
+         "t": "الهلال",
+         "en": "the crescent moon",
+         "tr": "al-hilāl"
+        },
+        {
+         "t": "عيدية",
+         "en": "Eid money given to children",
+         "tr": "ʿīdiyya"
+        }
+       ],
+       "examples": [
+        {
+         "t": "وُلدتُ في شهر آذار.",
+         "en": "I was born in March. (Levantine month name)",
+         "tr": "wulidtu fī shahr Ādhār."
+        },
+        {
+         "t": "يبدأ العام الدراسي في سبتمبر.",
+         "en": "The school year starts in September.",
+         "tr": "yabdaʾu al-ʿām ad-dirāsī fī Sibtambar."
+        },
+        {
+         "t": "يصوم المسلمون شهر رمضان، ثم يحتفلون بعيد الفطر.",
+         "en": "Muslims fast the month of Ramadan, then celebrate Eid al-Fitr.",
+         "tr": "yaṣūmu al-muslimūna shahr Ramaḍān, thumma yaḥtafilūna bi-ʿīd al-fiṭr."
+        },
+        {
+         "t": "عيد مبارك! — علينا وعليك!",
+         "en": "Blessed Eid! — To us and to you!",
+         "tr": "ʿīd mubārak! — ʿalēna w-ʿalēk!"
+        }
+       ],
+       "culture": {
+        "title": "Why Ramadan moves",
+        "body": [
+         "Because the Hijri year is about 11 days shorter, Ramadan starts about 11 days earlier each Gregorian year and moves through every season in roughly 33 years. A summer Ramadan means long, hot fasting days.",
+         "Each Hijri month begins when the new crescent (الهلال) is sighted, so the start of Ramadan or Eid can differ by a day between countries.",
+         "Both Eids are public holidays: families visit, children get new clothes and عيدية (Eid money), and people greet each other with عيد مبارك or كل عام وأنتم بخير."
+        ]
+       },
+       "quiz": [
+        {
+         "id": "ar-kit-5-q1",
+         "q": "In Damascus, 'April' is…",
+         "options": [
+          "أيار",
+          "أبريل",
+          "آذار",
+          "نيسان"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-kit-5-q2",
+         "q": "In Cairo, 'August' is…",
+         "options": [
+          "أيلول",
+          "آب",
+          "يوليو",
+          "أغسطس"
+         ],
+         "answer": 3
+        },
+        {
+         "id": "ar-kit-5-q3",
+         "q": "The Hijri year is…",
+         "options": [
+          "used only in Egypt",
+          "solar, like the Gregorian year",
+          "lunar, about 11 days shorter than the solar year",
+          "longer than the Gregorian year"
+         ],
+         "answer": 2
+        },
+        {
+         "id": "ar-kit-5-q4",
+         "q": "Eid al-Fitr falls on the first day of…",
+         "options": [
+          "رمضان",
+          "ذو الحجة",
+          "شوّال",
+          "مُحرّم"
+         ],
+         "answer": 2
+        }
+       ]
+      }
+     ]
+    },
+    {
      "id": "ar-story",
      "title": "Storytelling",
      "nativeTitle": "الحكايات",
@@ -7375,6 +8493,348 @@
        ]
       }
      ]
+    },
+    {
+     "id": "ar-sc-flat",
+     "title": "Renting a Flat in Damascus",
+     "level": "B1",
+     "emoji": "🏢",
+     "icon": "building.2",
+     "setting": "You need a flat for a year of study. A simsar (agent) meets you near the university.",
+     "goal": "Ask about the rooms, the floor, the rent and the furniture, then arrange a visit.",
+     "steps": [
+      {
+       "speaker": "Simsar",
+       "line": {
+        "t": "أهلين! شو بدّك بالضبط؟",
+        "en": "Welcome! What exactly are you looking for?",
+        "tr": "ahlēn! shū biddak bi-ẓ-ẓabṭ?"
+       },
+       "prompt": "Say you want a small furnished flat near the university.",
+       "choices": [
+        {
+         "t": "بدّي شقة صغيرة مفروشة قريبة من الجامعة.",
+         "en": "I want a small furnished flat near the university.",
+         "correct": true,
+         "feedback": "Size, furniture and location: clear.",
+         "tr": "biddi shaʾʾa zġīre mafrūshe ʾarībe mn ij-jāmʿa."
+        },
+        {
+         "t": "أنا شقة.",
+         "en": "I am a flat.",
+         "correct": false,
+         "feedback": "Use بدّي (I want) + شقة.",
+         "tr": "ana shaʾʾa."
+        },
+        {
+         "t": "بدّي جامعة صغيرة.",
+         "en": "I want a small university.",
+         "correct": false,
+         "feedback": "You want a شقة (flat), not a university!",
+         "tr": "biddi jāmʿa zġīre."
+        }
+       ]
+      },
+      {
+       "speaker": "Simsar",
+       "line": {
+        "t": "عندي شقة حلوة بالطابق الرابع، فيها غرفتين ومطبخ وحمّام.",
+        "en": "I have a nice flat on the fourth floor. It has two rooms, a kitchen and a bathroom.",
+        "tr": "ʿindi shaʾʾa ḥilwe bi-ṭ-ṭābeʾ ir-rābeʿ, fīha ghurftēn w-maṭbakh w-ḥammām."
+       },
+       "prompt": "What does the flat have?",
+       "choices": [
+        {
+         "t": "",
+         "en": "One room and no kitchen",
+         "correct": false,
+         "feedback": "He mentioned مطبخ, a kitchen."
+        },
+        {
+         "t": "",
+         "en": "Four rooms on the second floor",
+         "correct": false,
+         "feedback": "الرابع = the fourth (floor); غرفتين = two rooms."
+        },
+        {
+         "t": "",
+         "en": "Two rooms, a kitchen and a bathroom, on the fourth floor",
+         "correct": true,
+         "feedback": "فيها = it has; غرفتين = two rooms (dual)."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Ask whether there is a lift.",
+       "choices": [
+        {
+         "t": "في أسانسير؟",
+         "en": "Is there a lift?",
+         "correct": true,
+         "feedback": "في + noun = there is. Levantine uses أسانسير, from French.",
+         "tr": "fī asansēr?"
+        },
+        {
+         "t": "عندو أسانسير؟",
+         "en": "Does he have a lift?",
+         "correct": false,
+         "feedback": "For places use في (there is), not عند (to have).",
+         "tr": "ʿando asansēr?"
+        },
+        {
+         "t": "وين الأسانسير تبعي؟",
+         "en": "Where is my lift?",
+         "correct": false,
+         "feedback": "It isn't yours yet!",
+         "tr": "wēn il-asansēr tabaʿi?"
+        }
+       ]
+      },
+      {
+       "speaker": "Simsar",
+       "line": {
+        "t": "لا والله، ما في. بس الإيجار رخيص: مية دولار بالشهر.",
+        "en": "No, there isn't. But the rent is cheap: a hundred dollars a month.",
+        "tr": "la wallāh, ma fī. bas il-ījār rkhīṣ: mīt dolār bi-sh-shahr."
+       },
+       "prompt": "What did he say?",
+       "choices": [
+        {
+         "t": "",
+         "en": "There's no lift, but the rent is cheap: $100 a month",
+         "correct": true,
+         "feedback": "ما في = there isn't; بالشهر = per month."
+        },
+        {
+         "t": "",
+         "en": "The rent is expensive",
+         "correct": false,
+         "feedback": "رخيص = cheap."
+        },
+        {
+         "t": "",
+         "en": "There is a lift, and the rent is $100 a week",
+         "correct": false,
+         "feedback": "ما في = there isn't, and بالشهر = per month."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Ask whether it is furnished and whether you can see it today.",
+       "choices": [
+        {
+         "t": "الشقة بتشوفني اليوم؟",
+         "en": "Will the flat see me today?",
+         "correct": false,
+         "feedback": "You've swapped who sees whom!",
+         "tr": "ish-shaʾʾa btshūfni il-yōm?"
+        },
+        {
+         "t": "الشقة مفروشة؟ فيني شوفها اليوم؟",
+         "en": "Is the flat furnished? Can I see it today?",
+         "correct": true,
+         "feedback": "فيني = I can (Levantine).",
+         "tr": "ish-shaʾʾa mafrūshe? fīni shūfa il-yōm?"
+        },
+        {
+         "t": "بدّي اشتري الشقة هلّق.",
+         "en": "I want to buy the flat right now.",
+         "correct": false,
+         "feedback": "You want to rent it, and see it first.",
+         "tr": "biddi ishtiri ish-shaʾʾa hallaʾ."
+        }
+       ]
+      },
+      {
+       "speaker": "Simsar",
+       "line": {
+        "t": "أكيد! يلّا نروح هلّق.",
+        "en": "Of course! Let's go now.",
+        "tr": "akīd! yalla nrūḥ hallaʾ."
+       },
+       "prompt": "Agree and thank him for his trouble.",
+       "choices": [
+        {
+         "t": "سلامتك!",
+         "en": "Get well soon!",
+         "correct": false,
+         "feedback": "He isn't ill.",
+         "tr": "salāmtak!"
+        },
+        {
+         "t": "مبروك!",
+         "en": "Congratulations!",
+         "correct": false,
+         "feedback": "Nothing to congratulate yet.",
+         "tr": "mabrūk!"
+        },
+        {
+         "t": "تمام، يعطيك العافية!",
+         "en": "Great, thanks for your trouble!",
+         "correct": true,
+         "feedback": "He will answer الله يعافيك.",
+         "tr": "tamām, yaʿṭīk il-ʿāfye!"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ar-sc-wedding",
+     "title": "A Wedding Invitation in Amman",
+     "level": "B1",
+     "emoji": "💍",
+     "icon": "envelope.open",
+     "setting": "A colleague in Amman hands you an invitation to her brother's wedding.",
+     "goal": "Congratulate her, accept the invitation and use the right wishes at the party.",
+     "steps": [
+      {
+       "speaker": "Colleague",
+       "line": {
+        "t": "تفضّل، هاي بطاقة دعوة لعرس أخوي يوم الخميس.",
+        "en": "Here you go, this is an invitation to my brother's wedding on Thursday.",
+        "tr": "tfaḍḍal, hāy biṭāʾat daʿwe la-ʿurs akhūy yōm il-khamīs."
+       },
+       "prompt": "Congratulate her.",
+       "choices": [
+        {
+         "t": "سلامتك!",
+         "en": "Get well soon!",
+         "correct": false,
+         "feedback": "That's for someone who is ill.",
+         "tr": "salāmtik!"
+        },
+        {
+         "t": "مبروك! ألف مبروك!",
+         "en": "Congratulations! A thousand congratulations!",
+         "correct": true,
+         "feedback": "Perfect.",
+         "tr": "mabrūk! alf mabrūk!"
+        },
+        {
+         "t": "رمضان كريم!",
+         "en": "Happy Ramadan!",
+         "correct": false,
+         "feedback": "Wrong occasion.",
+         "tr": "ramaḍān karīm!"
+        }
+       ]
+      },
+      {
+       "speaker": "Colleague",
+       "line": {
+        "t": "الله يبارك فيك! عقبالك!",
+        "en": "Thank you! May you be next!",
+        "tr": "aḷḷa ybārik fīk! ʿuʾbālak!"
+       },
+       "prompt": "What did she wish you?",
+       "choices": [
+        {
+         "t": "",
+         "en": "That you bring a big present",
+         "correct": false,
+         "feedback": "Nothing about presents."
+        },
+        {
+         "t": "",
+         "en": "That you'll be the next to celebrate a wedding",
+         "correct": true,
+         "feedback": "عقبالك = may it be your turn (next)."
+        },
+        {
+         "t": "",
+         "en": "That you arrive on time",
+         "correct": false,
+         "feedback": "عقبالك wishes you a happy event of your own."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "Accept the invitation politely.",
+       "choices": [
+        {
+         "t": "أكيد رح إجي، شكراً على الدعوة!",
+         "en": "Of course I'll come, thanks for the invitation!",
+         "correct": true,
+         "feedback": "رح = will (Levantine).",
+         "tr": "akīd raḥ ʾiji, shukran ʿa-d-daʿwe!"
+        },
+        {
+         "t": "ما بحبّ الأعراس.",
+         "en": "I don't like weddings.",
+         "correct": false,
+         "feedback": "Honest, but rude!",
+         "tr": "ma bḥibb il-aʿrās."
+        },
+        {
+         "t": "مين أخوكِ؟",
+         "en": "Who is your brother?",
+         "correct": false,
+         "feedback": "Not the best reply to an invitation.",
+         "tr": "mīn akhūki?"
+        }
+       ]
+      },
+      {
+       "speaker": "Colleague",
+       "line": {
+        "t": "الحفلة الساعة تسعة بالليل بفندق قريب من الدوّار السابع.",
+        "en": "The party is at nine at night, in a hotel near Seventh Circle.",
+        "tr": "il-ḥafle is-sāʿa tisʿa bi-l-lēl b-funduʾ ʾarīb min id-dawwār is-sābiʿ."
+       },
+       "prompt": "When and where is it?",
+       "choices": [
+        {
+         "t": "",
+         "en": "On Saturday morning",
+         "correct": false,
+         "feedback": "She said Thursday, at night."
+        },
+        {
+         "t": "",
+         "en": "At 7 pm, at her house",
+         "correct": false,
+         "feedback": "تسعة = nine; فندق = hotel."
+        },
+        {
+         "t": "",
+         "en": "At 9 pm, in a hotel near Seventh Circle",
+         "correct": true,
+         "feedback": "الدوّار السابع (Seventh Circle) is a well-known roundabout in Amman."
+        }
+       ],
+       "mode": "understand"
+      },
+      {
+       "prompt": "At the wedding, greet the groom's mother.",
+       "choices": [
+        {
+         "t": "مبروك! الله يتمّم بالخير.",
+         "en": "Congratulations! May God bring it to a happy completion.",
+         "correct": true,
+         "feedback": "A classic wedding wish.",
+         "tr": "mabrūk! aḷḷa ytammim bi-l-khēr."
+        },
+        {
+         "t": "يعطيكي العافية.",
+         "en": "God give you strength (for your work).",
+         "correct": false,
+         "feedback": "That's said to someone working, not at a wedding.",
+         "tr": "yaʿṭīki il-ʿāfye."
+        },
+        {
+         "t": "كل سنة وانتِ سالمة.",
+         "en": "Many happy returns.",
+         "correct": false,
+         "feedback": "That's for yearly holidays and birthdays.",
+         "tr": "kull sane w-inti salme."
+        }
+       ]
+      }
+     ]
     }
    ],
    "aptitude": [
@@ -10038,6 +11498,641 @@
      "t": "تسلم إيدك",
      "tr": "tislam īdak",
      "en": "bless your hand (thank you)"
+    },
+    {
+     "t": "شقة",
+     "tr": "shaqqa",
+     "en": "apartment; flat"
+    },
+    {
+     "t": "شقق",
+     "tr": "shuqaq",
+     "en": "apartments"
+    },
+    {
+     "t": "طابق",
+     "tr": "ṭābiq",
+     "en": "floor; storey"
+    },
+    {
+     "t": "دور",
+     "tr": "dōr",
+     "en": "floor (Egyptian); turn; role"
+    },
+    {
+     "t": "مطابخ",
+     "tr": "maṭābikh",
+     "en": "kitchens"
+    },
+    {
+     "t": "استأجر",
+     "tr": "istaʾjara",
+     "en": "to rent"
+    },
+    {
+     "t": "إيجار",
+     "tr": "ījār",
+     "en": "rent"
+    },
+    {
+     "t": "حديقة",
+     "tr": "ḥadīqa",
+     "en": "garden; park"
+    },
+    {
+     "t": "جنينة",
+     "tr": "jnēne / gnēna",
+     "en": "garden (spoken)"
+    },
+    {
+     "t": "جنب",
+     "tr": "janb",
+     "en": "next to (spoken)"
+    },
+    {
+     "t": "ترك",
+     "tr": "taraka",
+     "en": "to leave (something)"
+    },
+    {
+     "t": "ساب",
+     "tr": "sāb",
+     "en": "to leave (Egyptian)"
+    },
+    {
+     "t": "خصوصية",
+     "tr": "khuṣūṣiyya",
+     "en": "privacy"
+    },
+    {
+     "t": "استقلال",
+     "tr": "istiqlāl",
+     "en": "independence"
+    },
+    {
+     "t": "سمسار",
+     "tr": "simsār",
+     "en": "property agent; middleman"
+    },
+    {
+     "t": "بواب",
+     "tr": "bawwāb",
+     "en": "doorman; building caretaker"
+    },
+    {
+     "t": "بناية",
+     "tr": "bināya",
+     "en": "building"
+    },
+    {
+     "t": "مفروش",
+     "tr": "mafrūsh",
+     "en": "furnished"
+    },
+    {
+     "t": "مسبح",
+     "tr": "masbaḥ",
+     "en": "swimming pool"
+    },
+    {
+     "t": "منزل",
+     "tr": "manzil",
+     "en": "residence; house"
+    },
+    {
+     "t": "انتقل",
+     "tr": "intaqala",
+     "en": "to move (house)"
+    },
+    {
+     "t": "فاضي",
+     "tr": "fāḍī",
+     "en": "empty; free; not busy"
+    },
+    {
+     "t": "أسانسير",
+     "tr": "asansēr",
+     "en": "lift; elevator (spoken)"
+    },
+    {
+     "t": "هاجر",
+     "tr": "hājara",
+     "en": "to emigrate; to immigrate"
+    },
+    {
+     "t": "هجرة",
+     "tr": "hijra",
+     "en": "emigration; migration"
+    },
+    {
+     "t": "مهاجر",
+     "tr": "muhājir",
+     "en": "immigrant; emigrant"
+    },
+    {
+     "t": "مهجر",
+     "tr": "mahjar",
+     "en": "diaspora; land of emigration"
+    },
+    {
+     "t": "جالية",
+     "tr": "jāliya",
+     "en": "immigrant community"
+    },
+    {
+     "t": "هوية",
+     "tr": "huwiyya",
+     "en": "identity; ID card"
+    },
+    {
+     "t": "بحث",
+     "tr": "baḥatha / baḥth",
+     "en": "to look for; research"
+    },
+    {
+     "t": "دور على",
+     "tr": "dawwar ʿala",
+     "en": "to look for (spoken)"
+    },
+    {
+     "t": "بقي",
+     "tr": "baqiya",
+     "en": "to stay; to remain"
+    },
+    {
+     "t": "قعد",
+     "tr": "ʾaʿad",
+     "en": "to stay; to sit (spoken)"
+    },
+    {
+     "t": "تياب",
+     "tr": "tyāb",
+     "en": "clothes (Levantine)"
+    },
+    {
+     "t": "هدوم",
+     "tr": "hdūm",
+     "en": "clothes (Egyptian)"
+    },
+    {
+     "t": "حرية",
+     "tr": "ḥurriyya",
+     "en": "freedom"
+    },
+    {
+     "t": "أجنبي",
+     "tr": "ajnabī",
+     "en": "foreign; foreigner"
+    },
+    {
+     "t": "أجانب",
+     "tr": "ajānib",
+     "en": "foreigners"
+    },
+    {
+     "t": "شمال",
+     "tr": "shamāl",
+     "en": "north; left (spoken)"
+    },
+    {
+     "t": "جنوب",
+     "tr": "janūb",
+     "en": "south"
+    },
+    {
+     "t": "شرق",
+     "tr": "sharq",
+     "en": "east"
+    },
+    {
+     "t": "غرب",
+     "tr": "gharb",
+     "en": "west"
+    },
+    {
+     "t": "غضب",
+     "tr": "ghaḍiba / ghaḍab",
+     "en": "to get angry; anger"
+    },
+    {
+     "t": "زعلان",
+     "tr": "zaʿlān",
+     "en": "upset; angry (spoken)"
+    },
+    {
+     "t": "اللي",
+     "tr": "illi",
+     "en": "who; which; that (spoken)"
+    },
+    {
+     "t": "الذي",
+     "tr": "alladhī",
+     "en": "who; which (m.)"
+    },
+    {
+     "t": "التي",
+     "tr": "allatī",
+     "en": "who; which (f.)"
+    },
+    {
+     "t": "الذين",
+     "tr": "alladhīna",
+     "en": "who (m. pl.)"
+    },
+    {
+     "t": "باع",
+     "tr": "bāʿa",
+     "en": "to sell"
+    },
+    {
+     "t": "أسعار",
+     "tr": "asʿār",
+     "en": "prices"
+    },
+    {
+     "t": "أصلح",
+     "tr": "aṣlaḥa",
+     "en": "to repair"
+    },
+    {
+     "t": "صلح",
+     "tr": "ṣallaḥ",
+     "en": "to repair (spoken)"
+    },
+    {
+     "t": "مفروشات",
+     "tr": "mafrūshāt",
+     "en": "furniture"
+    },
+    {
+     "t": "عفش",
+     "tr": "ʿafsh",
+     "en": "furniture (Egyptian)"
+    },
+    {
+     "t": "خزانة",
+     "tr": "khizāna",
+     "en": "wardrobe; closet"
+    },
+    {
+     "t": "دولاب",
+     "tr": "dulāb",
+     "en": "wardrobe (Egyptian)"
+    },
+    {
+     "t": "ثلاجة",
+     "tr": "thallāja",
+     "en": "refrigerator"
+    },
+    {
+     "t": "براد",
+     "tr": "barrād",
+     "en": "refrigerator (Levantine)"
+    },
+    {
+     "t": "ألوان",
+     "tr": "alwān",
+     "en": "colours"
+    },
+    {
+     "t": "حمراء",
+     "tr": "ḥamrāʾ",
+     "en": "red (f.)"
+    },
+    {
+     "t": "زرقاء",
+     "tr": "zarqāʾ",
+     "en": "blue (f.)"
+    },
+    {
+     "t": "خضراء",
+     "tr": "khaḍrāʾ",
+     "en": "green (f.)"
+    },
+    {
+     "t": "صفراء",
+     "tr": "ṣafrāʾ",
+     "en": "yellow (f.)"
+    },
+    {
+     "t": "بيضاء",
+     "tr": "bayḍāʾ",
+     "en": "white (f.)"
+    },
+    {
+     "t": "سوداء",
+     "tr": "sawdāʾ",
+     "en": "black (f.)"
+    },
+    {
+     "t": "بني",
+     "tr": "bunnī",
+     "en": "brown"
+    },
+    {
+     "t": "رمادي",
+     "tr": "ramādī",
+     "en": "grey"
+    },
+    {
+     "t": "برتقالي",
+     "tr": "burtuqālī",
+     "en": "orange (colour)"
+    },
+    {
+     "t": "وردي",
+     "tr": "wardī",
+     "en": "pink"
+    },
+    {
+     "t": "تغير",
+     "tr": "taghayyara",
+     "en": "to change (by itself)"
+    },
+    {
+     "t": "غير",
+     "tr": "ghayyara / ghayr",
+     "en": "to change (something); other than"
+    },
+    {
+     "t": "ما زال",
+     "tr": "mā zāla",
+     "en": "still"
+    },
+    {
+     "t": "أصبح",
+     "tr": "aṣbaḥa",
+     "en": "to become"
+    },
+    {
+     "t": "صار",
+     "tr": "ṣāra",
+     "en": "to become"
+    },
+    {
+     "t": "تكرم عينك",
+     "tr": "tikram ʿēnak",
+     "en": "with pleasure (Levantine)"
+    },
+    {
+     "t": "المحل محلك",
+     "tr": "il-maḥall maḥallak",
+     "en": "the shop is yours (polite welcome)"
+    },
+    {
+     "t": "حفلة",
+     "tr": "ḥafla",
+     "en": "party; celebration"
+    },
+    {
+     "t": "عرس",
+     "tr": "ʿurs",
+     "en": "wedding"
+    },
+    {
+     "t": "فرح",
+     "tr": "faraḥ",
+     "en": "joy; wedding (Egyptian)"
+    },
+    {
+     "t": "دعا",
+     "tr": "daʿā",
+     "en": "to invite; to call; to pray"
+    },
+    {
+     "t": "عزم",
+     "tr": "ʿazam",
+     "en": "to invite (spoken)"
+    },
+    {
+     "t": "دعوة",
+     "tr": "daʿwa",
+     "en": "invitation"
+    },
+    {
+     "t": "بطاقة",
+     "tr": "biṭāqa",
+     "en": "card"
+    },
+    {
+     "t": "صام",
+     "tr": "ṣāma",
+     "en": "to fast"
+    },
+    {
+     "t": "أفطر",
+     "tr": "afṭara",
+     "en": "to break a fast"
+    },
+    {
+     "t": "سحور",
+     "tr": "saḥūr",
+     "en": "pre-dawn meal in Ramadan"
+    },
+    {
+     "t": "رحلة",
+     "tr": "riḥla",
+     "en": "trip; flight"
+    },
+    {
+     "t": "اعتاد",
+     "tr": "iʿtāda",
+     "en": "to get used to"
+    },
+    {
+     "t": "اجتمع",
+     "tr": "ijtamaʿa",
+     "en": "to meet; to gather"
+    },
+    {
+     "t": "اختلف",
+     "tr": "ikhtalafa",
+     "en": "to differ; to disagree"
+    },
+    {
+     "t": "عاصمة",
+     "tr": "ʿāṣima",
+     "en": "capital city"
+    },
+    {
+     "t": "معهد",
+     "tr": "maʿhad",
+     "en": "institute"
+    },
+    {
+     "t": "عقبالك",
+     "tr": "ʿuʾbālak",
+     "en": "may you be next (wedding wish)"
+    },
+    {
+     "t": "كل عام وأنتم بخير",
+     "tr": "kull ʿām wa-antum bi-khayr",
+     "en": "happy holidays; many happy returns"
+    },
+    {
+     "t": "عيدية",
+     "tr": "ʿīdiyya",
+     "en": "Eid money for children"
+    },
+    {
+     "t": "هلال",
+     "tr": "hilāl",
+     "en": "crescent moon"
+    },
+    {
+     "t": "كنية",
+     "tr": "kunya",
+     "en": "kunya (Abu / Umm + name)"
+    },
+    {
+     "t": "هجري",
+     "tr": "hijrī",
+     "en": "Hijri (Islamic calendar)"
+    },
+    {
+     "t": "ميلادي",
+     "tr": "mīlādī",
+     "en": "Gregorian; AD"
+    },
+    {
+     "t": "كانون الثاني",
+     "tr": "kānūn ath-thānī",
+     "en": "January (Levant)"
+    },
+    {
+     "t": "شباط",
+     "tr": "shubāṭ",
+     "en": "February (Levant)"
+    },
+    {
+     "t": "آذار",
+     "tr": "ādhār",
+     "en": "March (Levant)"
+    },
+    {
+     "t": "نيسان",
+     "tr": "nīsān",
+     "en": "April (Levant)"
+    },
+    {
+     "t": "أيار",
+     "tr": "ayyār",
+     "en": "May (Levant)"
+    },
+    {
+     "t": "حزيران",
+     "tr": "ḥazīrān",
+     "en": "June (Levant)"
+    },
+    {
+     "t": "تموز",
+     "tr": "tammūz",
+     "en": "July (Levant)"
+    },
+    {
+     "t": "آب",
+     "tr": "āb",
+     "en": "August (Levant)"
+    },
+    {
+     "t": "أيلول",
+     "tr": "aylūl",
+     "en": "September (Levant)"
+    },
+    {
+     "t": "تشرين الأول",
+     "tr": "tishrīn al-awwal",
+     "en": "October (Levant)"
+    },
+    {
+     "t": "تشرين الثاني",
+     "tr": "tishrīn ath-thānī",
+     "en": "November (Levant)"
+    },
+    {
+     "t": "كانون الأول",
+     "tr": "kānūn al-awwal",
+     "en": "December (Levant)"
+    },
+    {
+     "t": "يناير",
+     "tr": "yanāyir",
+     "en": "January"
+    },
+    {
+     "t": "فبراير",
+     "tr": "fibrāyir",
+     "en": "February"
+    },
+    {
+     "t": "مارس",
+     "tr": "māris",
+     "en": "March"
+    },
+    {
+     "t": "أبريل",
+     "tr": "abrīl",
+     "en": "April"
+    },
+    {
+     "t": "مايو",
+     "tr": "māyū",
+     "en": "May"
+    },
+    {
+     "t": "يونيو",
+     "tr": "yūnyū",
+     "en": "June"
+    },
+    {
+     "t": "يوليو",
+     "tr": "yūlyū",
+     "en": "July"
+    },
+    {
+     "t": "أغسطس",
+     "tr": "aghusṭus",
+     "en": "August"
+    },
+    {
+     "t": "سبتمبر",
+     "tr": "sibtambar",
+     "en": "September"
+    },
+    {
+     "t": "أكتوبر",
+     "tr": "uktūbar",
+     "en": "October"
+    },
+    {
+     "t": "نوفمبر",
+     "tr": "nūfambar",
+     "en": "November"
+    },
+    {
+     "t": "ديسمبر",
+     "tr": "dīsambar",
+     "en": "December"
+    },
+    {
+     "t": "محرم",
+     "tr": "muḥarram",
+     "en": "Muharram (1st Hijri month)"
+    },
+    {
+     "t": "شعبان",
+     "tr": "shaʿbān",
+     "en": "Shaʿban (8th Hijri month)"
+    },
+    {
+     "t": "شوال",
+     "tr": "shawwāl",
+     "en": "Shawwal (10th Hijri month)"
+    },
+    {
+     "t": "ذو الحجة",
+     "tr": "dhū al-ḥijja",
+     "en": "Dhu al-Hijja (12th Hijri month)"
     }
    ],
    "media": [
@@ -10246,6 +12341,19 @@
      "why": "Long-form MSA narration on history, science and society.",
      "source": "YouTube / satellite",
      "skills": [
+      "listening"
+     ]
+    },
+    {
+     "level": "B1",
+     "type": "Book",
+     "title": "Al-Kitaab fii Taʿallum al-ʿArabiyya, Part Two (الكتاب في تعلّم العربية)",
+     "creator": "Kristen Brustad, Mahmoud Al-Batal & Abbas Al-Tonsi",
+     "why": "The intermediate course the Al-Kitaab Companion lessons follow. It presents formal Arabic, Egyptian and Levantine side by side, with video and audio.",
+     "source": "Georgetown University Press",
+     "skills": [
+      "reading",
+      "writing",
       "listening"
      ]
     }
@@ -10595,6 +12703,223 @@
       "en": "Yesterday the Ministry of Education announced a plan to teach programming in primary schools. According to the ministry, a thousand teachers will be trained this year. In addition, schools will get new devices. In my opinion, the idea is excellent; nevertheless, we must not forget village schools, so I hope the plan will be fair.",
       "tr": "aʿlanat wizārat at-taʿlīm ams ʿan khuṭṭa li-tadrīs al-barmaja fī al-madāris al-ibtidāʾiyya. wa-wifqan li-l-wizāra, sa-yatimmu tadrīb alf muʿallim hādhā al-ʿām. bi-l-iḍāfa ilā dhālika, sa-taḥṣulu al-madāris ʿalā ajhiza jadīda. fī raʾyī, al-fikra mumtāza, wa-maʿa dhālika yajibu allā nansā al-madāris fī al-qurā, li-dhālika atamannā an takūna al-khuṭṭa ʿādila."
      }
+    },
+    {
+     "id": "ar-w-home",
+     "level": "B1",
+     "prompt": "Describe your home, or a flat you would like: where it is, what it has and what is near it. Start some sentences with the place (في شقتي… / أمام… / بجانب…).",
+     "minWords": 20,
+     "requirements": [
+      {
+       "label": "rooms or parts of a home (غرفة، مطبخ، حمام…)",
+       "any": [
+        "غرفة",
+        "غرف",
+        "غرفتا",
+        "مطبخ",
+        "حمام",
+        "شرفة",
+        "صالون",
+        "طابق",
+        "الطابق"
+       ]
+      },
+      {
+       "label": "a place-first sentence (في شقتي…، أمام…، بجانب…)",
+       "any": [
+        "في بيتي",
+        "في شقتي",
+        "في البيت",
+        "في الشقة",
+        "أمام",
+        "بجانب",
+        "وراء",
+        "خلف"
+       ]
+      },
+      {
+       "label": "a describing word (كبير، صغير، قريب، مريح…)",
+       "any": [
+        "كبير",
+        "كبيرة",
+        "صغير",
+        "صغيرة",
+        "قريب",
+        "قريبة",
+        "جميل",
+        "جميلة",
+        "واسع",
+        "واسعة",
+        "مريح",
+        "مريحة"
+       ]
+      }
+     ],
+     "model": {
+      "t": "أسكن في شقة صغيرة في الطابق الثالث. في شقتي غرفتا نوم ومطبخ وحمام. أمام البناية حديقة جميلة، وبجانبها مخبز قريب. الشقة مريحة لكنّ الإيجار غالٍ.",
+      "en": "I live in a small flat on the third floor. My flat has two bedrooms, a kitchen and a bathroom. In front of the building is a beautiful garden, and next to it a bakery. The flat is comfortable, but the rent is expensive.",
+      "tr": "askunu fī shaqqa ṣaghīra fī aṭ-ṭābiq ath-thālith. fī shaqqatī ghurfatā nawm wa-maṭbakh wa-ḥammām. amāma al-bināya ḥadīqa jamīla, wa-bi-jānibihā makhbaz qarīb. ash-shaqqa murīḥa lākinna al-ījār ghālin."
+     }
+    },
+    {
+     "id": "ar-w-family-house",
+     "level": "B2",
+     "prompt": "Should newly married couples live with the husband's family at first, or in a home of their own? Give arguments on both sides and your conclusion.",
+     "minWords": 35,
+     "requirements": [
+      {
+       "label": "an opinion phrase (في رأيي، أعتقد أنّ…)",
+       "any": [
+        "في رأيي",
+        "أعتقد أن",
+        "أظن أن",
+        "أرى أن"
+       ]
+      },
+      {
+       "label": "both sides (من ناحية… ومن ناحية أخرى، لكنّ…)",
+       "any": [
+        "من ناحية",
+        "لكن",
+        "ومع ذلك",
+        "أما"
+       ]
+      },
+      {
+       "label": "key ideas (الاستقلال، الخصوصية، الأهل…)",
+       "any": [
+        "الاستقلال",
+        "والاستقلال",
+        "الخصوصية",
+        "الأهل",
+        "العائلة",
+        "بيت العائلة"
+       ]
+      },
+      {
+       "label": "a conclusion (لذلك، في النهاية)",
+       "any": [
+        "لذلك",
+        "في النهاية",
+        "أخيرا"
+       ]
+      }
+     ],
+     "model": {
+      "t": "يسكن كثير من الأزواج الجدد مع أهل الزوج لأنّ الإيجار غالٍ. من ناحية، هذا الحلّ يوفّر المال ويقرّب العائلة. ومن ناحية أخرى، يفقد الزوجان الخصوصية والاستقلال، وقد تحدث خلافات. في رأيي، السكن مع العائلة حلّ مؤقت جيد، لذلك يجب أن يكون للزوجين مطبخ خاص وخطة للانتقال.",
+      "en": "Many newlyweds live with the husband's family because rent is expensive. On one hand, this saves money and brings the family closer. On the other hand, the couple loses privacy and independence, and disagreements may happen. In my opinion, living with the family is a good temporary solution, so the couple should have their own kitchen and a plan to move out.",
+      "tr": "yaskunu kathīr min al-azwāj al-judud maʿa ahl az-zawj li-anna al-ījār ghālin. min nāḥiya, hādhā al-ḥall yuwaffiru al-māl wa-yuqarribu al-ʿāʾila. wa-min nāḥiya ukhrā, yafqidu az-zawjān al-khuṣūṣiyya wa-l-istiqlāl, wa-qad taḥduthu khilāfāt. fī raʾyī, as-sakan maʿa al-ʿāʾila ḥall muʾaqqat jayyid, li-dhālika yajibu an yakūna li-z-zawjayn maṭbakh khāṣṣ wa-khuṭṭa li-l-intiqāl."
+     }
+    },
+    {
+     "id": "ar-w-community",
+     "level": "B2",
+     "prompt": "Write about an immigrant community in your city or country: where they came from, when, and how they keep their identity.",
+     "minWords": 35,
+     "requirements": [
+      {
+       "label": "migration words (هاجر، مهاجرين، جالية…)",
+       "any": [
+        "هاجر",
+        "هاجروا",
+        "مهاجرين",
+        "المهاجرين",
+        "جالية",
+        "الجالية"
+       ]
+      },
+      {
+       "label": "a relative clause (الذي، التي، الذين)",
+       "any": [
+        "الذي",
+        "التي",
+        "الذين"
+       ]
+      },
+      {
+       "label": "identity and culture (الهوية، اللغة، الثقافة…)",
+       "any": [
+        "الهوية",
+        "هويتهم",
+        "اللغة",
+        "لغتهم",
+        "الثقافة",
+        "ثقافتهم",
+        "عاداتهم"
+       ]
+      },
+      {
+       "label": "a time expression (منذ، قبل، سنة…)",
+       "any": [
+        "منذ",
+        "في القرن",
+        "سنة",
+        "قبل"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في مدينتي جالية لبنانية كبيرة. هاجر أفرادها الأوائل منذ أكثر من مئة سنة، وكانوا يبحثون عن عمل وحرية. اليوم يعمل كثير منهم في التجارة والطب. الشباب الذين وُلدوا هنا يتكلمون الإنجليزية، لكنّ عائلاتهم تحافظ على اللغة العربية والمطبخ اللبناني، لذلك ما زالت هويتهم قوية.",
+      "en": "My city has a large Lebanese community. Its first members emigrated more than a hundred years ago, looking for work and freedom. Today many of them work in trade and medicine. The young people who were born here speak English, but their families keep the Arabic language and Lebanese cooking, so their identity is still strong.",
+      "tr": "fī madīnatī jāliya lubnāniyya kabīra. hājara afrāduhā al-awāʾil mundhu akthar min miʾat sana, wa-kānū yabḥathūna ʿan ʿamal wa-ḥurriyya. al-yawm yaʿmalu kathīr minhum fī at-tijāra wa-ṭ-ṭibb. ash-shabāb alladhīna wulidū hunā yatakallamūna al-injilīziyya, lākinna ʿāʾilātihim tuḥāfiẓu ʿalā al-lugha al-ʿarabiyya wa-l-maṭbakh al-lubnānī, li-dhālika mā zālat huwiyyatuhum qawiyya."
+     }
+    },
+    {
+     "id": "ar-w-shopping",
+     "level": "B2",
+     "prompt": "Online shopping or the market: compare them, then say which you prefer and why.",
+     "minWords": 30,
+     "requirements": [
+      {
+       "label": "shopping words (يشتري، السوق، الأسعار، رخيص…)",
+       "any": [
+        "أشتري",
+        "اشتريت",
+        "يشترون",
+        "السوق",
+        "الأسواق",
+        "الأسعار",
+        "سعر",
+        "رخيص",
+        "رخيصة",
+        "غالي",
+        "غالية"
+       ]
+      },
+      {
+       "label": "\"it is … to\" (من السهل أن، من الصعب أن…)",
+       "any": [
+        "من السهل",
+        "من الصعب",
+        "من الممكن",
+        "من المهم",
+        "من الأفضل"
+       ]
+      },
+      {
+       "label": "a comparative (أسهل، أرخص، أسرع…)",
+       "any": [
+        "أسهل",
+        "أرخص",
+        "أفضل",
+        "أغلى",
+        "أسرع",
+        "أمتع"
+       ]
+      },
+      {
+       "label": "a reason (لأنّ، لذلك)",
+       "any": [
+        "لأن",
+        "لذلك"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في السنوات الأخيرة أصبح كثير من الناس يشترون كل شيء من الإنترنت. من السهل أن تقارن الأسعار وأنت في البيت، والتوصيل أسرع من الماضي. لكنّني أفضّل السوق لأنّ التسوّق هناك أمتع: أرى الألوان وألمس القماش وأتكلم مع البائعين.",
+      "en": "In recent years many people have started buying everything online. It's easy to compare prices from home, and delivery is faster than before. But I prefer the market because shopping there is more fun: I see the colours, touch the fabric and talk with the sellers.",
+      "tr": "fī as-sanawāt al-akhīra aṣbaḥa kathīr min an-nās yashtarūna kull shayʾ min al-intarnit. min as-sahl an tuqārina al-asʿār wa-anta fī al-bayt, wa-t-tawṣīl asraʿ min al-māḍī. lākinnanī ufaḍḍilu as-sūq li-anna at-tasawwuq hunāk amtaʿ: arā al-alwān wa-almisu al-qumāsh wa-atakallamu maʿa al-bāʾiʿīn."
+     }
     }
    ],
    "speakingPrompts": [
@@ -10807,6 +13132,89 @@
       "tr": "fī as-sana al-qādima sawfa usāfiru ilā al-Urdun, wa-atamannā an atakallama al-ʿarabiyya bi-ṭalāqa."
      },
      "starter": "في السنة القادمة سوف…"
+    },
+    {
+     "id": "ar-s-home",
+     "level": "B1",
+     "prompt": "Describe your home out loud: what rooms it has and what is near it.",
+     "minWords": 10,
+     "requirements": [
+      {
+       "label": "a room (غرفة، مطبخ، حمام…)",
+       "any": [
+        "غرفة",
+        "غرف",
+        "مطبخ",
+        "حمام",
+        "صالون"
+       ]
+      },
+      {
+       "label": "a location word (أمام، بجانب، قريب…)",
+       "any": [
+        "أمام",
+        "وأمامه",
+        "بجانب",
+        "جنب",
+        "قريب",
+        "قريبة",
+        "وراء"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في بيتي ثلاث غرف ومطبخ كبير. بجانب البيت مدرسة، وأمامه حديقة صغيرة.",
+      "en": "My home has three rooms and a big kitchen. Next to the house is a school, and in front of it a small garden.",
+      "tr": "fī baytī thalāth ghuraf wa-maṭbakh kabīr. bi-jānib al-bayt madrasa, wa-amāmahu ḥadīqa ṣaghīra."
+     },
+     "starter": "في بيتي…"
+    },
+    {
+     "id": "ar-s-occasion",
+     "level": "B1",
+     "prompt": "Talk about how your family celebrates a holiday: what you do and what you say.",
+     "minWords": 12,
+     "requirements": [
+      {
+       "label": "a holiday or occasion (عيد، رمضان، حفلة…)",
+       "any": [
+        "عيد",
+        "العيد",
+        "رمضان",
+        "حفلة",
+        "عرس"
+       ]
+      },
+      {
+       "label": "a greeting (كل عام وأنتم بخير، مبروك…)",
+       "any": [
+        "كل عام وأنتم بخير",
+        "كل سنة",
+        "مبروك",
+        "عيد مبارك",
+        "رمضان كريم"
+       ]
+      },
+      {
+       "label": "present-tense \"we\" verbs (نزور، نأكل، نجتمع…)",
+       "any": [
+        "نزور",
+        "نأكل",
+        "ونأكل",
+        "نجتمع",
+        "نحتفل",
+        "نلبس",
+        "نذهب",
+        "نشتري"
+       ]
+      }
+     ],
+     "model": {
+      "t": "في العيد نجتمع في بيت جدّتي ونأكل الحلويات. نلبس ملابس جديدة ونقول لبعض: كل عام وأنتم بخير!",
+      "en": "At Eid we gather at my grandmother's house and eat sweets. We wear new clothes and say to each other: Happy Eid!",
+      "tr": "fī al-ʿīd najtamiʿu fī bayt jaddatī wa-naʾkulu al-ḥalawiyyāt. nalbasu malābis jadīda wa-naqūlu li-baʿḍ: kull ʿām wa-antum bi-khayr!"
+     },
+     "starter": "في العيد…"
     }
    ],
    "levelHours": {
