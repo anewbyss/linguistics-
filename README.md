@@ -5,7 +5,7 @@ A language-learning app for **Arabic** (Modern Standard Arabic with everyday Egy
 - **Web app** (`web/`): a PWA that works offline, runs in any modern browser, and can be installed to a phone's home screen.
 - **Swift Playgrounds app** (`swift/Lingua.swiftpm`): a native SwiftUI app for iPad, iPhone and Mac.
 
-A landing screen leads to a separate menu for each language. Your coach is **Hayya**, a feathered snake: هيّا (*hayyā*) means "let's go!" in Arabic, and the feathers nod to Quetzalcóatl, the feathered serpent of Mexico.
+A landing screen leads to a separate menu for each language. Your coach is **Hayya**, a feathered snake: هيّا (*hayyā*) means "let's go!" in Arabic, and the feathers nod to Quetzalcóatl, the feathered serpent of Mexico. Hayya's chocolate-and-caramel pattern comes from **Lyra**, a real ball python.
 
 ## Features (in both apps)
 
