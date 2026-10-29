@@ -306,13 +306,31 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
 
   step('mobile layout has no horizontal scroll');
   await page.setViewportSize({ width: 375, height: 800 });
-  for (const hash of ['/', '/ar', '/ar/read', '/es/lesson/es-greet-1', '/es/translate', '/ar/fluency', '/es/challenge', '/ar/speak', '/es/review', '/ar/listen', '/es/write']) {
+  for (const hash of ['/', '/ar', '/ar/read', '/es/lesson/es-greet-1', '/es/translate', '/ar/fluency', '/es/challenge', '/ar/speak', '/es/review', '/ar/listen', '/es/write', '/ar/resources', '/es/resources']) {
     await go(hash);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     assert(overflow <= 1, `no horizontal overflow on ${hash} (${overflow}px)`);
   }
   await go('/ar/lesson/ar-greet-1');
   await shot('11-mobile-lesson');
+
+  step('free courses page + learning preferences');
+  await go('/es/resources');
+  await page.locator('[data-act="res-level"][data-level="all"]').click();
+  const resLinks = await page.locator('#app a[target="_blank"]').evaluateAll((as) => as.map((a) => a.href));
+  assert(resLinks.length >= 5 && resLinks.every((u) => u.startsWith('https://')), 'resources link out over https');
+  await go('/progress');
+  await page.locator('[data-pref="quiet"]').check();
+  assert(!(await page.isVisible('#streak')), 'quiet mode hides the streak');
+  await page.locator('[data-pref="showTr"]').uncheck();
+  await go('/ar/lesson/ar-greet-1');
+  const blurred = await page.locator('.phrase .tr').first().evaluate((e) => getComputedStyle(e).filter);
+  assert(blurred.includes('blur'), 'transliteration hidden when switched off');
+  await page.locator('.phrase .tr').first().click();
+  assert((await page.locator('.phrase .tr').first().evaluate((e) => getComputedStyle(e).filter)) === 'none', 'tap reveals transliteration');
+  await go('/progress');
+  await page.locator('[data-pref="quiet"]').uncheck();
+  await page.locator('[data-pref="showTr"]').check();
 
   step('Arabic inside English text keeps its order (blanks, ellipses)');
   for (const hash of ['/ar/lesson/ar-kit-1', '/ar/lesson/ar-kit-3', '/ar/lesson/ar-work-2', '/ar/write']) {

@@ -65,13 +65,19 @@ struct TargetText: View {
 struct PhraseRow: View {
     let phrase: Phrase
     let lang: Language
+    @AppStorage(Prefs.showTransliteration) private var showTr = true
+    @State private var peek = false
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
                 TargetText(text: phrase.t, lang: lang)
                 if let tr = phrase.tr, !tr.isEmpty {
+                    // With transliteration off, the line is blurred until tapped.
                     Text(tr).font(.subheadline.italic()).foregroundColor(lang.color)
+                        .blur(radius: showTr || peek ? 0 : 5)
+                        .onTapGesture { if !showTr { peek.toggle() } }
+                        .accessibilityHidden(!showTr && !peek)
                 }
                 Text(phrase.en).font(.subheadline)
                 if let note = phrase.note {

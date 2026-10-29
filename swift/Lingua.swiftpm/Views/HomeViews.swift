@@ -2,6 +2,7 @@ import SwiftUI
 import UIKit
 
 struct LandingView: View {
+    @AppStorage(Prefs.quietMode) private var quiet = false
     @EnvironmentObject var content: ContentStore
     @EnvironmentObject var progress: ProgressStore
 
@@ -32,8 +33,10 @@ struct LandingView: View {
                 }
 
                 HStack(spacing: 12) {
-                    StatPill(value: "\(progress.data.xp)", label: "XP earned")
-                    StatPill(value: "\(progress.data.streak.count)", label: "day streak")
+                    if !quiet {
+                        StatPill(value: "\(progress.data.xp)", label: "XP earned")
+                        StatPill(value: "\(progress.data.streak.count)", label: "day streak")
+                    }
                 }
 
                 NavigationLink(value: Route.progress) {
@@ -105,6 +108,7 @@ struct LanguageCard: View {
 }
 
 struct LanguageHomeView: View {
+    @AppStorage(Prefs.quietMode) private var quiet = false
     let lang: Language
     @EnvironmentObject var progress: ProgressStore
 
@@ -153,8 +157,8 @@ struct LanguageHomeView: View {
                 let todayRecord = lp.challenges[ProgressStore.day(Date())]
                 NavigationLink(value: Route.challenge(lang.id)) {
                     MenuRow(emoji: "⚡", title: "Daily Challenge",
-                            detail: todayRecord.map { "Done today: \($0.score)/\($0.total) · 🔥 \(Engine.challengeStreak(lp))-day streak" }
-                                ?? "10 quick items: reading, writing, listening, speaking · 🔥 \(Engine.challengeStreak(lp))-day streak")
+                            detail: (todayRecord.map { "Done today: \($0.score)/\($0.total)" } ?? "10 quick items: reading, writing, listening, speaking")
+                                + (quiet ? "" : " · 🔥 \(Engine.challengeStreak(lp))-day streak"))
                 }
                 NavigationLink(value: Route.fluency(lang.id)) {
                     FluencySummaryRow(lang: lang, report: Engine.fluency(lang, lp))
@@ -190,6 +194,9 @@ struct LanguageHomeView: View {
                 }
                 NavigationLink(value: Route.media(lang.id)) {
                     MenuRow(emoji: "🎬", title: "Media Picks", detail: "Films, shows, books and music by level")
+                }
+                NavigationLink(value: Route.resources(lang.id)) {
+                    MenuRow(emoji: "🏛️", title: "Free Courses & Resources", detail: "From universities and government bodies, by level")
                 }
             }
 
@@ -335,6 +342,8 @@ struct LessonView: View {
                     .buttonStyle(.borderedProminent)
                     .tint(lang.color)
                 }
+                ReportMistakeLink(subject: "\(lesson.id) (\(lesson.title))")
+                    .frame(maxWidth: .infinity)
             }
             .padding()
             .frame(maxWidth: 760)

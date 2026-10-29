@@ -46,6 +46,7 @@ private struct Bubble: Identifiable {
 }
 
 struct ScenarioPlayView: View {
+    @AppStorage(Prefs.showTransliteration) private var showTr = true
     let lang: Language
     let scenario: Scenario
     @EnvironmentObject var progress: ProgressStore
@@ -154,7 +155,7 @@ struct ScenarioPlayView: View {
                                 Text(c.en)
                             } else {
                                 Text(c.t).font(.system(size: lang.isArabic ? 21 : 17))
-                                if let tr = c.tr { Text(tr).font(.caption.italic()).foregroundColor(.secondary) }
+                                if showTr, let tr = c.tr { Text(tr).font(.caption.italic()).foregroundColor(.secondary) }
                                 if showEnglish { Text(c.en).font(.caption).foregroundColor(.secondary) }
                             }
                         }
@@ -602,6 +603,8 @@ struct MediaView: View {
 // MARK: - Progress & backup
 
 struct ProgressBackupView: View {
+    @AppStorage(Prefs.quietMode) private var quiet = false
+    @AppStorage(Prefs.showTransliteration) private var showTr = true
     @EnvironmentObject var content: ContentStore
     @EnvironmentObject var progress: ProgressStore
     @State private var showImport = false
@@ -612,11 +615,13 @@ struct ProgressBackupView: View {
     var body: some View {
         List {
             Section {
-                HStack {
-                    StatPill(value: "\(progress.data.xp)", label: "XP")
-                    StatPill(value: "\(progress.data.streak.count)", label: "day streak")
+                if !quiet {
+                    HStack {
+                        StatPill(value: "\(progress.data.xp)", label: "XP")
+                        StatPill(value: "\(progress.data.streak.count)", label: "day streak")
+                    }
+                    .listRowBackground(Color.clear)
                 }
-                .listRowBackground(Color.clear)
                 if let err = progress.lastSaveError {
                     Text("⚠️ Couldn't save: \(err)").foregroundColor(.red).font(.caption)
                 } else if let at = ProgressStore.parseISO(progress.data.updatedAt) {
@@ -636,6 +641,35 @@ struct ProgressBackupView: View {
                         HStack { Text("Tested level"); Spacer(); LevelBadge(level: level, color: lang.color) }
                     }
                 }
+            }
+            Section {
+                Toggle(isOn: $showTr) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Show Arabic transliteration")
+                        Text("Turn off once you can read the script; tap a blurred line to peek.").font(.caption).foregroundColor(.secondary)
+                    }
+                }
+                Toggle(isOn: $quiet) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Quiet mode")
+                        Text("Hide streaks and XP. Progress and fluency tracking keep working.").font(.caption).foregroundColor(.secondary)
+                    }
+                }
+            } header: {
+                Text("Learning preferences")
+            }
+            Section {
+                ForEach(Array(Self.differences.enumerated()), id: \.offset) { _, item in
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(item.0).font(.subheadline.bold())
+                        Text(item.1).font(.caption)
+                    }
+                }
+                Text("The course was drafted with AI help and checked by automated tests, but it has not yet been reviewed by native-speaker teachers. If you spot an error, please report it.")
+                    .font(.caption).foregroundColor(.secondary)
+                ReportMistakeLink(subject: "general")
+            } header: {
+                Text("🐍 How Lingua is different")
             }
             Section {
                 ShareLink(item: progress.exportJSON(), preview: SharePreview("Lingua progress backup")) {
@@ -693,6 +727,15 @@ struct ProgressBackupView: View {
             }
         }
     }
+
+    static let differences: [(String, String)] = [
+        ("Free and open", "No ads, no account, no hearts or energy limits. Every lesson is open from day one, and the aptitude test lets you start at your level."),
+        ("Every answer is explained", "Each lesson starts with the grammar, and each question says why the answer is right."),
+        ("Arabic as it's really used", "Formal Arabic plus Egyptian and Levantine, the script taught properly with tracing and typing, and transliteration you can switch off."),
+        ("Real output", "Free writing and spoken answers are checked, not just repeat-after-me. Conversation with real people is still essential, and the app says so."),
+        ("Honest progress", "Fluency scores come from your own accuracy and coverage, measured against the CEFR. Streaks are optional."),
+        ("Your data stays yours", "Progress lives on your device, with export and import at any time."),
+    ]
 
     private func statRow(_ label: String, _ done: Int, _ total: Int, _ lang: Language) -> some View {
         HStack {

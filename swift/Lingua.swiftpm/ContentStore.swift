@@ -4,6 +4,7 @@ import UIKit
 /// Decodes the embedded course content once and caches dictionary indexes.
 final class ContentStore: ObservableObject {
     let languages: [Language]
+    let levelGuide: [String: LevelGuide]
     private var indexes: [String: DictionaryIndex] = [:]
 
     init() {
@@ -12,6 +13,7 @@ final class ContentStore: ObservableObject {
             let data = try JSONSerialization.data(withJSONObject: Bidi.isolateDisplayStrings(raw))
             let library = try JSONDecoder().decode(Library.self, from: data)
             languages = library.languages
+            levelGuide = library.levelGuide
         } catch {
             fatalError("Lingua content failed to decode: \(error)")
         }

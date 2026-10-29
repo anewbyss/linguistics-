@@ -677,14 +677,14 @@ struct AnswerPromptView: View {
 struct PathToFluencyView: View {
     let lang: Language
     let lp: LangProgress
+    @EnvironmentObject var content: ContentStore
 
-    private let canDo = [
-        "A1": "Read the script, introduce yourself, order food and handle basic greetings.",
-        "A2": "Get around town, shop, describe your routine and family, and understand slow, clear speech.",
-        "B1": "Tell stories, give opinions, handle most travel situations and follow one dialect in everyday talk.",
-        "B2": "Follow the news and films with some effort, debate, and write clear formal emails.",
-        "C1": "Read literature, follow fast native speech and express yourself fluently and precisely.",
-    ]
+    /// FSI's published estimate to professional working proficiency (ILR 3, roughly C1).
+    private var fsiNote: String {
+        lang.isArabic
+            ? "The US Foreign Service Institute puts Arabic in its hardest category: about 2,200 classroom hours (88 weeks of full-time study) for professional working proficiency, roughly C1."
+            : "The US Foreign Service Institute puts Spanish in its easiest category: about 600–750 classroom hours (24–30 weeks of full-time study) for professional working proficiency, roughly C1."
+    }
 
     private func format(_ minutes: Int) -> String {
         minutes >= 60 ? String(format: "%.1f h", Double(minutes) / 60) : "\(minutes) min"
@@ -704,7 +704,7 @@ struct PathToFluencyView: View {
                     Text("in the last 7 days").font(.caption).foregroundColor(.secondary)
                 }
             }
-            Text("Rough total study hours an English speaker needs for each level of \(lang.name), based on US Foreign Service Institute and guided-learning-hour estimates. Time counts while you're actively using the app.")
+            Text("\(fsiNote) The hours for the earlier levels are our estimates. Self-study usually takes longer than full-time classes, and time counts only while you're actively using the app. Level descriptions follow the Council of Europe's CEFR.")
                 .font(.caption).foregroundColor(.secondary)
             ForEach(Engine.levels, id: \.self) { level in
                 let need = Double(lang.levelHours[level] ?? 1)
@@ -715,12 +715,16 @@ struct PathToFluencyView: View {
                             Text("\(Int(need)) h").font(.caption.bold().monospacedDigit())
                             ProgressView(value: min(t.hours, need), total: need).tint(lang.color)
                         }
-                        Text(canDo[level] ?? "").font(.caption)
+                        Text(content.levelGuide[level]?.cefr ?? "").font(.caption)
                     }
                 }
             }
             Text("Beyond the app").font(.subheadline.bold()).padding(.top, 4)
             Text("• Talk to people every week: a tutor (for example on italki or Preply) or a language exchange (Tandem, HelloTalk, local meetups). Use the scenarios and speaking prompts as topics.")
+            NavigationLink(value: Route.resources(lang.id)) {
+                Text("• Take a free university or government course: see Free Courses & Resources.")
+                    .multilineTextAlignment(.leading)
+            }
             Text("• Listen for hours: climb the Media Picks ladder and move up when you understand most of it.")
             Text("• Read real texts and save new words in the translator; they'll appear in Review.")
             Text(lang.isArabic ? "• Pick a dialect: use the Egyptian or Levantine lessons, then watch shows in that dialect." : "• Spend time in Mexico if you can: even a week of immersion makes everything click.")
