@@ -530,7 +530,7 @@ struct AptitudeView: View {
                         let a = i < answers.count ? answers[i] : -1
                         let ok = a == q.answer
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("\(ok ? "✓" : "✗") \(q.level ?? "") \(q.q) \(q.t ?? "")")
+                            Text("\(ok ? "✓" : "✗") \(q.level ?? "") \(q.q) \(Bidi.isolate(q.t ?? ""))")
                                 .foregroundColor(ok ? .green : .red)
                             Text("Correct: \(q.options[q.answer])\(q.explain.map { " · \($0)" } ?? "")")
                                 .font(.caption)

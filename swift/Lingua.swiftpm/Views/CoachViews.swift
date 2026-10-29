@@ -103,7 +103,7 @@ struct HayyaTip: View {
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text("HAYYA").font(.caption2.bold()).foregroundColor(color ?? .green)
-                Text(text).font(.subheadline).fixedSize(horizontal: false, vertical: true)
+                Text(Bidi.isolate(text)).font(.subheadline).fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 0)
         }

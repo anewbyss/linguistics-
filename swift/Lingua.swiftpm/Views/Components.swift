@@ -102,7 +102,7 @@ struct TableView: View {
                 ForEach(Array(table.rows.enumerated()), id: \.offset) { _, row in
                     GridRow {
                         ForEach(Array(row.enumerated()), id: \.offset) { _, cell in
-                            Text(cell)
+                            Text(Bidi.isolate(cell))
                                 .font(Engine.hasArabic(cell) ? .body : .subheadline)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .frame(maxWidth: 230, alignment: .leading)
@@ -219,7 +219,8 @@ struct QuizView: View {
                 HStack {
                     TargetText(text: t, lang: lang, size: 24)
                     Spacer()
-                    SpeakButton(text: t, lang: lang)
+                    // A fill-in-the-blank sentence ("أنا ___") isn't worth reading aloud.
+                    if !t.contains("__") { SpeakButton(text: t, lang: lang) }
                 }
             }
             ForEach(Array(q.options.enumerated()), id: \.offset) { i, option in

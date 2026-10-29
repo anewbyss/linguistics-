@@ -8,7 +8,9 @@ final class ContentStore: ObservableObject {
 
     init() {
         do {
-            let library = try JSONDecoder().decode(Library.self, from: Data(ContentData.json.utf8))
+            let raw = try JSONSerialization.jsonObject(with: Data(ContentData.json.utf8))
+            let data = try JSONSerialization.data(withJSONObject: Bidi.isolateDisplayStrings(raw))
+            let library = try JSONDecoder().decode(Library.self, from: data)
             languages = library.languages
         } catch {
             fatalError("Lingua content failed to decode: \(error)")

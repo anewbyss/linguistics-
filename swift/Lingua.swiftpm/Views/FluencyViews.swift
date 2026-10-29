@@ -279,7 +279,7 @@ struct DailyChallengeView: View {
                     HStack {
                         TargetText(text: t, lang: lang, size: 24)
                         Spacer()
-                        SpeakButton(text: t, lang: lang)
+                        if !t.contains("__") { SpeakButton(text: t, lang: lang) }
                     }
                     if let tr = it.tr { Text(tr).font(.subheadline.italic()).foregroundColor(lang.color) }
                 }
