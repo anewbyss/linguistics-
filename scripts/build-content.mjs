@@ -10,6 +10,8 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import arabic from '../content/arabic.mjs';
 import spanish from '../content/spanish.mjs';
+import explanations from '../content/explanations.mjs';
+import { resources as allResources, levelGuide } from '../content/resources.mjs';
 
 const require = createRequire(import.meta.url);
 const engine = require('../web/js/engine.js');
@@ -41,6 +43,18 @@ function shuffled(list, seedText) {
     [out[i], out[j]] = [out[j], out[i]];
   }
   return out;
+}
+
+// Every question must explain its answer: inline (Q(..., explain)) or in content/explanations.mjs.
+const usedExplanations = new Set();
+function explanationFor(langId, group, q, where) {
+  const table = (explanations[langId] || {})[group] || {};
+  const extra = table[q.q];
+  if (extra !== undefined) usedExplanations.add(`${langId}|${group}|${q.q}`);
+  if (q.explain && extra) fail(`${where}: explanation given twice (inline and in explanations.mjs)`);
+  const text = q.explain || extra;
+  if (!text) fail(`${where}: no explanation ("${q.q}"); add one to content/explanations.mjs`);
+  return text;
 }
 
 function compileQuestion(q, id, where) {
@@ -91,7 +105,7 @@ function compileLanguage(lang) {
         return {
           id: l.id, title: l.title, level: l.level, summary: l.summary,
           grammar: l.grammar, vocab: l.vocab, examples: l.examples, culture: l.culture,
-          quiz: l.quiz.map((q, i) => compileQuestion(q, `${l.id}-q${i + 1}`, `${where} q${i + 1}`)),
+          quiz: l.quiz.map((q, i) => compileQuestion({ ...q, explain: explanationFor(lang.id, l.id, q, `${where} q${i + 1}`) }, `${l.id}-q${i + 1}`, `${where} q${i + 1}`)),
         };
       }),
     };
@@ -136,7 +150,7 @@ function compileLanguage(lang) {
     const where = `${lang.id} aptitude ${i + 1}`;
     if (!LEVELS.includes(q.level)) fail(`${where}: bad level`);
     if (!q.skill) fail(`${where}: skill missing`);
-    return compileQuestion(q, `${lang.id}-apt-${i + 1}`, where);
+    return compileQuestion({ ...q, explain: explanationFor(lang.id, 'apt', q, where) }, `${lang.id}-apt-${i + 1}`, where);
   });
   if (aptitude.length < 12) fail(`${lang.id}: aptitude test needs ≥12 questions`);
 
@@ -171,10 +185,23 @@ function compileLanguage(lang) {
   const speakingPrompts = compilePrompts(lang.speakingPrompts, 'speaking prompt');
   if (!lang.levelHours || LEVELS.some((l) => !Number.isFinite(lang.levelHours[l]))) fail(`${lang.id}: levelHours needs a number for every level`);
 
+  const PROVIDER_TYPES = ['University', 'Government', 'Intergovernmental'];
+  const resources = (allResources[lang.id] || []).map((r) => {
+    const where = `${lang.id} resource ${r.id}`;
+    for (const k of ['id', 'title', 'provider', 'providerType', 'url', 'what']) if (!r[k]) fail(`${where}: ${k} missing`);
+    if (!PROVIDER_TYPES.includes(r.providerType)) fail(`${where}: only universities and government bodies are listed`);
+    if (!/^https:\/\//.test(r.url)) fail(`${where}: url must be https`);
+    if (!r.levels.length || r.levels.some((l) => !LEVELS.includes(l))) fail(`${where}: bad levels`);
+    uniq(r.id, where);
+    return r;
+  });
+  if (!resources.length) fail(`${lang.id}: no resources`);
+
   const compiled = {
     id: lang.id, name: lang.name, nativeName: lang.nativeName, subtitle: lang.subtitle, symbol: lang.symbol,
     dir: lang.dir, speech: lang.speech, accent: lang.accent, translateSkipEn: lang.translateSkipEn,
     categories, reading, scenarios, aptitude, dictionary, media, writingPrompts, speakingPrompts, levelHours: lang.levelHours,
+    resources,
   };
   // Every model answer must satisfy its own prompt, or the checker would mark correct work as wrong.
   for (const pr of [...writingPrompts, ...speakingPrompts]) {
@@ -187,7 +214,15 @@ function compileLanguage(lang) {
   return compiled;
 }
 
-const library = { version: 1, levels: LEVELS, languages: [compileLanguage(arabic), compileLanguage(spanish)] };
+for (const l of LEVELS) if (!levelGuide[l] || !levelGuide[l].cefr || !levelGuide[l].actfl) fail(`levelGuide: ${l} missing`);
+const library = { version: 1, levels: LEVELS, levelGuide, languages: [compileLanguage(arabic), compileLanguage(spanish)] };
+for (const [langId, groups] of Object.entries(explanations)) {
+  for (const [group, table] of Object.entries(groups)) {
+    for (const q of Object.keys(table)) {
+      if (!usedExplanations.has(`${langId}|${group}|${q}`)) fail(`explanations.mjs: ${langId} ${group} "${q}" matches no question`);
+    }
+  }
+}
 
 if (errors.length) {
   console.error('Content errors:\n  ' + errors.join('\n  '));

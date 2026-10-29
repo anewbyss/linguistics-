@@ -72,6 +72,22 @@
   const allLessons = (lang) => lang.categories.flatMap((c) => c.lessons.map((l) => ({ ...l, cat: c })));
   const isAr = (lang) => lang.id === 'ar';
 
+  // Per-device learning preferences (not part of the progress backup).
+  let prefs = { showTr: true, quiet: false };
+  try { prefs = { ...prefs, ...JSON.parse(localStorage.getItem('lingua.prefs') || '{}') }; } catch (err) { /* defaults */ }
+  function applyPrefs() {
+    document.body.classList.toggle('hide-tr', !prefs.showTr);
+    document.body.classList.toggle('quiet', !!prefs.quiet);
+  }
+  function setPref(key, value) {
+    prefs[key] = value;
+    try { localStorage.setItem('lingua.prefs', JSON.stringify(prefs)); } catch (err) { /* this session only */ }
+    applyPrefs();
+    render();
+  }
+  const REPORT_URL = 'https://github.com/anewbyss/linguistics-/issues/new';
+  const reportLink = (what) => `<a class="small muted" target="_blank" rel="noopener" href="${REPORT_URL}?title=${encodeURIComponent(`Content: ${what}`)}&body=${encodeURIComponent('What is wrong, and what should it say?\n\n')}">⚑ Report a mistake</a>`;
+
   const RATES = { slow: 0.6, normal: 0.85, natural: 1.05 };
   let rateName = 'normal';
   try { rateName = localStorage.getItem('lingua.rate') || 'normal'; } catch (err) { /* default */ }
@@ -223,6 +239,7 @@
       console.error(err);
       html = `<div class="card"><h2>Something went wrong</h2><p class="muted">${h(err.message)}</p><a class="btn" href="#/">Go home</a></div>`;
     }
+    applyPrefs();
     app.innerHTML = html;
     isolateArabic(app);
     afterRender();
@@ -281,6 +298,7 @@
       case 'review': return reviewView(lang);
       case 'listen': return listenView(lang);
       case 'write': return writeView(lang);
+      case 'resources': return resourcesView(lang);
       default: return langHome(lang);
     }
   }
@@ -312,8 +330,8 @@
       ${hayya("Hi, I'm Hayya, a feathered snake. My name is Arabic for “let's go!” (هيّا), and my feathers come from Quetzalcóatl, Mexico's feathered serpent. Pick a language and I'll keep you on track.", { size: 56 })}
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">${cards}</div>
       <div class="grid tight" style="margin-top:1.2rem">
-        <div class="card center"><div class="score-big">${progress.xp}</div><div class="muted small">XP earned</div></div>
-        <div class="card center"><div class="score-big">${progress.streak.count}</div><div class="muted small">day streak</div></div>
+        <div class="card center gamify"><div class="score-big">${progress.xp}</div><div class="muted small">XP earned</div></div>
+        <div class="card center gamify"><div class="score-big">${progress.streak.count}</div><div class="muted small">day streak</div></div>
         <a class="tile" href="#/progress"><span class="emoji">💾</span><span class="title">Progress &amp; backup</span><span class="sub">Export, import or reset your progress</span></a>
       </div>
       <footer class="foot">Everything runs on your device and works offline.</footer>`;
@@ -352,6 +370,7 @@
       ['translate', '🔄', 'Offline Translator', 'Dictionary and phrasebook, no internet needed', `${lang.dictionary.length} entries`],
       ['test', '🎯', 'Aptitude Test', 'Find your level (A1–C1)', s.level ? `Last result: ${s.level}` : 'Not taken yet'],
       ['media', '🎬', 'Media Picks', 'Films, shows, books and music by level', `${lang.media.length} picks`],
+      ['resources', '🏛️', 'Free Courses & Resources', 'From universities and government bodies, by level', `${lang.resources.length} sources`],
     ].map(([r, emoji, title, sub, meta]) => `<a class="tile" href="#/${lang.id}/${r}"><span class="emoji ${r === 'read' && isAr(lang) ? 'ar' : ''}">${emoji}</span><span class="title">${title}</span><span class="sub">${sub}</span><span class="meta small muted">${h(meta)}</span></a>`).join('');
     const cats = lang.categories.map((c) => {
       const done = c.lessons.filter((l) => d.lessons[l.id] && d.lessons[l.id].done).length;
@@ -437,6 +456,7 @@
       <section class="card" id="quiz"><h2><span class="icon">✅</span>Check yourself</h2>${quizBody}</section>
       <div class="row spread">${prevL ? `<a class="btn" href="#/${lang.id}/lesson/${prevL.id}">← ${h(prevL.title)}</a>` : '<span></span>'}
         ${nextL ? `<a class="btn" href="#/${lang.id}/lesson/${nextL.id}">${h(nextL.title)} →</a>` : ''}</div>
+      <p class="center" style="margin-top:1rem">${reportLink(`${l.id} (${l.title})`)}</p>
     </article>`;
   }
 
@@ -925,12 +945,10 @@
         <p class="small muted">This is a study estimate, not an official CEFR certificate.</p></details>`;
   }
 
-  const LEVEL_CAN_DO = {
-    A1: 'Read the script, introduce yourself, order food and handle basic greetings.',
-    A2: 'Get around town, shop, describe your routine and family, and understand slow, clear speech.',
-    B1: 'Tell stories, give opinions, handle most travel situations and follow one dialect in everyday talk.',
-    B2: 'Follow the news and films with some effort, debate, and write clear formal emails.',
-    C1: 'Read literature, follow fast native speech and express yourself fluently and precisely.',
+  // FSI's published estimate to professional working proficiency (ILR 3, roughly C1).
+  const FSI_NOTE = {
+    ar: 'The US Foreign Service Institute puts Arabic in its hardest category: about 2,200 classroom hours (88 weeks of full-time study) for professional working proficiency, roughly C1.',
+    es: 'The US Foreign Service Institute puts Spanish in its easiest category: about 600–750 classroom hours (24–30 weeks of full-time study) for professional working proficiency, roughly C1.',
   };
 
   function pathToFluency(lang, d) {
@@ -939,20 +957,43 @@
     const rows = E.LEVELS.map((l) => {
       const need = t.levelHours[l];
       const done = Math.min(100, Math.round((t.hours / need) * 100));
-      return `<tr><td>${levelChip(l)}</td><td class="num">${need} h</td><td style="min-width:7rem">${bar(done)}</td><td class="small">${h(LEVEL_CAN_DO[l])}</td></tr>`;
+      return `<tr><td>${levelChip(l)}</td><td class="num">${need} h</td><td style="min-width:7rem">${bar(done)}</td><td class="small">${h(LIB.levelGuide[l].cefr)}</td></tr>`;
     }).join('');
     return `<div class="card"><h2>🧭 Your path to fluency</h2>
       <div class="row" style="gap:1.5rem;margin:.4rem 0 .8rem"><div><div class="score-big" style="font-size:2rem">${hrs(t.minutes)}</div><div class="small muted">active study time in this app</div></div>
         <div><div class="score-big" style="font-size:2rem">${hrs(t.weekMinutes)}</div><div class="small muted">in the last 7 days</div></div></div>
-      <p class="small">Rough total study hours an English speaker needs to reach each level of ${h(lang.name)}, based on US Foreign Service Institute and guided-learning-hour estimates. Time counts while you're actively using this app.</p>
-      <div class="table-wrap"><table><thead><tr><th>Level</th><th>Hours</th><th>Your time</th><th>What you can do</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <p class="small">${h(FSI_NOTE[lang.id] || '')} The hours for the earlier levels are our estimates. Self-study usually takes longer than full-time classes, and time counts here only while you're actively using the app. The level descriptions follow the Council of Europe's CEFR.</p>
+      <div class="table-wrap"><table><thead><tr><th>Level</th><th>Hours</th><th>Your time</th><th>What you can do (CEFR)</th></tr></thead><tbody>${rows}</tbody></table></div>
       <h3 style="margin-top:1rem">Beyond the app</h3>
       <ul class="small">
         <li><b>Talk to people every week.</b> A tutor (for example on italki or Preply) or a language exchange (Tandem, HelloTalk, local meetups) is the fastest way to fluency. Bring this app's scenarios and speaking prompts as conversation topics.</li>
+        <li><b>Take a free university or government course.</b> <a href="#/${lang.id}/resources">Free Courses &amp; Resources</a> lists options from your level up.</li>
         <li><b>Listen for hours.</b> Climb the Media Picks ladder: move up a level when you understand most of what you hear.</li>
         <li><b>Read real texts.</b> News sites, children's books, then novels. Save new words in the translator and they'll appear in Review.</li>
         ${isAr(lang) ? '<li><b>Pick a dialect.</b> Use the Egyptian or Levantine lessons, then watch shows in that dialect.</li>' : '<li><b>Spend time in Mexico if you can.</b> Even a week of immersion makes everything here click.</li>'}
       </ul></div>`;
+  }
+
+  // ---------------------------------------------------------------- free courses & resources
+  const levelSpan = (levels) => (levels.length === E.LEVELS.length ? 'All levels' : levels.length === 1 ? levels[0] : `${levels[0]}–${levels[levels.length - 1]}`);
+  function resourcesView(lang) {
+    setChrome('Free Courses', `#/${lang.id}`, lang.id);
+    const band = E.fluency(lang, lp(lang.id)).overall.band;
+    if (!view) view = { level: band };
+    const list = lang.resources.filter((r) => view.level === 'all' || r.levels.includes(view.level));
+    const chips = ['all', ...E.LEVELS].map((l) => `<button aria-pressed="${view.level === l}" data-act="res-level" data-level="${l}">${l === 'all' ? 'All' : l}${l === band ? ' ·you' : ''}</button>`).join('');
+    const cards = list.map((r) => `<div class="card"><div class="row spread"><h2 style="margin:0">${h(r.title)}</h2><span class="chip">${h(r.providerType)}</span></div>
+        <p class="small muted" style="margin:.3rem 0 .5rem">${h(r.provider)} · ${levelSpan(r.levels)}</p>
+        <p>${h(r.what)}</p>${r.note ? `<p class="small muted">${h(r.note)}</p>` : ''}
+        <a class="btn primary" href="${h(r.url)}" target="_blank" rel="noopener">Open ↗</a></div>`).join('');
+    const guide = [...E.LEVELS, 'C2'].map((l) => `<tr><td>${levelChip(l)}</td><td class="small">${h(LIB.levelGuide[l].cefr)}${l === 'C2' ? ' <span class="muted">(beyond this app)</span>' : ''}</td><td class="small">${h(LIB.levelGuide[l].actfl)}</td></tr>`).join('');
+    return `<div class="lesson-head"><h1>🏛️ Free Courses &amp; Resources</h1>
+        <p class="muted">Free materials from universities and government bodies only, chosen to sit alongside this app. They open on each provider's website and need an internet connection. Lingua isn't affiliated with any of them.</p></div>
+      <div class="seg" role="group" aria-label="Level" style="margin-bottom:1rem;flex-wrap:wrap">${chips}</div>
+      <div class="grid">${cards || '<p class="muted">Nothing listed for this level yet.</p>'}</div>
+      <div class="card" style="margin-top:1rem"><h2>📏 What the levels mean</h2>
+        <p class="small">This app uses the Council of Europe's CEFR levels. Some American resources use the ACTFL scale instead; the right-hand column shows roughly where they meet (ACTFL's own alignment, approximate).</p>
+        <div class="table-wrap"><table><thead><tr><th>Level</th><th>What you can do (CEFR)</th><th>≈ ACTFL</th></tr></thead><tbody>${guide}</tbody></table></div></div>`;
   }
 
   // ---------------------------------------------------------------- review (spaced repetition)
@@ -1246,7 +1287,7 @@
     const streak = E.challengeStreak(d);
     return `<a class="tile" href="#/${lang.id}/challenge"><span class="emoji">⚡</span><span class="title">Daily Challenge</span>
       <span class="sub">${today ? `Done today: ${today.score}/${today.total}. A new one unlocks tomorrow.` : '10 quick items: reading, writing, listening and speaking. About 5 minutes.'}</span>
-      <span class="meta"><span class="chip ${today ? 'done' : ''}">${today ? '✓ Completed' : 'Ready'}</span><span class="chip">🔥 ${streak}-day challenge streak</span></span></a>`;
+      <span class="meta"><span class="chip ${today ? 'done' : ''}">${today ? '✓ Completed' : 'Ready'}</span><span class="chip gamify">🔥 ${streak}-day challenge streak</span></span></a>`;
   }
 
   function challengeView(lang) {
@@ -1267,7 +1308,7 @@
       const skills = E.SKILLS.filter((k) => rec.bySkill[k]);
       return `<div class="card center"><p class="muted" style="margin:0">Today's challenge</p><div class="score-big">${rec.score}/${rec.total}</div>
           ${hayya(rec.score === rec.total ? 'Perfect score! I’m doing a happy wiggle. 🐍' : rec.score >= rec.total * 0.7 ? 'Great work! Come back tomorrow to keep the streak going.' : 'Good effort. Every day counts, and tomorrow’s challenge will feel easier.', { mood: rec.score >= rec.total * 0.7 ? 'cheer' : 'happy' })}
-          <p class="small">🔥 ${E.challengeStreak(d)}-day challenge streak · a new challenge unlocks tomorrow</p>
+          <p class="small"><span class="gamify">🔥 ${E.challengeStreak(d)}-day challenge streak · </span>a new challenge unlocks tomorrow</p>
           <div class="row" style="justify-content:center"><button class="btn" data-act="ch-replay">Practise again (not scored)</button><a class="btn primary" href="#/${lang.id}/fluency">See your fluency</a></div></div>
         <div class="card level-bars"><h3>By skill</h3>${skills.map((k) => `<div class="lvl" style="grid-template-columns:7rem 1fr 3rem"><span>${SKILL_META[k].icon} ${SKILL_META[k].label}</span>${bar(pct(rec.bySkill[k].c, rec.bySkill[k].t))}<span>${rec.bySkill[k].c}/${rec.bySkill[k].t}</span></div>`).join('')}</div>`;
     }
@@ -1360,9 +1401,22 @@
     }).join('');
     return `<div class="lesson-head"><h1>💾 Progress &amp; Backup</h1>
         <p class="muted">Progress is saved on this device after every answer${storageOK ? '' : ' (<b>storage is blocked in this browser</b>)'}.${progress.updatedAt ? ` Last saved ${new Date(progress.updatedAt).toLocaleString()}.` : ''}</p></div>
-      <div class="grid tight"><div class="card center"><div class="score-big">${progress.xp}</div><div class="small muted">XP</div></div>
+      <div class="grid tight gamify"><div class="card center"><div class="score-big">${progress.xp}</div><div class="small muted">XP</div></div>
         <div class="card center"><div class="score-big">${progress.streak.count}</div><div class="small muted">day streak</div></div></div>
       <div class="grid">${panels}</div>
+      <div class="card"><h2>⚙️ Learning preferences</h2>
+        <label class="pref"><input type="checkbox" data-change="pref" data-pref="showTr" ${prefs.showTr ? 'checked' : ''}> <span><b>Show Arabic transliteration</b><br><span class="small muted">Turn off once you can read the script; you can still tap a blurred line to peek.</span></span></label>
+        <label class="pref"><input type="checkbox" data-change="pref" data-pref="quiet" ${prefs.quiet ? 'checked' : ''}> <span><b>Quiet mode</b><br><span class="small muted">Hide streaks and XP. Your progress and fluency tracking keep working.</span></span></label></div>
+      <div class="card"><h2>🐍 How Lingua is different</h2>
+        <ul class="small">
+          <li><b>Free and open.</b> No ads, no account, no hearts or energy limits. Every lesson is open from day one, and the aptitude test lets you start at your level.</li>
+          <li><b>Every answer is explained.</b> Each lesson starts with the grammar, and each question says why the answer is right.</li>
+          <li><b>Arabic as it's really used.</b> Formal Arabic plus Egyptian and Levantine, the script taught properly with tracing and typing, and transliteration you can switch off.</li>
+          <li><b>Real output.</b> Free writing and spoken answers are checked, not just repeat-after-me. Conversation with real people is still essential, and the app says so.</li>
+          <li><b>Honest progress.</b> Fluency scores come from your own accuracy and coverage, measured against the CEFR. Streaks are optional.</li>
+          <li><b>Your data stays yours.</b> Progress lives on your device, with export and import at any time.</li>
+        </ul>
+        <p class="small muted">The course was drafted with AI help and checked by automated tests, but it has not yet been reviewed by native-speaker teachers. If you spot an error, please ${reportLink('general').replace('⚑ Report a mistake', 'report it')}.</p></div>
       <div class="card"><h2>Backup &amp; sync</h2>
         <p class="small">Export a backup file to keep your progress safe or move it to another browser. The same file works in the Swift Playgrounds app: use <b>Progress → Import</b> there and paste the file's contents.</p>
         <div class="row"><button class="btn primary" data-act="export">⬇️ Export backup</button>
@@ -1449,6 +1503,7 @@
         challengeAnswer({ skill: it.skill, correct: true, measured: false });
       }
     },
+    'res-level': (el) => { view.level = el.dataset.level; render(); },
     rate: (el) => { rateName = el.dataset.rate; try { localStorage.setItem('lingua.rate', rateName); } catch (err) { /* per-session */ } render(); },
     'sp-tab': (el) => { view.tab = el.dataset.tab; render(); },
     'ans-step': (el) => { view.pi += Number(el.dataset.d); view.answer = { status: 'idle' }; view.typed = ''; render(); },
@@ -1709,6 +1764,7 @@
   const changes = {
     'trace-select': (el) => { view.trace = el.value; view.form = 0; view.traceScore = null; render(); },
     'sc-en': (el) => { view.showEn = el.checked; render(); },
+    pref: (el) => setPref(el.dataset.pref, el.checked),
     'ls-level': (el) => { view.level = el.value; view.i = -1; view.typed = ''; view.result = null; view.picked = null; view.options = null; render(); },
     import: (el) => {
       const file = el.files && el.files[0];
@@ -1721,6 +1777,9 @@
   };
 
   app.addEventListener('click', (e) => {
+    // With transliteration off, tapping a blurred line reveals it.
+    const tr = document.body.classList.contains('hide-tr') && e.target.closest('.tr');
+    if (tr) { tr.classList.toggle('peek'); return; }
     const el = e.target.closest('[data-act]');
     if (!el || !app.contains(el)) return;
     const fn = actions[el.dataset.act];

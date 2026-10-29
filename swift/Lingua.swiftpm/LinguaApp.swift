@@ -31,6 +31,7 @@ enum Route: Hashable {
     case review(String)
     case listening(String)
     case writing(String)
+    case resources(String)
     case progress
 }
 
@@ -89,6 +90,8 @@ struct RootView: View {
             if let lang = content.language(id) { ListeningPracticeView(lang: lang) }
         case .writing(let id):
             if let lang = content.language(id) { WritingStudioView(lang: lang) }
+        case .resources(let id):
+            if let lang = content.language(id) { ResourcesView(lang: lang) }
         case .progress:
             ProgressBackupView()
         }

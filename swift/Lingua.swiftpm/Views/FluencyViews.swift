@@ -174,6 +174,7 @@ private struct ChallengeResult {
 }
 
 struct DailyChallengeView: View {
+    @AppStorage(Prefs.quietMode) private var quiet = false
     let lang: Language
     @EnvironmentObject var progress: ProgressStore
     @StateObject private var listener = SpeechListener()
@@ -466,7 +467,7 @@ struct DailyChallengeView: View {
                     Text("Today's challenge").foregroundColor(.secondary)
                     Text("\(rec.score)/\(rec.total)").font(.system(size: 52, weight: .bold)).foregroundColor(lang.color)
                     Text(rec.score == rec.total ? "Perfect score! 🎉" : Double(rec.score) >= Double(rec.total) * 0.7 ? "Great work!" : "Good effort. Every day counts.")
-                    Text("🔥 \(Engine.challengeStreak(lp))-day challenge streak · a new challenge unlocks tomorrow").font(.caption)
+                    Text(quiet ? "A new challenge unlocks tomorrow" : "🔥 \(Engine.challengeStreak(lp))-day challenge streak · a new challenge unlocks tomorrow").font(.caption)
                     HStack {
                         Button("Practise again (not scored)") {
                             replay = true

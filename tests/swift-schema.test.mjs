@@ -10,12 +10,14 @@ const lib = JSON.parse(json);
 
 // field: type. "?" suffix = optional. [T] = array of T. {T} = dictionary of T.
 const SCHEMA = {
-  Library: { version: 'int', levels: '[string]', languages: '[Language]' },
+  Library: { version: 'int', levels: '[string]', levelGuide: '{LevelGuide}', languages: '[Language]' },
+  LevelGuide: { cefr: 'string', actfl: 'string' },
+  LearningResource: { id: 'string', title: 'string', provider: 'string', providerType: 'string', url: 'string', levels: '[string]', skills: '[string]', what: 'string', note: 'string?' },
   Language: {
     id: 'string', name: 'string', nativeName: 'string', subtitle: 'string', symbol: 'string', dir: 'string',
     speech: 'string', accent: 'string', translateSkipEn: '[string]', categories: '[Category]', reading: 'Reading',
     scenarios: '[Scenario]', aptitude: '[Question]', dictionary: '[Phrase]', media: '[MediaItem]',
-    writingPrompts: '[PracticePrompt]', speakingPrompts: '[PracticePrompt]', levelHours: '{int}',
+    writingPrompts: '[PracticePrompt]', speakingPrompts: '[PracticePrompt]', levelHours: '{int}', resources: '[LearningResource]',
   },
   Phrase: { t: 'string', tr: 'string?', en: 'string', note: 'string?' },
   TableData: { headers: '[string]', rows: '[[string]]' },
@@ -73,11 +75,12 @@ test('Swift data matches the web data', () => {
 test('Swift sources have balanced brackets', () => {
   const files = ['Engine.swift', 'Models.swift', 'ProgressStore.swift', 'ContentStore.swift', 'LinguaApp.swift', 'Package.swift',
     'Views/Components.swift', 'Views/HomeViews.swift', 'Views/ReadingViews.swift', 'Views/PracticeViews.swift',
-    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift', 'Bidi.swift'];
+    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift', 'Bidi.swift', 'Views/ResourceViews.swift'];
   for (const f of files) {
     let src = readFileSync(new URL(`../swift/Lingua.swiftpm/${f}`, import.meta.url), 'utf8');
     // Strip comments and string literals (including interpolations) before counting.
-    src = src.replace(/\/\/[^\n]*/g, '').replace(/"(?:\\.|[^"\\\n])*"/g, '""');
+    // Strings first, so a URL like "https://…" isn't mistaken for a comment.
+    src = src.replace(/"(?:\\.|[^"\\\n])*"/g, '""').replace(/\/\/[^\n]*/g, '');
     const pairs = { '(': ')', '[': ']', '{': '}' };
     const stack = [];
     for (const ch of src) {
@@ -96,7 +99,7 @@ test('Swift type names do not shadow SwiftUI / Foundation types', () => {
   const dir = new URL('../swift/Lingua.swiftpm/', import.meta.url);
   const files = ['Engine.swift', 'Models.swift', 'ProgressStore.swift', 'ContentStore.swift', 'LinguaApp.swift',
     'Views/Components.swift', 'Views/HomeViews.swift', 'Views/ReadingViews.swift', 'Views/PracticeViews.swift',
-    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift', 'Bidi.swift'];
+    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift', 'Bidi.swift', 'Views/ResourceViews.swift'];
   for (const f of files) {
     const src = readFileSync(new URL(f, dir), 'utf8');
     for (const m of src.matchAll(/^\s*(?:private |fileprivate )?(?:final )?(?:struct|class|enum|protocol)\s+(\w+)/gm)) {

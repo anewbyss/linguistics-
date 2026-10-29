@@ -12,6 +12,32 @@ enum ContentData {
   "B2",
   "C1"
  ],
+ "levelGuide": {
+  "A1": {
+   "cefr": "Understand and use familiar everyday expressions and very basic phrases. Introduce yourself and others, ask and answer simple personal questions, and get by if people speak slowly and clearly.",
+   "actfl": "Novice High – Intermediate Low"
+  },
+  "A2": {
+   "cefr": "Understand common sentences about everyday life (family, shopping, work, your area). Handle simple routine exchanges and describe your background and immediate needs in simple terms.",
+   "actfl": "Intermediate Mid – High"
+  },
+  "B1": {
+   "cefr": "Understand the main points of clear speech on familiar topics, handle most travel situations, write simple connected text, and describe experiences, hopes and plans with brief reasons.",
+   "actfl": "Advanced Low"
+  },
+  "B2": {
+   "cefr": "Understand the main ideas of complex texts and discussions, talk with native speakers fluently without strain on either side, and explain a viewpoint with advantages and disadvantages.",
+   "actfl": "Advanced Mid – High"
+  },
+  "C1": {
+   "cefr": "Understand demanding, longer texts and implied meaning, express yourself fluently without searching for words, and use the language flexibly for social, academic and professional purposes.",
+   "actfl": "Superior"
+  },
+  "C2": {
+   "cefr": "Understand virtually everything heard or read, summarise from different sources, and express yourself spontaneously and precisely, with fine shades of meaning.",
+   "actfl": "Distinguished"
+  }
+ },
  "languages": [
   {
    "id": "ar",
@@ -195,7 +221,8 @@ enum ContentData {
           "Good morning",
           "Welcome"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "مع السلامة (maʿa as-salāma) means \"with safety\": the usual way to say goodbye."
         },
         {
          "id": "ar-greet-1-q4",
@@ -347,7 +374,8 @@ enum ContentData {
           "مصريون (miṣriyyūn)",
           "مصري (miṣrī)"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Add -iyya to the country (مصر → مصرية) for a woman; مصري is a man and مصريون is several men."
         },
         {
          "id": "ar-greet-2-q3",
@@ -358,7 +386,8 @@ enum ContentData {
           "Mother of Karim",
           "Karim's wife"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "أم (umm) means mother. Parents are often called after their eldest child: Umm Karīm, Abu Karīm."
         },
         {
          "id": "ar-greet-2-q4",
@@ -369,7 +398,8 @@ enum ContentData {
           "when apologising",
           "before eating"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "تشرفنا (tasharrafnā) means \"we are honoured\": the Arabic \"nice to meet you\"."
         }
        ]
       }
@@ -507,7 +537,8 @@ enum ContentData {
           "el-shamis",
           "a-shams"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "ش is a sun letter, so the l of al- disappears and the ش doubles: ash-shams."
         },
         {
          "id": "ar-noun-1-q2",
@@ -518,7 +549,8 @@ enum ContentData {
           "السوق",
           "القمر"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "ق is a moon letter, so the l is pronounced: al-qamar. ن and س are sun letters (an-nūr, as-sūq)."
         },
         {
          "id": "ar-noun-1-q3",
@@ -529,7 +561,8 @@ enum ContentData {
           "بيوت",
           "بيتي"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Add ال (al-) to make a noun definite: بيت (a house) → البيت (the house)."
         },
         {
          "id": "ar-noun-1-q4",
@@ -540,7 +573,8 @@ enum ContentData {
           "allergy",
           "algebra"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Algebra comes from al-jabr (\"restoring\"), in the title of al-Khwārizmī's 9th-century mathematics book."
         }
        ]
       },
@@ -663,7 +697,8 @@ enum ContentData {
           "كبيرة مدينة",
           "مدينة كبيرة"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "The adjective follows the noun and matches it: مدينة is feminine, so كبيرة. Neither word has al-, so it means \"a big city\"."
         },
         {
          "id": "ar-noun-2-q2",
@@ -674,7 +709,8 @@ enum ContentData {
           "the house's size",
           "a big house"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Definite noun + indefinite adjective makes a sentence (no word for \"is\" needed). \"The big house\" would be البيت الكبير."
         },
         {
          "id": "ar-noun-2-q3",
@@ -685,7 +721,8 @@ enum ContentData {
           "ي (yāʾ)",
           "ة (tāʾ marbūṭa)"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Most feminine nouns end in ة (tāʾ marbūṭa): مدينة، سيارة، طالبة."
         },
         {
          "id": "ar-noun-2-q4",
@@ -873,7 +910,8 @@ enum ContentData {
           "٢",
           "٧"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Eastern Arabic digits: ٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ = 0–9. ٥ looks like a small circle or heart."
         },
         {
          "id": "ar-num-1-q2",
@@ -884,7 +922,8 @@ enum ContentData {
           "52",
           "7"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Arabic digits are written left to right, like English: ٢ (2) then ٥ (5) = 25."
         },
         {
          "id": "ar-num-1-q3",
@@ -895,7 +934,8 @@ enum ContentData {
           "ستة (sitta)",
           "ثلاثة (thalātha)"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "ثلاثة is three. اثنان is two, ستة six and ثمانية eight."
         },
         {
          "id": "ar-num-1-q4",
@@ -906,7 +946,8 @@ enum ContentData {
           "how much it costs",
           "what time it is"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "بكم (bi-kam) = \"for how much?\": the question for prices. كم الساعة asks the time."
         }
        ]
       },
@@ -1040,7 +1081,8 @@ enum ContentData {
           "أين الساعة؟",
           "كم الساعة؟"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "كم الساعة؟ (kam as-sāʿa) = \"how much is the hour?\". بكم asks a price."
         },
         {
          "id": "ar-num-2-q2",
@@ -1051,7 +1093,8 @@ enum ContentData {
           "3:15",
           "3:30"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "الثالثة = the third (hour), والنصف = and a half: 3:30."
         },
         {
          "id": "ar-num-2-q3",
@@ -1062,7 +1105,8 @@ enum ContentData {
           "Friday",
           "Sunday"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "الجمعة (al-jumʿa, \"the gathering\") is Friday, the day of congregational prayer."
         },
         {
          "id": "ar-num-2-q4",
@@ -1073,7 +1117,8 @@ enum ContentData {
           "seven",
           "five"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Day names count from Sunday: الأحد (one), الاثنين (two), الثلاثاء (three), الأربعاء (four), الخميس (five)."
         }
        ]
       }
@@ -1211,7 +1256,8 @@ enum ContentData {
           "نريد (nurīdu)",
           "يريد (yurīdu)"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "The present-tense prefix أ (a-/u-) means \"I\": أريد. تريد = you, نريد = we, يريد = he."
         },
         {
          "id": "ar-food-1-q2",
@@ -1222,7 +1268,8 @@ enum ContentData {
           "Turn the cup upside down",
           "Gently shake the cup"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Gently shake the small cup from side to side when you hand it back. Otherwise it will be refilled."
         },
         {
          "id": "ar-food-1-q3",
@@ -1233,7 +1280,8 @@ enum ContentData {
           "without sugar",
           "with sugar"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "بدون (bidūn) = without; سكر (sukkar) = sugar."
         },
         {
          "id": "ar-food-1-q4",
@@ -1244,7 +1292,8 @@ enum ContentData {
           "you",
           "he"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Present-tense prefixes: أ = I, ت = you / she, ي = he, ن = we. So نريد = we want."
         }
        ]
       },
@@ -1385,7 +1434,8 @@ enum ContentData {
           "his book",
           "our book"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "The suffix ـها (-hā) means \"her\": كتابها = her book. ـي = my, ـه = his, ـنا = our."
         },
         {
          "id": "ar-food-2-q3",
@@ -1396,7 +1446,8 @@ enum ContentData {
           "عفواً",
           "إن شاء الله"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "سلمت يداك (salimat yadāki) = \"may your hands be safe\": thanks for cooking. The reply is الله يسلمك."
         },
         {
          "id": "ar-food-2-q4",
@@ -1407,7 +1458,8 @@ enum ContentData {
           "at me (= I have)",
           "to me"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "عند (ʿinda) means \"at, with\"; Arabic says \"at me (is) a car\" for \"I have a car\"."
         }
        ]
       }
@@ -1552,7 +1604,8 @@ enum ContentData {
           "I'm tired",
           "I have a fever"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "رأس = head, ـي = my, يؤلمني = (it) hurts me."
         },
         {
          "id": "ar-health-1-q3",
@@ -1563,7 +1616,8 @@ enum ContentData {
           "مبروك",
           "سلامتك"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "سلامتك (salāmtak) wishes someone safety and recovery. صحتين is said before eating and مبروك is congratulations."
         },
         {
          "id": "ar-health-1-q4",
@@ -1574,7 +1628,8 @@ enum ContentData {
           "many",
           "none"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Arabic has a special form for exactly two: كتابان = two books. Three or more takes the plural."
         }
        ]
       }
@@ -1717,7 +1772,8 @@ enum ContentData {
           "مدينة",
           "مكتبة"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "مكتبة (library) has the root ك-ت-ب (writing), like كتاب (book) and كاتب (writer)."
         },
         {
          "id": "ar-verb-1-q2",
@@ -1728,7 +1784,8 @@ enum ContentData {
           "كتبنا",
           "كتبتْ"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Past-tense ending -nā = we: كتبنا. كتبتُ = I wrote, كتبوا = they wrote, كتبتْ = she wrote."
         },
         {
          "id": "ar-verb-1-q3",
@@ -1739,7 +1796,8 @@ enum ContentData {
           "write",
           "sit"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "مدرسة (school) comes from د-ر-س (study), with the place pattern مَفعَلة: \"place of studying\"."
         },
         {
          "id": "ar-verb-1-q4",
@@ -1750,7 +1808,8 @@ enum ContentData {
           "office",
           "written"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "كاتب follows the pattern فاعل, \"the one who does it\": the one who writes, a writer."
         }
        ]
       },
@@ -1869,7 +1928,8 @@ enum ContentData {
           "سأذهب",
           "لم أذهب"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Formal Arabic negates the past with لم + present form: لم أذهب. لن is for the future and لا for the present."
         },
         {
          "id": "ar-verb-2-q2",
@@ -1880,7 +1940,8 @@ enum ContentData {
           "I didn't write",
           "I won't write"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "The prefix سـ (sa-) makes the future: سأكتب = I will write."
         },
         {
          "id": "ar-verb-2-q3",
@@ -1891,7 +1952,8 @@ enum ContentData {
           "سوف",
           "لم"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "لن + present form = will not: لن أذهب (I won't go)."
         },
         {
          "id": "ar-verb-2-q4",
@@ -1902,7 +1964,8 @@ enum ContentData {
           "I",
           "you (f)"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "يـ marks \"he\" (and \"they\" with the ending -ūn): يكتب = he writes."
         }
        ]
       }
@@ -2040,7 +2103,8 @@ enum ContentData {
           "على اليسار",
           "على اليمين"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "يسار = left, يمين = right, على طول = straight on, أمام = in front of."
         },
         {
          "id": "ar-dir-1-q2",
@@ -2051,7 +2115,8 @@ enum ContentData {
           "Is the station far?",
           "When is the train?"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "أين = where, المحطة = the station."
         },
         {
          "id": "ar-dir-1-q3",
@@ -2062,7 +2127,8 @@ enum ContentData {
           "خذ (khudh)",
           "خذوا (khudhū)"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Commands to a woman add -ī: خذ (to a man) → خذي (to a woman). خذوا is for a group."
         },
         {
          "id": "ar-dir-1-q4",
@@ -2073,7 +2139,8 @@ enum ContentData {
           "postal codes",
           "compass points"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Many streets are known by landmarks rather than names or numbers: \"after the big mosque, next to the pharmacy\"."
         }
        ]
       },
@@ -2201,7 +2268,8 @@ enum ContentData {
           "كم الساعة؟",
           "أين هذا؟"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "بكم (for how much) + هذا (this): بكم هذا؟"
         },
         {
          "id": "ar-dir-2-q2",
@@ -2212,7 +2280,8 @@ enum ContentData {
           "هذا",
           "ذلك"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "هذا is masculine, هذه is feminine (and used for non-human plurals). هؤلاء = these (people)."
         },
         {
          "id": "ar-dir-2-q3",
@@ -2223,7 +2292,8 @@ enum ContentData {
           "متى",
           "لماذا"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "هل turns a statement into a yes/no question: هل أنت طالب؟ (Are you a student?)."
         },
         {
          "id": "ar-dir-2-q4",
@@ -2234,7 +2304,8 @@ enum ContentData {
           "Craft stalls",
           "Souvenir stands"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Haggle in souqs and for crafts and souvenirs; supermarkets, pharmacies and basic food have fixed prices."
         }
        ]
       }
@@ -2384,7 +2455,8 @@ enum ContentData {
           "gahwa",
           "qahwa"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Cairenes usually pronounce ق as a glottal stop (ʾ), so قهوة sounds like ʾahwa."
         },
         {
          "id": "ar-egy-1-q2",
@@ -2395,7 +2467,8 @@ enum ContentData {
           "شو",
           "وين"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Egyptian uses فين (fēn). وين is Levantine and أين is formal Arabic."
         },
         {
          "id": "ar-egy-1-q3",
@@ -2406,7 +2479,8 @@ enum ContentData {
           "I don't know",
           "I want"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Egyptian negates verbs with ما…ش around them: ما + عرف + ش = I don't know."
         },
         {
          "id": "ar-egy-1-q4",
@@ -2417,7 +2491,8 @@ enum ContentData {
           "هذا بيت",
           "البيت ده"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Egyptian puts ده (this, masculine) after the noun: البيت ده."
         }
        ]
       },
@@ -2550,7 +2625,8 @@ enum ContentData {
           "I'm going now",
           "I'll go"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Egyptian marks the future with حـ (ḥa-): حاروح = I'll go."
         },
         {
          "id": "ar-egy-2-q2",
@@ -2561,7 +2637,8 @@ enum ContentData {
           "بيكتب",
           "حيكتب"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "The prefix بـ (bi-) marks ongoing or habitual actions: بيكتب = he writes / is writing."
         },
         {
          "id": "ar-egy-2-q3",
@@ -2572,7 +2649,8 @@ enum ContentData {
           "goodbye",
           "how much?"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "حاضر (ḥāḍir) means \"ready\": a polite \"yes, right away\" to a request."
         },
         {
          "id": "ar-egy-2-q4",
@@ -2583,7 +2661,8 @@ enum ContentData {
           "a type of coffee",
           "a café"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Koshari is Egypt's national street food: rice, lentils and pasta topped with tomato sauce and fried onions."
         }
        ]
       }
@@ -2728,7 +2807,8 @@ enum ContentData {
           "بكم",
           "كم الساعة"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Levantine uses قدّيش (ʾaddēsh) for \"how much\"."
         },
         {
          "id": "ar-lev-1-q2",
@@ -2739,7 +2819,8 @@ enum ContentData {
           "I must",
           "I have"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "بدّي (biddī) = I want. بدّك = you want, بدّو = he wants."
         },
         {
          "id": "ar-lev-1-q3",
@@ -2750,7 +2831,8 @@ enum ContentData {
           "مبروك",
           "يعطيك العافية"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "يعطيك العافية (God give you strength) greets anyone at work. The reply is الله يعافيك."
         },
         {
          "id": "ar-lev-1-q4",
@@ -2761,7 +2843,8 @@ enum ContentData {
           "I don't know",
           "I didn't go"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Levantine negates the present with ما: ما بعرف = I don't know."
         }
        ]
       },
@@ -2890,7 +2973,8 @@ enum ContentData {
           "I'll cook",
           "I don't cook"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "عم before a verb means \"right now\": عم بطبخ = I'm cooking at the moment."
         },
         {
          "id": "ar-lev-2-q2",
@@ -2901,7 +2985,8 @@ enum ContentData {
           "رح",
           "عم"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "رح (raḥ) + verb = future: رح روح = I'll go."
         },
         {
          "id": "ar-lev-2-q3",
@@ -2912,7 +2997,8 @@ enum ContentData {
           "وعليكم السلام",
           "مبروك"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "صحتين (enjoy your food, \"double health\") is answered with ع قلبك (\"on your heart\")."
         },
         {
          "id": "ar-lev-2-q4",
@@ -2923,7 +3009,8 @@ enum ContentData {
           "we write",
           "I write"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "In Levantine, the \"we\" prefix becomes منـ (mn-) in the present: منكتب = we write."
         }
        ]
       }
@@ -3063,7 +3150,8 @@ enum ContentData {
           "MSA (fuṣḥā)",
           "Egyptian dialect"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "News, books and formal speeches use Modern Standard Arabic (fuṣḥā), understood across the Arab world."
         },
         {
          "id": "ar-cult-1-q2",
@@ -3074,7 +3162,8 @@ enum ContentData {
           "I must go",
           "I know"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "بدّي = I want. Formal Arabic says أريد and Egyptian عايز."
         },
         {
          "id": "ar-cult-1-q3",
@@ -3085,7 +3174,8 @@ enum ContentData {
           "It is the same as MSA",
           "Its film, TV and music industry"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Egyptian films, TV series and songs have been watched across the Arab world for decades."
         },
         {
          "id": "ar-cult-1-q4",
@@ -3096,7 +3186,8 @@ enum ContentData {
           "Persian and Turkish",
           "Hindi and English"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Moroccan, Algerian and Tunisian Arabic grew up alongside Amazigh (Berber) languages and, later, French."
         }
        ]
       },
@@ -3218,7 +3309,8 @@ enum ContentData {
           "الله أكرم",
           "مع السلامة"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "رمضان كريم (\"Ramadan is generous\") is answered with الله أكرم (\"God is more generous\")."
         },
         {
          "id": "ar-cult-2-q2",
@@ -3229,7 +3321,8 @@ enum ContentData {
           "a sneeze",
           "a long trip"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "نعيماً wishes comfort to someone fresh from a bath, shower or haircut. The reply is الله ينعم عليك."
         },
         {
          "id": "ar-cult-2-q3",
@@ -3240,7 +3333,8 @@ enum ContentData {
           "never mind / sorry",
           "congratulations"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "معلش (maʿlesh) softens things: \"never mind\", \"it's OK\" or \"sorry\"."
         },
         {
          "id": "ar-cult-2-q4",
@@ -3251,7 +3345,8 @@ enum ContentData {
           "tea and sweets",
           "coffee and cake"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Following the Prophet's custom, many break the fast with dates and water before the meal."
         }
        ]
       }
@@ -3386,7 +3481,8 @@ enum ContentData {
           "أريد أعمل",
           "أعمل أريد"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Link two verbs with أن: أريد أن أعمل. The second verb goes in the subjunctive."
         },
         {
          "id": "ar-work-1-q2",
@@ -3397,7 +3493,8 @@ enum ContentData {
           "colleague",
           "office"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "راتب (rātib) is a salary. Meeting = اجتماع, colleague = زميل, office = مكتب."
         },
         {
          "id": "ar-work-1-q3",
@@ -3408,7 +3505,8 @@ enum ContentData {
           "overtime",
           "a type of contract"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "واسطة (wāsṭa) is using personal connections to get things done, a much-discussed part of working life."
         },
         {
          "id": "ar-work-1-q4",
@@ -3419,7 +3517,8 @@ enum ContentData {
           "subjunctive (-a)",
           "jussive"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "أن takes the subjunctive, which ends in -a: أن أعملَ، أن يذهبَ."
         }
        ]
       },
@@ -3543,7 +3642,8 @@ enum ContentData {
           "أكبر",
           "كبار"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Comparatives use the pattern أفعل: كبير → أكبر. Add من for \"than\"."
         },
         {
          "id": "ar-work-2-q2",
@@ -3554,7 +3654,8 @@ enum ContentData {
           "الأفضل",
           "الجيدة"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Add al- to the comparative for \"the most\": أفضل (better) → الأفضل (the best)."
         },
         {
          "id": "ar-work-2-q3",
@@ -3565,7 +3666,8 @@ enum ContentData {
           "على طول",
           "إن شاء الله"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "في رأيي = \"in my opinion\" (رأي = opinion, ـي = my)."
         },
         {
          "id": "ar-work-2-q4",
@@ -3576,7 +3678,8 @@ enum ContentData {
           "لا أبداً",
           "يلا"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "مع احترامي (with respect) introduces a polite \"but…\"."
         }
        ]
       }
@@ -3815,7 +3918,8 @@ enum ContentData {
           "Form X (استفعل)",
           "Form II (فعّل)"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "استـ + root is Form X (استفعل), which often means seeking or taking: أجر (rent) → استأجر (to rent)."
         },
         {
          "id": "ar-kit-1-q4",
@@ -3826,7 +3930,8 @@ enum ContentData {
           "دور",
           "طابق"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Egyptians say دور (dōr) for a floor; طابق is the formal word."
         },
         {
          "id": "ar-kit-1-q5",
@@ -4028,7 +4133,8 @@ enum ContentData {
           "إنّو",
           "مش"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Dialects use one relative word, اللي (illi), for every gender and number."
         },
         {
          "id": "ar-kit-2-q4",
@@ -4039,7 +4145,8 @@ enum ContentData {
           "ليس أذهب",
           "لن أذهب"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "لم + jussive negates the past: لم أذهب. لن is future, لا is present, ليس has no verb."
         },
         {
          "id": "ar-kit-2-q5",
@@ -4050,7 +4157,8 @@ enum ContentData {
           "an immigrant community",
           "a passport"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "جالية is an expatriate or immigrant community, such as the Arab community in Dearborn."
         }
        ]
       },
@@ -4230,7 +4338,8 @@ enum ContentData {
           "علّم (to teach)",
           "عَلِم (to know)"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Form II علّم = to teach (make someone know); Form V تعلّم = to learn (make yourself know)."
         },
         {
          "id": "ar-kit-3-q2",
@@ -4241,7 +4350,8 @@ enum ContentData {
           "سيارة حمراء",
           "سيارة أحمرة"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Basic colours have a feminine pattern فعلاء: أحمر → حمراء."
         },
         {
          "id": "ar-kit-3-q3",
@@ -4252,7 +4362,8 @@ enum ContentData {
           "I'm still looking for a flat",
           "I stopped looking for a flat"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "ما زال = still. With a present verb it means \"still doing\": I'm still looking for a flat."
         },
         {
          "id": "ar-kit-3-q4",
@@ -4263,7 +4374,8 @@ enum ContentData {
           "genitive (-in)",
           "accusative (-an)"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "أصبح is a sister of كان, so its predicate is accusative: أصبح الجوُّ بارداً."
         },
         {
          "id": "ar-kit-3-q5",
@@ -4274,7 +4386,8 @@ enum ContentData {
           "يمين",
           "جنوب"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "In speech شمال (shmāl) means left as well as north; يسار is the formal word."
         }
        ]
       },
@@ -4455,7 +4568,8 @@ enum ContentData {
           "تكرم عينك",
           "وأنتم بخير"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "The holiday wish is returned in kind: وأنتم بخير (and you too)."
         },
         {
          "id": "ar-kit-4-q4",
@@ -4466,7 +4580,8 @@ enum ContentData {
           "سحور",
           "فرح"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "In Egypt a wedding is فرح (faraḥ, literally \"joy\"); عرس is the formal and Levantine word."
         },
         {
          "id": "ar-kit-4-q5",
@@ -4477,7 +4592,8 @@ enum ContentData {
           "a kind of sweet",
           "a wedding dinner"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "سحور is the meal eaten before dawn in Ramadan; the sunset meal is إفطار."
         }
        ]
       },
@@ -4662,7 +4778,8 @@ enum ContentData {
           "آذار",
           "نيسان"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "The Levant uses Syriac-origin names: آذار (March), نيسان (April), أيار (May)."
         },
         {
          "id": "ar-kit-5-q2",
@@ -4673,7 +4790,8 @@ enum ContentData {
           "يوليو",
           "أغسطس"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Egypt uses European-derived month names: أغسطس for August. آب is the Levantine name."
         },
         {
          "id": "ar-kit-5-q3",
@@ -4684,7 +4802,8 @@ enum ContentData {
           "lunar, about 11 days shorter than the solar year",
           "longer than the Gregorian year"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Twelve lunar months make about 354 days, roughly 11 fewer than the solar year."
         },
         {
          "id": "ar-kit-5-q4",
@@ -4695,7 +4814,8 @@ enum ContentData {
           "شوّال",
           "مُحرّم"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Eid al-Fitr ends Ramadan, on 1 Shawwal, the month after it."
         }
        ]
       }
@@ -4833,7 +4953,8 @@ enum ContentData {
           "I will study",
           "I am studying"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "كان + present verb describes ongoing or habitual past actions: I was studying / I used to study."
         },
         {
          "id": "ar-story-1-q2",
@@ -4844,7 +4965,8 @@ enum ContentData {
           "عندما",
           "فجأة"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "فجأةً = suddenly. بينما = while, ثمّ = then, عندما = when."
         },
         {
          "id": "ar-story-1-q3",
@@ -4855,7 +4977,8 @@ enum ContentData {
           "مع السلامة",
           "إن شاء الله"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "كان يا ما كان (\"there was, or there was not\") is the Arabic \"once upon a time\"."
         },
         {
          "id": "ar-story-1-q4",
@@ -4866,7 +4989,8 @@ enum ContentData {
           "a noun only",
           "the subjunctive"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "بعد أن (after) usually takes the past tense: بعد أن أكلنا (after we ate)."
         }
        ]
       },
@@ -4983,7 +5107,8 @@ enum ContentData {
           "المرأة الذين تعمل هنا",
           "المرأة تعمل التي هنا"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "المرأة is definite and feminine, so the relative pronoun is التي."
         },
         {
          "id": "ar-story-2-q2",
@@ -4994,7 +5119,8 @@ enum ContentData {
           "replaced by أنّ",
           "always الذي"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Indefinite nouns take no relative word: امرأة تعمل هنا (a woman who works here)."
         },
         {
          "id": "ar-story-2-q3",
@@ -5005,7 +5131,8 @@ enum ContentData {
           "Time is money",
           "Haste makes waste"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "الصبر = patience, مفتاح = key, الفرج = relief: a well-known proverb."
         },
         {
          "id": "ar-story-2-q4",
@@ -5016,7 +5143,8 @@ enum ContentData {
           "a verb",
           "a preposition"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "اللي (illi) is the dialect word for who, which and that."
         }
        ]
       }
@@ -5152,7 +5280,8 @@ enum ContentData {
           "doing with someone",
           "becoming"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Form II (فعّل) often means making someone do something: درس (study) → درّس (teach)."
         },
         {
          "id": "ar-adv-1-q2",
@@ -5163,7 +5292,8 @@ enum ContentData {
           "to know",
           "to learn"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Form V تعلّم is the reflexive of علّم (teach): to teach yourself, to learn."
         },
         {
          "id": "ar-adv-1-q3",
@@ -5174,7 +5304,8 @@ enum ContentData {
           "كاتب",
           "استخدم"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "استخدم (to use) has the استـ prefix of Form X. تعاون is VI, درّس II, كاتب III."
         },
         {
          "id": "ar-adv-1-q4",
@@ -5185,7 +5316,8 @@ enum ContentData {
           "III",
           "X"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "A long ā after the first root letter (فاعَل) marks Form III, often \"doing something with someone\"."
         }
        ]
       },
@@ -5297,7 +5429,8 @@ enum ContentData {
           "unchanged",
           "nominative (-u / -un)"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "كان makes its predicate accusative: كان الجوُّ جميلاً."
         },
         {
          "id": "ar-adv-2-q2",
@@ -5308,7 +5441,8 @@ enum ContentData {
           "jussive",
           "genitive"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "إنّ and its sisters (أنّ، لكنّ، لأنّ) make the following subject accusative: إنّ الجوَّ جميلٌ."
         },
         {
          "id": "ar-adv-2-q3",
@@ -5319,7 +5453,8 @@ enum ContentData {
           "إنّ الجوُّ جميلاً",
           "كان الجوُّ جميلاً"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "The subject الجوُّ stays nominative (-u) and the predicate جميلاً becomes accusative (-an)."
         },
         {
          "id": "ar-adv-2-q4",
@@ -5330,7 +5465,8 @@ enum ContentData {
           "still",
           "but"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "لأنّ (li-anna) = because. Like إنّ, it makes the following noun accusative."
         }
        ]
       }
@@ -5457,7 +5593,8 @@ enum ContentData {
           "he writes",
           "write!"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "The vowels u-i (كُتِبَ) make the past passive: \"it was written\". كَتَبَ = he wrote."
         },
         {
          "id": "ar-news-1-q2",
@@ -5468,7 +5605,8 @@ enum ContentData {
           "The exhibition will open",
           "Open the exhibition"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "تمّ + verbal noun is a common news passive: \"the opening of the exhibition took place\"."
         },
         {
          "id": "ar-news-1-q3",
@@ -5479,7 +5617,8 @@ enum ContentData {
           "instead of",
           "according to"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "وفقاً لـ (wifqan li-) = according to, used to cite sources."
         },
         {
          "id": "ar-news-1-q4",
@@ -5490,7 +5629,8 @@ enum ContentData {
           "elections",
           "government"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "انتخابات = elections (singular انتخاب, from انتخب, to elect)."
         }
        ]
       },
@@ -5616,7 +5756,8 @@ enum ContentData {
           "إذا",
           "ومع ذلك"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "ومع ذلك (\"and with that\") = nevertheless. لذلك = therefore, بالإضافة إلى = in addition to."
         },
         {
          "id": "ar-news-2-q2",
@@ -5627,7 +5768,8 @@ enum ContentData {
           "If I had studied, I would have passed",
           "I will study to pass"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "لو + past … لـ + past is an unreal condition: if I had studied, I would have passed."
         },
         {
          "id": "ar-news-2-q3",
@@ -5638,7 +5780,8 @@ enum ContentData {
           "لو",
           "لأنّ"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "إذا introduces possible conditions (إذا درستَ تنجح); لو is for unreal or imagined ones."
         },
         {
          "id": "ar-news-2-q4",
@@ -5649,7 +5792,8 @@ enum ContentData {
           "to congratulate someone",
           "to say goodbye"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "\"Kind greetings, and then…\" is a standard opening for formal letters and emails."
         }
        ]
       }
@@ -8854,6 +8998,7 @@ enum ContentData {
       "Hello"
      ],
      "answer": 0,
+     "explain": "شكراً (shukran) = thank you. The reply is عفواً.",
      "level": "A1",
      "skill": "vocabulary"
     },
@@ -8881,6 +9026,7 @@ enum ContentData {
       "water"
      ],
      "answer": 3,
+     "explain": "ماء (māʾ) = water.",
      "level": "A1",
      "skill": "vocabulary"
     },
@@ -8909,6 +9055,7 @@ enum ContentData {
       "وعليكم السلام"
      ],
      "answer": 3,
+     "explain": "Return the greeting: وعليكم السلام (\"and upon you be peace\").",
      "level": "A1",
      "skill": "culture"
     },
@@ -8936,6 +9083,7 @@ enum ContentData {
       "كتابي"
      ],
      "answer": 3,
+     "explain": "The suffix ـي means \"my\": كتابي. ـه = his, ـها = her, ـك = your.",
      "level": "A2",
      "skill": "grammar"
     },
@@ -8950,6 +9098,7 @@ enum ContentData {
      ],
      "answer": 3,
      "t": "أين المحطة؟",
+     "explain": "أين = where; المحطة = the station.",
      "level": "A2",
      "skill": "reading"
     },
@@ -8978,6 +9127,7 @@ enum ContentData {
       "Sunday"
      ],
      "answer": 1,
+     "explain": "Friday (الجمعة) is the day of congregational prayer and the main weekly holiday.",
      "level": "A2",
      "skill": "culture"
     },
@@ -8991,6 +9141,7 @@ enum ContentData {
       "كتبوا"
      ],
      "answer": 2,
+     "explain": "The past-tense ending -nā means \"we\": كتبنا.",
      "level": "B1",
      "skill": "grammar"
     },
@@ -9005,6 +9156,7 @@ enum ContentData {
      ],
      "answer": 3,
      "t": "ذهبتُ إلى السوق واشتريتُ خبزاً.",
+     "explain": "اشتريتُ خبزاً = I bought bread (خبز).",
      "level": "B1",
      "skill": "reading"
     },
@@ -9032,6 +9184,7 @@ enum ContentData {
       "كتاب"
      ],
      "answer": 1,
+     "explain": "The place pattern مَفعَلة gives مكتبة, \"place of books\": a library or bookshop.",
      "level": "B1",
      "skill": "vocabulary"
     },
@@ -9045,6 +9198,7 @@ enum ContentData {
       "had a haircut or shower"
      ],
      "answer": 3,
+     "explain": "نعيماً wishes comfort after a bath, shower or haircut.",
      "level": "B1",
      "skill": "culture"
     },
@@ -9058,6 +9212,7 @@ enum ContentData {
       "nominative (marfūʿ)"
      ],
      "answer": 2,
+     "explain": "إنّ makes its subject accusative (manṣūb): إنّ الطالبَ مجتهدٌ.",
      "level": "B2",
      "skill": "grammar"
     },
@@ -9071,6 +9226,7 @@ enum ContentData {
       "the passive"
      ],
      "answer": 0,
+     "explain": "Form X often means seeking or asking for something: استقبل (receive), استأجر (rent), استغفر (ask forgiveness).",
      "level": "B2",
      "skill": "grammar"
     },
@@ -9100,6 +9256,7 @@ enum ContentData {
      ],
      "answer": 1,
      "t": "على الرغم من الصعوبات، نجح المشروع.",
+     "explain": "على الرغم من = despite; الصعوبات = the difficulties; نجح المشروع = the project succeeded.",
      "level": "B2",
      "skill": "reading"
     },
@@ -9113,6 +9270,7 @@ enum ContentData {
       "أحب (love)"
      ],
      "answer": 0,
+     "explain": "عايز = wanting: Egyptian for أريد (I want). Levantine uses بدّي.",
      "level": "B2",
      "skill": "culture"
     }
@@ -13232,7 +13390,140 @@ enum ContentData {
     "B1": 900,
     "B2": 1500,
     "C1": 2200
-   }
+   },
+   "resources": [
+    {
+     "id": "ar-res-qu",
+     "title": "Arabic for non-Arabic Speakers I–III",
+     "provider": "Qatar University (on edX)",
+     "providerType": "University",
+     "url": "https://www.edx.org/school/qux",
+     "levels": [
+      "A1",
+      "A2"
+     ],
+     "skills": [
+      "reading",
+      "writing",
+      "listening",
+      "speaking"
+     ],
+     "what": "A three-part university course from the alphabet to about mid-A2: greetings, family, daily routines, past and future.",
+     "note": "Free to take; edX charges only for a certificate. Check which parts are open for enrolment."
+    },
+    {
+     "id": "ar-res-fsi",
+     "title": "Modern Standard and Levantine Arabic courses",
+     "provider": "U.S. Foreign Service Institute",
+     "providerType": "Government",
+     "url": "https://www.livelingua.com/project/fsi/arabic/msa",
+     "levels": [
+      "A1",
+      "A2",
+      "B1"
+     ],
+     "skills": [
+      "reading",
+      "listening",
+      "speaking",
+      "grammar"
+     ],
+     "what": "The State Department's own training courses: textbooks and drill audio for formal Arabic, Levantine and Saudi (Hijazi) Arabic.",
+     "note": "Public domain, hosted for free by Live Lingua (not a government site). Decades old: thorough drills, dated topics."
+    },
+    {
+     "id": "ar-res-dli",
+     "title": "Egyptian Arabic course",
+     "provider": "U.S. Defense Language Institute",
+     "providerType": "Government",
+     "url": "https://www.livelingua.com/project/dli/arabic/egyptian",
+     "levels": [
+      "A1",
+      "A2",
+      "B1"
+     ],
+     "skills": [
+      "listening",
+      "speaking"
+     ],
+     "what": "Government course materials for spoken Egyptian Arabic, with audio.",
+     "note": "Public domain, hosted by Live Lingua. Older material; the dialect basics still hold."
+    },
+    {
+     "id": "ar-res-aswaat",
+     "title": "Aswaat Arabiyya (Arabic Voices)",
+     "provider": "University of Texas at Austin (COERLL)",
+     "providerType": "University",
+     "url": "https://laits.utexas.edu/aswaat/",
+     "levels": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1"
+     ],
+     "skills": [
+      "listening",
+      "culture"
+     ],
+     "what": "About 245 real clips from Arab TV and native speakers, sorted from Novice to Superior, with glossaries and worksheets. Mostly formal Arabic, with several dialects.",
+     "note": "Levels use the American ACTFL scale; see the level guide below to match them to A1–C1."
+    },
+    {
+     "id": "ar-res-langmedia",
+     "title": "LangMedia: Levantine Arabic",
+     "provider": "Five College Center for World Languages (Amherst, Smith, Mount Holyoke, Hampshire, UMass)",
+     "providerType": "University",
+     "url": "https://langmedia.fivecolleges.edu/legacy/arabic/levantine/index.html",
+     "levels": [
+      "A2",
+      "B1",
+      "B2"
+     ],
+     "skills": [
+      "listening",
+      "speaking",
+      "culture"
+     ],
+     "what": "Videos of everyday conversations from Jordan, Lebanon, Palestine and Syria, with translations and comprehension guides.",
+     "note": "Some pages are being updated and may look old."
+    },
+    {
+     "id": "ar-res-arabicorpus",
+     "title": "arabiCorpus",
+     "provider": "Brigham Young University",
+     "providerType": "University",
+     "url": "https://arabicorpus.byu.edu/",
+     "levels": [
+      "B2",
+      "C1"
+     ],
+     "skills": [
+      "reading",
+      "vocabulary"
+     ],
+     "what": "Search millions of words of real newspaper and literary Arabic to see how a word is actually used and what it goes with.",
+     "note": "The university plans to retire this tool on 1 July 2027."
+    },
+    {
+     "id": "ar-res-cefr",
+     "title": "The CEFR levels (A1–C2)",
+     "provider": "Council of Europe",
+     "providerType": "Intergovernmental",
+     "url": "https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale",
+     "levels": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1"
+     ],
+     "skills": [
+      "levels"
+     ],
+     "what": "The official description of the six levels this app uses. Read it to see what each level really means and to judge your own."
+    }
+   ]
   },
   {
    "id": "es",
@@ -13370,7 +13661,8 @@ enum ContentData {
           "¿Qué onda?",
           "¿Cómo estás?"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Usted (formal you) takes the third-person verb: ¿Cómo está? ¿Cómo estás? is informal (tú)."
         },
         {
          "id": "es-greet-1-q2",
@@ -13381,7 +13673,8 @@ enum ContentData {
           "ellos",
           "vosotros"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Latin America uses ustedes for any group, formal or not; vosotros is used only in Spain."
         },
         {
          "id": "es-greet-1-q3",
@@ -13392,7 +13685,8 @@ enum ContentData {
           "your boss",
           "friends"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "¿Qué onda? (\"what's up?\") is casual Mexican slang: fine with friends, too familiar with strangers."
         },
         {
          "id": "es-greet-1-q4",
@@ -13403,7 +13697,8 @@ enum ContentData {
           "Buen provecho",
           "Buenas tardes"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Greet everyone as you enter: buenas tardes from noon until dark."
         }
        ]
       },
@@ -13511,7 +13806,8 @@ enum ContentData {
           "Estoy maestra.",
           "Soy maestro."
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Professions use ser with no article, and the noun agrees with the person: Soy maestra."
         },
         {
          "id": "es-greet-2-q2",
@@ -13522,7 +13818,8 @@ enum ContentData {
           "son",
           "es"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Ser: soy, eres, es, somos, son. Estamos is estar."
         },
         {
          "id": "es-greet-2-q3",
@@ -13533,7 +13830,8 @@ enum ContentData {
           "norteño",
           "gringo"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Americano can mean anyone from the Americas, so estadounidense is clearer and polite."
         },
         {
          "id": "es-greet-2-q4",
@@ -13544,7 +13842,8 @@ enum ContentData {
           "her middle name",
           "her husband's surname"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Mexicans use two surnames: the father's first (López), then the mother's (García)."
         }
        ]
       }
@@ -13677,7 +13976,8 @@ enum ContentData {
           "Tengo cansado.",
           "Soy cansado."
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Temporary states use estar: estoy cansado (estoy cansada for a woman)."
         },
         {
          "id": "es-ser-1-q2",
@@ -13700,7 +14000,8 @@ enum ContentData {
           "to be ready",
           "to be late"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Estar listo = to be ready; ser listo = to be clever. The verb changes the meaning."
         },
         {
          "id": "es-ser-1-q4",
@@ -13711,7 +14012,8 @@ enum ContentData {
           "son",
           "es"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Location uses estar: ¿Dónde está el baño? Hay means \"there is\"."
         }
        ]
       },
@@ -13821,7 +14123,8 @@ enum ContentData {
           "Estamos comiendo.",
           "Comemos estando."
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Estar + gerund (-ando / -iendo) is the present continuous: estamos comiendo."
         },
         {
          "id": "es-ser-2-q2",
@@ -13832,7 +14135,8 @@ enum ContentData {
           "leiendo",
           "leando"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "When -iendo follows a vowel it becomes -yendo: leer → leyendo, oír → oyendo."
         },
         {
          "id": "es-ser-2-q3",
@@ -13843,7 +14147,8 @@ enum ContentData {
           "I arrive tomorrow",
           "I'm never coming"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "In Mexico ahorita (\"right now\") can mean any time from now to later. Ahorita vengo = I'll be back soon."
         },
         {
          "id": "es-ser-2-q4",
@@ -13854,7 +14159,8 @@ enum ContentData {
           "a large coffee",
           "a decaf coffee"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "The diminutive -ito adds warmth: un cafecito is a friendly \"a little coffee\", not a smaller one."
         }
        ]
       }
@@ -14016,7 +14322,8 @@ enum ContentData {
           "tres cinco",
           "treinta cinco"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "From 31 to 99, join tens and units with y: treinta y cinco."
         },
         {
          "id": "es-num-1-q2",
@@ -14027,7 +14334,8 @@ enum ContentData {
           "the price",
           "how heavy it is"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "¿A cómo está…? asks the current price, often per kilo: \"how much is it going for?\""
         },
         {
          "id": "es-num-1-q3",
@@ -14038,7 +14346,8 @@ enum ContentData {
           "exactly 5 pesos",
           "25–30%"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Leave about 10–15% (la propina) at sit-down restaurants."
         },
         {
          "id": "es-num-1-q4",
@@ -14049,7 +14358,8 @@ enum ContentData {
           "cash",
           "receipt"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Efectivo = cash. ¿Aceptan tarjeta? = do you take cards?"
         }
        ]
       },
@@ -14161,7 +14471,8 @@ enum ContentData {
           "Es las una.",
           "Son las uno."
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Una is singular, so: Es la una. From two onwards: Son las dos."
         },
         {
          "id": "es-num-2-q2",
@@ -14172,7 +14483,8 @@ enum ContentData {
           "4:08",
           "8:15"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Mexico counts down to the next hour: cuarto para las ocho = a quarter to eight, 7:45."
         },
         {
          "id": "es-num-2-q3",
@@ -14183,7 +14495,8 @@ enum ContentData {
           "with a capital letter",
           "in lowercase"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Days and months are not capitalised in Spanish: lunes, martes, enero."
         },
         {
          "id": "es-num-2-q4",
@@ -14194,7 +14507,8 @@ enum ContentData {
           "at 11 a.m.",
           "at 7 a.m."
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "La comida, the big meal of the day, is usually between 2 and 4 p.m."
         }
        ]
       }
@@ -14308,7 +14622,8 @@ enum ContentData {
           "lettuce and tomato",
           "cheese and cream"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Con todo usually means with chopped onion and cilantro; you add salsa and lime yourself."
         },
         {
          "id": "es-food-1-q2",
@@ -14319,7 +14634,8 @@ enum ContentData {
           "Dame tacos.",
           "Tacos, ¡ya!"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "¿Me da…? (\"will you give me…?\") plus por favor is the standard polite order."
         },
         {
          "id": "es-food-1-q3",
@@ -14330,7 +14646,8 @@ enum ContentData {
           "limónes",
           "limóns"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Add -es after a consonant; the accent drops because the stress now falls naturally: limones."
         },
         {
          "id": "es-food-1-q4",
@@ -14341,7 +14658,8 @@ enum ContentData {
           "Lebanon",
           "China"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Lebanese immigrants in Puebla brought spit-roasted shawarma, which became tacos árabes and then al pastor."
         }
        ]
       },
@@ -14448,7 +14766,8 @@ enum ContentData {
           "Me gustas los tacos.",
           "Yo gusto los tacos."
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Gustar agrees with the thing liked: los tacos is plural, so gustan."
         },
         {
          "id": "es-food-2-q2",
@@ -14459,7 +14778,8 @@ enum ContentData {
           "Ella gusta cocinar.",
           "A ella les gusta cocinar."
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "A ella le gusta… The thing liked (cocinar, an infinitive) is singular, so gusta."
         },
         {
          "id": "es-food-2-q3",
@@ -14470,7 +14790,8 @@ enum ContentData {
           "Yucatán",
           "Chihuahua"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Cochinita pibil, pork slow-cooked in achiote and citrus, is a Maya dish from Yucatán."
         },
         {
          "id": "es-food-2-q4",
@@ -14481,7 +14802,8 @@ enum ContentData {
           "spicy",
           "expensive"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Picar = to be spicy (hot). ¿Pica mucho? = is it very spicy?"
         }
        ]
       }
@@ -14603,7 +14925,8 @@ enum ContentData {
           "Yo duelo los pies",
           "Tengo dolor pies"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Doler works like gustar: the feet (plural) do the hurting, so me duelen los pies."
         },
         {
          "id": "es-health-1-q2",
@@ -14614,7 +14937,8 @@ enum ContentData {
           "the flu / a bad cold",
           "a grip"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Mexicans say la gripa (Spain says la gripe) for flu or a heavy cold."
         },
         {
          "id": "es-health-1-q3",
@@ -14625,7 +14949,8 @@ enum ContentData {
           "Get well soon!",
           "What's better?"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Que + subjunctive expresses a wish: que te mejores = may you get better."
         },
         {
          "id": "es-health-1-q4",
@@ -14636,7 +14961,8 @@ enum ContentData {
           "a doctor's office",
           "a gym"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Many Mexican pharmacies have a doctor's office next door offering cheap consultations."
         }
        ]
       }
@@ -14765,7 +15091,8 @@ enum ContentData {
           "vivo",
           "vivimos"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "-ir verbs end in -imos for \"we\": vivir → vivimos (-er verbs use -emos)."
         },
         {
          "id": "es-verb-1-q2",
@@ -14776,7 +15103,8 @@ enum ContentData {
           "se levanto",
           "me levanta"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Reflexive verbs need a matching pronoun: levantarse → me levanto."
         },
         {
          "id": "es-verb-1-q3",
@@ -14787,7 +15115,8 @@ enum ContentData {
           "llevar",
           "manejar"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Mexico says manejar; Spain says conducir."
         },
         {
          "id": "es-verb-1-q4",
@@ -14798,7 +15127,8 @@ enum ContentData {
           "a bus",
           "a dessert"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "A guajolota is a tamal inside a bread roll (bolillo), a Mexico City breakfast."
         }
        ]
       },
@@ -14922,7 +15252,8 @@ enum ContentData {
           "comé",
           "comí"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Preterite of -er verbs for \"I\" ends in a stressed -í: comí."
         },
         {
          "id": "es-verb-2-q2",
@@ -14933,7 +15264,8 @@ enum ContentData {
           "we will go",
           "they went"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Ir and ser share the preterite: fuimos = we went or we were; context decides."
         },
         {
          "id": "es-verb-2-q3",
@@ -14944,7 +15276,8 @@ enum ContentData {
           "What a father!",
           "How sad!"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "In Mexico, padre (father) also means cool or great: ¡qué padre!"
         },
         {
          "id": "es-verb-2-q4",
@@ -14955,7 +15288,8 @@ enum ContentData {
           "I speak",
           "I spoke"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "The written accent on -ó marks the preterite he / she form: habló = he / she spoke. Hablo = I speak."
         }
        ]
       }
@@ -15076,7 +15410,8 @@ enum ContentData {
           "Siga derecho.",
           "Cruce derecha."
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Dé vuelta (formal command) + a la derecha = turn right. Izquierda is left."
         },
         {
          "id": "es-dir-1-q2",
@@ -15087,7 +15422,8 @@ enum ContentData {
           "straight ahead",
           "right"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Derecho / todo derecho = straight ahead. Right is a la derecha."
         },
         {
          "id": "es-dir-1-q3",
@@ -15098,7 +15434,8 @@ enum ContentData {
           "a bus stop",
           "a block"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "A cuadra is a city block: a dos cuadras = two blocks away."
         },
         {
          "id": "es-dir-1-q4",
@@ -15109,7 +15446,8 @@ enum ContentData {
           "colours only",
           "numbers only"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Every station has a name and an icon, a 1969 design that also helps people who can't read."
         }
        ]
       },
@@ -15223,7 +15561,8 @@ enum ContentData {
           "Voy a viajar.",
           "Viajo a voy."
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Ir a + infinitive is the everyday future: voy a viajar."
         },
         {
          "id": "es-dir-2-q2",
@@ -15234,7 +15573,8 @@ enum ContentData {
           "de",
           "por"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Para marks the recipient or purpose: para ti."
         },
         {
          "id": "es-dir-2-q3",
@@ -15245,7 +15585,8 @@ enum ContentData {
           "por",
           "en"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Por marks an exchange or price: lo compré por 100 pesos."
         },
         {
          "id": "es-dir-2-q4",
@@ -15256,7 +15597,8 @@ enum ContentData {
           "Will you leave me?",
           "Can I sit here?"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Dejar = to leave or drop off: ¿me deja aquí? asks a driver to let you out here."
         }
        ]
       }
@@ -15379,7 +15721,8 @@ enum ContentData {
           "July 4",
           "September 16 (Independence)"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Independence Day (16 September) celebrates the 1810 Grito de Dolores. Cinco de Mayo is a smaller holiday."
         },
         {
          "id": "es-cult-1-q2",
@@ -15390,7 +15733,8 @@ enum ContentData {
           "rose",
           "cempasúchil (marigold)"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Bright orange cempasúchil (marigold) petals and scent are believed to guide the dead home."
         },
         {
          "id": "es-cult-1-q3",
@@ -15401,7 +15745,8 @@ enum ContentData {
           "The tamales eat themselves",
           "We will eat tamales"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Se + verb is an impersonal or passive form: tamales are eaten, people eat tamales."
         },
         {
          "id": "es-cult-1-q4",
@@ -15412,7 +15757,8 @@ enum ContentData {
           "pay for the rosca",
           "give a speech"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Whoever finds the baby Jesus figurine on 6 January hosts the tamales on Candelaria, 2 February."
         }
        ]
       },
@@ -15523,7 +15869,8 @@ enum ContentData {
           "say goodbye",
           "politely ask someone to repeat"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "¿Mande? is the polite Mexican way to say \"pardon?\" or to answer when someone calls you."
         },
         {
          "id": "es-cult-2-q2",
@@ -15534,7 +15881,8 @@ enum ContentData {
           "aguacate",
           "perro"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Aguacate comes from Nahuatl āhuacatl, like chocolate, tomate and chile."
         },
         {
          "id": "es-cult-2-q3",
@@ -15545,7 +15893,8 @@ enum ContentData {
           "¿Podría…?",
           "Dame…"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "The conditional softens requests: ¿Podría…? (could you…?) is polite with usted."
         },
         {
          "id": "es-cult-2-q4",
@@ -15556,7 +15905,8 @@ enum ContentData {
           "Con permiso",
           "Provecho"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Con permiso = \"excuse me\" when passing or leaving; perdón is for apologising."
         }
        ]
       }
@@ -15673,7 +16023,8 @@ enum ContentData {
           "He trabajado aquí tres años",
           "Estoy trabajado aquí"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Haber + past participle forms the present perfect: he trabajado."
         },
         {
          "id": "es-work-1-q2",
@@ -15684,7 +16035,8 @@ enum ContentData {
           "a party",
           "a joint"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "In Mexican offices, una junta is a meeting."
         },
         {
          "id": "es-work-1-q3",
@@ -15695,7 +16047,8 @@ enum ContentData {
           "a uniform",
           "a tax"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "The aguinaldo is a legally required year-end bonus of at least 15 days' pay."
         },
         {
          "id": "es-work-1-q4",
@@ -15706,7 +16059,8 @@ enum ContentData {
           "¿Ya comes?",
           "¿Ya has comido?"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Mexican Spanish prefers the simple preterite for recent events: ¿Ya comiste?"
         }
        ]
       },
@@ -15818,7 +16172,8 @@ enum ContentData {
           "No pienso es verdad",
           "Creo no verdad"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Doubt and denial (no creo que) take the subjunctive: sea, not es."
         },
         {
          "id": "es-work-2-q2",
@@ -15829,7 +16184,8 @@ enum ContentData {
           "mejor",
           "buenísimo"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Bueno has an irregular comparative: mejor (better), el mejor (the best)."
         },
         {
          "id": "es-work-2-q3",
@@ -15840,7 +16196,8 @@ enum ContentData {
           "a polite no",
           "it's easy"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "\"I see it difficult\": a soft, indirect way of saying no."
         },
         {
          "id": "es-work-2-q4",
@@ -15851,7 +16208,8 @@ enum ContentData {
           "tanto que",
           "más… que"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Equal comparisons use tan + adjective + como: tan alto como."
         }
        ]
       }
@@ -15973,7 +16331,8 @@ enum ContentData {
           "Era de noche",
           "Será de noche"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "The imperfect (era) sets the scene; the preterite tells what happened."
         },
         {
          "id": "es-story-1-q2",
@@ -15996,7 +16355,8 @@ enum ContentData {
           "hablar",
           "ir (iba)"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Only three verbs are irregular in the imperfect: ir (iba), ser (era) and ver (veía)."
         },
         {
          "id": "es-story-1-q4",
@@ -16007,7 +16367,8 @@ enum ContentData {
           "a Mexican dish",
           "a city"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "La Llorona, the weeping woman who searches for her children, is one of Mexico's best-known legends."
         }
        ]
       },
@@ -16119,7 +16480,8 @@ enum ContentData {
           "Cuyo necesito tiempo",
           "Que necesito es tiempo"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Lo que = \"what\" or \"the thing that\": lo que necesito es tiempo."
         },
         {
          "id": "es-story-2-q2",
@@ -16130,7 +16492,8 @@ enum ContentData {
           "la mujer cuyo hijo",
           "la mujer que su hijo de"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Cuyo agrees with the thing owned, not the owner: cuyo hijo, cuya hija."
         },
         {
          "id": "es-story-2-q3",
@@ -16153,7 +16516,8 @@ enum ContentData {
           "however",
           "although"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Sin embargo = however, nevertheless."
         }
        ]
       }
@@ -16283,7 +16647,8 @@ enum ContentData {
           "Mérida",
           "Mexico City"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Regio (from regiomontano) is a person from Monterrey, Nuevo León."
         },
         {
          "id": "es-reg-1-q2",
@@ -16294,7 +16659,8 @@ enum ContentData {
           "mountain",
           "money"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Northern slang: morra = girl or young woman, morro = boy."
         },
         {
          "id": "es-reg-1-q3",
@@ -16305,7 +16671,8 @@ enum ContentData {
           "tlayudas",
           "carne asada"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Ranching country: carne asada (grilled beef) with flour tortillas."
         },
         {
          "id": "es-reg-1-q4",
@@ -16316,7 +16683,8 @@ enum ContentData {
           "a fish",
           "a hat"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Yucatecos call people from central Mexico huaches, usually jokingly."
         }
        ]
       },
@@ -16434,7 +16802,8 @@ enum ContentData {
           "a dog",
           "a little"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Literally a jet of liquid; in Mexican speech un chorro = loads, a lot."
         },
         {
          "id": "es-reg-2-q2",
@@ -16445,7 +16814,8 @@ enum ContentData {
           "no manches",
           "¿qué pedo?"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "No manches (\"no way!\") is the clean version of the vulgar no mames."
         },
         {
          "id": "es-reg-2-q3",
@@ -16456,7 +16826,8 @@ enum ContentData {
           "delicious",
           "low-quality"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Chafa = cheap and low-quality, shoddy."
         },
         {
          "id": "es-reg-2-q4",
@@ -16467,7 +16838,8 @@ enum ContentData {
           "slowly",
           "right away"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "De volada = right away, in a flash."
         }
        ]
       }
@@ -16593,7 +16965,8 @@ enum ContentData {
           "Quiero venir tú.",
           "Quiero que vengas."
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Wanting someone else to act takes que + subjunctive: quiero que vengas."
         },
         {
          "id": "es-adv-1-q2",
@@ -16604,7 +16977,8 @@ enum ContentData {
           "tena",
           "tuviera"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Take the yo form (tengo), drop -o, add the opposite vowel: tenga."
         },
         {
          "id": "es-adv-1-q3",
@@ -16615,7 +16989,8 @@ enum ContentData {
           "French",
           "Arabic"
          ],
-         "answer": 3
+         "answer": 3,
+         "explain": "Ojalá comes from Arabic law šāʾ allāh, \"if God wills\", from the centuries of Arabic in Spain."
         },
         {
          "id": "es-adv-1-q4",
@@ -16626,7 +17001,8 @@ enum ContentData {
           "llegaste",
           "llegarás"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Cuando about the future takes the subjunctive: cuando llegues."
         }
        ]
       },
@@ -16726,7 +17102,8 @@ enum ContentData {
           "Si tengo dinero, viajaría.",
           "Si tuve dinero, viajo."
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Unreal present: si + imperfect subjunctive (tuviera) + conditional (viajaría)."
         },
         {
          "id": "es-adv-2-q2",
@@ -16737,7 +17114,8 @@ enum ContentData {
           "podería",
           "puedo"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Poder has an irregular stem podr-: podría."
         },
         {
          "id": "es-adv-2-q3",
@@ -16748,7 +17126,8 @@ enum ContentData {
           "fui",
           "iría"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Take the preterite ellos form (fueron), drop -ron, add -ra: fuera."
         },
         {
          "id": "es-adv-2-q4",
@@ -16759,7 +17138,8 @@ enum ContentData {
           "Dame…",
           "Quiero ya…"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Me gustaría… (I would like…) softens a request."
         }
        ]
       }
@@ -16873,7 +17253,8 @@ enum ContentData {
           "La ley es aprobar",
           "La ley fue aprobado"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "Passive: ser + past participle agreeing with the subject. La ley is feminine, so fue aprobada."
         },
         {
          "id": "es-news-1-q2",
@@ -16884,7 +17265,8 @@ enum ContentData {
           "estuvo",
           "está"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "In reported speech after a past verb, the present (estoy) shifts to the imperfect (estaba)."
         },
         {
          "id": "es-news-1-q3",
@@ -16895,7 +17277,8 @@ enum ContentData {
           "against",
           "because"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Según = according to: según el periódico (according to the newspaper)."
         },
         {
          "id": "es-news-1-q4",
@@ -16906,7 +17289,8 @@ enum ContentData {
           "a government minister",
           "a senator"
          ],
-         "answer": 2
+         "answer": 2,
+         "explain": "Mexico calls its cabinet ministers secretarios: secretario de Educación, de Salud…"
         }
        ]
       },
@@ -17017,7 +17401,8 @@ enum ContentData {
           "Hola a todos",
           "Querido señor"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "A quien corresponda is the standard opening of formal letters in Mexico."
         },
         {
          "id": "es-news-2-q2",
@@ -17028,7 +17413,8 @@ enum ContentData {
           "envía",
           "enviará"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "Requests with que take the subjunctive: que me envíe."
         },
         {
          "id": "es-news-2-q3",
@@ -17039,7 +17425,8 @@ enum ContentData {
           "for example",
           "moreover"
          ],
-         "answer": 1
+         "answer": 1,
+         "explain": "No obstante = nevertheless, a formal synonym of sin embargo."
         },
         {
          "id": "es-news-2-q4",
@@ -17050,7 +17437,8 @@ enum ContentData {
           "a tax refund",
           "a lawyer"
          ],
-         "answer": 0
+         "answer": 0,
+         "explain": "A trámite is a bureaucratic procedure: renewing a passport, registering a car."
         }
        ]
       }
@@ -19274,6 +19662,7 @@ enum ContentData {
       "What's your name?"
      ],
      "answer": 3,
+     "explain": "Llamarse = to be called: ¿Cómo te llamas? = \"what are you called?\", what's your name?",
      "level": "A1",
      "skill": "vocabulary"
     },
@@ -19301,6 +19690,7 @@ enum ContentData {
       "the table"
      ],
      "answer": 1,
+     "explain": "La cuenta = the bill. La propina = the tip.",
      "level": "A1",
      "skill": "vocabulary"
     },
@@ -19328,6 +19718,7 @@ enum ContentData {
       "Give it to me"
      ],
      "answer": 2,
+     "explain": "¿Mande? answers when someone calls you, or asks them to repeat.",
      "level": "A1",
      "skill": "culture"
     },
@@ -19369,6 +19760,7 @@ enum ContentData {
       "como"
      ],
      "answer": 0,
+     "explain": "Ayer (yesterday) points to a completed action: the preterite comí.",
      "level": "A2",
      "skill": "grammar"
     },
@@ -19382,6 +19774,7 @@ enum ContentData {
       "a city bus"
      ],
      "answer": 3,
+     "explain": "In Mexico, camión is a bus as well as a truck.",
      "level": "A2",
      "skill": "vocabulary"
     },
@@ -19395,6 +19788,7 @@ enum ContentData {
       "May 5"
      ],
      "answer": 0,
+     "explain": "Día de Muertos is 1–2 November: children on the 1st, adults on the 2nd.",
      "level": "A2",
      "skill": "culture"
     },
@@ -19436,6 +19830,7 @@ enum ContentData {
       "I came yesterday"
      ],
      "answer": 0,
+     "explain": "Ahorita is elastic in Mexico: anything from right now to later.",
      "level": "B1",
      "skill": "reading"
     },
@@ -19463,6 +19858,7 @@ enum ContentData {
       "How sad!"
      ],
      "answer": 0,
+     "explain": "Mexican slang: padre = cool, great.",
      "level": "B1",
      "skill": "vocabulary"
     },
@@ -19476,6 +19872,7 @@ enum ContentData {
       "compraría"
      ],
      "answer": 3,
+     "explain": "After si + imperfect subjunctive comes the conditional: compraría.",
      "level": "B2",
      "skill": "grammar"
     },
@@ -19504,6 +19901,7 @@ enum ContentData {
      ],
      "answer": 2,
      "t": "No es que no quiera ir, es que no puedo.",
+     "explain": "\"No es que + subjunctive, es que…\" = it's not that…, it's that…",
      "level": "B2",
      "skill": "reading"
     },
@@ -22563,7 +22961,124 @@ enum ContentData {
     "B1": 375,
     "B2": 550,
     "C1": 750
-   }
+   },
+   "resources": [
+    {
+     "id": "es-res-spe",
+     "title": "Spanish Proficiency Exercises",
+     "provider": "University of Texas at Austin",
+     "providerType": "University",
+     "url": "https://www.laits.utexas.edu/spe/",
+     "levels": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1"
+     ],
+     "skills": [
+      "listening",
+      "speaking",
+      "grammar"
+     ],
+     "what": "Short videos of native speakers from Mexico, elsewhere in Latin America and Spain doing everyday tasks at six levels, each with a Spanish transcript and English translation.",
+     "note": "Levels use the American ACTFL scale; see the level guide below."
+    },
+    {
+     "id": "es-res-coerll",
+     "title": "Open Spanish textbooks and Spanish Grammar in Context",
+     "provider": "University of Texas at Austin (COERLL)",
+     "providerType": "University",
+     "url": "https://coerll.utexas.edu/coerll/materials/language/spanish/",
+     "levels": [
+      "A1",
+      "A2",
+      "B1",
+      "B2"
+     ],
+     "skills": [
+      "grammar",
+      "reading",
+      "writing"
+     ],
+     "what": "Free university textbooks, plus grammar explained through real video clips."
+    },
+    {
+     "id": "es-res-fsi",
+     "title": "Spanish Basic and Programmatic Courses",
+     "provider": "U.S. Foreign Service Institute",
+     "providerType": "Government",
+     "url": "https://www.livelingua.com/project/fsi/spanish",
+     "levels": [
+      "A1",
+      "A2",
+      "B1"
+     ],
+     "skills": [
+      "speaking",
+      "listening",
+      "grammar"
+     ],
+     "what": "The State Department's classic courses: hundreds of pages of drills with audio, built to get diplomats speaking.",
+     "note": "Public domain, hosted for free by Live Lingua (not a government site). Decades old, with some Spain-style vocabulary."
+    },
+    {
+     "id": "es-res-dem",
+     "title": "Diccionario del español de México",
+     "provider": "El Colegio de México",
+     "providerType": "University",
+     "url": "https://dem.colmex.mx/",
+     "levels": [
+      "A2",
+      "B1",
+      "B2",
+      "C1"
+     ],
+     "skills": [
+      "vocabulary",
+      "reading"
+     ],
+     "what": "The reference dictionary of Mexican Spanish: about 32,600 entries describing how words are used in Mexico. There is also a free app."
+    },
+    {
+     "id": "es-res-pcic",
+     "title": "Plan curricular: Niveles de referencia",
+     "provider": "Instituto Cervantes (Government of Spain)",
+     "providerType": "Government",
+     "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/default.htm",
+     "levels": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1"
+     ],
+     "skills": [
+      "grammar",
+      "levels"
+     ],
+     "what": "The official checklist of the grammar, functions and vocabulary expected at each level. Use it to see what to learn next, not as a course.",
+     "note": "In Spanish. Its examples lean towards Spain, but it notes Latin American variants."
+    },
+    {
+     "id": "es-res-cefr",
+     "title": "The CEFR levels (A1–C2)",
+     "provider": "Council of Europe",
+     "providerType": "Intergovernmental",
+     "url": "https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-cefr-3.3-common-reference-levels-global-scale",
+     "levels": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "C1"
+     ],
+     "skills": [
+      "levels"
+     ],
+     "what": "The official description of the six levels this app uses. Read it to see what each level really means and to judge your own."
+    }
+   ]
   }
  ]
 }

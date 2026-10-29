@@ -5,7 +5,33 @@ import Foundation
 struct Library: Decodable {
     let version: Int
     let levels: [String]
+    let levelGuide: [String: LevelGuide]
     let languages: [Language]
+}
+
+/// What a CEFR level means (paraphrased from the Council of Europe) and its rough ACTFL equivalent.
+struct LevelGuide: Decodable, Hashable {
+    let cefr: String
+    let actfl: String
+}
+
+/// A free outside course or reference from a university or government body.
+struct LearningResource: Decodable, Hashable, Identifiable {
+    let id: String
+    let title: String
+    let provider: String
+    let providerType: String
+    let url: String
+    let levels: [String]
+    let skills: [String]
+    let what: String
+    let note: String?
+
+    var levelSpan: String {
+        if levels.count == Engine.levels.count { return "All levels" }
+        guard let first = levels.first, let last = levels.last else { return "" }
+        return first == last ? first : "\(first)–\(last)"
+    }
 }
 
 struct Language: Decodable, Identifiable {
@@ -27,6 +53,7 @@ struct Language: Decodable, Identifiable {
     let writingPrompts: [PracticePrompt]
     let speakingPrompts: [PracticePrompt]
     let levelHours: [String: Int]
+    let resources: [LearningResource]
 
     var isArabic: Bool { id == "ar" }
     var isRTL: Bool { dir == "rtl" }

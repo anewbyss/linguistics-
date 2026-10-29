@@ -38,6 +38,19 @@ A landing screen leads to a separate menu for each language. Your coach is **Hay
 
 All of this is written for this app. It reproduces no text, exercises or dialogues from the book, and it isn't affiliated with the publisher. Use it alongside the book.
 
+**Free Courses & Resources.** Each language has a page of free outside material, sorted by level, from universities and government bodies only:
+- **Arabic:** Qatar University's edX course, the US Foreign Service Institute and Defense Language Institute courses, UT Austin's *Aswaat Arabiyya*, Five Colleges' LangMedia, BYU's arabiCorpus.
+- **Spanish:** UT Austin's *Spanish Proficiency Exercises* and COERLL textbooks, the FSI courses, El Colegio de México's *Diccionario del español de México*, and the Instituto Cervantes *Plan curricular*.
+- **Both:** the Council of Europe's CEFR level descriptions.
+
+The page also explains how the CEFR levels used here line up with the ACTFL levels that American materials use. The fluency guide quotes the FSI's own hour estimates and describes the levels in CEFR terms.
+
+**Every answer is explained.** Every quiz and placement question explains why its answer is right. The build fails if one doesn't (`content/explanations.mjs`).
+
+**Learning preferences** (Progress page, both apps):
+- **Arabic transliteration:** can be switched off; tap a blurred line to peek.
+- **Quiet mode:** hides streaks and XP.
+
 **Review (spaced repetition).** Vocabulary from finished lessons and words saved in the translator come back after 1, 3, 7, 14, 30, 60 and 120 days, and start again when you forget them.
 
 **Listening.** Dictation (type what you hear, scored by similarity) and meaning checks on lesson and scenario lines, at slow, normal or natural speed.
@@ -87,6 +100,8 @@ The course content is embedded in `ContentData.swift`, so there are no bundle re
 content/              ← edit lessons, scenarios, tests, dictionary and media here
   arabic.mjs, arabic-more.mjs     (B1–C1, dialects, prompts, level hours)
   arabic-kitaab.mjs               (Al-Kitaab Part Two companion)
+  explanations.mjs                (why each quiz answer is right)
+  resources.mjs                   (free university / government resources, CEFR level guide)
   spanish.mjs, spanish-more.mjs
   helpers.mjs
   dist/lingua-content.json   (generated)
@@ -136,6 +151,21 @@ npm run test:e2e  # drives the whole web app in headless Chromium (needs Playwri
 - `swift-schema.test.mjs` checks the JSON embedded in the Swift app against every non-optional field in `Models.swift`.
 - The end-to-end test runs every feature in both languages, checks that progress survives a reload, round-trips export/import, checks for horizontal scrolling at phone width, opens the app from `file://`, and loads it offline through the service worker.
 
+## What Lingua avoids
+
+Common complaints about Duolingo and similar apps, and how this app answers them:
+
+| Complaint | Lingua |
+|---|---|
+| Thin grammar explanations | Every lesson opens with the grammar, and every question explains its answer. |
+| Unnatural or wrong sentences | Examples written for the app and checked by automated tests; a "Report a mistake" link on every lesson. |
+| Hearts, energy limits, ads, paywalls | None. Everything is free and open from day one; the aptitude test lets you skip ahead. |
+| Streak guilt and gamification over learning | Fluency is measured from real accuracy against the CEFR; quiet mode hides streaks and XP; no notifications. |
+| Little real speaking | Spoken answers to open questions, pronunciation scoring and scenarios, plus an honest push towards real conversation. |
+| Arabic: formal Arabic only, weak script teaching, too much romanisation | Egyptian and Levantine tracks, letter tracing and typing, and transliteration you can switch off. |
+| Stalls at beginner level | Lessons to C1 and free university and government courses for every level. |
+| Lost progress, subscriptions that change | No account: progress stays on the device and can be exported at any time. |
+
 ## Notes and limits
 
 - **No app alone makes you fully fluent.** This one now covers A1–C1 in all four skills, but real fluency also needs hundreds of hours of native listening and regular conversation with people. The Path to fluency section shows how to add those.
@@ -144,4 +174,4 @@ npm run test:e2e  # drives the whole web app in headless Chromium (needs Playwri
 - **Speech recognition** quality depends on the device and browser. Safari and Chrome support it, Firefox doesn't, and Chrome sends audio to an online service. Scores compare the transcript with the target text, so they reflect intelligibility rather than accent detail.
 - **Speech** uses the voices installed on the device (Web Speech API / AVSpeechSynthesizer). If a device has no Arabic or Mexican Spanish voice, the listen buttons fall back to a related voice or stay silent.
 - **The Swift code has not been compiled yet.** It was written against iOS 16 SwiftUI APIs and its data is validated by the schema test, but the environment it was written in had no Swift toolchain. Please report any compile error that Swift Playgrounds shows.
-- The content was written with care, but a review by native speakers (especially of the dialect notes) is recommended before wider use.
+- **The course was drafted with AI help** and is checked by automated tests (answers, explanations, prompt model answers, layout), but it has not yet been reviewed by native-speaker teachers. Please use "Report a mistake" (it opens a GitHub issue) if you find an error.
