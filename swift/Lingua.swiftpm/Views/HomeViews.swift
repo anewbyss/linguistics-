@@ -21,7 +21,7 @@ struct LandingView: View {
                 }
                 .padding(.top, 8)
 
-                HayyaTip(text: "Hi, I'm Hayya, a feathered snake! هيّا means “let's go!” in Arabic, and my feathers come from Quetzalcóatl, the feathered serpent of Mexico. Pick a language and I'll coach you all the way to fluency.")
+                HayyaTip(text: "Hi, I'm Hayya! My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll coach you all the way to fluency.")
 
                 ForEach(content.languages) { lang in
                     NavigationLink(value: Route.language(lang.id)) {

@@ -139,12 +139,15 @@
     const mouth = mood === 'cheer' ? '<path d="M74 35 Q81 45 88 35 Z" class="hy-mouth"/>'
       : think ? '<path d="M77 37 h7" class="hy-line"/>' : '<path d="M75 35 Q81 40 87 35" class="hy-line"/>';
     const tongue = mood === 'happy' || mood === 'cheer' ? '<path d="M81 41 v6 m0 0 l-3 3 m3 -3 l3 3" class="hy-tongue"/>' : '';
+    // Patterned after Lyra, a real ball python: chocolate body, cream-edged caramel blotches,
+    // a dark head with tan stripes and a cream chin. The feather crest nods to Quetzalcóatl.
     const body = 'M14 104 C 8 84, 40 80, 52 88 S 90 100, 94 78 S 70 56, 76 40';
     return `<svg class="hayya" width="${size}" height="${size}" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-      <path d="${body}" class="hy-body"/><path d="${body}" class="hy-scales"/>
+      <path d="${body}" class="hy-body"/><path d="${body}" class="hy-rim"/><path d="${body}" class="hy-blotch"/>
       <ellipse cx="66" cy="13" rx="4" ry="9" transform="rotate(-30 66 13)" class="hy-f1"/><ellipse cx="80" cy="9" rx="4" ry="10" class="hy-f2"/>
       <ellipse cx="94" cy="13" rx="4" ry="9" transform="rotate(30 94 13)" class="hy-f3"/>
-      <ellipse cx="81" cy="29" rx="17" ry="14" class="hy-head"/>${eyes}
+      <ellipse cx="81" cy="29" rx="17" ry="14" class="hy-head"/><ellipse cx="81" cy="35" rx="13" ry="6.5" class="hy-chin"/>
+      <path d="M65 25 Q72 16 80 17 M97 25 Q90 16 82 17" class="hy-stripe"/>${eyes}
       <circle cx="68" cy="34" r="2.6" class="hy-blush"/><circle cx="94" cy="34" r="2.6" class="hy-blush"/>${mouth}${tongue}</svg>`;
   }
   /** Hayya with a speech bubble; pass href to make the whole tip a link. */
@@ -327,7 +330,7 @@
         <h1>Learn Arabic &amp; Mexican Spanish</h1>
         <p>Lessons from your first letters to C1, a dialect track, daily challenges, spaced review, listening, writing and speaking practice, and fluency tracking. Your progress saves automatically.</p>
       </section>
-      ${hayya("Hi, I'm Hayya, a feathered snake. My name is Arabic for “let's go!” (هيّا), and my feathers come from Quetzalcóatl, Mexico's feathered serpent. Pick a language and I'll keep you on track.", { size: 56 })}
+      ${hayya("Hi, I'm Hayya! My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll keep you on track.", { size: 56 })}
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">${cards}</div>
       <div class="grid tight" style="margin-top:1.2rem">
         <div class="card center gamify"><div class="score-big">${progress.xp}</div><div class="muted small">XP earned</div></div>

@@ -4,14 +4,23 @@ import UIKit
 // MARK: - Hayya, the feathered snake
 
 /// "هيّا" (hayyā) means "let's go!" in Arabic; the feathers nod to Quetzalcóatl, Mexico's feathered serpent.
+/// Patterned after Lyra, a real ball python: chocolate body, cream-edged caramel blotches,
+/// a dark head with tan stripes and a cream chin.
 struct HayyaMascot: View {
     enum Mood { case happy, cheer, think, sleep }
 
     var mood: Mood = .happy
     var size: CGFloat = 64
-    var bodyColor = Color(UIColor { $0.userInterfaceStyle == .dark
-        ? UIColor(red: 0.30, green: 0.76, blue: 0.54, alpha: 1)
-        : UIColor(red: 0.18, green: 0.62, blue: 0.42, alpha: 1) })
+
+    private static func tone(_ light: UInt32, _ dark: UInt32) -> Color {
+        func ui(_ v: UInt32) -> UIColor {
+            UIColor(red: CGFloat((v >> 16) & 0xff) / 255, green: CGFloat((v >> 8) & 0xff) / 255, blue: CGFloat(v & 0xff) / 255, alpha: 1)
+        }
+        return Color(UIColor { $0.userInterfaceStyle == .dark ? ui(dark) : ui(light) })
+    }
+    private static let bodyColor = tone(0x3a281c, 0x5a4231)
+    private static let rimColor = tone(0xefe1c2, 0xe6d3ab)
+    private static let blotchColor = tone(0xb0844c, 0xb4884f)
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var bob = false
@@ -34,8 +43,11 @@ struct HayyaMascot: View {
             body.addCurve(to: pt(52, 88), control1: pt(8, 84), control2: pt(40, 80))
             body.addCurve(to: pt(94, 78), control1: pt(64, 96), control2: pt(90, 100))
             body.addCurve(to: pt(76, 40), control1: pt(98, 56), control2: pt(70, 56))
-            ctx.stroke(body, with: .color(bodyColor), style: StrokeStyle(lineWidth: 15 * s, lineCap: .round))
-            ctx.stroke(body, with: .color(.white.opacity(0.55)), style: StrokeStyle(lineWidth: 4 * s, lineCap: .round, dash: [0.1 * s, 11 * s]))
+            // Rounded dashes of uneven length make the blotches; the phase matches the web's dash offset.
+            let dash: [CGFloat] = [7, 19, 12, 19, 4, 19].map { $0 * s }
+            ctx.stroke(body, with: .color(Self.bodyColor), style: StrokeStyle(lineWidth: 17 * s, lineCap: .round))
+            ctx.stroke(body, with: .color(Self.rimColor), style: StrokeStyle(lineWidth: 13.5 * s, lineCap: .round, dash: dash, dashPhase: 71 * s))
+            ctx.stroke(body, with: .color(Self.blotchColor), style: StrokeStyle(lineWidth: 11 * s, lineCap: .round, dash: dash, dashPhase: 71 * s))
 
             // Feather crest
             ctx.fill(ellipse(66, 13, 4, 9, degrees: -30), with: .color(Color(red: 0.93, green: 0.63, blue: 0)))
@@ -43,7 +55,12 @@ struct HayyaMascot: View {
             ctx.fill(ellipse(94, 13, 4, 9, degrees: 30), with: .color(Color(red: 0.91, green: 0.48, blue: 0.64)))
 
             // Head
-            ctx.fill(ellipse(81, 29, 17, 14), with: .color(bodyColor))
+            ctx.fill(ellipse(81, 29, 17, 14), with: .color(Self.bodyColor))
+            ctx.fill(ellipse(81, 35, 13, 6.5), with: .color(Self.rimColor))
+            var stripes = Path()
+            stripes.move(to: pt(65, 25)); stripes.addQuadCurve(to: pt(80, 17), control: pt(72, 16))
+            stripes.move(to: pt(97, 25)); stripes.addQuadCurve(to: pt(82, 17), control: pt(90, 16))
+            ctx.stroke(stripes, with: .color(Self.blotchColor), style: StrokeStyle(lineWidth: 2.4 * s, lineCap: .round))
             if mood == .sleep {
                 var lids = Path()
                 lids.move(to: pt(70, 27)); lids.addQuadCurve(to: pt(78, 27), control: pt(74, 30))
@@ -96,11 +113,7 @@ struct HayyaTip: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            if let color = color {
-                HayyaMascot(mood: mood, size: 56, bodyColor: color)
-            } else {
-                HayyaMascot(mood: mood, size: 56)
-            }
+            HayyaMascot(mood: mood, size: 56)
             VStack(alignment: .leading, spacing: 2) {
                 Text("HAYYA").font(.caption2.bold()).foregroundColor(color ?? .green)
                 Text(Bidi.isolate(text)).font(.subheadline).fixedSize(horizontal: false, vertical: true)

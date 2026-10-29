@@ -24,8 +24,9 @@
   --series-4: #eda100;
   --series-5: #e87ba4;
   /* Hayya the mascot */
-  --hayya-body: #2f9e6b;
-  --hayya-belly: rgb(255 255 255 / 0.55);
+  --hayya-body: #3a281c;
+  --hayya-rim: #efe1c2;
+  --hayya-blotch: #b0844c;
   --hayya-ink: #1d1d1b;
   --hayya-eye: #ffffff;
   --hayya-tongue: #e34948;
@@ -57,7 +58,9 @@ body[data-lang="es"] { --accent: #c2185b; }
     --series-3: #199e70;
     --series-4: #c98500;
     --series-5: #d55181;
-    --hayya-body: #4cc28a;
+    --hayya-body: #5a4231;
+    --hayya-rim: #e6d3ab;
+    --hayya-blotch: #b4884f;
     color-scheme: dark;
   }
   :root:not([data-theme="light"]) body[data-lang="ar"] { --accent: #2bb3a3; --accent-ink: #062b27; }
@@ -81,7 +84,9 @@ body[data-lang="es"] { --accent: #c2185b; }
   --series-3: #199e70;
   --series-4: #c98500;
   --series-5: #d55181;
-  --hayya-body: #4cc28a;
+  --hayya-body: #5a4231;
+  --hayya-rim: #e6d3ab;
+  --hayya-blotch: #b4884f;
   color-scheme: dark;
 }
 :root[data-theme="dark"] body[data-lang="ar"] { --accent: #2bb3a3; --accent-ink: #062b27; }
@@ -365,10 +370,13 @@ textarea.input { min-height: 6rem; resize: vertical; }
 .legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 0.35rem; vertical-align: middle; }
 
 .hayya { flex-shrink: 0; overflow: visible; animation: hy-bob 3.4s ease-in-out infinite; }
-body[data-lang] .hayya { --hayya-body: var(--accent); }
-.hy-body { fill: none; stroke: var(--hayya-body); stroke-width: 15; stroke-linecap: round; }
-.hy-scales { fill: none; stroke: var(--hayya-belly); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 0.1 11; }
+.hy-body { fill: none; stroke: var(--hayya-body); stroke-width: 17; stroke-linecap: round; }
+/* Rounded dashes of uneven length make Lyra's cream-edged caramel blotches; caps add half the width at each end. */
+.hy-rim { fill: none; stroke: var(--hayya-rim); stroke-width: 13.5; stroke-linecap: round; stroke-dasharray: 7 19 12 19 4 19; stroke-dashoffset: -9; }
+.hy-blotch { fill: none; stroke: var(--hayya-blotch); stroke-width: 11; stroke-linecap: round; stroke-dasharray: 7 19 12 19 4 19; stroke-dashoffset: -9; }
 .hy-head { fill: var(--hayya-body); }
+.hy-chin { fill: var(--hayya-rim); }
+.hy-stripe { fill: none; stroke: var(--hayya-blotch); stroke-width: 2.4; stroke-linecap: round; }
 .hy-eye { fill: var(--hayya-eye); }
 .hy-pupil { fill: var(--hayya-ink); }
 .hy-line { fill: none; stroke: var(--hayya-ink); stroke-width: 2; stroke-linecap: round; }
