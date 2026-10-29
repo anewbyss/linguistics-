@@ -4424,14 +4424,15 @@ enum ContentData {
        "quiz": [
         {
          "id": "ar-kit-4-q1",
-         "q": "Which underlined word would be genitive (مجرور)?",
+         "q": "In which phrase is the first word listed genitive (مجرور)?",
          "options": [
+          "البيت in في البيت",
           "جميلاً in كان الجوّ جميلاً",
           "الطالب in جاء الطالب",
-          "كتاباً in قرأتُ كتاباً",
-          "البيت in في البيت"
+          "كتاباً in قرأتُ كتاباً"
          ],
-         "answer": 3
+         "answer": 0,
+         "explain": "After the preposition في, البيت is genitive: في البيتِ."
         },
         {
          "id": "ar-kit-4-q2",
@@ -8885,14 +8886,15 @@ enum ContentData {
     },
     {
      "id": "ar-apt-4",
-     "q": "Complete: 'I am a student (m).' أنا ___",
+     "q": "Complete: 'I am a student (m).'",
      "options": [
       "طالبة",
       "الطلاب",
-      "طالب",
-      "أكتب"
+      "أكتب",
+      "طالب"
      ],
-     "answer": 2,
+     "answer": 3,
+     "t": "أنا ___",
      "explain": "No verb \"to be\" is needed, and طالبة is feminine.",
      "level": "A1",
      "skill": "grammar"
@@ -8939,28 +8941,29 @@ enum ContentData {
     },
     {
      "id": "ar-apt-8",
-     "q": "أين المحطة؟",
+     "q": "What does this question mean?",
      "options": [
-      "Is the station big?",
-      "Where is the station?",
+      "How much is the ticket?",
       "When does the train leave?",
-      "How much is the ticket?"
+      "Is the station big?",
+      "Where is the station?"
      ],
-     "answer": 1,
+     "answer": 3,
      "t": "أين المحطة؟",
      "level": "A2",
      "skill": "reading"
     },
     {
      "id": "ar-apt-9",
-     "q": "Complete: 'a big city': مدينة ___",
+     "q": "Complete: 'a big city'",
      "options": [
       "كبير",
-      "كبار",
       "الكبيرة",
-      "كبيرة"
+      "كبيرة",
+      "كبار"
      ],
-     "answer": 3,
+     "answer": 2,
+     "t": "مدينة ___",
      "explain": "Feminine nouns take feminine adjectives.",
      "level": "A2",
      "skill": "grammar"
@@ -8993,14 +8996,14 @@ enum ContentData {
     },
     {
      "id": "ar-apt-12",
-     "q": "ذهبتُ إلى السوق واشتريتُ خبزاً. What did the person buy?",
+     "q": "What did the person buy?",
      "options": [
-      "bread",
-      "meat",
+      "a book",
       "fruit",
-      "a book"
+      "meat",
+      "bread"
      ],
-     "answer": 0,
+     "answer": 3,
      "t": "ذهبتُ إلى السوق واشتريتُ خبزاً.",
      "level": "B1",
      "skill": "reading"
@@ -9073,25 +9076,26 @@ enum ContentData {
     },
     {
      "id": "ar-apt-18",
-     "q": "Complete: 'The weather was beautiful.' كان الجوُّ ___",
+     "q": "Complete: 'The weather was beautiful.'",
      "options": [
-      "جميلٍ",
+      "الجميل",
       "جميلٌ",
-      "جميلاً",
-      "الجميل"
+      "جميلٍ",
+      "جميلاً"
      ],
-     "answer": 2,
+     "answer": 3,
+     "t": "كان الجوُّ ___",
      "explain": "كان makes its predicate accusative.",
      "level": "B2",
      "skill": "grammar"
     },
     {
      "id": "ar-apt-19",
-     "q": "على الرغم من الصعوبات، نجح المشروع.",
+     "q": "What does this sentence mean?",
      "options": [
-      "The project caused many difficulties.",
-      "Despite the difficulties, the project succeeded.",
       "After the difficulties, the project began.",
+      "Despite the difficulties, the project succeeded.",
+      "The project caused many difficulties.",
       "Because of the difficulties, the project failed."
      ],
      "answer": 1,
@@ -19491,14 +19495,14 @@ enum ContentData {
     },
     {
      "id": "es-apt-18",
-     "q": "\"No es que no quiera ir, es que no puedo.\"",
+     "q": "What does this sentence mean?",
      "options": [
       "I don't want to go and I can't.",
       "I want to go, but I won't.",
-      "I can go, but I don't want to.",
-      "It's not that I don't want to go; I can't."
+      "It's not that I don't want to go; I can't.",
+      "I can go, but I don't want to."
      ],
-     "answer": 3,
+     "answer": 2,
      "t": "No es que no quiera ir, es que no puedo.",
      "level": "B2",
      "skill": "reading"

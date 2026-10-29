@@ -314,6 +314,35 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
   await go('/ar/lesson/ar-greet-1');
   await shot('11-mobile-lesson');
 
+  step('Arabic inside English text keeps its order (blanks, ellipses)');
+  for (const hash of ['/ar/lesson/ar-kit-1', '/ar/lesson/ar-kit-3', '/ar/lesson/ar-work-2', '/ar/write']) {
+    await go(hash);
+    const misplaced = await page.evaluate(() => {
+      const out = [];
+      for (const el of document.querySelectorAll('#app p, #app li, #app h2, #app .note, #app .small')) {
+        if (getComputedStyle(el).direction !== 'ltr') continue;
+        // Bare Arabic text left in a left-to-right paragraph would be laid out in the wrong order.
+        for (const node of el.childNodes) {
+          if (node.nodeType === 3 && /[\u0600-\u06FF]/.test(node.nodeValue)) out.push(node.nodeValue.slice(0, 30));
+        }
+        const pieces = [];
+        for (const node of el.childNodes) {
+          const range = document.createRange(); range.selectNodeContents(node);
+          for (const rc of range.getClientRects()) if (rc.width > 0.5) pieces.push({ x: rc.left, y: Math.round(rc.top) });
+        }
+        for (let i = 1; i < pieces.length; i++) {
+          if (Math.abs(pieces[i].y - pieces[i - 1].y) < 4 && pieces[i].x < pieces[i - 1].x - 1) out.push(el.textContent.slice(0, 30));
+        }
+      }
+      return out;
+    });
+    assert(!misplaced.length, `mixed Arabic laid out in order on ${hash}: ${misplaced.slice(0, 3).join(' | ')}`);
+  }
+  await go('/ar/test');
+  await page.locator('[data-act="test-start"]').click();
+  const blankDir = await page.evaluate(() => [...document.querySelectorAll('.quiz-t [dir]')].map((e) => e.dir));
+  assert(blankDir.every((d) => d === 'rtl'), 'test target text is right-to-left');
+
   step('works from file:// without a server');
   const filePage = await context.newPage();
   filePage.on('pageerror', (e) => errors.push('file:// ' + e.message));

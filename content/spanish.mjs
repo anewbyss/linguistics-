@@ -1062,7 +1062,7 @@ const aptitude = [
   A('B1', 'vocabulary', "'¡Qué padre!' means…", ['How cool!', 'What a dad!', 'How sad!', 'How expensive!']),
   A('B2', 'grammar', 'Si tuviera dinero, ___ un coche.', ['compraría', 'compro', 'compraré', 'compré']),
   A('B2', 'grammar', 'Busco a alguien que ___ náhuatl.', ['hable', 'habla', 'hablará', 'hablaba'], 'Unknown / hypothetical person → subjunctive.'),
-  A('B2', 'reading', '"No es que no quiera ir, es que no puedo."', ["It's not that I don't want to go; I can't.", "I don't want to go and I can't.", "I want to go, but I won't.", "I can go, but I don't want to."], null, 'No es que no quiera ir, es que no puedo.'),
+  A('B2', 'reading', 'What does this sentence mean?', ["It's not that I don't want to go; I can't.", "I don't want to go and I can't.", "I want to go, but I won't.", "I can go, but I don't want to."], null, 'No es que no quiera ir, es que no puedo.'),
   A('B2', 'grammar', 'Si me ___ dicho antes, te habría ayudado.', ['hubieras', 'habías', 'has', 'habrías'], 'Past unreal condition → pluperfect subjunctive.'),
   A('B2', 'culture', "Which word for 'avocado' comes from Nahuatl?", ['aguacate', 'palta', 'durazno', 'plátano'], 'Palta (used in Peru and Chile) comes from Quechua.'),
 ];

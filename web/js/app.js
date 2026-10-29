@@ -177,7 +177,7 @@
     return `<div class="progress-label">Question ${q.i + 1} of ${q.questions.length}</div>
       ${bar(pct(q.i, q.questions.length))}
       <div style="margin-top:.8rem" class="quiz-q">${h(item.q)}</div>
-      ${item.t ? `<div class="quiz-t">${tText(item.t, lang, isAr(lang) && E.hasArabic(item.t) ? 'ar' : '')}${speakBtn(item.t, lang)}</div>` : ''}
+      ${item.t ? `<div class="quiz-t">${tText(item.t, lang, isAr(lang) && E.hasArabic(item.t) ? 'ar' : '')}${/_{2,}/.test(item.t) ? '' : speakBtn(item.t, lang)}</div>` : ''}
       <div class="options">${opts}</div>${fb}`;
   }
   function quizPick(i) {
@@ -224,7 +224,38 @@
       html = `<div class="card"><h2>Something went wrong</h2><p class="muted">${h(err.message)}</p><a class="btn" href="#/">Go home</a></div>`;
     }
     app.innerHTML = html;
+    isolateArabic(app);
     afterRender();
+  }
+
+  // Arabic inside left-to-right text (an English question, a label, a "…" hint) is laid out
+  // left to right, so a blank or ellipsis after an Arabic word lands on the wrong side.
+  // Wrap each Arabic run, with its blanks and ellipses, in a right-to-left isolate.
+  const AR_CH = '\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF';
+  const AR_RUN = new RegExp(`(?:[_…]+[ \u00A0]*)?[${AR_CH}](?:[${AR_CH} \u00A0_…،؛؟!.]*[${AR_CH}_…؟])?`, 'g');
+  const HAS_AR = new RegExp(`[${AR_CH}]`);
+  function isolateArabic(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: (n) => (HAS_AR.test(n.nodeValue) && !n.parentElement.closest('[dir="rtl"], textarea, script, style')
+        ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+    });
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    for (const node of nodes) {
+      const text = node.nodeValue;
+      const frag = document.createDocumentFragment();
+      let last = 0;
+      for (const m of text.matchAll(AR_RUN)) {
+        if (m.index > last) frag.append(text.slice(last, m.index));
+        const span = document.createElement('span');
+        span.dir = 'rtl';
+        span.textContent = m[0];
+        frag.append(span);
+        last = m.index + m[0].length;
+      }
+      if (last < text.length) frag.append(text.slice(last));
+      node.replaceWith(frag);
+    }
   }
 
   function dispatch(parts) {
@@ -1703,7 +1734,9 @@
     if (e.target.id === 'tr-input' && view) {
       view.text = e.target.value;
       const lang = LANGS[route()[0]];
-      document.getElementById('tr-result').innerHTML = translationResult(lang);
+      const out = document.getElementById('tr-result');
+      out.innerHTML = translationResult(lang);
+      isolateArabic(out);
       e.target.classList.toggle('ar', E.hasArabic(view.text));
     } else if (e.target.id === 'write-input' && view) {
       view.input = e.target.value;

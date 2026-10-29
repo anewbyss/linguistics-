@@ -238,7 +238,7 @@ export const categories = [
           ],
         },
         quiz: [
-          Q('Which underlined word would be genitive (مجرور)?', ['البيت in في البيت', 'الطالب in جاء الطالب', 'كتاباً in قرأتُ كتاباً', 'جميلاً in كان الجوّ جميلاً']),
+          Q('In which phrase is the first word listed genitive (مجرور)?', ['البيت in في البيت', 'الطالب in جاء الطالب', 'كتاباً in قرأتُ كتاباً', 'جميلاً in كان الجوّ جميلاً'], 'After the preposition في, البيت is genitive: في البيتِ.'),
           Q('In مع أبي خالد, the word أبي is…', ['genitive, after مع', 'accusative', 'nominative', "'my father'"], 'Before a name in an iḍāfa, أب takes a long vowel: أبو / أبا / أبي.'),
           Q("Someone says 'كل عام وأنتم بخير'. You reply…", ['وأنتم بخير', 'الله يعافيك', 'سلامتك', 'تكرم عينك']),
           Q('Egyptians call a wedding…', ['فرح', 'عرس', 'حفلة', 'سحور']),
