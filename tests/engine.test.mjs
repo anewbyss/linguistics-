@@ -337,3 +337,43 @@ test('study time adds active minutes and finds the next level', () => {
   assert.equal(t.nextLevel, 'A1');
   assert.equal(t.nextLevelHours, es.levelHours.A1);
 });
+
+test('learning plan starts with the alphabet and adapts to the learner', () => {
+  const ar = lib.languages.find((l) => l.id === 'ar');
+  const es = lib.languages.find((l) => l.id === 'es');
+  const fresh = E.emptyLang();
+  const p = E.learningPlan(ar, fresh);
+  assert.equal(p.needsSetup, true);
+  assert.equal(p.units[0].id, 'alphabet');
+  assert.equal(p.next.id, 'alpha-1');
+  assert.equal(E.learningPlan(es, E.emptyLang()).next.target.tab, 'letters');
+
+  // Studying the first seven letters completes the first step.
+  const lp = E.emptyLang();
+  lp.plan = { start: 'zero' };
+  for (const l of ar.reading.letters.slice(0, 7)) lp.letters[l.char] = 1;
+  assert.equal(E.learningPlan(ar, lp).next.id, 'alpha-2');
+
+  // Readers of the script skip the alphabet; a dialect choice drops the other dialect's lessons.
+  const reader = E.emptyLang();
+  reader.plan = { start: 'script', dialect: 'lev' };
+  const rp = E.learningPlan(ar, reader);
+  assert.equal(rp.units.find((u) => u.id === 'alphabet').skipped, true);
+  assert.equal(rp.nextUnit.id, 'level-A1');
+  const ids = rp.units.flatMap((u) => u.steps.map((s) => s.id));
+  assert.ok(ids.includes('lesson-ar-lev-1') && !ids.includes('lesson-ar-egy-1'));
+
+  // A placement test result skips the units below the tested level.
+  const tested = E.emptyLang();
+  tested.plan = { start: 'test' };
+  assert.equal(E.learningPlan(ar, tested).next.id, 'placement-test');
+  tested.aptitude = [{ at: null, level: 'B1', score: 10, total: 20, bySkill: {} }];
+  const tp = E.learningPlan(ar, tested);
+  assert.equal(tp.nextUnit.id, 'level-B1');
+  assert.ok(tp.units.find((u) => u.id === 'level-A2').skipped);
+
+  // Settings survive a backup round trip.
+  const back = E.sanitizeProgress({ languages: { ar: { plan: { start: 'script', dialect: 'egy' }, checks: { marks: 1, words: 4 } } } });
+  assert.deepEqual(back.languages.ar.plan, { start: 'script', dialect: 'egy' });
+  assert.equal(back.languages.ar.checks.words, 4);
+});

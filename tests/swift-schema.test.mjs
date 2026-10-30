@@ -75,7 +75,7 @@ test('Swift data matches the web data', () => {
 test('Swift sources have balanced brackets', () => {
   const files = ['Engine.swift', 'Models.swift', 'ProgressStore.swift', 'ContentStore.swift', 'LinguaApp.swift', 'Package.swift',
     'Views/Components.swift', 'Views/HomeViews.swift', 'Views/ReadingViews.swift', 'Views/PracticeViews.swift',
-    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift', 'Bidi.swift', 'Views/ResourceViews.swift'];
+    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift', 'Bidi.swift', 'Views/ResourceViews.swift', 'Plan.swift', 'Views/PlanViews.swift'];
   for (const f of files) {
     let src = readFileSync(new URL(`../swift/Lingua.swiftpm/${f}`, import.meta.url), 'utf8');
     // Strip comments and string literals (including interpolations) before counting.
@@ -99,7 +99,7 @@ test('Swift type names do not shadow SwiftUI / Foundation types', () => {
   const dir = new URL('../swift/Lingua.swiftpm/', import.meta.url);
   const files = ['Engine.swift', 'Models.swift', 'ProgressStore.swift', 'ContentStore.swift', 'LinguaApp.swift',
     'Views/Components.swift', 'Views/HomeViews.swift', 'Views/ReadingViews.swift', 'Views/PracticeViews.swift',
-    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift', 'Bidi.swift', 'Views/ResourceViews.swift'];
+    'Fluency.swift', 'Speech.swift', 'Views/FluencyViews.swift', 'Practice.swift', 'Views/CoachViews.swift', 'Bidi.swift', 'Views/ResourceViews.swift', 'Plan.swift', 'Views/PlanViews.swift'];
   for (const f of files) {
     const src = readFileSync(new URL(f, dir), 'utf8');
     for (const m of src.matchAll(/^\s*(?:private |fileprivate )?(?:final )?(?:struct|class|enum|protocol)\s+(\w+)/gm)) {

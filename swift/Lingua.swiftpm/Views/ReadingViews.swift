@@ -22,7 +22,12 @@ enum ReadingTab: String, CaseIterable, Identifiable {
 struct ReadingView: View {
     let lang: Language
     @EnvironmentObject var progress: ProgressStore
-    @State private var tab: ReadingTab = .letters
+    @State private var tab: ReadingTab
+
+    init(lang: Language, initialTab: ReadingTab = .letters) {
+        self.lang = lang
+        _tab = State(initialValue: initialTab)
+    }
     @State private var selected: Letter?
     @State private var traceChar = ""
 
@@ -125,6 +130,11 @@ struct ReadingView: View {
                 .card()
             }
         }
+        .onAppear {
+            if (progress.lang(lang.id).checks["marks"] ?? 0) == 0 {
+                progress.update(lang, xp: 0) { $0.checks["marks"] = 1 }
+            }
+        }
     }
 }
 
@@ -191,6 +201,7 @@ struct LetterDetailView: View {
 
 struct WordFlashView: View {
     let lang: Language
+    @EnvironmentObject var progress: ProgressStore
     @State private var index = 0
     @State private var reveal = false
 
@@ -209,7 +220,13 @@ struct WordFlashView: View {
             HStack(spacing: 12) {
                 Button { index -= 1; reveal = false } label: { Image(systemName: "chevron.left") }
                     .buttonStyle(.bordered).disabled(index == 0)
-                Button(reveal ? "Hide" : "Reveal") { reveal.toggle() }
+                Button(reveal ? "Hide" : "Reveal") {
+                    reveal.toggle()
+                    // The learning plan counts how far through the word list you have read.
+                    if reveal, (progress.lang(lang.id).checks["words"] ?? 0) < index + 1 {
+                        progress.update(lang, xp: 0) { $0.checks["words"] = index + 1 }
+                    }
+                }
                     .buttonStyle(.borderedProminent).tint(lang.color)
                 SpeakButton(text: word.t, lang: lang)
                 Button { index += 1; reveal = false } label: { Image(systemName: "chevron.right") }
@@ -585,7 +602,10 @@ struct ReadingQuizView: View {
             } else {
                 QuizView(questions: questions, mode: .practice, lang: lang) { correct, _ in
                     let pct = Engine.percent(correct, questions.count)
-                    progress.update(lang, xp: correct * 5) { $0.logPractice("reading", pct) }
+                    progress.update(lang, xp: correct * 5) { lp in
+                        lp.logPractice("reading", pct)
+                        lp.checks["readQuiz"] = max(lp.checks["readQuiz"] ?? 0, pct)
+                    }
                 }
                 .id(key)
                 Button("New quiz") { regenerate() }.buttonStyle(.bordered)

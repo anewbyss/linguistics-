@@ -44,10 +44,22 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     step(`${lang}: home`);
     await go(`/${lang}`);
     assert(await page.locator('.lang-hero').count() === 1, 'language hero');
+    assert(await page.locator('.welcome [data-act="plan-start"]').count() >= 2, 'first visit shows the welcome choices');
     await shot(`02-${lang}-home`);
 
+    step(`${lang}: learning plan starts with the alphabet`);
+    await page.locator('[data-act="plan-start"][data-start="zero"]').click();
+    await page.waitForSelector('.plan-step.next');
+    await shot(`02b-${lang}-plan`);
+    await page.locator('.plan-step.next').click();
+    await page.waitForSelector('.letter-grid');
+    assert(page.url().endsWith(`/${lang}/read/letters`), 'first step opens the alphabet');
+    await go(`/${lang}`);
+    assert(await page.locator('.plan-card .plan-next').count() === 1, 'home shows the next plan step');
+
     step(`${lang}: lesson + quiz`);
-    await page.locator('.tile', { hasText: 'Continue learning' }).click();
+    await page.locator('.level-head + .grid .tile').first().click();
+    await page.locator('a.tile[href*="/lesson/"]').first().click();
     await page.waitForSelector('#quiz .option');
     const lessonId = page.url().split('/').pop();
     while (await page.locator('#quiz [data-act="quiz-pick"]').count()) {
@@ -269,7 +281,7 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `18-${lang}-answer.png`), fullPage: true });
 
     await srPage.goto(base + `index.html#/${lang}`);
-    assert(await srPage.locator('.hayya-tip').count() === 1, 'coach tip on home');
+    assert(await srPage.locator('.welcome, .plan-card').count() === 1, 'home shows the welcome or the plan');
   }
   await srPage.goto(base + 'index.html#/');
   assert(await srPage.locator('.lang-card .chip.done').count() === 2, 'landing shows both challenges done');

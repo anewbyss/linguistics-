@@ -125,54 +125,6 @@ struct HayyaTip: View {
     }
 }
 
-/// Suggests what to do next: reviews due, then the daily challenge, then the weakest skill.
-struct CoachTip: View {
-    let lang: Language
-    @EnvironmentObject var progress: ProgressStore
-
-    var body: some View {
-        let lp = progress.lang(lang.id)
-        let day = ProgressStore.day(Date())
-        let st = Engine.srsStats(lang, lp, day: day)
-        if st.due > 0 {
-            NavigationLink(value: Route.review(lang.id)) {
-                HayyaTip(text: "You have \(st.due) word\(st.due == 1 ? "" : "s") due for review. A few minutes now keeps them from slipping away.", color: lang.color)
-            }
-            .buttonStyle(.plain)
-        } else if lp.challenges[day] == nil {
-            NavigationLink(value: Route.challenge(lang.id)) {
-                HayyaTip(text: "Today's challenge is ready: ten quick items across reading, writing, listening and speaking. ¡Vámonos! / يلا!", mood: .cheer, color: lang.color)
-            }
-            .buttonStyle(.plain)
-        } else {
-            let f = Engine.fluency(lang, lp)
-            let weakest = Engine.skills.min { f.skill($0).score < f.skill($1).score } ?? "reading"
-            NavigationLink(value: weakestRoute(weakest)) {
-                HayyaTip(text: "Challenge done, nice! Your \(weakest) is your weakest skill right now (\(f.skill(weakest).score)/100). \(weakestAdvice(weakest)).", mood: .think, color: lang.color)
-            }
-            .buttonStyle(.plain)
-        }
-    }
-
-    private func weakestRoute(_ skill: String) -> Route {
-        switch skill {
-        case "reading": return .review(lang.id)
-        case "writing": return .writing(lang.id)
-        case "listening": return .listening(lang.id)
-        default: return .speaking(lang.id)
-        }
-    }
-
-    private func weakestAdvice(_ skill: String) -> String {
-        switch skill {
-        case "reading": return "Review your words or finish a lesson"
-        case "writing": return "Try a prompt in the Writing Studio"
-        case "listening": return "Do a few dictations in Listening"
-        default: return "Answer a speaking prompt out loud"
-        }
-    }
-}
-
 struct SpeedPicker: View {
     @State private var rate = Speaker.shared.rateName
 
@@ -517,6 +469,11 @@ struct WritingStudioView: View {
     @EnvironmentObject var content: ContentStore
     @EnvironmentObject var progress: ProgressStore
     @State private var selected: PracticePrompt?
+
+    init(lang: Language, initialPromptId: String? = nil) {
+        self.lang = lang
+        _selected = State(initialValue: lang.writingPrompts.first { $0.id == initialPromptId })
+    }
     @State private var text = ""
     @State private var analysis: PromptAnalysis?
 
