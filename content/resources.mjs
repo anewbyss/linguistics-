@@ -19,7 +19,7 @@ export const resources = {
     R('ar-res-qu', 'Arabic for non-Arabic Speakers I–III', 'Qatar University (on edX)', 'University',
       'https://www.edx.org/school/qux', ['A1', 'A2'], ['reading', 'writing', 'listening', 'speaking'],
       'A three-part university course from the alphabet to about mid-A2: greetings, family, daily routines, past and future.',
-      'Free to take; edX charges only for a certificate. Check which parts are open for enrolment.'),
+      'Free to take; edX charges only for a certificate. Check which parts are open for enrollment.'),
     R('ar-res-fsi', 'Modern Standard and Levantine Arabic courses', 'U.S. Foreign Service Institute', 'Government',
       'https://www.livelingua.com/project/fsi/arabic/msa', ['A1', 'A2', 'B1'], ['reading', 'listening', 'speaking', 'grammar'],
       'The State Department\'s own training courses: textbooks and drill audio for formal Arabic, Levantine and Saudi (Hijazi) Arabic.',
@@ -39,7 +39,7 @@ export const resources = {
     R('ar-res-arabicorpus', 'arabiCorpus', 'Brigham Young University', 'University',
       'https://arabicorpus.byu.edu/', ['B2', 'C1'], ['reading', 'vocabulary'],
       'Search millions of words of real newspaper and literary Arabic to see how a word is actually used and what it goes with.',
-      'The university plans to retire this tool on 1 July 2027.'),
+      'The university plans to retire this tool on July 1, 2027.'),
     cefr('ar'),
   ],
   es: [
@@ -60,7 +60,7 @@ export const resources = {
     R('es-res-pcic', 'Plan curricular: Niveles de referencia', 'Instituto Cervantes (Government of Spain)', 'Government',
       'https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/default.htm', ALL, ['grammar', 'levels'],
       'The official checklist of the grammar, functions and vocabulary expected at each level. Use it to see what to learn next, not as a course.',
-      'In Spanish. Its examples lean towards Spain, but it notes Latin American variants.'),
+      'In Spanish. Its examples lean toward Spain, but it notes Latin American variants.'),
     cefr('es'),
   ],
 };
@@ -73,5 +73,5 @@ export const levelGuide = {
   B1: { cefr: 'Understand the main points of clear speech on familiar topics, handle most travel situations, write simple connected text, and describe experiences, hopes and plans with brief reasons.', actfl: 'Advanced Low' },
   B2: { cefr: 'Understand the main ideas of complex texts and discussions, talk with native speakers fluently without strain on either side, and explain a viewpoint with advantages and disadvantages.', actfl: 'Advanced Mid – High' },
   C1: { cefr: 'Understand demanding, longer texts and implied meaning, express yourself fluently without searching for words, and use the language flexibly for social, academic and professional purposes.', actfl: 'Superior' },
-  C2: { cefr: 'Understand virtually everything heard or read, summarise from different sources, and express yourself spontaneously and precisely, with fine shades of meaning.', actfl: 'Distinguished' },
+  C2: { cefr: 'Understand virtually everything heard or read, summarize from different sources, and express yourself spontaneously and precisely, with fine shades of meaning.', actfl: 'Distinguished' },
 };

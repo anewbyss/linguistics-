@@ -11,7 +11,7 @@
   const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1'];
   const PASS = 0.6;
 
-  // ---------- normalisation ----------
+  // ---------- normalization ----------
   const PUNCT = /[¿¡?!.,;:"'“”‘’«»()\[\]…،؟؛—–\-]/g;
   const ARABIC_MARKS = /[ً-ٰٟـ]/g; // harakat, dagger alif, tatweel
 
@@ -840,7 +840,7 @@
   const band = (score) => BAND_EDGES.find(([edge]) => score < edge)[1];
 
   /**
-   * Fluency per skill, 0–100: 60% coverage (how much of the course you've practised) +
+   * Fluency per skill, 0–100: 60% coverage (how much of the course you've practiced) +
    * 40% accuracy (average of your last 10 measured results). Without measured results a skill tops out at 60.
    * Overall = average of the four skills, blended 75/25 with the latest aptitude-test level when there is one.
    */
@@ -902,7 +902,7 @@
   }
 
   // ---------------------------------------------------------------- learning plan
-  // A recommended path through the whole course, starting with the alphabet. Steps tick themselves
+  // A recommended path through the whole course, starting with the alphabet. Steps check themselves
   // off from real progress; nothing is ever locked. Mirrored in the Swift app (Plan.swift).
   const PLAN_STARTS = ['zero', 'script', 'test'];
   const PLAN_DIALECTS = ['both', 'lev', 'egy', 'msa'];
@@ -942,7 +942,7 @@
 
     if (settings.start === 'test') {
       units.push({ id: 'placement', level: null, title: 'Find your level', intro: 'A five-minute placement test sets where your plan starts.', steps: [
-        step('placement-test', 'test', 'Take the placement test', 'Twenty questions from A1 to B2. Your plan then starts at your level, and earlier units stay open for revision.', { view: 'test' }, lp.aptitude.length > 0),
+        step('placement-test', 'test', 'Take the placement test', 'Twenty questions from A1 to B2. Your plan then starts at your level, and earlier units stay open for review.', { view: 'test' }, lp.aptitude.length > 0),
       ] });
     }
 
@@ -955,7 +955,7 @@
       const label = ar ? `Letters ${i + 1}–${i + group.length}: ${group.map((l) => l.char).join(' ')}`
         : `Letters ${group[0].char.toUpperCase()}–${group[group.length - 1].char.toUpperCase()}`;
       const why = ar
-        ? (i === 0 ? 'Tap each letter to hear it and see its shapes. ب ت ث share one shape: only the dots differ.' : 'Tap each letter to hear its sound and see how it joins its neighbours.')
+        ? (i === 0 ? 'Tap each letter to hear it and see its shapes. ب ت ث share one shape: only the dots differ.' : 'Tap each letter to hear its sound and see how it joins its neighbors.')
         : (i === 0 ? 'Tap each letter to hear it. Spanish vowels are short and always pronounced the same way.' : 'Tap each letter to hear it, including ñ and the rolled rr.');
       alpha.push(step(`alpha-${alpha.length + 1}`, 'letters', label, why, { view: 'read', tab: 'letters' }, seen === group.length, [seen, group.length]));
     }
@@ -974,7 +974,7 @@
     const writeGoal = Math.min(5, r.writing.length);
     alpha.push(step('alpha-write', 'write', 'Type 5 words', ar ? 'Use the on-screen Arabic keyboard to spell words yourself.' : 'Spell words with the accent keys.',
       { view: 'read', tab: 'write' }, written >= writeGoal, [Math.min(written, writeGoal), writeGoal]));
-    alpha.push(step('alpha-quiz', 'quiz', ar ? 'Letter quiz: score 80% or more' : 'Accent quiz: score 80% or more', 'Check you can recognise them before moving on.',
+    alpha.push(step('alpha-quiz', 'quiz', ar ? 'Letter quiz: score 80% or more' : 'Accent quiz: score 80% or more', 'Check you can recognize them before moving on.',
       { view: 'read', tab: 'quiz' }, (checks.readQuiz || 0) >= 80));
     units.push({ id: 'alphabet', level: 'A1', title: ar ? 'The Arabic alphabet' : 'The alphabet and pronunciation',
       intro: ar ? 'Start here: 28 letters, written right to left and joined together. Most learners need a week or two.' : 'Start here: Spanish is spelled almost exactly as it sounds, so this goes quickly.',

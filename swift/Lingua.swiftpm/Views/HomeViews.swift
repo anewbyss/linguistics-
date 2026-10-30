@@ -23,7 +23,7 @@ struct LandingView: View {
 
                 HayyaTip(text: content.languages.allSatisfy { progress.lang($0.id).plan.start == nil }
                     ? "Hi, I'm Hayya! New here? Pick a language below and I'll set up a plan for you, starting with the alphabet."
-                    : "Hi, I'm Hayya! My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll coach you all the way to fluency.", mood: .cheer)
+                    : "Hi, I'm Hayya! My colors come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll coach you all the way to fluency.", mood: .cheer)
 
                 ForEach(content.languages) { lang in
                     NavigationLink(value: Route.language(lang.id)) {
@@ -186,7 +186,7 @@ struct LanguageHomeView: View {
                     MenuRow(emoji: "🔄", title: "Offline Translator", detail: "\(lang.dictionary.count) entries, no internet needed")
                 }
             } header: {
-                Text("2 · Practise")
+                Text("2 · Practice")
             } footer: {
                 Text("Use these alongside your lessons, a little every day.")
             }

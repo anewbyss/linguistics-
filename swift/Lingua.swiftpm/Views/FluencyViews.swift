@@ -50,7 +50,7 @@ struct SpeakPanel: View {
                 .disabled(disabled)
             }
             feedback
-            Text("Speech is recognised on your device when it supports this language.")
+            Text("Speech is recognized on your device when it supports this language.")
                 .font(.caption2).foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity)
@@ -71,7 +71,7 @@ struct SpeakPanel: View {
                 Text("I heard: “\(heard)”").font(.caption)
             }
         case .selfChecked:
-            Text("✓ Marked as practised (self-checked). Only scored attempts change your accuracy.")
+            Text("✓ Marked as practiced (self-checked). Only scored attempts change your accuracy.")
                 .font(.caption).foregroundColor(.green).multilineTextAlignment(.center)
         case .failed(let message):
             Text(message).font(.caption).foregroundColor(.red).multilineTextAlignment(.center)
@@ -118,7 +118,7 @@ struct SpeakingPracticeView: View {
                     }
                 } else {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Listen to the model, then tap “Say it” and repeat. Scores of \(Engine.speakPass)% or more count towards your speaking fluency.")
+                    Text("Listen to the model, then tap “Say it” and repeat. Scores of \(Engine.speakPass)% or more count toward your speaking fluency.")
                         .font(.subheadline)
                     Text("\(spoken)/\(phrases.count) phrases spoken well").font(.caption.bold())
                     ProgressView(value: Double(spoken), total: Double(max(phrases.count, 1))).tint(lang.color)
@@ -236,7 +236,7 @@ struct DailyChallengeView: View {
             Text("✍️ 3 writing: two typed answers and a spelling check")
             Text("🎧 2 listening: a dictation and a line to understand by ear")
             Text("🎙️ 2 speaking: phrases to say out loud")
-            Text("The challenge stays the same all day. Your first completion counts towards your fluency and challenge streak.")
+            Text("The challenge stays the same all day. Your first completion counts toward your fluency and challenge streak.")
                 .font(.caption).foregroundColor(.secondary)
             Button("Start today's challenge") { phase = 1 }
                 .buttonStyle(.borderedProminent)
@@ -474,7 +474,7 @@ struct DailyChallengeView: View {
                     Text(rec.score == rec.total ? "Perfect score! 🎉" : Double(rec.score) >= Double(rec.total) * 0.7 ? "Great work!" : "Good effort. Every day counts.")
                     Text(quiet ? "A new challenge unlocks tomorrow" : "🔥 \(Engine.challengeStreak(lp))-day challenge streak · a new challenge unlocks tomorrow").font(.caption)
                     HStack {
-                        Button("Practise again (not scored)") {
+                        Button("Practice again (not scored)") {
                             replay = true
                             items = Engine.dailyChallenge(lang, lp, day: today)
                             index = 0
@@ -685,7 +685,7 @@ struct FluencyView: View {
                     if lp.fluency.count >= 2 {
                         FluencyTrendChart(entries: Array(lp.fluency.suffix(60)))
                     } else {
-                        Text("Your trend appears here after you practise on two different days.")
+                        Text("Your trend appears here after you practice on two different days.")
                             .font(.subheadline).foregroundColor(.secondary)
                     }
                 }
@@ -693,7 +693,7 @@ struct FluencyView: View {
 
                 DisclosureGroup("How fluency is calculated") {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Each skill scores 0–100: 60% coverage (how much of the course you've practised in that skill) plus 40% accuracy (the average of your last 10 scored attempts). Bands: under 20 = A1, under 40 = A2, under 60 = B1, under 80 = B2, 80+ = C1.")
+                        Text("Each skill scores 0–100: 60% coverage (how much of the course you've practiced in that skill) plus 40% accuracy (the average of your last 10 scored attempts). Bands: under 20 = A1, under 40 = A2, under 60 = B1, under 80 = B2, 80+ = C1.")
                         Text("Reading: letters studied, lessons completed and words learned in Review; accuracy from lesson quizzes, letter / accent quizzes and challenge reading items.")
                         Text("Writing: writing tasks mastered, letters traced and free-writing prompts passed; accuracy from typed answers, tracing scores and challenge writing items.")
                         Text("Listening: lines understood (\(Engine.listenPass)+); accuracy from dictation and meaning checks and challenge listening items.")
@@ -735,7 +735,7 @@ struct FluencyView: View {
             Text(s.samples > 0 ? "Based on your last \(s.samples) scored attempts. \(tips[name] ?? "")" : "No scored attempts yet, so this skill can reach at most 60. \(tips[name] ?? "")")
                 .font(.caption).foregroundColor(.secondary)
             NavigationLink(value: practiceRoute(name)) {
-                Text("Practise \(name)")
+                Text("Practice \(name)")
             }
             .buttonStyle(.bordered)
         }

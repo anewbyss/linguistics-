@@ -40,7 +40,7 @@ const categories = [
         culture: {
           title: 'Mexican greeting etiquette',
           body: [
-            "Say hello when you walk into a small shop, waiting room or lift ('Buenas tardes') and goodbye when you leave ('Hasta luego').",
+            "Say hello when you walk into a small shop, waiting room or elevator ('Buenas tardes') and goodbye when you leave ('Hasta luego').",
             'Women often greet friends with a single kiss on the right cheek. Men shake hands or give a back-patting hug (abrazo).',
             "'Buenas' on its own is a friendly greeting at any time of day.",
             'Expect professional titles: Licenciado/Licenciada (university graduate), Ingeniero, Doctor are used routinely at work.',
@@ -218,7 +218,7 @@ const categories = [
           title: 'Money tips',
           body: [
             "Small businesses, markets and street stalls are often cash-only, and many can't break big notes. Keep coins and small bills.",
-            'Restaurant tips are usually 10–15%. It is customary to give a few pesos to petrol-station attendants and supermarket baggers (often older people or teenagers).',
+            'Restaurant tips are usually 10–15%. It is customary to give a few pesos to gas-station attendants and supermarket baggers (often older people or teenagers).',
             "'Lana' and 'varo' are slang for money.",
           ],
         },
@@ -421,7 +421,7 @@ const categories = [
           S('¿a poco?', 'no way? / really? (MX)'), S('fresa', 'posh / preppy (MX)'),
         ],
         examples: [
-          S('El fin de semana fuimos a Teotihuacán. ¡Estuvo bien padre!', 'At the weekend we went to Teotihuacan. It was really cool!'),
+          S('El fin de semana fuimos a Teotihuacán. ¡Estuvo bien padre!', 'On the weekend we went to Teotihuacan. It was really cool!'),
           S('¿Neta conseguiste chamba? ¡No manches!', 'You really got a job? No way!'),
           S('Ayer hablé con mi jefe.', 'Yesterday I talked to my boss.'),
         ],
@@ -482,8 +482,8 @@ const categories = [
         quiz: [
           Q("'Turn right' (formal):", ['Dé vuelta a la derecha.', 'Siga derecho.', 'Dé vuelta a la izquierda.', 'Cruce derecha.']),
           Q("In directions, 'derecho' means…", ['straight ahead', 'right', 'left', 'back']),
-          Q("A 'cuadra' is…", ['a block', 'a square metre', 'a street sign', 'a bus stop']),
-          Q('Mexico City Metro stations are identified by…', ['icons and names', 'numbers only', 'colours only', 'letters']),
+          Q("A 'cuadra' is…", ['a block', 'a square meter', 'a street sign', 'a bus stop']),
+          Q('Mexico City Metro stations are identified by…', ['icons and names', 'numbers only', 'colors only', 'letters']),
         ],
       },
       {
@@ -566,7 +566,7 @@ const categories = [
           title: 'Beyond Cinco de Mayo',
           body: [
             "Cinco de Mayo marks the 1862 Battle of Puebla and is celebrated mostly in Puebla and in the U.S. Mexico's big national holiday is Independence Day (Sept 16).",
-            "Día de Muertos (UNESCO Intangible Heritage) is a joyful remembrance, not Halloween. Families believe the dead come back to visit, guided by the scent and colour of cempasúchil.",
+            "Día de Muertos (UNESCO Intangible Heritage) is a joyful remembrance, not Halloween. Families believe the dead come back to visit, guided by the scent and color of cempasúchil.",
             "'Calaveritas literarias' are funny rhyming poems written as if Death had come for friends, teachers or politicians.",
           ],
         },
@@ -718,7 +718,7 @@ const reading = {
   intro: [
     'Spanish spelling is very regular. Once you know the rules, you can pronounce almost any word you read.',
     "Mexican Spanish uses seseo: z and c (before e / i) sound like s. There is no 'th' sound like in Spain.",
-    "Learn the accent rules below, practise reading Mexican place names, then write phrases yourself.",
+    "Learn the accent rules below, practice reading Mexican place names, then write phrases yourself.",
   ],
   letters: [
     L('a', 'a', 'ah', "Open 'ah' as in 'father'.", S('casa', 'house')),
@@ -860,8 +860,8 @@ const scenarios = [
         R('¿Dónde vive Bellas Artes?', 'Where does Bellas Artes live?', false, "Places don't 'live'. Use '¿cómo llego a…?' or '¿dónde está…?'"),
         R('¿Qué hora es Bellas Artes?', 'What time is Bellas Artes?', false, "You've mixed two questions!"),
       ]),
-      step('Officer', S('Tome la línea 2, dirección Cuatro Caminos, y bájese en Bellas Artes.', 'Take Line 2 towards Cuatro Caminos and get off at Bellas Artes.'), 'What should you do?', [
-        U('Take Line 2 towards Cuatro Caminos and get off at Bellas Artes', true, "'Dirección' is the last station on the line, which tells you the direction."),
+      step('Officer', S('Tome la línea 2, dirección Cuatro Caminos, y bájese en Bellas Artes.', 'Take Line 2 toward Cuatro Caminos and get off at Bellas Artes.'), 'What should you do?', [
+        U('Take Line 2 toward Cuatro Caminos and get off at Bellas Artes', true, "'Dirección' is the last station on the line, which tells you the direction."),
         U('Take Line 4 and walk two blocks', false, 'Línea 2 = Line 2.'),
         U('Take a bus to Cuatro Caminos', false, "'Línea' means a Metro line."),
       ], 'understand'),
@@ -879,7 +879,7 @@ const scenarios = [
   },
   {
     id: 'es-sc-mercado', title: 'At the Market', level: 'A2', emoji: '🥑', icon: 'basket',
-    setting: 'A busy neighbourhood market in Guadalajara. You need avocados and tomatoes.', goal: 'Ask prices the Mexican way and buy what you need.',
+    setting: 'A busy neighborhood market in Guadalajara. You need avocados and tomatoes.', goal: 'Ask prices the Mexican way and buy what you need.',
     steps: [
       step('Vendor', S('¿Qué le damos, güerita? Pásele, pásele.', 'What can I get you, blondie? Come on in.', "'Güero / güerita' is a friendly (not rude) way vendors address light-skinned or foreign customers."), 'Ask the price of avocados per kilo.', [
         R('¿A cómo el kilo de aguacate?', 'How much for a kilo of avocados?', true, "'¿A cómo…?' is how Mexicans ask prices at the market."),
@@ -893,8 +893,8 @@ const scenarios = [
       ], 'understand'),
       step(null, null, 'Ask for a kilo, ripe enough to eat today.', [
         R('Deme un kilo, pero que estén para hoy, por favor.', 'Give me a kilo, ripe for today, please.', true, "'Para hoy' = ready to eat today. The vendor will pick them for you."),
-        R('Quiero un kilómetro.', 'I want a kilometre.', false, 'Kilo, not kilómetro!'),
-        R('Un kilo para el año pasado.', 'A kilo for last year.', false, 'Time-travelling avocados?'),
+        R('Quiero un kilómetro.', 'I want a kilometer.', false, 'Kilo, not kilómetro!'),
+        R('Un kilo para el año pasado.', 'A kilo for last year.', false, 'Time-traveling avocados?'),
       ]),
       step('Vendor', S('¿Algo más? El jitomate está bien bonito hoy.', 'Anything else? The tomatoes are really nice today.'), 'Ask for half a kilo of tomatoes.', [
         R('Sí, medio kilo de jitomate, por favor.', 'Yes, half a kilo of tomatoes, please.', true, 'Jitomate = red tomato in central Mexico.'),
@@ -954,12 +954,12 @@ const scenarios = [
         R('Adiós.', 'Goodbye.', false, 'You just arrived!'),
       ]),
       step("Lucía's grandmother", S('Esta es la ofrenda para mi esposo. Le encantaba el mole.', 'This is the altar for my husband. He loved mole.'), 'Respond respectfully.', [
-        R('Está muy bonita. ¿Cómo se llamaba?', "It's beautiful. What was his name?", true, 'Asking about the person honours their memory.'),
+        R('Está muy bonita. ¿Cómo se llamaba?', "It's beautiful. What was his name?", true, 'Asking about the person honors their memory.'),
         R('¿Puedo comer el mole?', 'Can I eat the mole?', false, 'The food on the ofrenda is for the spirits first!'),
         R('Qué miedo.', 'How scary.', false, 'Día de Muertos is about love and memory, not fear.'),
       ]),
-      step("Lucía's grandmother", S('Se llamaba Don Ernesto. Le pusimos pan de muerto, cempasúchil y su mezcal favorito.', "His name was Don Ernesto. We put out pan de muerto, marigolds and his favourite mezcal."), 'What is on the altar?', [
-        U('Pan de muerto, marigolds and his favourite mezcal', true, 'Ofrendas hold the favourite things of the person who died.'),
+      step("Lucía's grandmother", S('Se llamaba Don Ernesto. Le pusimos pan de muerto, cempasúchil y su mezcal favorito.', "His name was Don Ernesto. We put out pan de muerto, marigolds and his favorite mezcal."), 'What is on the altar?', [
+        U('Pan de muerto, marigolds and his favorite mezcal', true, 'Ofrendas hold the favorite things of the person who died.'),
         U('Candy skulls and a guitar', false, 'Listen again: pan de muerto, cempasúchil, mezcal.'),
         U('Only photos of Lucía', false, "It's for Don Ernesto."),
       ], 'understand'),
@@ -1149,7 +1149,7 @@ const media = [
   M('A2', 'Music', 'Natalia Lafourcade: "Hasta la Raíz"', 'Natalia Lafourcade', 'A beautiful song with very clear diction. Read the lyrics while you listen.', 'Music streaming', ['listening']),
   M('A2', 'TV', 'Rebelde (2004)', 'Televisa', 'A hugely popular teen telenovela with everyday dialogue and dramatic, easy-to-follow plots.', 'Streaming / YouTube', ['listening']),
   M('B1', 'Film', 'Instructions Not Included / No se aceptan devoluciones (2013)', 'Eugenio Derbez', 'Bilingual comedy-drama that moves between Acapulco and L.A. Great for bridging English and Spanish.', 'Streaming', ['listening']),
-  M('B1', 'TV', 'Club de Cuervos (2015–2019)', 'Netflix, Mexico', 'A satirical comedy about a football club, packed with Mexican slang and business Spanish.', 'Netflix', ['listening', 'culture']),
+  M('B1', 'TV', 'Club de Cuervos (2015–2019)', 'Netflix, Mexico', 'A satirical comedy about a soccer club, packed with Mexican slang and business Spanish.', 'Netflix', ['listening', 'culture']),
   M('B1', 'YouTube', 'Luisito Comunica', 'Luis Arturo Villar', 'Travel vlogs in fast, casual Mexican Spanish. Turn on Spanish captions.', 'YouTube', ['listening']),
   M('B1', 'Film', 'Nosotros los Nobles (2013)', 'Gary Alazraki', 'A comedy about spoiled rich kids forced to work, with lots of class-based slang (fresa vs. naco).', 'Streaming', ['listening', 'culture']),
   M('B2', 'Film', 'Roma (2018)', 'Alfonso Cuarón', 'An Oscar-winning portrait of 1970s Mexico City in Spanish and Mixtec.', 'Netflix', ['listening', 'culture']),

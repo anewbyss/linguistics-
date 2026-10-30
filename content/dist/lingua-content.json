@@ -29,7 +29,7 @@
    "actfl": "Superior"
   },
   "C2": {
-   "cefr": "Understand virtually everything heard or read, summarise from different sources, and express yourself spontaneously and precisely, with fine shades of meaning.",
+   "cefr": "Understand virtually everything heard or read, summarize from different sources, and express yourself spontaneously and precisely, with fine shades of meaning.",
    "actfl": "Distinguished"
   }
  },
@@ -308,7 +308,7 @@
         },
         {
          "t": "تشرفنا",
-         "en": "Nice to meet you (lit. we are honoured)",
+         "en": "Nice to meet you (lit. we are honored)",
          "tr": "tasharrafnā"
         },
         {
@@ -390,11 +390,11 @@
          "options": [
           "when meeting someone",
           "when leaving",
-          "when apologising",
+          "when apologizing",
           "before eating"
          ],
          "answer": 0,
-         "explain": "تشرفنا (tasharrafnā) means \"we are honoured\": the Arabic \"nice to meet you\"."
+         "explain": "تشرفنا (tasharrafnā) means \"we are honored\": the Arabic \"nice to meet you\"."
         }
        ]
       }
@@ -678,8 +678,8 @@
        "culture": {
         "title": "The old city",
         "body": [
-         "Many Arab cities have an 'old city' (al-madīna al-qadīma) of narrow lanes, souqs and courtyards beside a modern centre.",
-         "The old cities of Fes, Damascus, Jerusalem, Cairo and Tunis are UNESCO World Heritage sites, and good places to practise asking for directions and prices."
+         "Many Arab cities have an 'old city' (al-madīna al-qadīma) of narrow lanes, souqs and courtyards beside a modern center.",
+         "The old cities of Fes, Damascus, Jerusalem, Cairo and Tunis are UNESCO World Heritage sites, and good places to practice asking for directions and prices."
         ]
        },
        "quiz": [
@@ -1572,7 +1572,7 @@
        "culture": {
         "title": "Visiting the sick",
         "body": [
-         "Visiting someone who is ill (ʿiyādat al-marīḍ) is an important social duty. Visitors bring fruit, juice or sweets.",
+         "Visiting someone who is ill (ʿiyādat al-marīḍ) is an important social duty. Visitors bring fruit, juice or desserts.",
          "Wish a sick person سلامتك (salāmtak to a man, salāmtik to a woman), literally 'your safety'. The reply is الله يسلمك.",
          "Pharmacists are often the first stop for minor illnesses and give advice freely."
         ]
@@ -1648,7 +1648,7 @@
         "body": [
          "Most Arabic words are built from a three-letter root that carries a core meaning. k-t-b (ك ت ب) is about writing: kataba (he wrote), kitāb (book), kātib (writer), maktab (office), maktaba (library).",
          "The past tense adds endings to the stem katab-: katabtu (I wrote), katabta (you, m), katabti (you, f), kataba (he), katabat (she), katabnā (we), katabū (they).",
-         "Dictionaries are organised by root, so finding the root unlocks a whole family of words."
+         "Dictionaries are organized by root, so finding the root unlocks a whole family of words."
         ],
         "table": {
          "headers": [
@@ -1740,7 +1740,7 @@
         },
         {
          "t": "درسنا العربية في الجامعة.",
-         "en": "We studied Arabic at university.",
+         "en": "We studied Arabic at the university.",
          "tr": "darasnā al-ʿarabiyya fī al-jāmiʿa."
         },
         {
@@ -2241,7 +2241,7 @@
         },
         {
          "t": "هل عندك لون آخر؟",
-         "en": "Do you have another colour?",
+         "en": "Do you have another color?",
          "tr": "hal ʿindak lawn ākhar?"
         }
        ],
@@ -2437,7 +2437,7 @@
         "body": [
          "Egyptian Arabic is the most widely understood dialect, spread by Cairo's film, TV and music industry since the 1930s.",
          "Friendly titles are everywhere: يا باشا yā bāsha (boss), يا أستاذ yā ustāz (sir), يا حاجة yā ḥagga (to an older woman).",
-         "Egyptians are famous for their humour: jokes (nukat) and wordplay are part of everyday life."
+         "Egyptians are famous for their humor: jokes (nukat) and wordplay are part of everyday life."
         ]
        },
        "quiz": [
@@ -2788,7 +2788,7 @@
         "title": "Levantine courtesy",
         "body": [
          "يعطيك العافية greets anyone who is working or has made an effort. The reply is الله يعافيك.",
-         "تكرم / تكرمي (tikram / tikrami, 'be honoured') answers a request: 'of course, with pleasure'.",
+         "تكرم / تكرمي (tikram / tikrami, 'be honored') answers a request: 'of course, with pleasure'.",
          "Mornings often start with Fairuz on the radio, and coffee is offered to every guest."
         ]
        },
@@ -3290,8 +3290,8 @@
         "title": "Ramadan & Eid",
         "body": [
          "During Ramadan, Muslims fast from dawn to sunset. As a visitor, avoid eating or drinking in public during the day in conservative areas.",
-         "Iftar, the meal that breaks the fast, traditionally starts with dates and water at the sunset call to prayer. An invitation to iftar is a real honour.",
-         "Eid al-Fitr ends Ramadan, and Eid al-Adha follows about 70 days later. Both bring new clothes, family visits, sweets, and gifts of money (ʿīdiyya) for children."
+         "Iftar, the meal that breaks the fast, traditionally starts with dates and water at the sunset call to prayer. An invitation to iftar is a real honor.",
+         "Eid al-Fitr ends Ramadan, and Eid al-Adha follows about 70 days later. Both bring new clothes, family visits, desserts, and gifts of money (ʿīdiyya) for children."
         ]
        },
        "quiz": [
@@ -3337,7 +3337,7 @@
          "options": [
           "dates and water",
           "soup and bread",
-          "tea and sweets",
+          "tea and desserts",
           "coffee and cake"
          ],
          "answer": 0,
@@ -3623,8 +3623,8 @@
         "title": "Disagreeing politely",
         "body": [
          "Soften disagreement: start with مع احترامي (maʿa iḥtirāmī, with respect) or معك حق، بس… (maʿak ḥaqq, bas…, you're right, but…).",
-         "Directly criticising someone senior in public can cause loss of face, so disagreement is often expressed privately or indirectly.",
-         "Lively debate among friends, though, is a favourite pastime, especially about football, politics and food."
+         "Directly criticizing someone senior in public can cause loss of face, so disagreement is often expressed privately or indirectly.",
+         "Lively debate among friends, though, is a favorite pastime, especially about soccer, politics and food."
         ]
        },
        "quiz": [
@@ -3700,7 +3700,7 @@
          "Patterns shift meaning in typical directions. Form II often acts on someone else (درس to study → درّس to teach); Form V is often its reflexive partner (ذكّر to remind → تذكّر to remember); Form X often means seeking or taking (أجر wage, rent → استأجر to rent).",
          "The examples in the table: كتب to write, درّس to teach, ساعد to help, أرسل to send, تذكّر to remember, تعاون to cooperate, انكسر to break (by itself), انتقل to move house, استأجر to rent.",
          "Nouns of place use مَفعَل or مَفعِل, plural مَفاعِل: مطبخ kitchen (from طبخ to cook), مكتب office, مسبح swimming pool, منزل residence. Plurals: مطابخ، مكاتب، منازل.",
-         "To say what a place has, put the place first and use في, not عند: في الشقة ثلاث غرف (the flat has three rooms), أمام البيت حديقة (there is a garden in front of the house). An indefinite noun cannot start the sentence, so the place phrase comes first."
+         "To say what a place has, put the place first and use في, not عند: في الشقة ثلاث غرف (the apartment has three rooms), أمام البيت حديقة (there is a garden in front of the house). An indefinite noun cannot start the sentence, so the place phrase comes first."
         ],
         "table": {
          "headers": [
@@ -3780,13 +3780,13 @@
        "vocab": [
         {
          "t": "شقة",
-         "en": "apartment, flat",
+         "en": "apartment",
          "tr": "shaqqa",
          "note": "Plural شقق. The same word in Levantine and Egyptian."
         },
         {
          "t": "طابق",
-         "en": "floor, storey",
+         "en": "floor, story",
          "tr": "ṭābiq",
          "note": "Egyptian: دور dōr."
         },
@@ -3850,7 +3850,7 @@
        "examples": [
         {
          "t": "في شقتنا غرفتا نوم ومطبخ صغير.",
-         "en": "Our flat has two bedrooms and a small kitchen.",
+         "en": "Our apartment has two bedrooms and a small kitchen.",
          "tr": "fī shaqqatinā ghurfatā nawm wa-maṭbakh ṣaghīr.",
          "note": "The place phrase comes first: في شقتنا…"
         },
@@ -3861,20 +3861,20 @@
         },
         {
          "t": "نستأجر شقة في الطابق الثالث، والإيجار معقول.",
-         "en": "We rent a flat on the third floor, and the rent is reasonable.",
+         "en": "We rent an apartment on the third floor, and the rent is reasonable.",
          "tr": "nastaʾjiru shaqqa fī aṭ-ṭābiq ath-thālith, wa-l-ījār maʿqūl."
         },
         {
          "t": "بدّي شقة قريبة من الجامعة.",
-         "en": "I want a flat near the university. (Levantine)",
+         "en": "I want an apartment near the university. (Levantine)",
          "tr": "biddī shaʾʾa ʾarībe mn ij-jāmʿa."
         }
        ],
        "culture": {
-        "title": "Finding a flat and \"establishing a home\"",
+        "title": "Finding an apartment and \"establishing a home\"",
         "body": [
-         "In many Arab cities people find flats through a سمسار (simsār), an informal agent paid a commission, or by asking the بوّاب (bawwāb), the building caretaker common in Egypt, who knows which flats are empty.",
-         "Word of mouth matters: ask friends, colleagues and shopkeepers in the neighbourhood before you search online.",
+         "In many Arab cities people find apartments through a سمسار (simsār), an informal agent paid a commission, or by asking the بوّاب (bawwāb), the building caretaker common in Egypt, who knows which apartments are empty.",
+         "Word of mouth matters: ask friends, colleagues and shopkeepers in the neighborhood before you search online.",
          "تأسيس بيت (taʾsīs bayt, establishing a household) is traditionally a key step before marriage: the couple, often with family help, prepares a permanent, fully furnished home. High housing costs make this hard for many young people, so some newlyweds live with the husband's family in بيت العائلة (the family house), at least at first.",
          "Someone with news to share may open with خير؟ (khēr?), literally \"good?\", meaning \"I hope it's good news?\""
         ]
@@ -3918,12 +3918,12 @@
         },
         {
          "id": "ar-kit-1-q4",
-         "q": "In Egyptian Arabic, 'floor, storey' is…",
+         "q": "In Egyptian Arabic, 'floor, story' is…",
          "options": [
           "بيت",
-          "سطح",
+          "طابق",
           "دور",
-          "طابق"
+          "سطح"
          ],
          "answer": 2,
          "explain": "Egyptians say دور (dōr) for a floor; طابق is the formal word."
@@ -4148,7 +4148,7 @@
          "q": "جالية means…",
          "options": [
           "a mosque",
-          "a neighbourhood market",
+          "a neighborhood market",
           "an immigrant community",
           "a passport"
          ],
@@ -4161,12 +4161,12 @@
        "id": "ar-kit-3",
        "title": "From Home to the Market",
        "level": "B1",
-       "summary": "Form II and V pairs, colours, كان and its sisters, and \"it is … to\". Goes with Al-Kitaab 2, Lesson 3.",
+       "summary": "Form II and V pairs, colors, كان and its sisters, and \"it is … to\". Goes with Al-Kitaab 2, Lesson 3.",
        "grammar": {
-        "title": "Form II / V pairs, colours, and كان and its sisters",
+        "title": "Form II / V pairs, colors, and كان and its sisters",
         "body": [
          "Form II (فعّل) usually does something to someone or something; Form V (تفعّل) is its reflexive partner: غيّر to change something → تغيّر to change (itself); علّم to teach → تعلّم to learn; عرّف to introduce → تعرّف على to get to know.",
-         "Basic colours have their own patterns (table below): masculine أفعل, feminine فعلاء, human plural فُعل. Other colours are nisba adjectives ending in ـي: بنّي brown (from بُنّ, coffee beans), برتقالي orange, رمادي grey, وردي pink.",
+         "Basic colors have their own patterns (table below): masculine أفعل, feminine فعلاء, human plural فُعل. Other colors are nisba adjectives ending in ـي: بنّي brown (from بُنّ, coffee beans), برتقالي orange, رمادي gray, وردي pink.",
          "كان and its \"sisters\", ليس (is not), ما زال (still) and أصبح / صار (became), put their predicate in the accusative: أصبح الجوّ بارداً (the weather became cold).",
          "Followed by a present-tense verb they describe habits and changes: كنتُ أشتري الخبز كل يوم (I used to buy bread every day); ما زلتُ أبحث (I am still looking).",
          "\"It is … to …\" is من الـ + adjective + أن: من الصعب أن أجد… (it is hard to find…), من السهل أن، من الممكن أن، من المهم أن. Spoken Arabic drops من: صعب إنّي لاقي…"
@@ -4279,7 +4279,7 @@
         },
         {
          "t": "لون",
-         "en": "colour",
+         "en": "color",
          "tr": "lawn",
          "note": "Plural ألوان."
         },
@@ -4295,7 +4295,7 @@
          "t": "اشتريتُ قميصاً أزرق وتنورة حمراء.",
          "en": "I bought a blue shirt and a red skirt.",
          "tr": "ishtaraytu qamīṣan azraq wa-tannūra ḥamrāʾ.",
-         "note": "The colour agrees with its noun: أزرق (masculine), حمراء (feminine)."
+         "note": "The color agrees with its noun: أزرق (masculine), حمراء (feminine)."
         },
         {
          "t": "ما زالت الأسعار غالية.",
@@ -4316,8 +4316,8 @@
        "culture": {
         "title": "The traditional souq",
         "body": [
-         "A traditional Arab souq is a network of smaller markets, each specialising in one kind of goods: spices, gold, fabric, copper. Lanes are often named after what they sell, and the main market usually sits beside the city's great mosque.",
-         "Damascus's Souq al-Hamidiyya (سوق الحميدية), a long covered market from the Ottoman era named after Sultan Abdul Hamid, leads to the Umayyad Mosque. Nearby are specialised markets such as al-Buzuriyya (البزورية) for spices and sweets.",
+         "A traditional Arab souq is a network of smaller markets, each specializing in one kind of goods: spices, gold, fabric, copper. Lanes are often named after what they sell, and the main market usually sits beside the city's great mosque.",
+         "Damascus's Souq al-Hamidiyya (سوق الحميدية), a long covered market from the Ottoman era named after Sultan Abdul Hamid, leads to the Umayyad Mosque. Nearby are specialized markets such as al-Buzuriyya (البزورية) for spices and candy.",
          "Prices for many goods are agreed by bargaining. Shopkeepers selling the same goods sit side by side and often send customers to each other rather than compete.",
          "Many old markets have a حمّام, a public steam bath with several rooms. It is still part of everyday life in parts of North Africa and a popular experience in old Damascus, Aleppo and Cairo.",
          "Shop phrases: يعطيك العافية (said to someone working; reply: الله يعافيك), مبروك (said on a purchase too; reply: الله يبارك فيك), تكرم عينك (with pleasure, Levantine)."
@@ -4346,19 +4346,19 @@
           "سيارة أحمرة"
          ],
          "answer": 2,
-         "explain": "Basic colours have a feminine pattern فعلاء: أحمر → حمراء."
+         "explain": "Basic colors have a feminine pattern فعلاء: أحمر → حمراء."
         },
         {
          "id": "ar-kit-3-q3",
          "q": "ما زلتُ أبحث عن شقة means…",
          "options": [
-          "I never looked for a flat",
-          "I will look for a flat",
-          "I'm still looking for a flat",
-          "I stopped looking for a flat"
+          "I never looked for an apartment",
+          "I will look for an apartment",
+          "I'm still looking for an apartment",
+          "I stopped looking for an apartment"
          ],
          "answer": 2,
-         "explain": "ما زال = still. With a present verb it means \"still doing\": I'm still looking for a flat."
+         "explain": "ما زال = still. With a present verb it means \"still doing\": I'm still looking for an apartment."
         },
         {
          "id": "ar-kit-3-q4",
@@ -4525,7 +4525,7 @@
         "title": "A wish for every occasion, and the kunya",
         "body": [
          "For holidays and birthdays say كل عام وأنتم بخير (or a spoken version). For weddings, graduations, a new baby or a new car say مبروك, answered with الله يبارك فيك. After a wedding مبروك, the reply often adds عقبالك / عقبال عندك (may you be next!).",
-         "In Ramadan, Muslims fast from dawn to sunset, eat سحور before dawn and break the fast at إفطار. Evenings are social: family visits, special sweets, and TV series (مسلسلات) made for the month. Greet people with رمضان كريم (reply: الله أكرم) or رمضان مبارك.",
+         "In Ramadan, Muslims fast from dawn to sunset, eat سحور before dawn and break the fast at إفطار. Evenings are social: family visits, special desserts, and TV series (مسلسلات) made for the month. Greet people with رمضان كريم (reply: الله أكرم) or رمضان مبارك.",
          "Many people are called by a kunya (كنية): أبو or أم plus the name of their eldest son, or daughter if there are no sons, as in أبو خالد and أم خالد. It sounds warm and respectful. Some names come with a traditional kunya: a man named حسين is often called أبو علي."
         ]
        },
@@ -4714,13 +4714,13 @@
          "t": "عيد الفطر",
          "en": "Eid al-Fitr, the feast after Ramadan",
          "tr": "ʿīd al-fiṭr",
-         "note": "On 1 Shawwal."
+         "note": "On Shawwal 1."
         },
         {
          "t": "عيد الأضحى",
          "en": "Eid al-Adha, the Feast of the Sacrifice",
          "tr": "ʿīd al-aḍḥā",
-         "note": "On 10 Dhu al-Hijja, during the Hajj."
+         "note": "On Dhu al-Hijja 10, during the Hajj."
         },
         {
          "t": "الهلال",
@@ -4810,7 +4810,7 @@
           "مُحرّم"
          ],
          "answer": 2,
-         "explain": "Eid al-Fitr ends Ramadan, on 1 Shawwal, the month after it."
+         "explain": "Eid al-Fitr ends Ramadan, on Shawwal 1, the month after it."
         }
        ]
       }
@@ -5782,7 +5782,7 @@
          "id": "ar-news-2-q4",
          "q": "تحية طيبة وبعد is used…",
          "options": [
-          "to apologise",
+          "to apologize",
           "to open a formal letter",
           "to congratulate someone",
           "to say goodbye"
@@ -7548,7 +7548,7 @@
      "level": "B1",
      "emoji": "🌙",
      "icon": "moon.stars",
-     "setting": "During Ramadan, your neighbour Umm Khalid greets you in the stairwell.",
+     "setting": "During Ramadan, your neighbor Umm Khalid greets you in the stairwell.",
      "goal": "Return the greeting, accept her invitation, and be a gracious guest at iftar.",
      "steps": [
       {
@@ -8129,7 +8129,7 @@
         },
         {
          "t": "أنا منظّمة، وأعمل جيداً ضمن فريق.",
-         "en": "I'm organised and I work well in a team.",
+         "en": "I'm organized and I work well in a team.",
          "correct": true,
          "feedback": "Specific and positive.",
          "tr": "ana munaẓẓama, wa-aʿmalu jayyidan ḍimna farīq."
@@ -8396,7 +8396,7 @@
        "speaker": "Server",
        "line": {
         "t": "هنا ولا تيك أواي؟",
-        "en": "For here or takeaway?",
+        "en": "For here or to go?",
         "tr": "hena walla tēk awāy?"
        },
        "prompt": "Choose.",
@@ -8410,7 +8410,7 @@
         },
         {
          "t": "تيك أواي، لو سمحت.",
-         "en": "Takeaway, please.",
+         "en": "To go, please.",
          "correct": true,
          "feedback": "Egyptians use the English word.",
          "tr": "tēk awāy, law samaḥt."
@@ -8488,7 +8488,7 @@
      "level": "A2",
      "emoji": "🫓",
      "icon": "sun.max",
-     "setting": "A neighbourhood bakery in Beirut early in the morning. The baker speaks Lebanese Arabic.",
+     "setting": "A neighborhood bakery in Beirut early in the morning. The baker speaks Lebanese Arabic.",
      "goal": "Order a za'atar manoushe and pay politely.",
      "steps": [
       {
@@ -8641,11 +8641,11 @@
     },
     {
      "id": "ar-sc-flat",
-     "title": "Renting a Flat in Damascus",
+     "title": "Renting an Apartment in Damascus",
      "level": "B1",
      "emoji": "🏢",
      "icon": "building.2",
-     "setting": "You need a flat for a year of study. A simsar (agent) meets you near the university.",
+     "setting": "You need an apartment for a year of study. A simsar (agent) meets you near the university.",
      "goal": "Ask about the rooms, the floor, the rent and the furniture, then arrange a visit.",
      "steps": [
       {
@@ -8655,18 +8655,18 @@
         "en": "Welcome! What exactly are you looking for?",
         "tr": "ahlēn! shū biddak bi-ẓ-ẓabṭ?"
        },
-       "prompt": "Say you want a small furnished flat near the university.",
+       "prompt": "Say you want a small furnished apartment near the university.",
        "choices": [
         {
          "t": "بدّي شقة صغيرة مفروشة قريبة من الجامعة.",
-         "en": "I want a small furnished flat near the university.",
+         "en": "I want a small furnished apartment near the university.",
          "correct": true,
          "feedback": "Size, furniture and location: clear.",
          "tr": "biddi shaʾʾa zġīre mafrūshe ʾarībe mn ij-jāmʿa."
         },
         {
          "t": "أنا شقة.",
-         "en": "I am a flat.",
+         "en": "I am an apartment.",
          "correct": false,
          "feedback": "Use بدّي (I want) + شقة.",
          "tr": "ana shaʾʾa."
@@ -8675,7 +8675,7 @@
          "t": "بدّي جامعة صغيرة.",
          "en": "I want a small university.",
          "correct": false,
-         "feedback": "You want a شقة (flat), not a university!",
+         "feedback": "You want a شقة (apartment), not a university!",
          "tr": "biddi jāmʿa zġīre."
         }
        ]
@@ -8684,10 +8684,10 @@
        "speaker": "Simsar",
        "line": {
         "t": "عندي شقة حلوة بالطابق الرابع، فيها غرفتين ومطبخ وحمّام.",
-        "en": "I have a nice flat on the fourth floor. It has two rooms, a kitchen and a bathroom.",
+        "en": "I have a nice apartment on the fourth floor. It has two rooms, a kitchen and a bathroom.",
         "tr": "ʿindi shaʾʾa ḥilwe bi-ṭ-ṭābeʾ ir-rābeʿ, fīha ghurftēn w-maṭbakh w-ḥammām."
        },
-       "prompt": "What does the flat have?",
+       "prompt": "What does the apartment have?",
        "choices": [
         {
          "t": "",
@@ -8711,25 +8711,25 @@
        "mode": "understand"
       },
       {
-       "prompt": "Ask whether there is a lift.",
+       "prompt": "Ask whether there is an elevator.",
        "choices": [
         {
          "t": "في أسانسير؟",
-         "en": "Is there a lift?",
+         "en": "Is there an elevator?",
          "correct": true,
          "feedback": "في + noun = there is. Levantine uses أسانسير, from French.",
          "tr": "fī asansēr?"
         },
         {
          "t": "عندو أسانسير؟",
-         "en": "Does he have a lift?",
+         "en": "Does he have an elevator?",
          "correct": false,
          "feedback": "For places use في (there is), not عند (to have).",
          "tr": "ʿando asansēr?"
         },
         {
          "t": "وين الأسانسير تبعي؟",
-         "en": "Where is my lift?",
+         "en": "Where is my elevator?",
          "correct": false,
          "feedback": "It isn't yours yet!",
          "tr": "wēn il-asansēr tabaʿi?"
@@ -8747,7 +8747,7 @@
        "choices": [
         {
          "t": "",
-         "en": "There's no lift, but the rent is cheap: $100 a month",
+         "en": "There's no elevator, but the rent is cheap: $100 a month",
          "correct": true,
          "feedback": "ما في = there isn't; بالشهر = per month."
         },
@@ -8759,7 +8759,7 @@
         },
         {
          "t": "",
-         "en": "There is a lift, and the rent is $100 a week",
+         "en": "There is an elevator, and the rent is $100 a week",
          "correct": false,
          "feedback": "ما في = there isn't, and بالشهر = per month."
         }
@@ -8771,21 +8771,21 @@
        "choices": [
         {
          "t": "الشقة بتشوفني اليوم؟",
-         "en": "Will the flat see me today?",
+         "en": "Will the apartment see me today?",
          "correct": false,
          "feedback": "You've swapped who sees whom!",
          "tr": "ish-shaʾʾa btshūfni il-yōm?"
         },
         {
          "t": "الشقة مفروشة؟ فيني شوفها اليوم؟",
-         "en": "Is the flat furnished? Can I see it today?",
+         "en": "Is the apartment furnished? Can I see it today?",
          "correct": true,
          "feedback": "فيني = I can (Levantine).",
          "tr": "ish-shaʾʾa mafrūshe? fīni shūfa il-yōm?"
         },
         {
          "t": "بدّي اشتري الشقة هلّق.",
-         "en": "I want to buy the flat right now.",
+         "en": "I want to buy the apartment right now.",
          "correct": false,
          "feedback": "You want to rent it, and see it first.",
          "tr": "biddi ishtiri ish-shaʾʾa hallaʾ."
@@ -8972,7 +8972,7 @@
         },
         {
          "t": "كل سنة وانتِ سالمة.",
-         "en": "Many happy returns.",
+         "en": "Happy holidays (or happy birthday).",
          "correct": false,
          "feedback": "That's for yearly holidays and birthdays.",
          "tr": "kull sane w-inti salme."
@@ -9122,7 +9122,7 @@
       "Sunday"
      ],
      "answer": 1,
-     "explain": "Friday (الجمعة) is the day of congregational prayer and the main weekly holiday.",
+     "explain": "Friday (الجمعة) is the day of congregational prayer and the main weekly day off.",
      "level": "A2",
      "skill": "culture"
     },
@@ -11089,7 +11089,7 @@
     {
      "t": "خريف",
      "tr": "kharīf",
-     "en": "autumn; fall"
+     "en": "fall; autumn"
     },
     {
      "t": "مطبخ",
@@ -11164,7 +11164,7 @@
     {
      "t": "لون",
      "tr": "lawn",
-     "en": "colour; color"
+     "en": "color"
     },
     {
      "t": "قال",
@@ -11664,7 +11664,7 @@
     {
      "t": "شقة",
      "tr": "shaqqa",
-     "en": "apartment; flat"
+     "en": "apartment"
     },
     {
      "t": "شقق",
@@ -11674,7 +11674,7 @@
     {
      "t": "طابق",
      "tr": "ṭābiq",
-     "en": "floor; storey"
+     "en": "floor; story"
     },
     {
      "t": "دور",
@@ -11774,7 +11774,7 @@
     {
      "t": "أسانسير",
      "tr": "asansēr",
-     "en": "lift; elevator (spoken)"
+     "en": "elevator (spoken)"
     },
     {
      "t": "هاجر",
@@ -11954,7 +11954,7 @@
     {
      "t": "ألوان",
      "tr": "alwān",
-     "en": "colours"
+     "en": "colors"
     },
     {
      "t": "حمراء",
@@ -11994,12 +11994,12 @@
     {
      "t": "رمادي",
      "tr": "ramādī",
-     "en": "grey"
+     "en": "gray"
     },
     {
      "t": "برتقالي",
      "tr": "burtuqālī",
-     "en": "orange (colour)"
+     "en": "orange (color)"
     },
     {
      "t": "وردي",
@@ -12129,7 +12129,7 @@
     {
      "t": "كل عام وأنتم بخير",
      "tr": "kull ʿām wa-antum bi-khayr",
-     "en": "happy holidays; many happy returns"
+     "en": "happy holidays; happy birthday"
     },
     {
      "t": "عيدية",
@@ -12350,7 +12350,7 @@
      "type": "TV",
      "title": "Detective Conan (المحقق كونان), Arabic dub",
      "creator": "Arabic dub",
-     "why": "A cult favourite with learners: crisp MSA dialogue, with lots of repeated phrases.",
+     "why": "A cult favorite with learners: crisp MSA dialogue, with lots of repeated phrases.",
      "source": "Streaming / YouTube",
      "skills": [
       "listening"
@@ -12556,7 +12556,7 @@
      ],
      "model": {
       "t": "اسمي سام. أنا من كندا. أنا طالب وأدرس العربية في الجامعة.",
-      "en": "My name is Sam. I'm from Canada. I'm a student and I study Arabic at university.",
+      "en": "My name is Sam. I'm from Canada. I'm a student and I study Arabic at the university.",
       "tr": "ismī Sām. ana min Kanadā. ana ṭālib wa-adrusu al-ʿarabiyya fī al-jāmiʿa."
      }
     },
@@ -12658,7 +12658,7 @@
     {
      "id": "ar-w-past",
      "level": "B1",
-     "prompt": "Write about your last holiday or weekend, in the past tense.",
+     "prompt": "Write about your last vacation or weekend, in the past tense.",
      "minWords": 15,
      "requirements": [
       {
@@ -12701,7 +12701,7 @@
      ],
      "model": {
       "t": "في نهاية الأسبوع ذهبتُ إلى البحر مع أصدقائي. سبحنا وأكلنا سمكاً في مطعم صغير. كانت الرحلة ممتعة جداً.",
-      "en": "At the weekend I went to the sea with my friends. We swam and ate fish in a small restaurant. The trip was a lot of fun.",
+      "en": "On the weekend I went to the sea with my friends. We swam and ate fish in a small restaurant. The trip was a lot of fun.",
       "tr": "fī nihāyat al-usbūʿ dhahabtu ilā al-baḥr maʿa aṣdiqāʾī. sabaḥnā wa-akalnā samakan fī maṭʿam ṣaghīr. kānat ar-riḥla mumtiʿa jiddan."
      }
     },
@@ -12827,7 +12827,7 @@
     {
      "id": "ar-w-news",
      "level": "C1",
-     "prompt": "Summarise a news story you read recently and give your view. Use reporting language and connectors.",
+     "prompt": "Summarize a news story you read recently and give your view. Use reporting language and connectors.",
      "minWords": 40,
      "requirements": [
       {
@@ -12869,7 +12869,7 @@
     {
      "id": "ar-w-home",
      "level": "B1",
-     "prompt": "Describe your home, or a flat you would like: where it is, what it has and what is near it. Start some sentences with the place (في شقتي… / أمام… / بجانب…).",
+     "prompt": "Describe your home, or an apartment you would like: where it is, what it has and what is near it. Start some sentences with the place (في شقتي… / أمام… / بجانب…).",
      "minWords": 20,
      "requirements": [
       {
@@ -12919,7 +12919,7 @@
      ],
      "model": {
       "t": "أسكن في شقة صغيرة في الطابق الثالث. في شقتي غرفتا نوم ومطبخ وحمام. أمام البناية حديقة جميلة، وبجانبها مخبز قريب. الشقة مريحة لكنّ الإيجار غالٍ.",
-      "en": "I live in a small flat on the third floor. My flat has two bedrooms, a kitchen and a bathroom. In front of the building is a beautiful garden, and next to it a bakery. The flat is comfortable, but the rent is expensive.",
+      "en": "I live in a small apartment on the third floor. My apartment has two bedrooms, a kitchen and a bathroom. In front of the building is a beautiful garden, and next to it a bakery. The apartment is comfortable, but the rent is expensive.",
       "tr": "askunu fī shaqqa ṣaghīra fī aṭ-ṭābiq ath-thālith. fī shaqqatī ghurfatā nawm wa-maṭbakh wa-ḥammām. amāma al-bināya ḥadīqa jamīla, wa-bi-jānibihā makhbaz qarīb. ash-shaqqa murīḥa lākinna al-ījār ghālin."
      }
     },
@@ -13079,7 +13079,7 @@
      ],
      "model": {
       "t": "في السنوات الأخيرة أصبح كثير من الناس يشترون كل شيء من الإنترنت. من السهل أن تقارن الأسعار وأنت في البيت، والتوصيل أسرع من الماضي. لكنّني أفضّل السوق لأنّ التسوّق هناك أمتع: أرى الألوان وألمس القماش وأتكلم مع البائعين.",
-      "en": "In recent years many people have started buying everything online. It's easy to compare prices from home, and delivery is faster than before. But I prefer the market because shopping there is more fun: I see the colours, touch the fabric and talk with the sellers.",
+      "en": "In recent years many people have started buying everything online. It's easy to compare prices from home, and delivery is faster than before. But I prefer the market because shopping there is more fun: I see the colors, touch the fabric and talk with the sellers.",
       "tr": "fī as-sanawāt al-akhīra aṣbaḥa kathīr min an-nās yashtarūna kull shayʾ min al-intarnit. min as-sahl an tuqārina al-asʿār wa-anta fī al-bayt, wa-t-tawṣīl asraʿ min al-māḍī. lākinnanī ufaḍḍilu as-sūq li-anna at-tasawwuq hunāk amtaʿ: arā al-alwān wa-almisu al-qumāsh wa-atakallamu maʿa al-bāʾiʿīn."
      }
     }
@@ -13219,7 +13219,7 @@
      ],
      "model": {
       "t": "في نهاية الأسبوع زرتُ جدتي وأكلنا معاً، ثم شاهدتُ فيلماً.",
-      "en": "At the weekend I visited my grandmother and we ate together, then I watched a film.",
+      "en": "On the weekend I visited my grandmother and we ate together, then I watched a film.",
       "tr": "fī nihāyat al-usbūʿ zurtu jaddatī wa-akalnā maʿan, thumma shāhadtu filman."
      },
      "starter": "في نهاية الأسبوع…"
@@ -13373,7 +13373,7 @@
      ],
      "model": {
       "t": "في العيد نجتمع في بيت جدّتي ونأكل الحلويات. نلبس ملابس جديدة ونقول لبعض: كل عام وأنتم بخير!",
-      "en": "At Eid we gather at my grandmother's house and eat sweets. We wear new clothes and say to each other: Happy Eid!",
+      "en": "At Eid we gather at my grandmother's house and eat desserts. We wear new clothes and say to each other: Happy Eid!",
       "tr": "fī al-ʿīd najtamiʿu fī bayt jaddatī wa-naʾkulu al-ḥalawiyyāt. nalbasu malābis jadīda wa-naqūlu li-baʿḍ: kull ʿām wa-antum bi-khayr!"
      },
      "starter": "في العيد…"
@@ -13404,7 +13404,7 @@
       "speaking"
      ],
      "what": "A three-part university course from the alphabet to about mid-A2: greetings, family, daily routines, past and future.",
-     "note": "Free to take; edX charges only for a certificate. Check which parts are open for enrolment."
+     "note": "Free to take; edX charges only for a certificate. Check which parts are open for enrollment."
     },
     {
      "id": "ar-res-fsi",
@@ -13498,7 +13498,7 @@
       "vocabulary"
      ],
      "what": "Search millions of words of real newspaper and literary Arabic to see how a word is actually used and what it goes with.",
-     "note": "The university plans to retire this tool on 1 July 2027."
+     "note": "The university plans to retire this tool on July 1, 2027."
     },
     {
      "id": "ar-res-cefr",
@@ -13640,7 +13640,7 @@
        "culture": {
         "title": "Mexican greeting etiquette",
         "body": [
-         "Say hello when you walk into a small shop, waiting room or lift ('Buenas tardes') and goodbye when you leave ('Hasta luego').",
+         "Say hello when you walk into a small shop, waiting room or elevator ('Buenas tardes') and goodbye when you leave ('Hasta luego').",
          "Women often greet friends with a single kiss on the right cheek. Men shake hands or give a back-patting hug (abrazo).",
          "'Buenas' on its own is a friendly greeting at any time of day.",
          "Expect professional titles: Licenciado/Licenciada (university graduate), Ingeniero, Doctor are used routinely at work."
@@ -14303,7 +14303,7 @@
         "title": "Money tips",
         "body": [
          "Small businesses, markets and street stalls are often cash-only, and many can't break big notes. Keep coins and small bills.",
-         "Restaurant tips are usually 10–15%. It is customary to give a few pesos to petrol-station attendants and supermarket baggers (often older people or teenagers).",
+         "Restaurant tips are usually 10–15%. It is customary to give a few pesos to gas-station attendants and supermarket baggers (often older people or teenagers).",
          "'Lana' and 'varo' are slang for money."
         ]
        },
@@ -15218,7 +15218,7 @@
        "examples": [
         {
          "t": "El fin de semana fuimos a Teotihuacán. ¡Estuvo bien padre!",
-         "en": "At the weekend we went to Teotihuacan. It was really cool!"
+         "en": "On the weekend we went to Teotihuacan. It was really cool!"
         },
         {
          "t": "¿Neta conseguiste chamba? ¡No manches!",
@@ -15424,7 +15424,7 @@
          "id": "es-dir-1-q3",
          "q": "A 'cuadra' is…",
          "options": [
-          "a square metre",
+          "a square meter",
           "a street sign",
           "a bus stop",
           "a block"
@@ -15438,7 +15438,7 @@
          "options": [
           "letters",
           "icons and names",
-          "colours only",
+          "colors only",
           "numbers only"
          ],
          "answer": 1,
@@ -15702,7 +15702,7 @@
         "title": "Beyond Cinco de Mayo",
         "body": [
          "Cinco de Mayo marks the 1862 Battle of Puebla and is celebrated mostly in Puebla and in the U.S. Mexico's big national holiday is Independence Day (Sept 16).",
-         "Día de Muertos (UNESCO Intangible Heritage) is a joyful remembrance, not Halloween. Families believe the dead come back to visit, guided by the scent and colour of cempasúchil.",
+         "Día de Muertos (UNESCO Intangible Heritage) is a joyful remembrance, not Halloween. Families believe the dead come back to visit, guided by the scent and color of cempasúchil.",
          "'Calaveritas literarias' are funny rhyming poems written as if Death had come for friends, teachers or politicians."
         ]
        },
@@ -15717,7 +15717,7 @@
           "September 16 (Independence)"
          ],
          "answer": 3,
-         "explain": "Independence Day (16 September) celebrates the 1810 Grito de Dolores. Cinco de Mayo is a smaller holiday."
+         "explain": "Independence Day (September 16) celebrates the 1810 Grito de Dolores. Cinco de Mayo is a smaller holiday."
         },
         {
          "id": "es-cult-1-q2",
@@ -15753,7 +15753,7 @@
           "give a speech"
          ],
          "answer": 1,
-         "explain": "Whoever finds the baby Jesus figurine on 6 January hosts the tamales on Candelaria, 2 February."
+         "explain": "Whoever finds the baby Jesus figurine on January 6 hosts the tamales on Candelaria, February 2."
         }
        ]
       },
@@ -15901,7 +15901,7 @@
           "Provecho"
          ],
          "answer": 2,
-         "explain": "Con permiso = \"excuse me\" when passing or leaving; perdón is for apologising."
+         "explain": "Con permiso = \"excuse me\" when passing or leaving; perdón is for apologizing."
         }
        ]
       }
@@ -16154,7 +16154,7 @@
         "body": [
          "Open confrontation is usually avoided. People soften disagreement with 'Sí, pero…', 'Fíjate que…' or '¿No crees que…?'.",
          "A direct 'no' can feel rude, so you may hear 'lo veo difícil' (I see it as difficult) or 'a ver' (we'll see) instead.",
-         "Among friends, though, passionate debates about football (Chivas vs. América!) are a national pastime."
+         "Among friends, though, passionate debates about soccer (Chivas vs. América!) are a national pastime."
         ]
        },
        "quiz": [
@@ -16391,7 +16391,7 @@
            "la película que vimos"
           ],
           [
-           "the friend I travelled with",
+           "the friend I traveled with",
            "la amiga con quien viajé"
           ],
           [
@@ -16537,7 +16537,7 @@
          "Mexican Spanish varies by region in accent and vocabulary, but everyone understands standard Mexican Spanish from school and TV.",
          "Northern speech (norteño) has a strong, open rhythm and words like 'plebe' (kids / the gang) and 'morro / morra' (boy / girl).",
          "In Yucatán, Maya influence shows in words like 'huach' (a Mexican from outside the peninsula). At jarana dances someone shouts '¡Bomba!' before a funny rhyming verse.",
-         "In Mexico City, chilango speech has a sing-song intonation and favourites like 'güey', 'chido' and '¿qué onda?'."
+         "In Mexico City, chilango speech has a sing-song intonation and favorites like 'güey', 'chido' and '¿qué onda?'."
         ],
         "table": {
          "headers": [
@@ -16617,7 +16617,7 @@
         {
          "t": "¡Ándale, plebe, vámonos!",
          "en": "Come on, guys, let's go!",
-         "note": "Northern flavour."
+         "note": "Northern flavor."
         },
         {
          "t": "En Mérida me dicen huach porque soy de la capital.",
@@ -16627,8 +16627,8 @@
        "culture": {
         "title": "Food and identity",
         "body": [
-         "Regional pride runs deep and often centres on food: carne asada in the north, birria in Jalisco, cochinita pibil in Yucatán, mole in Puebla and Oaxaca.",
-         "Chilango humour and Monterrey's business culture are favourite subjects of friendly rivalry.",
+         "Regional pride runs deep and often centers on food: carne asada in the north, birria in Jalisco, cochinita pibil in Yucatán, mole in Puebla and Oaxaca.",
+         "Chilango humor and Monterrey's business culture are favorite subjects of friendly rivalry.",
          "Indigenous languages, including Maya in Yucatán and Zapotec and Mixtec in Oaxaca, are spoken alongside Spanish in many regions."
         ]
        },
@@ -16687,7 +16687,7 @@
        "id": "es-reg-2",
        "title": "Slang & Register",
        "level": "B2",
-       "summary": "Everyday slang, vulgar words to recognise, and when to switch.",
+       "summary": "Everyday slang, vulgar words to recognize, and when to switch.",
        "grammar": {
         "title": "Knowing when to use slang",
         "body": [
@@ -17222,7 +17222,7 @@
         },
         {
          "t": "Según una encuesta, el 60% está a favor.",
-         "en": "According to a poll, 60% are in favour."
+         "en": "According to a poll, 60% are in favor."
         },
         {
          "t": "El secretario dijo que la economía crecería este año.",
@@ -17367,7 +17367,7 @@
        "examples": [
         {
          "t": "Por medio de la presente, le solicito una constancia de estudios.",
-         "en": "By means of this letter, I request a certificate of enrolment."
+         "en": "By means of this letter, I request a certificate of enrollment."
         },
         {
          "t": "Le agradecería que me respondiera a la brevedad.",
@@ -17445,7 +17445,7 @@
     "intro": [
      "Spanish spelling is very regular. Once you know the rules, you can pronounce almost any word you read.",
      "Mexican Spanish uses seseo: z and c (before e / i) sound like s. There is no 'th' sound like in Spain.",
-     "Learn the accent rules below, practise reading Mexican place names, then write phrases yourself."
+     "Learn the accent rules below, practice reading Mexican place names, then write phrases yourself."
     ],
     "letters": [
      {
@@ -18244,7 +18244,7 @@
        "speaker": "Officer",
        "line": {
         "t": "Tome la línea 2, dirección Cuatro Caminos, y bájese en Bellas Artes.",
-        "en": "Take Line 2 towards Cuatro Caminos and get off at Bellas Artes."
+        "en": "Take Line 2 toward Cuatro Caminos and get off at Bellas Artes."
        },
        "prompt": "What should you do?",
        "choices": [
@@ -18256,7 +18256,7 @@
         },
         {
          "t": "",
-         "en": "Take Line 2 towards Cuatro Caminos and get off at Bellas Artes",
+         "en": "Take Line 2 toward Cuatro Caminos and get off at Bellas Artes",
          "correct": true,
          "feedback": "'Dirección' is the last station on the line, which tells you the direction."
         },
@@ -18328,7 +18328,7 @@
      "level": "A2",
      "emoji": "🥑",
      "icon": "basket",
-     "setting": "A busy neighbourhood market in Guadalajara. You need avocados and tomatoes.",
+     "setting": "A busy neighborhood market in Guadalajara. You need avocados and tomatoes.",
      "goal": "Ask prices the Mexican way and buy what you need.",
      "steps": [
       {
@@ -18402,11 +18402,11 @@
          "t": "Un kilo para el año pasado.",
          "en": "A kilo for last year.",
          "correct": false,
-         "feedback": "Time-travelling avocados?"
+         "feedback": "Time-traveling avocados?"
         },
         {
          "t": "Quiero un kilómetro.",
-         "en": "I want a kilometre.",
+         "en": "I want a kilometer.",
          "correct": false,
          "feedback": "Kilo, not kilómetro!"
         }
@@ -18698,7 +18698,7 @@
          "t": "Está muy bonita. ¿Cómo se llamaba?",
          "en": "It's beautiful. What was his name?",
          "correct": true,
-         "feedback": "Asking about the person honours their memory."
+         "feedback": "Asking about the person honors their memory."
         },
         {
          "t": "¿Puedo comer el mole?",
@@ -18712,7 +18712,7 @@
        "speaker": "Lucía's grandmother",
        "line": {
         "t": "Se llamaba Don Ernesto. Le pusimos pan de muerto, cempasúchil y su mezcal favorito.",
-        "en": "His name was Don Ernesto. We put out pan de muerto, marigolds and his favourite mezcal."
+        "en": "His name was Don Ernesto. We put out pan de muerto, marigolds and his favorite mezcal."
        },
        "prompt": "What is on the altar?",
        "choices": [
@@ -18724,9 +18724,9 @@
         },
         {
          "t": "",
-         "en": "Pan de muerto, marigolds and his favourite mezcal",
+         "en": "Pan de muerto, marigolds and his favorite mezcal",
          "correct": true,
-         "feedback": "Ofrendas hold the favourite things of the person who died."
+         "feedback": "Ofrendas hold the favorite things of the person who died."
         },
         {
          "t": "",
@@ -19370,7 +19370,7 @@
         },
         {
          "t": "¿Lo vi el fin de semana?",
-         "en": "Did I see it at the weekend?",
+         "en": "Did I see it on the weekend?",
          "correct": false,
          "feedback": "That's the past."
         },
@@ -19783,7 +19783,7 @@
       "May 5"
      ],
      "answer": 0,
-     "explain": "Día de Muertos is 1–2 November: children on the 1st, adults on the 2nd.",
+     "explain": "Día de Muertos is November 1–2: children on the 1st, adults on the 2nd.",
      "level": "A2",
      "skill": "culture"
     },
@@ -21728,7 +21728,7 @@
     },
     {
      "t": "otoño",
-     "en": "autumn; fall"
+     "en": "fall; autumn"
     },
     {
      "t": "calor",
@@ -21804,7 +21804,7 @@
     },
     {
      "t": "color",
-     "en": "colour; color"
+     "en": "color"
     },
     {
      "t": "departamento",
@@ -22285,7 +22285,7 @@
      "type": "TV",
      "title": "Club de Cuervos (2015–2019)",
      "creator": "Netflix, Mexico",
-     "why": "A satirical comedy about a football club, packed with Mexican slang and business Spanish.",
+     "why": "A satirical comedy about a soccer club, packed with Mexican slang and business Spanish.",
      "source": "Netflix",
      "skills": [
       "listening",
@@ -22877,7 +22877,7 @@
      ],
      "model": {
       "t": "El fin de semana fui al mercado y comí unas quesadillas buenísimas.",
-      "en": "At the weekend I went to the market and ate some amazing quesadillas."
+      "en": "On the weekend I went to the market and ate some amazing quesadillas."
      },
      "starter": "El fin de semana…"
     },
@@ -23053,7 +23053,7 @@
       "levels"
      ],
      "what": "The official checklist of the grammar, functions and vocabulary expected at each level. Use it to see what to learn next, not as a course.",
-     "note": "In Spanish. Its examples lean towards Spain, but it notes Latin American variants."
+     "note": "In Spanish. Its examples lean toward Spain, but it notes Latin American variants."
     },
     {
      "id": "es-res-cefr",

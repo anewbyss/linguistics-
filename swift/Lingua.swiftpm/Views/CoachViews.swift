@@ -605,7 +605,7 @@ struct AnswerPromptView: View {
             }
             if !transcript.isEmpty { Text("I heard: “\(transcript)”").font(.subheadline) }
             if selfChecked {
-                Text("✓ Marked as practised (self-checked). Only transcribed answers change your accuracy.").font(.caption).foregroundColor(.green)
+                Text("✓ Marked as practiced (self-checked). Only transcribed answers change your accuracy.").font(.caption).foregroundColor(.green)
             }
             DisclosureGroup("Or type what you said") {
                 VStack(alignment: .leading) {

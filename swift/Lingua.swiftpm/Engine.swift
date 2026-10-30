@@ -1,6 +1,6 @@
 import Foundation
 
-// Port of web/js/engine.js. Keep the two in sync; tests/engine.test.mjs documents the expected behaviour.
+// Port of web/js/engine.js. Keep the two in sync; tests/engine.test.mjs documents the expected behavior.
 
 enum TranslateDirection: String, CaseIterable {
     case toEn, fromEn
@@ -89,7 +89,7 @@ enum Engine {
         "A1": "Beginner", "A2": "Elementary", "B1": "Intermediate", "B2": "Upper intermediate", "C1": "Advanced",
     ]
 
-    // MARK: Normalisation
+    // MARK: Normalization
 
     private static let punctuation = Set("¿¡?!.,;:\"'“”‘’«»()[]…،؟؛—–-")
 

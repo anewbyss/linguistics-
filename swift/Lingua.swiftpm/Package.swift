@@ -31,7 +31,7 @@ let package = Package(
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
             ],
             capabilities: [
-                .microphone(purposeString: "Lingua listens when you practise speaking so it can score your pronunciation."),
+                .microphone(purposeString: "Lingua listens when you practice speaking so it can score your pronunciation."),
                 .speechRecognition(purposeString: "Lingua turns your speech into text to check your pronunciation. Recognition runs on your device when supported.")
             ]
         )

@@ -320,8 +320,8 @@
         <p>Lessons from your first letters to C1, a dialect track, daily challenges, spaced review, listening, writing and speaking practice, and fluency tracking. Your progress saves automatically.</p>
       </section>
       ${hayya(LIB.languages.every((l) => !lp(l.id).plan.start)
-        ? "Hi, I'm Hayya! New here? Pick a language below and I'll set up a plan for you, starting with the alphabet. (My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl. My name is Arabic for “let's go!”, هيّا.)"
-        : "Hi, I'm Hayya! My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll keep you on track.", { size: 56, mood: 'cheer' })}
+        ? "Hi, I'm Hayya! New here? Pick a language below and I'll set up a plan for you, starting with the alphabet. (My colors come from Lyra, a real ball python, and my feathers from Quetzalcóatl. My name is Arabic for “let's go!”, هيّا.)"
+        : "Hi, I'm Hayya! My colors come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll keep you on track.", { size: 56, mood: 'cheer' })}
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">${cards}</div>
       <div class="grid tight" style="margin-top:1.2rem">
         <div class="card center gamify"><div class="score-big">${progress.xp}</div><div class="muted small">XP earned</div></div>
@@ -385,7 +385,7 @@
       <h2 class="section-title">1 · Start here</h2>
       <p class="small muted section-sub">New learners begin with the alphabet; the learning plan takes you through everything else in order.</p>
       <div class="grid">${startTiles}</div>
-      <h2 class="section-title">2 · Practise</h2>
+      <h2 class="section-title">2 · Practice</h2>
       <p class="small muted section-sub">Use these alongside your lessons, a little every day.</p>
       <div class="grid">${tiles}</div>
       <h2 class="section-title">3 · Go further</h2>
@@ -550,7 +550,7 @@
           <select id="trace-select" class="btn" data-change="trace-select">${r.letters.map((x) => `<option value="${h(x.char)}" ${x.char === L.char ? 'selected' : ''}>${h(x.char)} · ${h(x.name)}</option>`).join('')}</select>
           ${L.forms ? `<div class="seg">${['Isolated', 'Initial', 'Medial', 'Final'].map((lbl, i) => `<button aria-pressed="${view.form === i}" data-act="trace-form" data-i="${i}">${lbl}</button>`).join('')}</div>` : ''}
         </div>
-        <p class="small muted" style="margin-top:.6rem">Trace over the grey shape with your finger, mouse, Apple Pencil or stylus${isAr(lang) ? '. Draw the main body first, then the dots' : ''}. A stylus draws thicker when you press harder.</p>
+        <p class="small muted" style="margin-top:.6rem">Trace over the gray shape with your finger, mouse, Apple Pencil or stylus${isAr(lang) ? '. Draw the main body first, then the dots' : ''}. A stylus draws thicker when you press harder.</p>
         <p class="small" id="pen-note" hidden></p>
         <div class="trace-wrap"><canvas id="trace-guide" data-glyph="${h(forms[view.form] || L.char)}" aria-label="Letter to trace"></canvas><canvas id="trace-ink"></canvas></div>
         ${view.traceScore !== null ? `<div class="feedback ${view.traceScore >= 70 ? 'good' : 'bad'}">${view.traceScore >= 70 ? '✓ Nice tracing!' : 'Keep going. Try to cover the whole shape and stay inside the lines.'} Score: ${view.traceScore}%</div>` : ''}
@@ -896,7 +896,7 @@
 
   function trendChart(entries) {
     if (entries.length < 2) {
-      return '<p class="small muted">Your trend appears here after you practise on two different days.</p>';
+      return '<p class="small muted">Your trend appears here after you practice on two different days.</p>';
     }
     const W = 640, H = 220, L = 34, Rr = 96, T = 12, B = 26;
     const xs = (i) => L + (i * (W - L - Rr)) / (entries.length - 1);
@@ -932,7 +932,7 @@
           ${x.parts.map((p) => `<div class="lvl" style="grid-template-columns:9.5rem 1fr 4rem"><span>${h(p.label)}</span>${bar(pct(p.done, p.total))}<span>${p.done}/${p.total}</span></div>`).join('')}
           <div class="lvl" style="grid-template-columns:9.5rem 1fr 4rem"><span>Recent accuracy</span>${bar(x.accuracy || 0)}<span>${x.accuracy === null ? 'none yet' : `${x.accuracy}%`}</span></div></div>
         <p class="small muted" style="margin-top:.6rem">${x.samples ? `Based on your last ${x.samples} scored attempts.` : 'No scored attempts yet, so this skill can reach at most 60.'} ${h(SKILL_META[k].tip)}</p>
-        <a class="btn" href="#/${lang.id}/${SKILL_META[k].link}">Practise ${SKILL_META[k].label.toLowerCase()}</a></div>`;
+        <a class="btn" href="#/${lang.id}/${SKILL_META[k].link}">Practice ${SKILL_META[k].label.toLowerCase()}</a></div>`;
     };
     const rows = d.fluency.slice().reverse().slice(0, 30);
     return `<div class="card center"><p class="muted" style="margin:0">Overall fluency</p><div class="score-big">${f.overall.score}<span class="small muted">/100</span></div>
@@ -945,7 +945,7 @@
         ${rows.length ? `<details><summary class="small">Show as a table</summary><div class="table-wrap"><table><thead><tr><th>Day</th><th>Overall</th><th>Reading</th><th>Writing</th><th>Listening</th><th>Speaking</th></tr></thead>
           <tbody>${rows.map((r) => `<tr><td>${h(r.day)}</td><td>${r.overall}</td><td>${r.reading}</td><td>${r.writing}</td><td>${r.listening}</td><td>${r.speaking}</td></tr>`).join('')}</tbody></table></div></details>` : ''}</div>
       <details class="card"><summary><b>How fluency is calculated</b></summary>
-        <p class="small" style="margin-top:.6rem">Each skill scores 0–100: <b>60% coverage</b> (how much of the course you've practised in that skill) plus <b>40% accuracy</b> (the average of your last 10 scored attempts). Bands: under 20 = A1, under 40 = A2, under 60 = B1, under 80 = B2, 80+ = C1.</p>
+        <p class="small" style="margin-top:.6rem">Each skill scores 0–100: <b>60% coverage</b> (how much of the course you've practiced in that skill) plus <b>40% accuracy</b> (the average of your last 10 scored attempts). Bands: under 20 = A1, under 40 = A2, under 60 = B1, under 80 = B2, 80+ = C1.</p>
         <ul class="small"><li><b>Reading:</b> letters studied, lessons completed and words learned in Review; accuracy from lesson quizzes, reviews, letter / accent quizzes and challenge reading items.</li>
         <li><b>Writing:</b> writing tasks mastered, letters traced and Writing Studio prompts passed; accuracy from typed answers, tracing, free writing and challenge writing items.</li>
         <li><b>Listening:</b> lines understood (dictation ${E.LISTEN_PASS}%+ or a correct comprehension answer); accuracy from listening practice and challenge listening items.</li>
@@ -1039,11 +1039,11 @@
           ${st.progress && !st.done ? `<span class="small muted plan-count">${st.progress[0]}/${st.progress[1]}</span>` : ''}</a>`;
       }).join('');
       return `<details class="card plan-unit" ${isCurrent ? 'open' : ''}><summary><span class="row spread" style="width:100%"><span><b>${h(u.title)}</b>${u.skipped ? ' <span class="chip">tested out</span>' : ''}</span><span class="small muted">${u.done}/${u.total}</span></span></summary>
-        <p class="small muted">${h(u.intro)}${u.skipped ? ' You tested above this unit, so the plan skips it; open any step to revise.' : ''}</p>${bar(pct(u.done, u.total))}
+        <p class="small muted">${h(u.intro)}${u.skipped ? ' You tested above this unit, so the plan skips it; open any step to review.' : ''}</p>${bar(pct(u.done, u.total))}
         <div class="plan-steps">${steps}</div></details>`;
     }).join('');
     return `<div class="lesson-head"><h1>🧭 Your learning plan</h1>
-        <p class="muted">The recommended order through the whole course. Steps tick themselves off as you go, and nothing is locked: jump to anything whenever you like.</p></div>
+        <p class="muted">The recommended order through the whole course. Steps check themselves off as you go, and nothing is locked: jump to anything whenever you like.</p></div>
       <div class="card"><div class="row spread"><span>${h(startLabel)}</span><button class="btn" data-act="plan-reset">Change</button></div>
         ${isAr(lang) ? `<p class="small" style="margin:.8rem 0 .4rem">Spoken Arabic in your plan:</p>${dialectPicker(lang, plan.settings.dialect)}` : ''}
         <div style="margin-top:.8rem">${bar(pct(plan.done, plan.total))}</div><p class="small muted">${plan.done} of ${plan.total} steps done</p></div>
@@ -1252,7 +1252,7 @@
     'service-not-allowed': 'Speech recognition is turned off in this browser. Check yourself instead.',
     network: 'Speech recognition needs an internet connection in this browser. Check yourself instead.',
     'no-speech': "I didn't hear anything. Tap the microphone and speak after the beep.",
-    'language-not-supported': "This browser can't recognise this language. Check yourself instead.",
+    'language-not-supported': "This browser can't recognize this language. Check yourself instead.",
   };
 
   /** Shared listen / record / score panel. st: {status, transcript, score, message}. */
@@ -1260,7 +1260,7 @@
     const result = st.status === 'scored'
       ? `<div class="feedback ${st.score >= E.SPEAK_PASS ? 'good' : 'bad'}">${st.score >= E.SPEAK_PASS ? '✓ Great pronunciation!' : 'Close. Listen again and try once more.'} Score: ${st.score}%
           <span class="detail">I heard: <span lang="${lang.id}" dir="${lang.dir}">“${h(st.transcript)}”</span></span></div>` : '';
-    const self = st.status === 'self' ? '<div class="feedback good">✓ Marked as practised (self-checked). Self-checks count as practice, but only scored attempts change your accuracy.</div>' : '';
+    const self = st.status === 'self' ? '<div class="feedback good">✓ Marked as practiced (self-checked). Self-checks count as practice, but only scored attempts change your accuracy.</div>' : '';
     const msg = st.message ? `<div class="feedback bad">${h(st.message)}</div>` : '';
     return `<div class="flash" style="padding:.6rem 0">
         <div class="big ${isAr(lang) ? 'ar' : ''}" lang="${lang.id}" dir="${lang.dir}" style="font-size:${isAr(lang) ? '2.4rem' : '2rem'}">${h(p.t)}</div>
@@ -1270,7 +1270,7 @@
         ${SR ? `<button class="btn primary" data-act="speak-listen" ${st.status === 'listening' ? 'disabled' : ''}>${st.status === 'listening' ? '🎙️ Listening…' : '🎙️ Say it'}</button>` : ''}
         <button class="btn" data-act="speak-self" title="Use this if you can't use the microphone">I said it ✓</button></div>
       ${result}${self}${msg}
-      ${!SR ? `<p class="small muted center">${h(SR_MESSAGES.unsupported)}</p>` : '<p class="small muted center">Speech is recognised by your browser and may need an internet connection.</p>'}`;
+      ${!SR ? `<p class="small muted center">${h(SR_MESSAGES.unsupported)}</p>` : '<p class="small muted center">Speech is recognized by your browser and may need an internet connection.</p>'}`;
   }
 
   function recordSpeaking(lang, phraseT, score, self) {
@@ -1313,7 +1313,7 @@
     const rec = d.speaking[p.t];
     const lesson = allLessons(lang).find((l) => l.id === p.lesson);
     return `<div class="card"><div class="row spread"><h1 style="margin:0">🎙️ Speaking Practice</h1><span class="chip">${spoken}/${all.length} spoken well</span></div>
-        <p class="muted small" style="margin-top:.4rem">Listen to the model, then tap <b>Say it</b> and repeat. Scores of ${E.SPEAK_PASS}% or more count towards your speaking fluency.</p></div>
+        <p class="muted small" style="margin-top:.4rem">Listen to the model, then tap <b>Say it</b> and repeat. Scores of ${E.SPEAK_PASS}% or more count toward your speaking fluency.</p></div>
       ${tabs}
       <div class="card">
         <div class="row spread small muted"><span>Phrase ${view.i + 1} of ${all.length} · ${levelChip(p.level)} ${lesson ? h(lesson.title) : ''}</span>
@@ -1346,7 +1346,7 @@
           <button class="btn" data-act="ans-self">I answered aloud ✓</button></div>
         ${a.transcript ? `<p class="small">I heard: <span lang="${lang.id}" dir="${lang.dir}">“${h(a.transcript)}”</span></p>` : ''}
         ${a.message ? `<div class="feedback bad">${h(a.message)}</div>` : ''}
-        ${a.status === 'self' ? '<div class="feedback good">✓ Marked as practised (self-checked). It counts as practice, but only transcribed answers change your accuracy.</div>' : ''}
+        ${a.status === 'self' ? '<div class="feedback good">✓ Marked as practiced (self-checked). It counts as practice, but only transcribed answers change your accuracy.</div>' : ''}
         <details ${SR ? '' : 'open'}><summary class="small">Or type what you said</summary>
           <textarea class="input ${isAr(lang) ? 'ar' : ''}" id="ans-text" dir="${lang.dir}" lang="${lang.id}" style="min-height:4rem;margin-top:.5rem">${h(view.typed)}</textarea>
           <button class="btn" data-act="ans-typed" style="margin-top:.4rem">Check</button></details>
@@ -1376,7 +1376,7 @@
       return `<div class="card"><h1>⚡ Daily Challenge</h1><p class="muted">${new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}</p>
         <p>Ten quick items drawn from what you've been learning, at your level:</p>
         <ul><li>📖 3 reading: a meaning, a word to read and a lesson question</li><li>✍️ 3 writing: two typed answers and a spelling check</li><li>🎧 2 listening: a dictation and a line to understand by ear</li><li>🎙️ 2 speaking: two phrases to say aloud</li></ul>
-        <p class="small muted">Everyone learning ${h(lang.name)} on this device gets the same challenge all day. Your first completion counts towards your fluency and challenge streak.</p>
+        <p class="small muted">Everyone learning ${h(lang.name)} on this device gets the same challenge all day. Your first completion counts toward your fluency and challenge streak.</p>
         <button class="btn primary" data-act="ch-start">Start today's challenge</button></div>`;
     }
     if (view.phase === 'done') {
@@ -1385,7 +1385,7 @@
       return `<div class="card center"><p class="muted" style="margin:0">Today's challenge</p><div class="score-big">${rec.score}/${rec.total}</div>
           ${hayya(rec.score === rec.total ? 'Perfect score! I’m doing a happy wiggle. 🐍' : rec.score >= rec.total * 0.7 ? 'Great work! Come back tomorrow to keep the streak going.' : 'Good effort. Every day counts, and tomorrow’s challenge will feel easier.', { mood: rec.score >= rec.total * 0.7 ? 'cheer' : 'happy' })}
           <p class="small"><span class="gamify">🔥 ${E.challengeStreak(d)}-day challenge streak · </span>a new challenge unlocks tomorrow</p>
-          <div class="row" style="justify-content:center"><button class="btn" data-act="ch-replay">Practise again (not scored)</button><a class="btn primary" href="#/${lang.id}/fluency">See your fluency</a></div></div>
+          <div class="row" style="justify-content:center"><button class="btn" data-act="ch-replay">Practice again (not scored)</button><a class="btn primary" href="#/${lang.id}/fluency">See your fluency</a></div></div>
         <div class="card level-bars"><h3>By skill</h3>${skills.map((k) => `<div class="lvl" style="grid-template-columns:7rem 1fr 3rem"><span>${SKILL_META[k].icon} ${SKILL_META[k].label}</span>${bar(pct(rec.bySkill[k].c, rec.bySkill[k].t))}<span>${rec.bySkill[k].c}/${rec.bySkill[k].t}</span></div>`).join('')}</div>`;
     }
     const it = view.items[view.i];
@@ -1850,7 +1850,7 @@
       backupNote = 'Backup restored.';
       render();
     },
-    'import-cancel': () => { pendingImport = null; backupNote = 'Import cancelled. Nothing changed.'; render(); },
+    'import-cancel': () => { pendingImport = null; backupNote = 'Import canceled. Nothing changed.'; render(); },
     'import-paste': () => stageImport(document.getElementById('import-text').value),
   };
 

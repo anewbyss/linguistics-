@@ -31,7 +31,7 @@ export const categories = [
             'Patterns shift meaning in typical directions. Form II often acts on someone else (درس to study → درّس to teach); Form V is often its reflexive partner (ذكّر to remind → تذكّر to remember); Form X often means seeking or taking (أجر wage, rent → استأجر to rent).',
             'The examples in the table: كتب to write, درّس to teach, ساعد to help, أرسل to send, تذكّر to remember, تعاون to cooperate, انكسر to break (by itself), انتقل to move house, استأجر to rent.',
             'Nouns of place use مَفعَل or مَفعِل, plural مَفاعِل: مطبخ kitchen (from طبخ to cook), مكتب office, مسبح swimming pool, منزل residence. Plurals: مطابخ، مكاتب، منازل.',
-            'To say what a place has, put the place first and use في, not عند: في الشقة ثلاث غرف (the flat has three rooms), أمام البيت حديقة (there is a garden in front of the house). An indefinite noun cannot start the sentence, so the place phrase comes first.',
+            'To say what a place has, put the place first and use في, not عند: في الشقة ثلاث غرف (the apartment has three rooms), أمام البيت حديقة (there is a garden in front of the house). An indefinite noun cannot start the sentence, so the place phrase comes first.',
           ],
           table: T(['Form', 'Past', 'Present', 'Verbal noun', 'Example'],
             ['I', 'فَعَلَ', 'يفعَل', '(varies)', 'كتب'],
@@ -45,8 +45,8 @@ export const categories = [
             ['X', 'استفعَل', 'يستفعِل', 'استفعال', 'استأجر']),
         },
         vocab: [
-          P('شقة', 'shaqqa', 'apartment, flat', 'Plural شقق. The same word in Levantine and Egyptian.'),
-          P('طابق', 'ṭābiq', 'floor, storey', 'Egyptian: دور dōr.'),
+          P('شقة', 'shaqqa', 'apartment', 'Plural شقق. The same word in Levantine and Egyptian.'),
+          P('طابق', 'ṭābiq', 'floor, story', 'Egyptian: دور dōr.'),
           P('مطبخ', 'maṭbakh', 'kitchen', 'A noun of place from طبخ (to cook).'),
           P('استأجر', 'istaʾjara', 'to rent', 'Egyptian: أجّر aggar.'),
           P('الإيجار', 'al-ījār', 'the rent'),
@@ -59,16 +59,16 @@ export const categories = [
           P('سمسار', 'simsār', 'property agent, middleman'),
         ],
         examples: [
-          P('في شقتنا غرفتا نوم ومطبخ صغير.', 'fī shaqqatinā ghurfatā nawm wa-maṭbakh ṣaghīr.', 'Our flat has two bedrooms and a small kitchen.', 'The place phrase comes first: في شقتنا…'),
+          P('في شقتنا غرفتا نوم ومطبخ صغير.', 'fī shaqqatinā ghurfatā nawm wa-maṭbakh ṣaghīr.', 'Our apartment has two bedrooms and a small kitchen.', 'The place phrase comes first: في شقتنا…'),
           P('أمام البناية حديقة عامة.', 'amāma al-bināya ḥadīqa ʿāmma.', 'There is a public park in front of the building.'),
-          P('نستأجر شقة في الطابق الثالث، والإيجار معقول.', 'nastaʾjiru shaqqa fī aṭ-ṭābiq ath-thālith, wa-l-ījār maʿqūl.', 'We rent a flat on the third floor, and the rent is reasonable.'),
-          P('بدّي شقة قريبة من الجامعة.', 'biddī shaʾʾa ʾarībe mn ij-jāmʿa.', 'I want a flat near the university. (Levantine)'),
+          P('نستأجر شقة في الطابق الثالث، والإيجار معقول.', 'nastaʾjiru shaqqa fī aṭ-ṭābiq ath-thālith, wa-l-ījār maʿqūl.', 'We rent an apartment on the third floor, and the rent is reasonable.'),
+          P('بدّي شقة قريبة من الجامعة.', 'biddī shaʾʾa ʾarībe mn ij-jāmʿa.', 'I want an apartment near the university. (Levantine)'),
         ],
         culture: {
-          title: 'Finding a flat and "establishing a home"',
+          title: 'Finding an apartment and "establishing a home"',
           body: [
-            'In many Arab cities people find flats through a سمسار (simsār), an informal agent paid a commission, or by asking the بوّاب (bawwāb), the building caretaker common in Egypt, who knows which flats are empty.',
-            'Word of mouth matters: ask friends, colleagues and shopkeepers in the neighbourhood before you search online.',
+            'In many Arab cities people find apartments through a سمسار (simsār), an informal agent paid a commission, or by asking the بوّاب (bawwāb), the building caretaker common in Egypt, who knows which apartments are empty.',
+            'Word of mouth matters: ask friends, colleagues and shopkeepers in the neighborhood before you search online.',
             'تأسيس بيت (taʾsīs bayt, establishing a household) is traditionally a key step before marriage: the couple, often with family help, prepares a permanent, fully furnished home. High housing costs make this hard for many young people, so some newlyweds live with the husband\'s family in بيت العائلة (the family house), at least at first.',
             'Someone with news to share may open with خير؟ (khēr?), literally "good?", meaning "I hope it\'s good news?"',
           ],
@@ -77,7 +77,7 @@ export const categories = [
           Q('مطبخ (kitchen) comes from طبخ (to cook). Which pattern makes nouns of place?', ['مَفعَل', 'فاعِل', 'تفعيل', 'مفعول'], 'مَفعَل / مَفعِل: مكتب، مسبح، منزل.'),
           Q("Which sentence says 'The house has a garden'?", ['في البيت حديقة.', 'عند البيت حديقة.', 'البيت حديقة.', 'حديقة البيت في.'], 'Places "have" things with في, and the place phrase comes first.'),
           Q('استأجر (to rent) is which verb form?', ['Form X (استفعل)', 'Form II (فعّل)', 'Form V (تفعّل)', 'Form VIII (افتعل)']),
-          Q("In Egyptian Arabic, 'floor, storey' is…", ['دور', 'طابق', 'سطح', 'بيت']),
+          Q("In Egyptian Arabic, 'floor, story' is…", ['دور', 'طابق', 'سطح', 'بيت']),
           Q('A سمسار is…', ['an informal property agent', 'a building caretaker', 'a landlord', 'a removal van'], 'The caretaker is the بوّاب.'),
         ],
       },
@@ -134,17 +134,17 @@ export const categories = [
           Q("Which is correct for 'I have a friend who speaks Arabic'?", ['عندي صديق يتكلم العربية.', 'عندي صديق الذي يتكلم العربية.', 'عندي الصديق يتكلم العربية.', 'عندي صديق التي يتكلم العربية.'], 'صديق is indefinite, so no relative pronoun.'),
           Q('In spoken Arabic, الذي / التي / الذين are all…', ['اللي', 'ما', 'مش', 'إنّو']),
           Q("Formal 'I did not go' is…", ['لم أذهب', 'لن أذهب', 'لا ذهبتُ', 'ليس أذهب']),
-          Q('جالية means…', ['an immigrant community', 'a passport', 'a mosque', 'a neighbourhood market']),
+          Q('جالية means…', ['an immigrant community', 'a passport', 'a mosque', 'a neighborhood market']),
         ],
       },
       {
         id: 'ar-kit-3', title: 'From Home to the Market', level: 'B1',
-        summary: 'Form II and V pairs, colours, كان and its sisters, and "it is … to". Goes with Al-Kitaab 2, Lesson 3.',
+        summary: 'Form II and V pairs, colors, كان and its sisters, and "it is … to". Goes with Al-Kitaab 2, Lesson 3.',
         grammar: {
-          title: 'Form II / V pairs, colours, and كان and its sisters',
+          title: 'Form II / V pairs, colors, and كان and its sisters',
           body: [
             'Form II (فعّل) usually does something to someone or something; Form V (تفعّل) is its reflexive partner: غيّر to change something → تغيّر to change (itself); علّم to teach → تعلّم to learn; عرّف to introduce → تعرّف على to get to know.',
-            'Basic colours have their own patterns (table below): masculine أفعل, feminine فعلاء, human plural فُعل. Other colours are nisba adjectives ending in ـي: بنّي brown (from بُنّ, coffee beans), برتقالي orange, رمادي grey, وردي pink.',
+            'Basic colors have their own patterns (table below): masculine أفعل, feminine فعلاء, human plural فُعل. Other colors are nisba adjectives ending in ـي: بنّي brown (from بُنّ, coffee beans), برتقالي orange, رمادي gray, وردي pink.',
             'كان and its "sisters", ليس (is not), ما زال (still) and أصبح / صار (became), put their predicate in the accusative: أصبح الجوّ بارداً (the weather became cold).',
             'Followed by a present-tense verb they describe habits and changes: كنتُ أشتري الخبز كل يوم (I used to buy bread every day); ما زلتُ أبحث (I am still looking).',
             '"It is … to …" is من الـ + adjective + أن: من الصعب أن أجد… (it is hard to find…), من السهل أن، من الممكن أن، من المهم أن. Spoken Arabic drops من: صعب إنّي لاقي…',
@@ -165,11 +165,11 @@ export const categories = [
           P('مفروشات', 'mafrūshāt', 'furniture', 'Levantine: فرش farsh; Egyptian: عفش ʿafsh.'),
           P('خزانة', 'khizāna', 'wardrobe, closet', 'Egyptian: دولاب dulāb.'),
           P('ثلاجة', 'thallāja', 'refrigerator', 'Levantine: برّاد barrād; Egyptian: تلاجة tallāga.'),
-          P('لون', 'lawn', 'colour', 'Plural ألوان.'),
+          P('لون', 'lawn', 'color', 'Plural ألوان.'),
           P('يسار', 'yasār', 'left', 'Spoken: شمال shmāl.'),
         ],
         examples: [
-          P('اشتريتُ قميصاً أزرق وتنورة حمراء.', 'ishtaraytu qamīṣan azraq wa-tannūra ḥamrāʾ.', 'I bought a blue shirt and a red skirt.', 'The colour agrees with its noun: أزرق (masculine), حمراء (feminine).'),
+          P('اشتريتُ قميصاً أزرق وتنورة حمراء.', 'ishtaraytu qamīṣan azraq wa-tannūra ḥamrāʾ.', 'I bought a blue shirt and a red skirt.', 'The color agrees with its noun: أزرق (masculine), حمراء (feminine).'),
           P('ما زالت الأسعار غالية.', 'mā zālat al-asʿār ghāliya.', 'Prices are still high.'),
           P('من الصعب أن أجد ثلاجة رخيصة.', 'min aṣ-ṣaʿb an ajida thallāja rakhīṣa.', "It's hard to find a cheap fridge."),
           P('قدّيش حقّو؟ — المحلّ محلّك!', 'ʾaddēsh ḥaʾʾo? — il-maḥall maḥallak!', 'How much is it? — The shop is yours! (a polite welcome, not a gift)'),
@@ -177,8 +177,8 @@ export const categories = [
         culture: {
           title: 'The traditional souq',
           body: [
-            'A traditional Arab souq is a network of smaller markets, each specialising in one kind of goods: spices, gold, fabric, copper. Lanes are often named after what they sell, and the main market usually sits beside the city\'s great mosque.',
-            'Damascus\'s Souq al-Hamidiyya (سوق الحميدية), a long covered market from the Ottoman era named after Sultan Abdul Hamid, leads to the Umayyad Mosque. Nearby are specialised markets such as al-Buzuriyya (البزورية) for spices and sweets.',
+            'A traditional Arab souq is a network of smaller markets, each specializing in one kind of goods: spices, gold, fabric, copper. Lanes are often named after what they sell, and the main market usually sits beside the city\'s great mosque.',
+            'Damascus\'s Souq al-Hamidiyya (سوق الحميدية), a long covered market from the Ottoman era named after Sultan Abdul Hamid, leads to the Umayyad Mosque. Nearby are specialized markets such as al-Buzuriyya (البزورية) for spices and candy.',
             'Prices for many goods are agreed by bargaining. Shopkeepers selling the same goods sit side by side and often send customers to each other rather than compete.',
             'Many old markets have a حمّام, a public steam bath with several rooms. It is still part of everyday life in parts of North Africa and a popular experience in old Damascus, Aleppo and Cairo.',
             'Shop phrases: يعطيك العافية (said to someone working; reply: الله يعافيك), مبروك (said on a purchase too; reply: الله يبارك فيك), تكرم عينك (with pleasure, Levantine).',
@@ -187,7 +187,7 @@ export const categories = [
         quiz: [
           Q('تعلّم (to learn) is the Form V partner of…', ['علّم (to teach)', 'عَلِم (to know)', 'معلّم (teacher)', 'استعلم (to inquire)']),
           Q("'A red car' (سيارة is feminine) is…", ['سيارة حمراء', 'سيارة أحمر', 'سيارة حُمر', 'سيارة أحمرة']),
-          Q('ما زلتُ أبحث عن شقة means…', ["I'm still looking for a flat", 'I stopped looking for a flat', 'I will look for a flat', 'I never looked for a flat']),
+          Q('ما زلتُ أبحث عن شقة means…', ["I'm still looking for an apartment", 'I stopped looking for an apartment', 'I will look for an apartment', 'I never looked for an apartment']),
           Q('After أصبح, a predicate adjective is…', ['accusative (-an)', 'nominative (-un)', 'genitive (-in)', 'always a verb']),
           Q("In Levantine and Egyptian speech, 'left' is…", ['شمال', 'يسار', 'يمين', 'جنوب']),
         ],
@@ -233,7 +233,7 @@ export const categories = [
           title: 'A wish for every occasion, and the kunya',
           body: [
             'For holidays and birthdays say كل عام وأنتم بخير (or a spoken version). For weddings, graduations, a new baby or a new car say مبروك, answered with الله يبارك فيك. After a wedding مبروك, the reply often adds عقبالك / عقبال عندك (may you be next!).',
-            'In Ramadan, Muslims fast from dawn to sunset, eat سحور before dawn and break the fast at إفطار. Evenings are social: family visits, special sweets, and TV series (مسلسلات) made for the month. Greet people with رمضان كريم (reply: الله أكرم) or رمضان مبارك.',
+            'In Ramadan, Muslims fast from dawn to sunset, eat سحور before dawn and break the fast at إفطار. Evenings are social: family visits, special desserts, and TV series (مسلسلات) made for the month. Greet people with رمضان كريم (reply: الله أكرم) or رمضان مبارك.',
             'Many people are called by a kunya (كنية): أبو or أم plus the name of their eldest son, or daughter if there are no sons, as in أبو خالد and أم خالد. It sounds warm and respectful. Some names come with a traditional kunya: a man named حسين is often called أبو علي.',
           ],
         },
@@ -269,8 +269,8 @@ export const categories = [
           P('السنة الهجرية', 'as-sana al-hijriyya', 'the Hijri (Islamic) year'),
           P('السنة الميلادية', 'as-sana al-mīlādiyya', 'the Gregorian year'),
           P('رمضان', 'Ramaḍān', 'Ramadan, the month of fasting'),
-          P('عيد الفطر', 'ʿīd al-fiṭr', 'Eid al-Fitr, the feast after Ramadan', 'On 1 Shawwal.'),
-          P('عيد الأضحى', 'ʿīd al-aḍḥā', 'Eid al-Adha, the Feast of the Sacrifice', 'On 10 Dhu al-Hijja, during the Hajj.'),
+          P('عيد الفطر', 'ʿīd al-fiṭr', 'Eid al-Fitr, the feast after Ramadan', 'On Shawwal 1.'),
+          P('عيد الأضحى', 'ʿīd al-aḍḥā', 'Eid al-Adha, the Feast of the Sacrifice', 'On Dhu al-Hijja 10, during the Hajj.'),
           P('الهلال', 'al-hilāl', 'the crescent moon'),
           P('عيدية', 'ʿīdiyya', 'Eid money given to children'),
         ],
@@ -301,33 +301,33 @@ export const categories = [
 
 export const scenarios = [
   {
-    id: 'ar-sc-flat', title: 'Renting a Flat in Damascus', level: 'B1', emoji: '🏢', icon: 'building.2',
-    setting: 'You need a flat for a year of study. A simsar (agent) meets you near the university.', goal: 'Ask about the rooms, the floor, the rent and the furniture, then arrange a visit.',
+    id: 'ar-sc-flat', title: 'Renting an Apartment in Damascus', level: 'B1', emoji: '🏢', icon: 'building.2',
+    setting: 'You need an apartment for a year of study. A simsar (agent) meets you near the university.', goal: 'Ask about the rooms, the floor, the rent and the furniture, then arrange a visit.',
     steps: [
-      step('Simsar', P('أهلين! شو بدّك بالضبط؟', 'ahlēn! shū biddak bi-ẓ-ẓabṭ?', 'Welcome! What exactly are you looking for?'), 'Say you want a small furnished flat near the university.', [
-        C('بدّي شقة صغيرة مفروشة قريبة من الجامعة.', 'biddi shaʾʾa zġīre mafrūshe ʾarībe mn ij-jāmʿa.', 'I want a small furnished flat near the university.', true, 'Size, furniture and location: clear.'),
-        C('بدّي جامعة صغيرة.', 'biddi jāmʿa zġīre.', 'I want a small university.', false, 'You want a شقة (flat), not a university!'),
-        C('أنا شقة.', 'ana shaʾʾa.', 'I am a flat.', false, 'Use بدّي (I want) + شقة.'),
+      step('Simsar', P('أهلين! شو بدّك بالضبط؟', 'ahlēn! shū biddak bi-ẓ-ẓabṭ?', 'Welcome! What exactly are you looking for?'), 'Say you want a small furnished apartment near the university.', [
+        C('بدّي شقة صغيرة مفروشة قريبة من الجامعة.', 'biddi shaʾʾa zġīre mafrūshe ʾarībe mn ij-jāmʿa.', 'I want a small furnished apartment near the university.', true, 'Size, furniture and location: clear.'),
+        C('بدّي جامعة صغيرة.', 'biddi jāmʿa zġīre.', 'I want a small university.', false, 'You want a شقة (apartment), not a university!'),
+        C('أنا شقة.', 'ana shaʾʾa.', 'I am an apartment.', false, 'Use بدّي (I want) + شقة.'),
       ]),
-      step('Simsar', P('عندي شقة حلوة بالطابق الرابع، فيها غرفتين ومطبخ وحمّام.', 'ʿindi shaʾʾa ḥilwe bi-ṭ-ṭābeʾ ir-rābeʿ, fīha ghurftēn w-maṭbakh w-ḥammām.', 'I have a nice flat on the fourth floor. It has two rooms, a kitchen and a bathroom.'), 'What does the flat have?', [
+      step('Simsar', P('عندي شقة حلوة بالطابق الرابع، فيها غرفتين ومطبخ وحمّام.', 'ʿindi shaʾʾa ḥilwe bi-ṭ-ṭābeʾ ir-rābeʿ, fīha ghurftēn w-maṭbakh w-ḥammām.', 'I have a nice apartment on the fourth floor. It has two rooms, a kitchen and a bathroom.'), 'What does the apartment have?', [
         U('Two rooms, a kitchen and a bathroom, on the fourth floor', true, 'فيها = it has; غرفتين = two rooms (dual).'),
         U('Four rooms on the second floor', false, 'الرابع = the fourth (floor); غرفتين = two rooms.'),
         U('One room and no kitchen', false, 'He mentioned مطبخ, a kitchen.'),
       ], 'understand'),
-      step(null, null, 'Ask whether there is a lift.', [
-        C('في أسانسير؟', 'fī asansēr?', 'Is there a lift?', true, 'في + noun = there is. Levantine uses أسانسير, from French.'),
-        C('عندو أسانسير؟', 'ʿando asansēr?', 'Does he have a lift?', false, 'For places use في (there is), not عند (to have).'),
-        C('وين الأسانسير تبعي؟', 'wēn il-asansēr tabaʿi?', 'Where is my lift?', false, "It isn't yours yet!"),
+      step(null, null, 'Ask whether there is an elevator.', [
+        C('في أسانسير؟', 'fī asansēr?', 'Is there an elevator?', true, 'في + noun = there is. Levantine uses أسانسير, from French.'),
+        C('عندو أسانسير؟', 'ʿando asansēr?', 'Does he have an elevator?', false, 'For places use في (there is), not عند (to have).'),
+        C('وين الأسانسير تبعي؟', 'wēn il-asansēr tabaʿi?', 'Where is my elevator?', false, "It isn't yours yet!"),
       ]),
       step('Simsar', P('لا والله، ما في. بس الإيجار رخيص: مية دولار بالشهر.', 'la wallāh, ma fī. bas il-ījār rkhīṣ: mīt dolār bi-sh-shahr.', "No, there isn't. But the rent is cheap: a hundred dollars a month."), 'What did he say?', [
-        U("There's no lift, but the rent is cheap: $100 a month", true, 'ما في = there isn\'t; بالشهر = per month.'),
-        U('There is a lift, and the rent is $100 a week', false, 'ما في = there isn\'t, and بالشهر = per month.'),
+        U("There's no elevator, but the rent is cheap: $100 a month", true, 'ما في = there isn\'t; بالشهر = per month.'),
+        U('There is an elevator, and the rent is $100 a week', false, 'ما في = there isn\'t, and بالشهر = per month.'),
         U('The rent is expensive', false, 'رخيص = cheap.'),
       ], 'understand'),
       step(null, null, 'Ask whether it is furnished and whether you can see it today.', [
-        C('الشقة مفروشة؟ فيني شوفها اليوم؟', 'ish-shaʾʾa mafrūshe? fīni shūfa il-yōm?', 'Is the flat furnished? Can I see it today?', true, 'فيني = I can (Levantine).'),
-        C('الشقة بتشوفني اليوم؟', 'ish-shaʾʾa btshūfni il-yōm?', 'Will the flat see me today?', false, "You've swapped who sees whom!"),
-        C('بدّي اشتري الشقة هلّق.', 'biddi ishtiri ish-shaʾʾa hallaʾ.', 'I want to buy the flat right now.', false, 'You want to rent it, and see it first.'),
+        C('الشقة مفروشة؟ فيني شوفها اليوم؟', 'ish-shaʾʾa mafrūshe? fīni shūfa il-yōm?', 'Is the apartment furnished? Can I see it today?', true, 'فيني = I can (Levantine).'),
+        C('الشقة بتشوفني اليوم؟', 'ish-shaʾʾa btshūfni il-yōm?', 'Will the apartment see me today?', false, "You've swapped who sees whom!"),
+        C('بدّي اشتري الشقة هلّق.', 'biddi ishtiri ish-shaʾʾa hallaʾ.', 'I want to buy the apartment right now.', false, 'You want to rent it, and see it first.'),
       ]),
       step('Simsar', P('أكيد! يلّا نروح هلّق.', 'akīd! yalla nrūḥ hallaʾ.', "Of course! Let's go now."), 'Agree and thank him for his trouble.', [
         C('تمام، يعطيك العافية!', 'tamām, yaʿṭīk il-ʿāfye!', 'Great, thanks for your trouble!', true, 'He will answer الله يعافيك.'),
@@ -362,7 +362,7 @@ export const scenarios = [
       ], 'understand'),
       step(null, null, "At the wedding, greet the groom's mother.", [
         C('مبروك! الله يتمّم بالخير.', 'mabrūk! aḷḷa ytammim bi-l-khēr.', 'Congratulations! May God bring it to a happy completion.', true, 'A classic wedding wish.'),
-        C('كل سنة وانتِ سالمة.', 'kull sane w-inti salme.', 'Many happy returns.', false, "That's for yearly holidays and birthdays."),
+        C('كل سنة وانتِ سالمة.', 'kull sane w-inti salme.', 'Happy holidays (or happy birthday).', false, "That's for yearly holidays and birthdays."),
         C('يعطيكي العافية.', 'yaʿṭīki il-ʿāfye.', 'God give you strength (for your work).', false, "That's said to someone working, not at a wedding."),
       ]),
     ],
@@ -371,13 +371,13 @@ export const scenarios = [
 
 export const dictionary = [
   // housing
-  ['شقة', 'shaqqa', 'apartment; flat'], ['شقق', 'shuqaq', 'apartments'], ['طابق', 'ṭābiq', 'floor; storey'], ['دور', 'dōr', 'floor (Egyptian); turn; role'],
+  ['شقة', 'shaqqa', 'apartment'], ['شقق', 'shuqaq', 'apartments'], ['طابق', 'ṭābiq', 'floor; story'], ['دور', 'dōr', 'floor (Egyptian); turn; role'],
   ['مطبخ', 'maṭbakh', 'kitchen'], ['مطابخ', 'maṭābikh', 'kitchens'], ['استأجر', 'istaʾjara', 'to rent'], ['إيجار', 'ījār', 'rent'],
   ['حديقة', 'ḥadīqa', 'garden; park'], ['جنينة', 'jnēne / gnēna', 'garden (spoken)'], ['بجانب', 'bi-jānib', 'next to'], ['جنب', 'janb', 'next to (spoken)'],
   ['وراء', 'warāʾ', 'behind'], ['ترك', 'taraka', 'to leave (something)'], ['ساب', 'sāb', 'to leave (Egyptian)'], ['خصوصية', 'khuṣūṣiyya', 'privacy'],
   ['استقلال', 'istiqlāl', 'independence'], ['سمسار', 'simsār', 'property agent; middleman'], ['بواب', 'bawwāb', 'doorman; building caretaker'],
   ['بناية', 'bināya', 'building'], ['مفروش', 'mafrūsh', 'furnished'], ['مسبح', 'masbaḥ', 'swimming pool'], ['منزل', 'manzil', 'residence; house'],
-  ['انتقل', 'intaqala', 'to move (house)'], ['فاضي', 'fāḍī', 'empty; free; not busy'], ['أسانسير', 'asansēr', 'lift; elevator (spoken)'],
+  ['انتقل', 'intaqala', 'to move (house)'], ['فاضي', 'fāḍī', 'empty; free; not busy'], ['أسانسير', 'asansēr', 'elevator (spoken)'],
   // migration & identity
   ['هاجر', 'hājara', 'to emigrate; to immigrate'], ['هجرة', 'hijra', 'emigration; migration'], ['مهاجر', 'muhājir', 'immigrant; emigrant'], ['مهجر', 'mahjar', 'diaspora; land of emigration'],
   ['جالية', 'jāliya', 'immigrant community'], ['هوية', 'huwiyya', 'identity; ID card'], ['بحث', 'baḥatha / baḥth', 'to look for; research'], ['دور على', 'dawwar ʿala', 'to look for (spoken)'],
@@ -389,9 +389,9 @@ export const dictionary = [
   ['اشترى', 'ishtarā', 'to buy'], ['باع', 'bāʿa', 'to sell'], ['سعر', 'siʿr', 'price'], ['أسعار', 'asʿār', 'prices'], ['رخيص', 'rakhīṣ', 'cheap'], ['غالي', 'ghālī', 'expensive; dear'],
   ['أصلح', 'aṣlaḥa', 'to repair'], ['صلح', 'ṣallaḥ', 'to repair (spoken)'], ['غسل', 'ghasala', 'to wash'], ['مفروشات', 'mafrūshāt', 'furniture'], ['عفش', 'ʿafsh', 'furniture (Egyptian)'],
   ['خزانة', 'khizāna', 'wardrobe; closet'], ['دولاب', 'dulāb', 'wardrobe (Egyptian)'], ['ثلاجة', 'thallāja', 'refrigerator'], ['براد', 'barrād', 'refrigerator (Levantine)'],
-  ['لون', 'lawn', 'colour'], ['ألوان', 'alwān', 'colours'], ['أحمر', 'aḥmar', 'red'], ['حمراء', 'ḥamrāʾ', 'red (f.)'], ['أزرق', 'azraq', 'blue'], ['زرقاء', 'zarqāʾ', 'blue (f.)'],
+  ['لون', 'lawn', 'color'], ['ألوان', 'alwān', 'colors'], ['أحمر', 'aḥmar', 'red'], ['حمراء', 'ḥamrāʾ', 'red (f.)'], ['أزرق', 'azraq', 'blue'], ['زرقاء', 'zarqāʾ', 'blue (f.)'],
   ['أخضر', 'akhḍar', 'green'], ['خضراء', 'khaḍrāʾ', 'green (f.)'], ['أصفر', 'aṣfar', 'yellow'], ['صفراء', 'ṣafrāʾ', 'yellow (f.)'], ['أبيض', 'abyaḍ', 'white'], ['بيضاء', 'bayḍāʾ', 'white (f.)'],
-  ['أسود', 'aswad', 'black'], ['سوداء', 'sawdāʾ', 'black (f.)'], ['بني', 'bunnī', 'brown'], ['رمادي', 'ramādī', 'grey'], ['برتقالي', 'burtuqālī', 'orange (colour)'], ['وردي', 'wardī', 'pink'],
+  ['أسود', 'aswad', 'black'], ['سوداء', 'sawdāʾ', 'black (f.)'], ['بني', 'bunnī', 'brown'], ['رمادي', 'ramādī', 'gray'], ['برتقالي', 'burtuqālī', 'orange (color)'], ['وردي', 'wardī', 'pink'],
   ['يسار', 'yasār', 'left'], ['يمين', 'yamīn', 'right'], ['تغير', 'taghayyara', 'to change (by itself)'], ['غير', 'ghayyara / ghayr', 'to change (something); other than'],
   ['ما زال', 'mā zāla', 'still'], ['أصبح', 'aṣbaḥa', 'to become'], ['صار', 'ṣāra', 'to become'], ['يعطيك العافية', 'yaʿṭīk il-ʿāfye', 'God give you strength (to someone working)'],
   ['تكرم عينك', 'tikram ʿēnak', 'with pleasure (Levantine)'], ['المحل محلك', 'il-maḥall maḥallak', 'the shop is yours (polite welcome)'],
@@ -400,7 +400,7 @@ export const dictionary = [
   ['عزم', 'ʿazam', 'to invite (spoken)'], ['دعوة', 'daʿwa', 'invitation'], ['بطاقة', 'biṭāqa', 'card'], ['صام', 'ṣāma', 'to fast'], ['أفطر', 'afṭara', 'to break a fast'],
   ['سحور', 'saḥūr', 'pre-dawn meal in Ramadan'], ['رحلة', 'riḥla', 'trip; flight'], ['قلق', 'qalaq', 'anxiety; worry'], ['اعتاد', 'iʿtāda', 'to get used to'],
   ['اجتمع', 'ijtamaʿa', 'to meet; to gather'], ['اختلف', 'ikhtalafa', 'to differ; to disagree'], ['عاصمة', 'ʿāṣima', 'capital city'], ['معهد', 'maʿhad', 'institute'],
-  ['عقبالك', 'ʿuʾbālak', 'may you be next (wedding wish)'], ['كل عام وأنتم بخير', 'kull ʿām wa-antum bi-khayr', 'happy holidays; many happy returns'],
+  ['عقبالك', 'ʿuʾbālak', 'may you be next (wedding wish)'], ['كل عام وأنتم بخير', 'kull ʿām wa-antum bi-khayr', 'happy holidays; happy birthday'],
   ['عيد مبارك', 'ʿīd mubārak', 'blessed Eid'], ['عيدية', 'ʿīdiyya', 'Eid money for children'], ['هلال', 'hilāl', 'crescent moon'], ['كنية', 'kunya', 'kunya (Abu / Umm + name)'],
   ['هجري', 'hijrī', 'Hijri (Islamic calendar)'], ['ميلادي', 'mīlādī', 'Gregorian; AD'],
   ['كانون الثاني', 'kānūn ath-thānī', 'January (Levant)'], ['شباط', 'shubāṭ', 'February (Levant)'], ['آذار', 'ādhār', 'March (Levant)'], ['نيسان', 'nīsān', 'April (Levant)'],
@@ -413,13 +413,13 @@ export const dictionary = [
 
 export const writingPrompts = [
   {
-    id: 'ar-w-home', level: 'B1', prompt: 'Describe your home, or a flat you would like: where it is, what it has and what is near it. Start some sentences with the place (في شقتي… / أمام… / بجانب…).', minWords: 20,
+    id: 'ar-w-home', level: 'B1', prompt: 'Describe your home, or an apartment you would like: where it is, what it has and what is near it. Start some sentences with the place (في شقتي… / أمام… / بجانب…).', minWords: 20,
     requirements: [
       R('rooms or parts of a home (غرفة، مطبخ، حمام…)', ['غرفة', 'غرف', 'غرفتا', 'مطبخ', 'حمام', 'شرفة', 'صالون', 'طابق', 'الطابق']),
       R('a place-first sentence (في شقتي…، أمام…، بجانب…)', ['في بيتي', 'في شقتي', 'في البيت', 'في الشقة', 'أمام', 'بجانب', 'وراء', 'خلف']),
       R('a describing word (كبير، صغير، قريب، مريح…)', ['كبير', 'كبيرة', 'صغير', 'صغيرة', 'قريب', 'قريبة', 'جميل', 'جميلة', 'واسع', 'واسعة', 'مريح', 'مريحة']),
     ],
-    model: P('أسكن في شقة صغيرة في الطابق الثالث. في شقتي غرفتا نوم ومطبخ وحمام. أمام البناية حديقة جميلة، وبجانبها مخبز قريب. الشقة مريحة لكنّ الإيجار غالٍ.', 'askunu fī shaqqa ṣaghīra fī aṭ-ṭābiq ath-thālith. fī shaqqatī ghurfatā nawm wa-maṭbakh wa-ḥammām. amāma al-bināya ḥadīqa jamīla, wa-bi-jānibihā makhbaz qarīb. ash-shaqqa murīḥa lākinna al-ījār ghālin.', 'I live in a small flat on the third floor. My flat has two bedrooms, a kitchen and a bathroom. In front of the building is a beautiful garden, and next to it a bakery. The flat is comfortable, but the rent is expensive.'),
+    model: P('أسكن في شقة صغيرة في الطابق الثالث. في شقتي غرفتا نوم ومطبخ وحمام. أمام البناية حديقة جميلة، وبجانبها مخبز قريب. الشقة مريحة لكنّ الإيجار غالٍ.', 'askunu fī shaqqa ṣaghīra fī aṭ-ṭābiq ath-thālith. fī shaqqatī ghurfatā nawm wa-maṭbakh wa-ḥammām. amāma al-bināya ḥadīqa jamīla, wa-bi-jānibihā makhbaz qarīb. ash-shaqqa murīḥa lākinna al-ījār ghālin.', 'I live in a small apartment on the third floor. My apartment has two bedrooms, a kitchen and a bathroom. In front of the building is a beautiful garden, and next to it a bakery. The apartment is comfortable, but the rent is expensive.'),
   },
   {
     id: 'ar-w-family-house', level: 'B2', prompt: "Should newly married couples live with the husband's family at first, or in a home of their own? Give arguments on both sides and your conclusion.", minWords: 35,
@@ -449,7 +449,7 @@ export const writingPrompts = [
       R('a comparative (أسهل، أرخص، أسرع…)', ['أسهل', 'أرخص', 'أفضل', 'أغلى', 'أسرع', 'أمتع']),
       R('a reason (لأنّ، لذلك)', ['لأن', 'لذلك']),
     ],
-    model: P('في السنوات الأخيرة أصبح كثير من الناس يشترون كل شيء من الإنترنت. من السهل أن تقارن الأسعار وأنت في البيت، والتوصيل أسرع من الماضي. لكنّني أفضّل السوق لأنّ التسوّق هناك أمتع: أرى الألوان وألمس القماش وأتكلم مع البائعين.', 'fī as-sanawāt al-akhīra aṣbaḥa kathīr min an-nās yashtarūna kull shayʾ min al-intarnit. min as-sahl an tuqārina al-asʿār wa-anta fī al-bayt, wa-t-tawṣīl asraʿ min al-māḍī. lākinnanī ufaḍḍilu as-sūq li-anna at-tasawwuq hunāk amtaʿ: arā al-alwān wa-almisu al-qumāsh wa-atakallamu maʿa al-bāʾiʿīn.', "In recent years many people have started buying everything online. It's easy to compare prices from home, and delivery is faster than before. But I prefer the market because shopping there is more fun: I see the colours, touch the fabric and talk with the sellers."),
+    model: P('في السنوات الأخيرة أصبح كثير من الناس يشترون كل شيء من الإنترنت. من السهل أن تقارن الأسعار وأنت في البيت، والتوصيل أسرع من الماضي. لكنّني أفضّل السوق لأنّ التسوّق هناك أمتع: أرى الألوان وألمس القماش وأتكلم مع البائعين.', 'fī as-sanawāt al-akhīra aṣbaḥa kathīr min an-nās yashtarūna kull shayʾ min al-intarnit. min as-sahl an tuqārina al-asʿār wa-anta fī al-bayt, wa-t-tawṣīl asraʿ min al-māḍī. lākinnanī ufaḍḍilu as-sūq li-anna at-tasawwuq hunāk amtaʿ: arā al-alwān wa-almisu al-qumāsh wa-atakallamu maʿa al-bāʾiʿīn.', "In recent years many people have started buying everything online. It's easy to compare prices from home, and delivery is faster than before. But I prefer the market because shopping there is more fun: I see the colors, touch the fabric and talk with the sellers."),
   },
 ];
 
@@ -469,7 +469,7 @@ export const speakingPrompts = [
       R('a greeting (كل عام وأنتم بخير، مبروك…)', ['كل عام وأنتم بخير', 'كل سنة', 'مبروك', 'عيد مبارك', 'رمضان كريم']),
       R('present-tense "we" verbs (نزور، نأكل، نجتمع…)', ['نزور', 'نأكل', 'ونأكل', 'نجتمع', 'نحتفل', 'نلبس', 'نذهب', 'نشتري']),
     ],
-    model: P('في العيد نجتمع في بيت جدّتي ونأكل الحلويات. نلبس ملابس جديدة ونقول لبعض: كل عام وأنتم بخير!', 'fī al-ʿīd najtamiʿu fī bayt jaddatī wa-naʾkulu al-ḥalawiyyāt. nalbasu malābis jadīda wa-naqūlu li-baʿḍ: kull ʿām wa-antum bi-khayr!', "At Eid we gather at my grandmother's house and eat sweets. We wear new clothes and say to each other: Happy Eid!"),
+    model: P('في العيد نجتمع في بيت جدّتي ونأكل الحلويات. نلبس ملابس جديدة ونقول لبعض: كل عام وأنتم بخير!', 'fī al-ʿīd najtamiʿu fī bayt jaddatī wa-naʾkulu al-ḥalawiyyāt. nalbasu malābis jadīda wa-naqūlu li-baʿḍ: kull ʿām wa-antum bi-khayr!', "At Eid we gather at my grandmother's house and eat desserts. We wear new clothes and say to each other: Happy Eid!"),
   },
 ];
 
