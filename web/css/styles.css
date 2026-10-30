@@ -437,3 +437,13 @@ body.hide-tr .opt-tr { display: none; }
 .plan-title { font-weight: 600; }
 .plan-count { flex: none; }
 .plan-dialect button { white-space: nowrap; }
+
+/* Generated practice */
+.keep-practicing { border-left: 4px solid var(--accent); }
+.level-practice { margin-left: auto; font-weight: 500; text-decoration: none; }
+.tile-line, .tile-pool { display: flex; flex-wrap: wrap; gap: 0.45rem; min-height: 3.2rem; align-items: center; padding: 0.6rem; border-radius: 12px; }
+.tile-line { background: var(--surface-2); margin: 0.6rem 0; border: 2px dashed var(--line); }
+.word-tile { font: inherit; font-size: 1.05rem; padding: 0.45rem 0.8rem; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer; box-shadow: var(--shadow); }
+.tile-line.ar .word-tile, .tile-pool.ar .word-tile { font-size: 1.35rem; }
+.word-tile.placed { border-color: var(--accent); }
+.word-tile:disabled { cursor: default; box-shadow: none; }

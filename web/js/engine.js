@@ -901,6 +901,159 @@
     return f;
   }
 
+  // ---------------------------------------------------------------- generated practice
+  // Endless, varied practice sets for a lesson, a topic (category) or a whole level. Every item is
+  // assembled from the course's own checked content (vocabulary, example sentences, grammar tables
+  // and quiz questions), so nothing new or unchecked is invented. Mirrored in Practice.swift.
+  const PRACTICE_PASS = 80;
+  function practiceScope(language, scope) {
+    const lessons = language.categories.flatMap((c) => c.lessons.map((l) => ({ ...l, cat: c })));
+    if (scope.type === 'lesson') {
+      const l = lessons.find((x) => x.id === scope.id);
+      return l ? { key: `lesson:${l.id}`, title: l.title, lessons: [l] } : null;
+    }
+    if (scope.type === 'cat') {
+      const c = language.categories.find((x) => x.id === scope.id);
+      return c ? { key: `cat:${c.id}`, title: c.title, lessons: lessons.filter((l) => l.cat.id === c.id) } : null;
+    }
+    if (scope.type === 'level' && LEVELS.includes(scope.id)) {
+      return { key: `level:${scope.id}`, title: `${scope.id} · ${LEVEL_NAMES[scope.id]}`, lessons: lessons.filter((l) => l.level === scope.id) };
+    }
+    return null;
+  }
+
+  function practiceSet(language, scope, seed, count = 10) {
+    const sc = practiceScope(language, scope);
+    if (!sc || !sc.lessons.length) return [];
+    const rand = seeded(seed >>> 0);
+    const pick = (arr) => arr[Math.floor(rand() * arr.length)];
+    const shuffle = (arr) => seededShuffle(arr, rand);
+    const lid = language.id;
+    const norm = (t) => normalize(t, lid);
+    const usable = (p) => p && p.t && p.en && !/…|\.\.\.|\//.test(p.t);
+    const uniq = (list) => { const seen = new Set(); return list.filter((p) => !seen.has(p.t) && seen.add(p.t)); };
+    const vocab = uniq(sc.lessons.flatMap((l) => l.vocab).filter(usable));
+    const examples = uniq(sc.lessons.flatMap((l) => l.examples).filter(usable));
+    const phrases = uniq([...vocab, ...examples]);
+    // Distractors come from the scope first, then from other lessons up to the same level.
+    const top = Math.max(...sc.lessons.map((l) => LEVELS.indexOf(l.level)));
+    const wider = uniq(language.categories.flatMap((c) => c.lessons).filter((l) => LEVELS.indexOf(l.level) <= top)
+      .flatMap((l) => [...l.vocab, ...l.examples]).filter(usable));
+    // Options must look alike: words go with words, sentences with sentences, or the answer gives itself away.
+    const isShort = (p) => p.t.split(/\s+/).length <= 2;
+    const others = (p, n) => {
+      const seenEn = new Set([p.en]);
+      const out = [];
+      for (const q of [...shuffle(phrases), ...shuffle(wider)]) {
+        if (out.length >= n) break;
+        if (seenEn.has(q.en) || norm(q.t) === norm(p.t) || isShort(q) !== isShort(p)) continue;
+        seenEn.add(q.en);
+        out.push(q);
+      }
+      return out;
+    };
+    const about = (p) => `${p.t}${p.tr ? ` (${p.tr})` : ''}: “${p.en}”${p.note ? ` · ${p.note}` : ''}`;
+    const choice = (skill, q, options, correct, extra) => {
+      const opts = shuffle(options);
+      return { type: 'choice', skill, q, options: opts, answer: opts.indexOf(correct), ...extra };
+    };
+    const used = new Set();
+    const fresh = (list) => shuffle(list).find((p) => !used.has(p.t));
+    const gens = {
+      meaning() {
+        const p = fresh(phrases); if (!p) return null;
+        const d = others(p, 3); if (d.length < 2) return null;
+        used.add(p.t);
+        return choice('reading', 'What does this mean?', [p.en, ...d.map((x) => x.en)], p.en, { t: p.t, ...(p.tr ? { tr: p.tr } : {}), explain: about(p) });
+      },
+      reverse() {
+        const p = fresh(phrases); if (!p) return null;
+        const d = others(p, 3); if (d.length < 2) return null;
+        used.add(p.t);
+        return choice('reading', `How do you say “${primaryEnglish(p.en)}”?`, [p.t, ...d.map((x) => x.t)], p.t, { explain: about(p) });
+      },
+      listen() {
+        const p = fresh(phrases); if (!p) return null;
+        const d = others(p, 3); if (d.length < 2) return null;
+        used.add(p.t);
+        return choice('listening', 'Listen. What does it mean?', [p.en, ...d.map((x) => x.en)], p.en, { t: p.t, ...(p.tr ? { tr: p.tr } : {}), audio: true, explain: about(p) });
+      },
+      type() {
+        const v = fresh(vocab.filter((x) => x.t.split(/\s+/).length <= 3)); if (!v) return null;
+        used.add(v.t);
+        return { type: 'type', skill: 'writing', prompt: `Write “${primaryEnglish(v.en)}” in ${language.name}`, answer: v.t, ...(v.tr ? { hint: v.tr } : {}), explain: about(v) };
+      },
+      order() {
+        const s2 = fresh(examples.filter((x) => { const n = x.t.split(/\s+/).length; return n >= 3 && n <= 8 && !/ — /.test(x.t); }));
+        if (!s2) return null;
+        const tokens = s2.t.split(/\s+/);
+        let tiles = shuffle(tokens);
+        for (let k = 0; k < 5 && tiles.join(' ') === tokens.join(' '); k++) tiles = shuffle(tokens);
+        if (tiles.join(' ') === tokens.join(' ')) return null;
+        used.add(s2.t);
+        return { type: 'order', skill: 'writing', prompt: 'Put the words in order', en: s2.en, ...(s2.tr ? { tr: s2.tr } : {}), tiles, answer: tokens, explain: about(s2) };
+      },
+      gap() {
+        const single = vocab.filter((v) => !/\s/.test(v.t));
+        for (const s2 of shuffle(examples)) {
+          if (used.has(s2.t)) continue;
+          const tokens = s2.t.split(/\s+/);
+          if (tokens.length < 3) continue;
+          const sentenceWords = new Set(tokens.map(norm));
+          const hits = tokens.map((tk, i) => ({ tk, i, v: single.find((v) => norm(v.t) === norm(tk)) })).filter((x) => x.v);
+          if (!hits.length) continue;
+          const hit = pick(hits);
+          const d = shuffle(single.filter((v) => !sentenceWords.has(norm(v.t)))).slice(0, 3);
+          if (d.length < 2) continue;
+          used.add(s2.t);
+          const blanked = tokens.map((tk, i) => (i === hit.i ? '___' : tk)).join(' ');
+          return choice('reading', `Complete the sentence: “${s2.en}”`, [hit.tk, ...d.map((v) => v.t)], hit.tk, { t: blanked, explain: about(s2) });
+        }
+        return null;
+      },
+      table() {
+        if ([...used].filter((k) => k.startsWith('table:')).length >= 2) return null;
+        const withTables = shuffle(sc.lessons.filter((l) => l.grammar.table && l.grammar.table.rows.length >= 3 && l.grammar.table.headers.length >= 2));
+        for (const l of withTables) {
+          const tb = l.grammar.table;
+          const cols = shuffle(tb.headers.map((_, c) => c).slice(1)).filter((c) => new Set(tb.rows.map((r) => r[c])).size === tb.rows.length && new Set(tb.rows.map((r) => r[0])).size === tb.rows.length);
+          if (!cols.length) continue;
+          const c = cols[0];
+          const row = pick(tb.rows);
+          const key = `table:${l.id}:${row[0]}:${c}`;
+          if (used.has(key)) continue;
+          used.add(key);
+          const wrong = shuffle(tb.rows.filter((r) => r !== row).map((r) => r[c])).slice(0, 3);
+          return choice('reading', `${tb.headers[0]} “${row[0]}” → ${tb.headers[c]}?`, [row[c], ...wrong], row[c], { context: `Grammar: ${l.grammar.title}`, explain: `${row[0]} → ${row[c]} (${tb.headers[c]})` });
+        }
+        return null;
+      },
+      quiz() {
+        const qs = shuffle(sc.lessons.flatMap((l) => l.quiz)).filter((q) => !used.has(`quiz:${q.id}`));
+        const q = qs[0]; if (!q) return null;
+        used.add(`quiz:${q.id}`);
+        return choice('reading', q.q, q.options, q.options[q.answer], { ...(q.t ? { t: q.t } : {}), ...(q.explain ? { explain: q.explain } : {}) });
+      },
+    };
+    // A varied mix: each round visits every exercise type once, in a random order.
+    const kinds = Object.keys(gens);
+    const items = [];
+    let misses = 0;
+    while (items.length < count && misses < kinds.length * 3) {
+      for (const k of shuffle(kinds)) {
+        if (items.length >= count) break;
+        const it = gens[k]();
+        if (it) items.push(it); else misses++;
+      }
+    }
+    return items.map((it, i) => ({ id: `${sc.key}-${seed}-${i}`, ...it }));
+  }
+
+  /** Mark an ordering answer: the chosen tiles must spell the original sentence. */
+  function checkOrder(chosen, answer) {
+    return chosen.length === answer.length && chosen.every((t, i) => t === answer[i]);
+  }
+
   // ---------------------------------------------------------------- learning plan
   // A recommended path through the whole course, starting with the alphabet. Steps check themselves
   // off from real progress; nothing is ever locked. Mirrored in the Swift app (Plan.swift).
@@ -1015,6 +1168,10 @@
       for (const pr of language.speakingPrompts.filter((x) => x.level === L)) {
         steps.push(step(`answer-${pr.id}`, 'answer', `Answer aloud: ${pr.prompt}`, 'Speak freely; your answer is transcribed and checked.', { view: 'speak', tab: 'answer' }, lp.prompts[pr.id] && lp.prompts[pr.id].best >= PROMPT_PASS));
       }
+      if (language.categories.some((c) => c.lessons.some((l) => l.level === L))) {
+        const best = (lp.checks || {})[`drill:level:${L}`] || 0;
+        steps.push(step(`drill-${L}`, 'drill', `Mixed practice: score ${PRACTICE_PASS}% on a ${L} set`, 'Ten fresh exercises drawn from every lesson at this level. Each set is different.', { view: 'practice', scope: 'level', id: L }, best >= PRACTICE_PASS));
+      }
       if (L === 'A2' && settings.start !== 'test') {
         steps.push(step('level-check', 'test', 'Check your level', 'Take the placement test to see how far you have come.', { view: 'test' }, lp.aptitude.length > 0));
       }
@@ -1041,7 +1198,7 @@
   }
 
   return {
-    PLAN_STARTS, PLAN_DIALECTS, learningPlan, planSettings,
+    PLAN_STARTS, PLAN_DIALECTS, learningPlan, planSettings, PRACTICE_PASS, practiceScope, practiceSet, checkOrder,
     LEVELS, LEVEL_NAMES, PASS, SKILLS, SPEAK_PASS, LISTEN_PASS, PROMPT_PASS, SRS_DAYS,
     listeningItems, dictationScore, addDays, srsDeck, srsQueue, srsGrade, srsStats, analyzePrompt, logMinute, studyTime,
     logPractice, speakingPhrases, similarity, misspellings, dailyChallenge, challengeStreak, fluency, recordFluency,
