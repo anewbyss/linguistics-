@@ -80,7 +80,7 @@ const categories = [
           P('ما اسمك؟', 'mā ismuk?', "What's your name?"),
           P('أنا من...', 'ana min…', "I'm from…"),
           P('من أين أنت؟', 'min ayna anta?', 'Where are you from? (to a man)'),
-          P('تشرفنا', 'tasharrafnā', 'Nice to meet you (lit. we are honoured)'),
+          P('تشرفنا', 'tasharrafnā', 'Nice to meet you (lit. we are honored)'),
           P('طالب / طالبة', 'ṭālib / ṭāliba', 'student (m / f)'),
           P('أمريكي / أمريكية', 'amrīkī / amrīkiyya', 'American (m / f)'),
         ],
@@ -101,7 +101,7 @@ const categories = [
           Q("How do you say 'I am a student' (male)?", ['أنا طالب', 'أنا طالبة', 'أنا الطالب هو', 'هو طالب'], "No verb 'to be' is needed. طالبة is the feminine form."),
           Q('A woman from Egypt is…', ['مصرية (miṣriyya)', 'مصري (miṣrī)', 'مصر (Miṣr)', 'مصريون (miṣriyyūn)']),
           Q("What does 'Umm Karīm' mean?", ['Mother of Karim', "Karim's aunt", "Karim's wife", "Karim's grandmother"]),
-          Q("'تشرفنا' is said…", ['when meeting someone', 'when leaving', 'before eating', 'when apologising']),
+          Q("'تشرفنا' is said…", ['when meeting someone', 'when leaving', 'before eating', 'when apologizing']),
         ],
       },
     ],
@@ -188,8 +188,8 @@ const categories = [
         culture: {
           title: 'The old city',
           body: [
-            "Many Arab cities have an 'old city' (al-madīna al-qadīma) of narrow lanes, souqs and courtyards beside a modern centre.",
-            'The old cities of Fes, Damascus, Jerusalem, Cairo and Tunis are UNESCO World Heritage sites, and good places to practise asking for directions and prices.',
+            "Many Arab cities have an 'old city' (al-madīna al-qadīma) of narrow lanes, souqs and courtyards beside a modern center.",
+            'The old cities of Fes, Damascus, Jerusalem, Cairo and Tunis are UNESCO World Heritage sites, and good places to practice asking for directions and prices.',
           ],
         },
         quiz: [
@@ -396,7 +396,7 @@ const categories = [
           body: [
             'Most Arabic words are built from a three-letter root that carries a core meaning. k-t-b (ك ت ب) is about writing: kataba (he wrote), kitāb (book), kātib (writer), maktab (office), maktaba (library).',
             'The past tense adds endings to the stem katab-: katabtu (I wrote), katabta (you, m), katabti (you, f), kataba (he), katabat (she), katabnā (we), katabū (they).',
-            'Dictionaries are organised by root, so finding the root unlocks a whole family of words.',
+            'Dictionaries are organized by root, so finding the root unlocks a whole family of words.',
           ],
           table: T(['Person', 'Arabic', 'Say'],
             ['I', 'كتبتُ', 'katabtu'], ['you (m)', 'كتبتَ', 'katabta'], ['you (f)', 'كتبتِ', 'katabti'],
@@ -409,7 +409,7 @@ const categories = [
         ],
         examples: [
           P('كتبتُ رسالة لأمي.', 'katabtu risāla li-ummī.', 'I wrote a letter to my mother.'),
-          P('درسنا العربية في الجامعة.', 'darasnā al-ʿarabiyya fī al-jāmiʿa.', 'We studied Arabic at university.'),
+          P('درسنا العربية في الجامعة.', 'darasnā al-ʿarabiyya fī al-jāmiʿa.', 'We studied Arabic at the university.'),
           P('ذهبتْ إلى المكتبة.', 'dhahabat ilā al-maktaba.', 'She went to the library.'),
         ],
         culture: {
@@ -538,7 +538,7 @@ const categories = [
         examples: [
           P('بكم هذه الحقيبة؟', 'bikam hādhihi al-ḥaqība?', 'How much is this bag?'),
           P('هذا غالٍ جداً!', 'hādhā ghālin jiddan!', 'This is very expensive!'),
-          P('هل عندك لون آخر؟', 'hal ʿindak lawn ākhar?', 'Do you have another colour?'),
+          P('هل عندك لون آخر؟', 'hal ʿindak lawn ākhar?', 'Do you have another color?'),
         ],
         culture: {
           title: 'The art of bargaining',
@@ -635,15 +635,15 @@ const categories = [
           title: 'Ramadan & Eid',
           body: [
             'During Ramadan, Muslims fast from dawn to sunset. As a visitor, avoid eating or drinking in public during the day in conservative areas.',
-            'Iftar, the meal that breaks the fast, traditionally starts with dates and water at the sunset call to prayer. An invitation to iftar is a real honour.',
-            'Eid al-Fitr ends Ramadan, and Eid al-Adha follows about 70 days later. Both bring new clothes, family visits, sweets, and gifts of money (ʿīdiyya) for children.',
+            'Iftar, the meal that breaks the fast, traditionally starts with dates and water at the sunset call to prayer. An invitation to iftar is a real honor.',
+            'Eid al-Fitr ends Ramadan, and Eid al-Adha follows about 70 days later. Both bring new clothes, family visits, desserts, and gifts of money (ʿīdiyya) for children.',
           ],
         },
         quiz: [
           Q("Reply to 'رمضان كريم':", ['الله أكرم', 'عيد مبارك', 'وعليكم السلام', 'مع السلامة']),
           Q('نعيماً is said after…', ['a haircut or shower', 'a sneeze', 'a meal', 'a long trip']),
           Q('معلش means…', ['never mind / sorry', 'hurry up', 'congratulations', 'I promise']),
-          Q('Iftar traditionally starts with…', ['dates and water', 'coffee and cake', 'soup and bread', 'tea and sweets']),
+          Q('Iftar traditionally starts with…', ['dates and water', 'coffee and cake', 'soup and bread', 'tea and desserts']),
         ],
       },
     ],
@@ -1000,7 +1000,7 @@ const scenarios = [
   },
   {
     id: 'ar-sc-iftar', title: 'An Iftar Invitation', level: 'B1', emoji: '🌙', icon: 'moon.stars',
-    setting: 'During Ramadan, your neighbour Umm Khalid greets you in the stairwell.', goal: 'Return the greeting, accept her invitation, and be a gracious guest at iftar.',
+    setting: 'During Ramadan, your neighbor Umm Khalid greets you in the stairwell.', goal: 'Return the greeting, accept her invitation, and be a gracious guest at iftar.',
     steps: [
       step('Umm Khalid', P('رمضان كريم!', 'ramaḍān karīm!', 'Ramadan Kareem!'), 'Reply.', [
         C('الله أكرم!', 'allāhu akram!', 'God is more generous!', true, 'The standard reply.'),
@@ -1167,7 +1167,7 @@ const media = [
   M('A1', 'TV', 'Iftah Ya Simsim (افتح يا سمسم)', 'Arabic Sesame Street', 'Simple, clear Modern Standard Arabic for children. Great for your first listening practice.', 'YouTube / regional TV', ['listening']),
   M('A1', 'Web', 'Al Jazeera Learning Arabic', 'Al Jazeera', 'Free graded MSA lessons built around news topics, with audio.', 'learning.aljazeera.net', ['reading', 'listening']),
   M('A2', 'Book', 'Al-Kitaab fii Taʿallum al-ʿArabiyya, Part 1', 'Brustad, Al-Batal & Al-Tonsi', 'A widely used course that builds MSA and Egyptian or Levantine colloquial side by side.', 'Georgetown University Press', ['grammar', 'reading']),
-  M('A2', 'TV', 'Detective Conan (المحقق كونان), Arabic dub', 'Arabic dub', 'A cult favourite with learners: crisp MSA dialogue, with lots of repeated phrases.', 'Streaming / YouTube', ['listening']),
+  M('A2', 'TV', 'Detective Conan (المحقق كونان), Arabic dub', 'Arabic dub', 'A cult favorite with learners: crisp MSA dialogue, with lots of repeated phrases.', 'Streaming / YouTube', ['listening']),
   M('A2', 'Music', 'Fairuz: "Nassam Alayna el Hawa" (نسم علينا الهوا)', 'Fairuz', 'A slow, clearly sung Lebanese classic. Look up the lyrics and sing along.', 'Music streaming', ['listening', 'culture']),
   M('B1', 'Film', 'Wadjda (2012)', 'Haifaa al-Mansour', 'The first feature film shot entirely in Saudi Arabia: a girl saving up for a bicycle. Gulf dialect with subtitles.', 'Streaming / DVD', ['listening', 'culture']),
   M('B1', 'TV', 'AlRawabi School for Girls (2021)', 'Netflix, Jordan', 'A teen drama in natural Levantine Arabic, a good step into dialect.', 'Netflix', ['listening']),

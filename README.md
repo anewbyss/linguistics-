@@ -13,7 +13,7 @@ A landing screen leads to a separate menu for each language. Your coach is **Hay
 |---|---|---|
 | **Lesson categories** (grammar + culture, A1–C1) | 15 categories, 32 lessons, including an Egyptian and a Levantine dialect track and an Al-Kitaab Part Two companion | 13 categories, 25 lessons, including Mexican regional speech and slang |
 | **Reading & writing** | 28 letters with all four joined forms, vowel marks, word reading, typing with an on-screen Arabic keyboard, finger tracing with scoring, letter quiz | Letters and Mexican pronunciation, accent rules, place-name reading, typing with accent keys, tracing, accent quiz |
-| **Real-world scenarios** (branching role-play) | 14 (adds the doctor, a job interview, discussing the news, koshari in Cairo, manoushe in Beirut, renting a flat in Damascus, a wedding invitation in Amman) | 11 (adds the doctor, renting a flat, a debate, a customer-service call) |
+| **Real-world scenarios** (branching role-play) | 14 (adds the doctor, a job interview, discussing the news, koshari in Cairo, manoushe in Beirut, renting an apartment in Damascus, a wedding invitation in Amman) | 11 (adds the doctor, renting an apartment, a debate, a customer-service call) |
 | **Aptitude test** (placement A1–C1, broken down by level and skill) | 20 questions | 20 questions |
 | **Offline translator** (both directions, phrasebook, saved words) | 605 entries with prefix and suffix handling (و، ال، ـي…) | 567 entries with plurals and diminutives |
 | **Listening** (dictation and meaning checks, three speeds) | 151 lines | 116 lines |
@@ -33,15 +33,15 @@ The plan always starts with the **alphabet**:
 Then come units for A1–C1. Each unit mixes lessons, a role-play after every couple of lessons, speaking, listening, review, and writing and speaking prompts at that level.
 
 How the plan behaves:
-- **Steps tick themselves off** from your real progress, and the language home always shows the next step.
+- **Steps check themselves off** from your real progress, and the language home always shows the next step.
 - **The placement test adjusts the plan:** it marks lower units as tested out.
 - **Nothing is ever locked,** and you can change your choices at any time.
 
-The language home is grouped by stage, *Start here → Practise → Go further*, with lessons listed by level. The plan logic is shared: `learningPlan` in `web/js/engine.js`, mirrored in `Plan.swift`.
+The language home is grouped by stage, *Start here → Practice → Go further*, with lessons listed by level. The plan logic is shared: `learningPlan` in `web/js/engine.js`, mirrored in `Plan.swift`.
 
 **Daily challenge.** A new 10-item challenge each day per language: 3 reading, 3 writing (two typed answers and a spelling check), 2 listening (a dictation and a line to understand by ear) and 2 phrases to say aloud.
 - Items are drawn from your current level, and the challenge stays the same all day.
-- Your first completion each day counts towards fluency, XP and a challenge streak. You can replay it for practice without it being scored.
+- Your first completion each day counts toward fluency, XP and a challenge streak. You can replay it for practice without it being scored.
 - Both apps use the same seeded generator, so they build the same challenge for the same day and progress.
 
 **Speaking practice.** Listen to a model phrase (text-to-speech), say it, and get a pronunciation score from speech recognition, compared with the target phrase. Scores of 70% or more count as "spoken well".
@@ -51,7 +51,7 @@ The language home is grouped by stage, *Start here → Practise → Go further*,
 
 **Al-Kitaab companion (Arabic).** Five lessons that follow *Al-Kitaab fii Taʿallum al-ʿArabiyya, Part Two* (3rd ed.), Lessons 1–4. They cover:
 - Topics: housing, Arabs in America, the market, occasions, and month names.
-- Grammar: verb patterns, nouns of place, relative clauses, negation, colours, كان and its sisters, and case endings.
+- Grammar: verb patterns, nouns of place, relative clauses, negation, colors, كان and its sisters, and case endings.
 - Vocabulary notes that give the Levantine and Egyptian words.
 - Matching scenarios and writing and speaking prompts.
 
@@ -74,12 +74,12 @@ The page also explains how the CEFR levels used here line up with the ACTFL leve
 
 **Listening.** Dictation (type what you hear, scored by similarity) and meaning checks on lesson and scenario lines, at slow, normal or natural speed.
 
-**Writing Studio and spoken answers.** Open-ended prompts from A1 to C1 (introduce yourself, tell a story, write a formal email, summarise the news…). Automatic feedback checks the required points, length, unknown words and missing accents or hamza, then shows a model answer. Speaking Practice has an "Answer questions" tab that transcribes a spoken answer and checks it the same way.
+**Writing Studio and spoken answers.** Open-ended prompts from A1 to C1 (introduce yourself, tell a story, write a formal email, summarize the news…). Automatic feedback checks the required points, length, unknown words and missing accents or hamza, then shows a model answer. Speaking Practice has an "Answer questions" tab that transcribes a spoken answer and checks it the same way.
 
-**Path to fluency.** Active study time (counted only while you're using the app) against rough hour estimates for each level based on US Foreign Service Institute figures (Arabic is a Category IV language, Spanish Category I), with what you can do at each level and how to practise beyond the app.
+**Path to fluency.** Active study time (counted only while you're using the app) against rough hour estimates for each level based on US Foreign Service Institute figures (Arabic is a Category IV language, Spanish Category I), with what you can do at each level and how to practice beyond the app.
 
 **Progress to fluency.** Reading, writing, listening, speaking and overall scores (0–100), each with an estimated CEFR band, a breakdown of what counts, and a trend chart with a table view.
-- **Each skill:** 60% coverage (how much of the course you've practised in that skill) plus 40% accuracy (the average of your last 10 scored attempts).
+- **Each skill:** 60% coverage (how much of the course you've practiced in that skill) plus 40% accuracy (the average of your last 10 scored attempts).
 - **Overall:** the average of the four skills, blended 25% with your latest aptitude-test level.
 - It's a study estimate, not an official CEFR certificate.
 
@@ -89,7 +89,7 @@ The page also explains how the CEFR levels used here line up with the ACTFL leve
 
 Every lesson has a grammar explanation (with tables), key vocabulary, example sentences, a culture section and a quiz. Phrases have transliteration (Arabic) and text-to-speech using the device's offline voices.
 
-**Progress saving.** Progress is saved after every answer: lessons, best scores, scenarios, test history, letters practised, writing tasks, saved words, XP and a daily streak.
+**Progress saving.** Progress is saved after every answer: lessons, best scores, scenarios, test history, letters practiced, writing tasks, saved words, XP and a daily streak.
 - The web app saves to `localStorage` and keeps open tabs in sync.
 - The Swift app writes a JSON file to Application Support.
 - Both apps use the **same backup format**. Export from one and import into the other (Progress → Export / Import).
@@ -167,7 +167,7 @@ npm test          # content up to date + engine tests + Swift schema checks
 npm run test:e2e  # drives the whole web app in headless Chromium (needs Playwright)
 ```
 
-- The engine tests cover Arabic and Spanish normalisation, phrase and word-by-word translation, Arabic affixes, diminutives, writing checks, placement, streaks and progress repair.
+- The engine tests cover Arabic and Spanish normalization, phrase and word-by-word translation, Arabic affixes, diminutives, writing checks, placement, streaks and progress repair.
 - `swift-schema.test.mjs` checks the JSON embedded in the Swift app against every non-optional field in `Models.swift`.
 - The end-to-end test runs every feature in both languages, checks that progress survives a reload, round-trips export/import, checks for horizontal scrolling at phone width, opens the app from `file://`, and loads it offline through the service worker.
 
@@ -181,7 +181,7 @@ Common complaints about Duolingo and similar apps, and how this app answers them
 | Unnatural or wrong sentences | Examples written for the app and checked by automated tests; a "Report a mistake" link on every lesson. |
 | Hearts, energy limits, ads, paywalls | None. Everything is free and open from day one; the aptitude test lets you skip ahead. |
 | Streak guilt and gamification over learning | Fluency is measured from real accuracy against the CEFR; quiet mode hides streaks and XP; no notifications. |
-| Little real speaking | Spoken answers to open questions, pronunciation scoring and scenarios, plus an honest push towards real conversation. |
+| Little real speaking | Spoken answers to open questions, pronunciation scoring and scenarios, plus an honest push toward real conversation. |
 | Arabic: formal Arabic only, weak script teaching, too much romanisation | Egyptian and Levantine tracks, letter tracing and typing, and transliteration you can switch off. |
 | Stalls at beginner level | Lessons to C1 and free university and government courses for every level. |
 | Lost progress, subscriptions that change | No account: progress stays on the device and can be exported at any time. |

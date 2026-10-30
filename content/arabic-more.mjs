@@ -47,7 +47,7 @@ export const categories = [
         culture: {
           title: 'Visiting the sick',
           body: [
-            'Visiting someone who is ill (ʿiyādat al-marīḍ) is an important social duty. Visitors bring fruit, juice or sweets.',
+            'Visiting someone who is ill (ʿiyādat al-marīḍ) is an important social duty. Visitors bring fruit, juice or desserts.',
             "Wish a sick person سلامتك (salāmtak to a man, salāmtik to a woman), literally 'your safety'. The reply is الله يسلمك.",
             'Pharmacists are often the first stop for minor illnesses and give advice freely.',
           ],
@@ -138,8 +138,8 @@ export const categories = [
           title: 'Disagreeing politely',
           body: [
             'Soften disagreement: start with مع احترامي (maʿa iḥtirāmī, with respect) or معك حق، بس… (maʿak ḥaqq, bas…, you\'re right, but…).',
-            'Directly criticising someone senior in public can cause loss of face, so disagreement is often expressed privately or indirectly.',
-            'Lively debate among friends, though, is a favourite pastime, especially about football, politics and food.',
+            'Directly criticizing someone senior in public can cause loss of face, so disagreement is often expressed privately or indirectly.',
+            'Lively debate among friends, though, is a favorite pastime, especially about soccer, politics and food.',
           ],
         },
         quiz: [
@@ -320,7 +320,7 @@ export const categories = [
           Q("'Nevertheless' is…", ['ومع ذلك', 'لذلك', 'بالإضافة إلى', 'إذا']),
           Q('لو درستُ لنجحتُ means…', ['If I had studied, I would have passed', "If you study, you'll pass", 'I studied and passed', 'I will study to pass']),
           Q('Which word starts a real (possible) condition?', ['إذا', 'لو', 'لكنّ', 'لأنّ']),
-          Q('تحية طيبة وبعد is used…', ['to open a formal letter', 'to say goodbye', 'to congratulate someone', 'to apologise']),
+          Q('تحية طيبة وبعد is used…', ['to open a formal letter', 'to say goodbye', 'to congratulate someone', 'to apologize']),
         ],
       },
     ],
@@ -362,7 +362,7 @@ export const categories = [
           body: [
             "Egyptian Arabic is the most widely understood dialect, spread by Cairo's film, TV and music industry since the 1930s.",
             'Friendly titles are everywhere: يا باشا yā bāsha (boss), يا أستاذ yā ustāz (sir), يا حاجة yā ḥagga (to an older woman).',
-            'Egyptians are famous for their humour: jokes (nukat) and wordplay are part of everyday life.',
+            'Egyptians are famous for their humor: jokes (nukat) and wordplay are part of everyday life.',
           ],
         },
         quiz: [
@@ -450,7 +450,7 @@ export const categories = [
           title: 'Levantine courtesy',
           body: [
             'يعطيك العافية greets anyone who is working or has made an effort. The reply is الله يعافيك.',
-            "تكرم / تكرمي (tikram / tikrami, 'be honoured') answers a request: 'of course, with pleasure'.",
+            "تكرم / تكرمي (tikram / tikrami, 'be honored') answers a request: 'of course, with pleasure'.",
             'Mornings often start with Fairuz on the radio, and coffee is offered to every guest.',
           ],
         },
@@ -553,7 +553,7 @@ export const scenarios = [
         C('لا أعرف.', 'lā aʿrif.', "I don't know.", false, 'Prepare an answer to this one!'),
       ]),
       step('Interviewer', P('ما هي نقاط قوّتكِ؟', 'mā hiya nuqāṭ quwwatiki?', 'What are your strengths?'), 'Name two strengths.', [
-        C('أنا منظّمة، وأعمل جيداً ضمن فريق.', 'ana munaẓẓama, wa-aʿmalu jayyidan ḍimna farīq.', "I'm organised and I work well in a team.", true, 'Specific and positive.'),
+        C('أنا منظّمة، وأعمل جيداً ضمن فريق.', 'ana munaẓẓama, wa-aʿmalu jayyidan ḍimna farīq.', "I'm organized and I work well in a team.", true, 'Specific and positive.'),
         C('ليس عندي نقاط.', 'laysa ʿindī nuqāṭ.', "I don't have any points.", false, 'Too modest, and a bit confusing.'),
         C('نقطة قوّتي هي النوم.', 'nuqṭat quwwatī hiya an-nawm.', 'My strength is sleeping.', false, 'Ha! Not for an interview.'),
       ]),
@@ -609,9 +609,9 @@ export const scenarios = [
         C('لأ، من غير شطّة.', 'laʾ, min ghēr shaṭṭa.', 'No, without hot sauce.', true, 'من غير = without; شطة = hot sauce.'),
         C('أيوه، لأ.', 'aywa, laʾ.', 'Yes, no.', false, 'Pick one!'),
       ]),
-      step('Server', P('هنا ولا تيك أواي؟', 'hena walla tēk awāy?', 'For here or takeaway?'), 'Choose.', [
+      step('Server', P('هنا ولا تيك أواي؟', 'hena walla tēk awāy?', 'For here or to go?'), 'Choose.', [
         C('هنا.', 'hena.', 'Here.', true, 'هنا is pronounced hena in Egyptian.'),
-        C('تيك أواي، لو سمحت.', 'tēk awāy, law samaḥt.', 'Takeaway, please.', true, 'Egyptians use the English word.'),
+        C('تيك أواي، لو سمحت.', 'tēk awāy, law samaḥt.', 'To go, please.', true, 'Egyptians use the English word.'),
         C('بكرة.', 'bukra.', 'Tomorrow.', false, 'Koshari is for now!'),
       ]),
       step('Server', P('الحساب خمسة وتلاتين جنيه.', 'il-ḥisāb khamsa w-talātīn ginēh.', "That's thirty-five pounds."), 'How much is it?', [
@@ -628,7 +628,7 @@ export const scenarios = [
   },
   {
     id: 'ar-sc-manoushe', title: 'Breakfast at a Beirut Bakery', level: 'A2', emoji: '🫓', icon: 'sun.max',
-    setting: 'A neighbourhood bakery in Beirut early in the morning. The baker speaks Lebanese Arabic.', goal: "Order a za'atar manoushe and pay politely.",
+    setting: 'A neighborhood bakery in Beirut early in the morning. The baker speaks Lebanese Arabic.', goal: "Order a za'atar manoushe and pay politely.",
     steps: [
       step('Baker', P('صباح الخير! شو بتحب؟', 'ṣabāḥ il-khēr! shū btḥebb?', 'Good morning! What would you like?'), "Order a za'atar manoushe.", [
         C('صباح النور، بدّي منقوشة زعتر لو سمحت.', 'ṣabāḥ in-nūr, biddi manʾūshe zaʿtar law samaḥt.', "Good morning, I'd like a za'atar manoushe, please.", true, 'بدّي = I want. Very natural.'),
@@ -684,12 +684,12 @@ export const dictionary = [
   ['شجرة', 'shajara', 'tree'], ['نهر', 'nahr', 'river'], ['وردة', 'warda', 'flower; rose'], ['حيوان', 'ḥayawān', 'animal'],
   ['قطة', 'qiṭṭa', 'cat'], ['كلب', 'kalb', 'dog'], ['حصان', 'ḥiṣān', 'horse'], ['جمل', 'jamal', 'camel'], ['طائر', 'ṭāʾir', 'bird'],
   ['حية', 'ḥayya', 'snake'], ['أفعى', 'afʿā', 'snake; viper'], ['صيف', 'ṣayf', 'summer'], ['شتاء', 'shitāʾ', 'winter'],
-  ['ربيع', 'rabīʿ', 'spring (season)'], ['خريف', 'kharīf', 'autumn; fall'],
-  // home, clothes, colours
+  ['ربيع', 'rabīʿ', 'spring (season)'], ['خريف', 'kharīf', 'fall; autumn'],
+  // home, clothes, colors
   ['مطبخ', 'maṭbakh', 'kitchen'], ['سرير', 'sarīr', 'bed'], ['كرسي', 'kursī', 'chair'], ['طاولة', 'ṭāwila', 'table'],
   ['مفتاح', 'miftāḥ', 'key'], ['ملابس', 'malābis', 'clothes'], ['قميص', 'qamīṣ', 'shirt'], ['حذاء', 'ḥidhāʾ', 'shoe; shoes'],
   ['أحمر', 'aḥmar', 'red'], ['أزرق', 'azraq', 'blue'], ['أخضر', 'akhḍar', 'green'], ['أصفر', 'aṣfar', 'yellow'], ['أبيض', 'abyaḍ', 'white'],
-  ['أسود', 'aswad', 'black'], ['لون', 'lawn', 'colour; color'],
+  ['أسود', 'aswad', 'black'], ['لون', 'lawn', 'color'],
   // verbs
   ['قال', 'qāla', 'said; say'], ['أقول', 'aqūlu', 'I say'], ['سأل', 'saʾala', 'asked; ask'], ['أجاب', 'ajāba', 'answered'],
   ['فكر', 'fakkara', 'thought; think'], ['تذكر', 'tadhakkara', 'remembered; remember'], ['نسي', 'nasiya', 'forgot; forget'],
@@ -733,7 +733,7 @@ export const writingPrompts = [
   {
     id: 'ar-w-intro', level: 'A1', prompt: 'Introduce yourself: your name, where you are from, and what you do.', minWords: 8,
     requirements: [R('your name (اسمي…)', ['اسمي']), R('where you are from (أنا من…)', ['أنا من', 'انا من']), R('what you do (طالب، أعمل، أدرس…)', ['طالب', 'طالبة', 'أعمل', 'أدرس', 'مهندس', 'معلم', 'طبيب', 'موظف'])],
-    model: P('اسمي سام. أنا من كندا. أنا طالب وأدرس العربية في الجامعة.', 'ismī Sām. ana min Kanadā. ana ṭālib wa-adrusu al-ʿarabiyya fī al-jāmiʿa.', "My name is Sam. I'm from Canada. I'm a student and I study Arabic at university."),
+    model: P('اسمي سام. أنا من كندا. أنا طالب وأدرس العربية في الجامعة.', 'ismī Sām. ana min Kanadā. ana ṭālib wa-adrusu al-ʿarabiyya fī al-jāmiʿa.', "My name is Sam. I'm from Canada. I'm a student and I study Arabic at the university."),
   },
   {
     id: 'ar-w-family', level: 'A2', prompt: 'Describe your family: who is in it and one thing about each person.', minWords: 12,
@@ -746,9 +746,9 @@ export const writingPrompts = [
     model: P('أستيقظ في الساعة السابعة وأشرب القهوة. ثم أذهب إلى العمل. في المساء أقرأ كتاباً وأنام في الساعة الحادية عشرة.', 'astayqiẓu fī as-sāʿa as-sābiʿa wa-ashrabu al-qahwa. thumma adhhabu ilā al-ʿamal. fī al-masāʾ aqraʾu kitāban wa-anāmu fī as-sāʿa al-ḥādiya ʿashra.', 'I wake up at seven and drink coffee. Then I go to work. In the evening I read a book and sleep at eleven.'),
   },
   {
-    id: 'ar-w-past', level: 'B1', prompt: 'Write about your last holiday or weekend, in the past tense.', minWords: 15,
+    id: 'ar-w-past', level: 'B1', prompt: 'Write about your last vacation or weekend, in the past tense.', minWords: 15,
     requirements: [R('past-tense verbs (ذهبتُ، زرتُ، أكلتُ…)', ['ذهبت', 'زرت', 'أكلت', 'رأيت', 'سافرت', 'شربت', 'لعبت', 'قرأت', 'شاهدت']), R('a time expression (أمس، الأسبوع الماضي…)', ['أمس', 'الأسبوع الماضي', 'السنة الماضية', 'في العطلة', 'نهاية الأسبوع']), R('how it was (جميل، رائع، ممتع…)', ['جميل', 'جميلة', 'رائع', 'رائعة', 'ممتع', 'ممتعة', 'ممل', 'مملة'])],
-    model: P('في نهاية الأسبوع ذهبتُ إلى البحر مع أصدقائي. سبحنا وأكلنا سمكاً في مطعم صغير. كانت الرحلة ممتعة جداً.', 'fī nihāyat al-usbūʿ dhahabtu ilā al-baḥr maʿa aṣdiqāʾī. sabaḥnā wa-akalnā samakan fī maṭʿam ṣaghīr. kānat ar-riḥla mumtiʿa jiddan.', 'At the weekend I went to the sea with my friends. We swam and ate fish in a small restaurant. The trip was a lot of fun.'),
+    model: P('في نهاية الأسبوع ذهبتُ إلى البحر مع أصدقائي. سبحنا وأكلنا سمكاً في مطعم صغير. كانت الرحلة ممتعة جداً.', 'fī nihāyat al-usbūʿ dhahabtu ilā al-baḥr maʿa aṣdiqāʾī. sabaḥnā wa-akalnā samakan fī maṭʿam ṣaghīr. kānat ar-riḥla mumtiʿa jiddan.', 'On the weekend I went to the sea with my friends. We swam and ate fish in a small restaurant. The trip was a lot of fun.'),
   },
   {
     id: 'ar-w-opinion', level: 'B1', prompt: 'City or village: which is better to live in? Give your opinion, compare them, and give a reason.', minWords: 22,
@@ -766,7 +766,7 @@ export const writingPrompts = [
     model: P('تحية طيبة وبعد، أودّ أن أسأل عن دورة اللغة العربية للمبتدئين. هل يمكن أن ترسلوا لي مواعيد الدروس والأسعار؟ شكراً لكم مسبقاً، ومع الاحترام.', 'taḥiyya ṭayyiba wa-baʿd, awaddu an asʾala ʿan dawrat al-lugha al-ʿarabiyya li-l-mubtadiʾīn. hal yumkin an tursilū lī mawāʿīd ad-durūs wa-l-asʿār? shukran lakum musbaqan, wa-maʿa al-iḥtirām.', 'Kind greetings. I would like to ask about the Arabic course for beginners. Could you send me the class times and prices? Thank you in advance, with respect.'),
   },
   {
-    id: 'ar-w-news', level: 'C1', prompt: 'Summarise a news story you read recently and give your view. Use reporting language and connectors.', minWords: 40,
+    id: 'ar-w-news', level: 'C1', prompt: 'Summarize a news story you read recently and give your view. Use reporting language and connectors.', minWords: 40,
     requirements: [R('reporting or passive (تمّ، أعلن، وفقاً لـ…)', ['تم', 'أعلن', 'أعلنت', 'وفقا', 'صرح', 'يقال']), R('connectors (بالإضافة إلى، ومع ذلك، لذلك…)', ['بالإضافة', 'علاوة على ذلك', 'ومع ذلك', 'لذلك', 'على الرغم']), R('your view (في رأيي، أرى أنّ…)', ['في رأيي', 'أعتقد أن', 'أرى أن'])],
     model: P('أعلنت وزارة التعليم أمس عن خطة لتدريس البرمجة في المدارس الابتدائية. ووفقاً للوزارة، سيتمّ تدريب ألف معلم هذا العام. بالإضافة إلى ذلك، ستحصل المدارس على أجهزة جديدة. في رأيي، الفكرة ممتازة، ومع ذلك يجب ألّا ننسى المدارس في القرى، لذلك أتمنى أن تكون الخطة عادلة.', 'aʿlanat wizārat at-taʿlīm ams ʿan khuṭṭa li-tadrīs al-barmaja fī al-madāris al-ibtidāʾiyya. wa-wifqan li-l-wizāra, sa-yatimmu tadrīb alf muʿallim hādhā al-ʿām. bi-l-iḍāfa ilā dhālika, sa-taḥṣulu al-madāris ʿalā ajhiza jadīda. fī raʾyī, al-fikra mumtāza, wa-maʿa dhālika yajibu allā nansā al-madāris fī al-qurā, li-dhālika atamannā an takūna al-khuṭṭa ʿādila.', 'Yesterday the Ministry of Education announced a plan to teach programming in primary schools. According to the ministry, a thousand teachers will be trained this year. In addition, schools will get new devices. In my opinion, the idea is excellent; nevertheless, we must not forget village schools, so I hope the plan will be fair.'),
   },
@@ -791,7 +791,7 @@ export const speakingPrompts = [
   {
     id: 'ar-s-weekend', level: 'A2', prompt: 'What did you do last weekend?', starter: 'في نهاية الأسبوع…', minWords: 8,
     requirements: [R('past-tense verbs', ['ذهبت', 'زرت', 'أكلت', 'شاهدت', 'سافرت', 'لعبت', 'قرأت']), R('a time expression', ['أمس', 'نهاية الأسبوع', 'السبت', 'الجمعة'])],
-    model: P('في نهاية الأسبوع زرتُ جدتي وأكلنا معاً، ثم شاهدتُ فيلماً.', 'fī nihāyat al-usbūʿ zurtu jaddatī wa-akalnā maʿan, thumma shāhadtu filman.', 'At the weekend I visited my grandmother and we ate together, then I watched a film.'),
+    model: P('في نهاية الأسبوع زرتُ جدتي وأكلنا معاً، ثم شاهدتُ فيلماً.', 'fī nihāyat al-usbūʿ zurtu jaddatī wa-akalnā maʿan, thumma shāhadtu filman.', 'On the weekend I visited my grandmother and we ate together, then I watched a film.'),
   },
   {
     id: 'ar-s-opinion', level: 'B1', prompt: 'Which is better, summer or winter? Say why.', starter: 'في رأيي…', minWords: 10,

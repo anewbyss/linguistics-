@@ -134,7 +134,7 @@ export const categories = [
           body: [
             "Open confrontation is usually avoided. People soften disagreement with 'Sí, pero…', 'Fíjate que…' or '¿No crees que…?'.",
             "A direct 'no' can feel rude, so you may hear 'lo veo difícil' (I see it as difficult) or 'a ver' (we'll see) instead.",
-            'Among friends, though, passionate debates about football (Chivas vs. América!) are a national pastime.',
+            'Among friends, though, passionate debates about soccer (Chivas vs. América!) are a national pastime.',
           ],
         },
         quiz: [
@@ -202,7 +202,7 @@ export const categories = [
             'Aunque + indicative states a fact (although it is); aunque + subjunctive is hypothetical (even if): Aunque llueve, salgo / Aunque llueva, saldré.',
           ],
           table: T(['English', 'Spanish'],
-            ['the film (that) we saw', 'la película que vimos'], ['the friend I travelled with', 'la amiga con quien viajé'],
+            ['the film (that) we saw', 'la película que vimos'], ['the friend I traveled with', 'la amiga con quien viajé'],
             ['the building where I work', 'el edificio en el que trabajo'], ['what I like', 'lo que me gusta'],
             ['the author whose novel I read', 'el autor cuya novela leí'], ['even if it rains', 'aunque llueva']),
         },
@@ -257,7 +257,7 @@ export const categories = [
         ],
         examples: [
           S('La reforma fue aprobada por la Cámara de Diputados.', 'The reform was passed by the Chamber of Deputies.'),
-          S('Según una encuesta, el 60% está a favor.', 'According to a poll, 60% are in favour.'),
+          S('Según una encuesta, el 60% está a favor.', 'According to a poll, 60% are in favor.'),
           S('El secretario dijo que la economía crecería este año.', 'The minister said the economy would grow this year.', "In Mexico, government ministers are called 'secretarios'."),
         ],
         culture: {
@@ -296,7 +296,7 @@ export const categories = [
           S('el trámite', 'bureaucratic procedure'), S('atentamente', 'sincerely'),
         ],
         examples: [
-          S('Por medio de la presente, le solicito una constancia de estudios.', 'By means of this letter, I request a certificate of enrolment.'),
+          S('Por medio de la presente, le solicito una constancia de estudios.', 'By means of this letter, I request a certificate of enrollment.'),
           S('Le agradecería que me respondiera a la brevedad.', 'I would be grateful if you could reply as soon as possible.'),
           S('Sin otro particular, quedo a sus órdenes.', 'With nothing further, I remain at your service.'),
         ],
@@ -331,7 +331,7 @@ export const categories = [
             'Mexican Spanish varies by region in accent and vocabulary, but everyone understands standard Mexican Spanish from school and TV.',
             "Northern speech (norteño) has a strong, open rhythm and words like 'plebe' (kids / the gang) and 'morro / morra' (boy / girl).",
             "In Yucatán, Maya influence shows in words like 'huach' (a Mexican from outside the peninsula). At jarana dances someone shouts '¡Bomba!' before a funny rhyming verse.",
-            "In Mexico City, chilango speech has a sing-song intonation and favourites like 'güey', 'chido' and '¿qué onda?'.",
+            "In Mexico City, chilango speech has a sing-song intonation and favorites like 'güey', 'chido' and '¿qué onda?'.",
           ],
           table: T(['Region', 'Word', 'Meaning'],
             ['CDMX', 'chido', 'cool'], ['CDMX', '¿qué onda?', "what's up?"], ['North', 'plebe', 'kids / the gang'],
@@ -345,14 +345,14 @@ export const categories = [
         ],
         examples: [
           S('Mi amigo es regio y le encanta la carne asada.', 'My friend is from Monterrey and loves carne asada.'),
-          S('¡Ándale, plebe, vámonos!', "Come on, guys, let's go!", 'Northern flavour.'),
+          S('¡Ándale, plebe, vámonos!', "Come on, guys, let's go!", 'Northern flavor.'),
           S('En Mérida me dicen huach porque soy de la capital.', "In Mérida they call me 'huach' because I'm from the capital."),
         ],
         culture: {
           title: 'Food and identity',
           body: [
-            'Regional pride runs deep and often centres on food: carne asada in the north, birria in Jalisco, cochinita pibil in Yucatán, mole in Puebla and Oaxaca.',
-            "Chilango humour and Monterrey's business culture are favourite subjects of friendly rivalry.",
+            'Regional pride runs deep and often centers on food: carne asada in the north, birria in Jalisco, cochinita pibil in Yucatán, mole in Puebla and Oaxaca.',
+            "Chilango humor and Monterrey's business culture are favorite subjects of friendly rivalry.",
             'Indigenous languages, including Maya in Yucatán and Zapotec and Mixtec in Oaxaca, are spoken alongside Spanish in many regions.',
           ],
         },
@@ -365,7 +365,7 @@ export const categories = [
       },
       {
         id: 'es-reg-2', title: 'Slang & Register', level: 'B2',
-        summary: 'Everyday slang, vulgar words to recognise, and when to switch.',
+        summary: 'Everyday slang, vulgar words to recognize, and when to switch.',
         grammar: {
           title: 'Knowing when to use slang',
           body: [
@@ -458,7 +458,7 @@ export const scenarios = [
       ]),
       step('Owner', S('El agua sí está incluida; la luz y el gas no.', 'Water is included; electricity and gas are not.'), 'Ask to see it this weekend.', [
         Rc('¿Podría verlo este fin de semana?', 'Could I see it this weekend?', true, 'The conditional sounds polite.'),
-        Rc('¿Lo vi el fin de semana?', 'Did I see it at the weekend?', false, "That's the past."),
+        Rc('¿Lo vi el fin de semana?', 'Did I see it on the weekend?', false, "That's the past."),
         Rc('Quiero verte siempre.', 'I want to see you always.', false, 'Very romantic, but no!'),
       ]),
     ],
@@ -546,11 +546,11 @@ export const dictionary = [
   ['lluvia', 'rain'], ['llover', 'to rain'], ['nieve', 'snow'], ['viento', 'wind'], ['nube', 'cloud'], ['cielo', 'sky'], ['árbol', 'tree'],
   ['río', 'river'], ['flor', 'flower'], ['animal', 'animal'], ['gato', 'cat'], ['perro', 'dog'], ['caballo', 'horse'], ['pájaro', 'bird'],
   ['serpiente', 'snake'], ['víbora', 'snake; viper (MX)'], ['verano', 'summer'], ['invierno', 'winter'], ['primavera', 'spring (season)'],
-  ['otoño', 'autumn; fall'], ['calor', 'heat'], ['hace calor', "it's hot"], ['hace frío', "it's cold"],
-  // home, clothes, colours
+  ['otoño', 'fall; autumn'], ['calor', 'heat'], ['hace calor', "it's hot"], ['hace frío', "it's cold"],
+  // home, clothes, colors
   ['cocina', 'kitchen'], ['cama', 'bed'], ['silla', 'chair'], ['mesa', 'table'], ['llave', 'key'], ['ropa', 'clothes'], ['camisa', 'shirt'],
   ['playera', 'T-shirt (MX)'], ['zapatos', 'shoes'], ['rojo', 'red'], ['azul', 'blue'], ['verde', 'green'], ['amarillo', 'yellow'],
-  ['blanco', 'white'], ['negro', 'black'], ['color', 'colour; color'], ['departamento', 'apartment (MX)'], ['depa', 'apartment (MX, informal)'],
+  ['blanco', 'white'], ['negro', 'black'], ['color', 'color'], ['departamento', 'apartment (MX)'], ['depa', 'apartment (MX, informal)'],
   ['renta', 'rent (MX)'],
   // verbs
   ['decir', 'to say; to tell'], ['preguntar', 'to ask'], ['contestar', 'to answer'], ['recordar', 'to remember'], ['olvidar', 'to forget'],
@@ -645,7 +645,7 @@ export const speakingPrompts = [
   {
     id: 'es-s-weekend', level: 'A2', prompt: 'What did you do last weekend?', starter: 'El fin de semana…', minWords: 10,
     requirements: [R('preterite verbs (fui, comí, vi…)', ['fui', 'comí', 'vi', 'visité', 'salí', 'jugué']), R('when (el sábado, ayer…)', ['el fin de semana', 'el sábado', 'el domingo', 'ayer'])],
-    model: S('El fin de semana fui al mercado y comí unas quesadillas buenísimas.', 'At the weekend I went to the market and ate some amazing quesadillas.'),
+    model: S('El fin de semana fui al mercado y comí unas quesadillas buenísimas.', 'On the weekend I went to the market and ate some amazing quesadillas.'),
   },
   {
     id: 'es-s-opinion', level: 'B1', prompt: 'Which do you prefer, the beach or the mountains? Why?', starter: 'Creo que…', minWords: 15,

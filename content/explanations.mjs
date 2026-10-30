@@ -10,7 +10,7 @@ export default {
     'ar-greet-2': {
       'A woman from Egypt is…': 'Add -iyya to the country (مصر → مصرية) for a woman; مصري is a man and مصريون is several men.',
       "What does 'Umm Karīm' mean?": 'أم (umm) means mother. Parents are often called after their eldest child: Umm Karīm, Abu Karīm.',
-      "'تشرفنا' is said…": 'تشرفنا (tasharrafnā) means "we are honoured": the Arabic "nice to meet you".',
+      "'تشرفنا' is said…": 'تشرفنا (tasharrafnā) means "we are honored": the Arabic "nice to meet you".',
     },
     'ar-noun-1': {
       'How is الشمس pronounced?': 'ش is a sun letter, so the l of al- disappears and the ش doubles: ash-shams.',
@@ -125,7 +125,7 @@ export default {
     },
     'ar-kit-1': {
       'استأجر (to rent) is which verb form?': 'استـ + root is Form X (استفعل), which often means seeking or taking: أجر (rent) → استأجر (to rent).',
-      "In Egyptian Arabic, 'floor, storey' is…": 'Egyptians say دور (dōr) for a floor; طابق is the formal word.',
+      "In Egyptian Arabic, 'floor, story' is…": 'Egyptians say دور (dōr) for a floor; طابق is the formal word.',
     },
     'ar-kit-2': {
       'In spoken Arabic, الذي / التي / الذين are all…': 'Dialects use one relative word, اللي (illi), for every gender and number.',
@@ -134,8 +134,8 @@ export default {
     },
     'ar-kit-3': {
       'تعلّم (to learn) is the Form V partner of…': 'Form II علّم = to teach (make someone know); Form V تعلّم = to learn (make yourself know).',
-      "'A red car' (سيارة is feminine) is…": 'Basic colours have a feminine pattern فعلاء: أحمر → حمراء.',
-      'ما زلتُ أبحث عن شقة means…': 'ما زال = still. With a present verb it means "still doing": I\'m still looking for a flat.',
+      "'A red car' (سيارة is feminine) is…": 'Basic colors have a feminine pattern فعلاء: أحمر → حمراء.',
+      'ما زلتُ أبحث عن شقة means…': 'ما زال = still. With a present verb it means "still doing": I\'m still looking for an apartment.',
       'After أصبح, a predicate adjective is…': 'أصبح is a sister of كان, so its predicate is accusative: أصبح الجوُّ بارداً.',
       "In Levantine and Egyptian speech, 'left' is…": 'In speech شمال (shmāl) means left as well as north; يسار is the formal word.',
     },
@@ -148,7 +148,7 @@ export default {
       "In Damascus, 'April' is…": 'The Levant uses Syriac-origin names: آذار (March), نيسان (April), أيار (May).',
       "In Cairo, 'August' is…": 'Egypt uses European-derived month names: أغسطس for August. آب is the Levantine name.',
       'The Hijri year is…': 'Twelve lunar months make about 354 days, roughly 11 fewer than the solar year.',
-      'Eid al-Fitr falls on the first day of…': 'Eid al-Fitr ends Ramadan, on 1 Shawwal, the month after it.',
+      'Eid al-Fitr falls on the first day of…': 'Eid al-Fitr ends Ramadan, on Shawwal 1, the month after it.',
     },
     'ar-story-1': {
       'كنتُ أدرس means…': 'كان + present verb describes ongoing or habitual past actions: I was studying / I used to study.',
@@ -192,7 +192,7 @@ export default {
       "What's the correct reply to 'السلام عليكم'?": 'Return the greeting: وعليكم السلام ("and upon you be peace").',
       "'My book' is…": 'The suffix ـي means "my": كتابي. ـه = his, ـها = her, ـك = your.',
       'What does this question mean?': 'أين = where; المحطة = the station.',
-      'In most Arab countries, the main weekly day off is…': 'Friday (الجمعة) is the day of congregational prayer and the main weekly holiday.',
+      'In most Arab countries, the main weekly day off is…': 'Friday (الجمعة) is the day of congregational prayer and the main weekly day off.',
       "'We wrote' is…": 'The past-tense ending -nā means "we": كتبنا.',
       'What did the person buy?': 'اشتريتُ خبزاً = I bought bread (خبز).',
       "Which word from the root ك-ت-ب means 'library'?": 'The place pattern مَفعَلة gives مكتبة, "place of books": a library or bookshop.',
@@ -282,16 +282,16 @@ export default {
       "'¿Me deja aquí?' means…": 'Dejar = to leave or drop off: ¿me deja aquí? asks a driver to let you out here.',
     },
     'es-cult-1': {
-      "Mexico's main national holiday is…": 'Independence Day (16 September) celebrates the 1810 Grito de Dolores. Cinco de Mayo is a smaller holiday.',
+      "Mexico's main national holiday is…": 'Independence Day (September 16) celebrates the 1810 Grito de Dolores. Cinco de Mayo is a smaller holiday.',
       'Which flower guides spirits on Día de Muertos?': 'Bright orange cempasúchil (marigold) petals and scent are believed to guide the dead home.',
       "'Se comen tamales' means…": 'Se + verb is an impersonal or passive form: tamales are eaten, people eat tamales.',
-      'If you find the figurine in the rosca, you must…': 'Whoever finds the baby Jesus figurine on 6 January hosts the tamales on Candelaria, 2 February.',
+      'If you find the figurine in the rosca, you must…': 'Whoever finds the baby Jesus figurine on January 6 hosts the tamales on Candelaria, February 2.',
     },
     'es-cult-2': {
       "'¿Mande?' is used to…": '¿Mande? is the polite Mexican way to say "pardon?" or to answer when someone calls you.',
       'Which word comes from Nahuatl?': 'Aguacate comes from Nahuatl āhuacatl, like chocolate, tomate and chile.',
       "A polite way to say 'Could you…?':": 'The conditional softens requests: ¿Podría…? (could you…?) is polite with usted.',
-      'What do you say when you walk past in front of someone?': 'Con permiso = "excuse me" when passing or leaving; perdón is for apologising.',
+      'What do you say when you walk past in front of someone?': 'Con permiso = "excuse me" when passing or leaving; perdón is for apologizing.',
     },
     'es-work-1': {
       "'I have worked here for three years':": 'Haber + past participle forms the present perfect: he trabajado.',
@@ -357,7 +357,7 @@ export default {
       "In Mexico, '¿Mande?' is a polite way to say…": '¿Mande? answers when someone calls you, or asks them to repeat.',
       'Ayer yo ___ (comer) en casa.': 'Ayer (yesterday) points to a completed action: the preterite comí.',
       "In Mexico City, 'el camión' usually means…": 'In Mexico, camión is a bus as well as a truck.',
-      'Día de Muertos is celebrated on…': 'Día de Muertos is 1–2 November: children on the 1st, adults on the 2nd.',
+      'Día de Muertos is celebrated on…': 'Día de Muertos is November 1–2: children on the 1st, adults on the 2nd.',
       "In Mexican usage, 'Ahorita vengo' most likely means…": 'Ahorita is elastic in Mexico: anything from right now to later.',
       "'¡Qué padre!' means…": 'Mexican slang: padre = cool, great.',
       'Si tuviera dinero, ___ un coche.': 'After si + imperfect subjunctive comes the conditional: compraría.',

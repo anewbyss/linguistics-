@@ -121,7 +121,7 @@ struct LearningPlanView: View {
         let plan = Engine.learningPlan(lang, progress.lang(lang.id))
         List {
             Section {
-                Text("The recommended order through the whole course. Steps tick themselves off as you go, and nothing is locked: jump to anything whenever you like.")
+                Text("The recommended order through the whole course. Steps check themselves off as you go, and nothing is locked: jump to anything whenever you like.")
                     .font(.subheadline)
                 if plan.needsSetup {
                     WelcomeCard(lang: lang, opensPlan: false)
@@ -143,7 +143,7 @@ struct LearningPlanView: View {
                 ForEach(plan.units) { unit in
                     Section {
                         DisclosureGroup(isExpanded: expansion(unit, plan)) {
-                            Text(unit.intro + (unit.skipped ? " You tested above this unit, so the plan skips it; open any step to revise." : ""))
+                            Text(unit.intro + (unit.skipped ? " You tested above this unit, so the plan skips it; open any step to review." : ""))
                                 .font(.caption).foregroundColor(.secondary)
                             ForEach(unit.steps) { step in stepRow(step, isNext: step.id == plan.next?.id) }
                         } label: {

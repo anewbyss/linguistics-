@@ -1,7 +1,7 @@
 import Foundation
 
 // Port of learningPlan in web/js/engine.js: a recommended path through the whole course, starting
-// with the alphabet. Steps tick themselves off from real progress; nothing is ever locked.
+// with the alphabet. Steps check themselves off from real progress; nothing is ever locked.
 
 /// Saved onboarding choices; same JSON as the web app's `plan` object.
 struct PlanRecord: Codable, Hashable {
@@ -102,7 +102,7 @@ extension Engine {
 
         if start == "test" {
             units.append(PlanUnit(id: "placement", level: nil, title: "Find your level", intro: "A five-minute placement test sets where your plan starts.", steps: [
-                PlanStep(id: "placement-test", title: "Take the placement test", why: "Twenty questions from A1 to B2. Your plan then starts at your level, and earlier units stay open for revision.", target: .test, done: !lp.aptitude.isEmpty),
+                PlanStep(id: "placement-test", title: "Take the placement test", why: "Twenty questions from A1 to B2. Your plan then starts at your level, and earlier units stay open for review.", target: .test, done: !lp.aptitude.isEmpty),
             ]))
         }
 
@@ -117,7 +117,7 @@ extension Engine {
                 ? "Letters \(i + 1)–\(i + group.count): \(group.map(\.char).joined(separator: " "))"
                 : "Letters \(group.first?.char.uppercased() ?? "")–\(group.last?.char.uppercased() ?? "")"
             let why = ar
-                ? (i == 0 ? "Tap each letter to hear it and see its shapes. ب ت ث share one shape: only the dots differ." : "Tap each letter to hear its sound and see how it joins its neighbours.")
+                ? (i == 0 ? "Tap each letter to hear it and see its shapes. ب ت ث share one shape: only the dots differ." : "Tap each letter to hear its sound and see how it joins its neighbors.")
                 : (i == 0 ? "Tap each letter to hear it. Spanish vowels are short and always pronounced the same way." : "Tap each letter to hear it, including ñ and the rolled rr.")
             alpha.append(PlanStep(id: "alpha-\(alpha.count + 1)", title: label, why: why, target: .reading(.letters), done: seen == group.count, progress: (seen, group.count)))
             i += size
@@ -138,7 +138,7 @@ extension Engine {
         let writeGoal = min(5, r.writing.count)
         alpha.append(PlanStep(id: "alpha-write", title: "Type 5 words", why: ar ? "Use the on-screen Arabic keyboard to spell words yourself." : "Spell words with the accent keys.",
                               target: .reading(.write), done: written >= writeGoal, progress: (min(written, writeGoal), writeGoal)))
-        alpha.append(PlanStep(id: "alpha-quiz", title: ar ? "Letter quiz: score 80% or more" : "Accent quiz: score 80% or more", why: "Check you can recognise them before moving on.",
+        alpha.append(PlanStep(id: "alpha-quiz", title: ar ? "Letter quiz: score 80% or more" : "Accent quiz: score 80% or more", why: "Check you can recognize them before moving on.",
                               target: .reading(.quiz), done: (lp.checks["readQuiz"] ?? 0) >= 80))
         units.append(PlanUnit(id: "alphabet", level: "A1", title: ar ? "The Arabic alphabet" : "The alphabet and pronunciation",
                               intro: ar ? "Start here: 28 letters, written right to left and joined together. Most learners need a week or two." : "Start here: Spanish is spelled almost exactly as it sounds, so this goes quickly.",

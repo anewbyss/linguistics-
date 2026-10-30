@@ -171,7 +171,7 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
   const srPage = await context.newPage();
   srPage.on('pageerror', (e) => errors.push('sr ' + e.message));
   await srPage.addInitScript(() => {
-    // Fake recogniser: "hears" whatever the test puts in window.__say.
+    // Fake recognizer: "hears" whatever the test puts in window.__say.
     const Fake = class {
       start() { setTimeout(() => { this.onresult && this.onresult({ results: [[{ transcript: window.__say || '' }]] }); this.onend && this.onend(); }, 20); }
       abort() {}
@@ -241,7 +241,7 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
       reviewed++;
     }
     assert(reviewed > 0, 'reviewed some cards');
-    assert(await srPage.locator('.hayya-tip').count() >= 1, 'Hayya summarises the review');
+    assert(await srPage.locator('.hayya-tip').count() >= 1, 'Hayya summarizes the review');
     if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `15-${lang}-review.png`), fullPage: true });
 
     // Listening: dictation and meaning.
@@ -270,7 +270,7 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     assert(await srPage.locator('.checklist li.ok').count() >= 2, 'requirements ticked');
     if (shotDir) await srPage.screenshot({ path: path.join(shotDir, `17-${lang}-write.png`), fullPage: true });
 
-    // Speaking prompts answered aloud (stubbed recogniser).
+    // Speaking prompts answered aloud (stubbed recognizer).
     await srPage.goto(base + `index.html#/${lang}/speak`);
     await srPage.locator('[data-act="sp-tab"][data-tab="answer"]').click();
     const spoken = await srPage.evaluate((id) => window.LINGUA_CONTENT.languages.find((l) => l.id === id).speakingPrompts[0].model.t, lang);
@@ -306,7 +306,7 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
   assert(await page.locator('#xp').innerText() === '⭐ 0', 'reset cleared xp');
   await page.setInputFiles('input[data-change="import"]', file);
   await page.locator('[data-act="import-cancel"]').click();
-  assert(await page.locator('#xp').innerText() === '⭐ 0', 'cancelled import changes nothing');
+  assert(await page.locator('#xp').innerText() === '⭐ 0', 'canceled import changes nothing');
   await page.setInputFiles('input[data-change="import"]', []);
   await page.setInputFiles('input[data-change="import"]', file);
   await page.locator('[data-act="import-confirm"]').click();

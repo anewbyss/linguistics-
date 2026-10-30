@@ -355,7 +355,7 @@ struct TracingView: View {
                 }
                 .pickerStyle(.segmented)
             }
-            Text("Trace over the grey shape with Apple Pencil or your finger\(lang.isArabic ? ". Draw the main body first, then the dots" : ""). Press harder for a thicker line; double-tap Apple Pencil (2nd gen / Pro) to switch to the eraser.")
+            Text("Trace over the gray shape with Apple Pencil or your finger\(lang.isArabic ? ". Draw the main body first, then the dots" : ""). Press harder for a thicker line; double-tap Apple Pencil (2nd gen / Pro) to switch to the eraser.")
                 .font(.caption).foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
 
