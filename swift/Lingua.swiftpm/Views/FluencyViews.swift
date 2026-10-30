@@ -87,7 +87,12 @@ struct SpeakingPracticeView: View {
     @StateObject private var listener = SpeechListener()
     @State private var index = 0
     @State private var started = false
-    @State private var tab = "repeat"
+    @State private var tab: String
+
+    init(lang: Language, initialTab: String = "repeat") {
+        self.lang = lang
+        _tab = State(initialValue: initialTab == "answer" ? "answer" : "repeat")
+    }
 
     var body: some View {
         let phrases = Engine.speakingPhrases(lang)

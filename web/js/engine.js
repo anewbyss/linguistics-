@@ -321,6 +321,7 @@
       lessons: {}, scenarios: {}, aptitude: [], letters: {}, writing: {}, saved: [], lastVisit: null,
       tracing: {}, speaking: {}, practice: { reading: [], writing: [], listening: [], speaking: [] }, challenges: {}, fluency: [],
       listening: {}, srs: {}, prompts: {}, minutes: {},
+      checks: {}, plan: {},
     };
   }
   function emptyProgress() {
@@ -390,6 +391,11 @@
       if (isObj(src.minutes)) {
         const days = Object.keys(src.minutes).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && Number.isFinite(src.minutes[d])).sort().slice(-MINUTES_KEEP);
         for (const d of days) dst.minutes[d] = Math.max(0, Math.min(1440, src.minutes[d] | 0));
+      }
+      if (isObj(src.checks)) for (const [k, v] of Object.entries(src.checks)) if (Number.isFinite(v)) dst.checks[k] = Math.max(0, Math.min(1000, Math.floor(v)));
+      if (isObj(src.plan)) {
+        if (PLAN_STARTS.includes(src.plan.start)) dst.plan.start = src.plan.start;
+        if (PLAN_DIALECTS.includes(src.plan.dialect)) dst.plan.dialect = src.plan.dialect;
       }
       if (Array.isArray(src.fluency)) dst.fluency = src.fluency.filter((f) => isObj(f) && typeof f.day === 'string')
         .map((f) => ({ day: f.day, reading: clampPct(f.reading), writing: clampPct(f.writing), listening: clampPct(f.listening), speaking: clampPct(f.speaking), overall: clampPct(f.overall) }))
@@ -895,7 +901,147 @@
     return f;
   }
 
+  // ---------------------------------------------------------------- learning plan
+  // A recommended path through the whole course, starting with the alphabet. Steps tick themselves
+  // off from real progress; nothing is ever locked. Mirrored in the Swift app (Plan.swift).
+  const PLAN_STARTS = ['zero', 'script', 'test'];
+  const PLAN_DIALECTS = ['both', 'lev', 'egy', 'msa'];
+  const PLAN_TARGETS = {
+    speak: { A1: 5, A2: 15, B1: 30, B2: 45, C1: 60 },
+    listen: { A1: 5, A2: 15, B1: 30, B2: 45, C1: 60 },
+    review: { A1: 15, A2: 40, B1: 80, B2: 120, C1: 160 },
+  };
+  const UNIT_INTROS = {
+    A1: 'Greetings, introductions, numbers and food: short, high-frequency phrases and your first role-play.',
+    A2: 'Everyday life: getting around, shopping, health and your routine, plus your first spoken dialect.',
+    B1: 'Independence: telling stories, giving opinions, work and culture.',
+    B2: 'Fluency: complex grammar, formal writing and longer conversations.',
+    C1: 'Mastery: the news, formal argument and precise expression.',
+  };
+  // Scenarios set in one spoken dialect, skipped when the learner chose a different focus.
+  const SCENARIO_DIALECT = { 'ar-sc-koshari': 'egy', 'ar-sc-manoushe': 'lev', 'ar-sc-flat': 'lev', 'ar-sc-wedding': 'lev' };
+  const DIALECT_CATEGORY = { 'ar-egy': 'egy', 'ar-lev': 'lev' };
+
+  function planSettings(language, lp) {
+    const plan = (lp && lp.plan) || {};
+    return { start: plan.start || null, dialect: language.id === 'ar' ? (plan.dialect || 'both') : null };
+  }
+  function dialectAllowed(dialect, which) {
+    return !which || dialect === 'both' || dialect === which;
+  }
+
+  function learningPlan(language, lp) {
+    const ar = language.id === 'ar';
+    const settings = planSettings(language, lp);
+    const checks = lp.checks || {};
+    const r = language.reading;
+    const placed = lp.aptitude.length ? lp.aptitude[lp.aptitude.length - 1].level : null;
+    const placedIdx = placed ? LEVELS.indexOf(placed) : -1;
+    const step = (id, kind, title, why, target, done, prog) => ({ id, kind, title, why, target, done: !!done, progress: prog || null });
+    const units = [];
+
+    if (settings.start === 'test') {
+      units.push({ id: 'placement', level: null, title: 'Find your level', intro: 'A five-minute placement test sets where your plan starts.', steps: [
+        step('placement-test', 'test', 'Take the placement test', 'Twenty questions from A1 to B2. Your plan then starts at your level, and earlier units stay open for revision.', { view: 'test' }, lp.aptitude.length > 0),
+      ] });
+    }
+
+    // The alphabet comes first.
+    const size = ar ? 7 : 14;
+    const alpha = [];
+    for (let i = 0; i < r.letters.length; i += size) {
+      const group = r.letters.slice(i, i + size);
+      const seen = group.filter((l) => (lp.letters[l.char] || 0) > 0).length;
+      const label = ar ? `Letters ${i + 1}–${i + group.length}: ${group.map((l) => l.char).join(' ')}`
+        : `Letters ${group[0].char.toUpperCase()}–${group[group.length - 1].char.toUpperCase()}`;
+      const why = ar
+        ? (i === 0 ? 'Tap each letter to hear it and see its shapes. ب ت ث share one shape: only the dots differ.' : 'Tap each letter to hear its sound and see how it joins its neighbours.')
+        : (i === 0 ? 'Tap each letter to hear it. Spanish vowels are short and always pronounced the same way.' : 'Tap each letter to hear it, including ñ and the rolled rr.');
+      alpha.push(step(`alpha-${alpha.length + 1}`, 'letters', label, why, { view: 'read', tab: 'letters' }, seen === group.length, [seen, group.length]));
+    }
+    alpha.push(step('alpha-marks', 'marks', ar ? 'Short vowels and other marks' : 'Accents and pronunciation rules',
+      ar ? 'Learn the small marks for a, i and u, doubled letters and silent letters.' : 'Learn where the stress falls and what the written accent tells you.',
+      { view: 'read', tab: 'marks' }, (checks.marks || 0) > 0));
+    if (ar) {
+      const traced = Object.values(lp.tracing).filter((v) => v > 0).length;
+      alpha.push(step('alpha-trace', 'trace', 'Trace 10 letters', 'Writing the shapes by hand (or with a finger or pencil) fixes them in memory.',
+        { view: 'read', tab: 'trace' }, traced >= 10, [Math.min(traced, 10), 10]));
+    }
+    const wordsGoal = Math.min(10, r.words.length);
+    alpha.push(step('alpha-read', 'read', 'Read your first words', ar ? 'Sound out real words letter by letter, then check.' : 'Read real words aloud using the rules, then check.',
+      { view: 'read', tab: 'read' }, (checks.words || 0) >= wordsGoal, [Math.min(checks.words || 0, wordsGoal), wordsGoal]));
+    const written = r.writing.filter((w) => lp.writing[w.answer]).length;
+    const writeGoal = Math.min(5, r.writing.length);
+    alpha.push(step('alpha-write', 'write', 'Type 5 words', ar ? 'Use the on-screen Arabic keyboard to spell words yourself.' : 'Spell words with the accent keys.',
+      { view: 'read', tab: 'write' }, written >= writeGoal, [Math.min(written, writeGoal), writeGoal]));
+    alpha.push(step('alpha-quiz', 'quiz', ar ? 'Letter quiz: score 80% or more' : 'Accent quiz: score 80% or more', 'Check you can recognise them before moving on.',
+      { view: 'read', tab: 'quiz' }, (checks.readQuiz || 0) >= 80));
+    units.push({ id: 'alphabet', level: 'A1', title: ar ? 'The Arabic alphabet' : 'The alphabet and pronunciation',
+      intro: ar ? 'Start here: 28 letters, written right to left and joined together. Most learners need a week or two.' : 'Start here: Spanish is spelled almost exactly as it sounds, so this goes quickly.',
+      skipped: settings.start === 'script' || (settings.start === 'test' && placedIdx >= 1), steps: alpha });
+
+    const phrases = speakingPhrases(language);
+    const spoken = phrases.filter((p) => lp.speaking[p.t] && lp.speaking[p.t].best >= SPEAK_PASS).length;
+    const listenAll = listeningItems(language);
+    const understood = listenAll.filter((x) => lp.listening[x.t] && lp.listening[x.t].best >= LISTEN_PASS).length;
+    const deck = srsDeck(language, lp);
+    const learned = deck.filter((c) => lp.srs[c.t] && lp.srs[c.t].box >= 3).length;
+
+    LEVELS.forEach((L, li) => {
+      const steps = [];
+      const lessons = [];
+      for (const c of language.categories) {
+        if (ar && !dialectAllowed(settings.dialect, DIALECT_CATEGORY[c.id])) continue;
+        for (const l of c.lessons) if (l.level === L) lessons.push(l);
+      }
+      const scenarios = language.scenarios.filter((s) => s.level === L && !(ar && !dialectAllowed(settings.dialect, SCENARIO_DIALECT[s.id])));
+      const scenarioStep = (s) => step(`scenario-${s.id}`, 'scenario', `Role-play: ${s.title}`, s.goal, { view: 'scenario', id: s.id }, !!lp.scenarios[s.id]);
+      lessons.forEach((l, i) => {
+        steps.push(step(`lesson-${l.id}`, 'lesson', l.title, l.summary, { view: 'lesson', id: l.id }, lp.lessons[l.id] && lp.lessons[l.id].done));
+        if (i % 2 === 1 && scenarios.length) steps.push(scenarioStep(scenarios.shift()));
+      });
+      scenarios.forEach((s) => steps.push(scenarioStep(s)));
+      const capped = (n, total) => Math.max(1, Math.min(n, total));
+      const speakGoal = capped(PLAN_TARGETS.speak[L], phrases.length);
+      steps.push(step(`speak-${L}`, 'speak', `Say ${speakGoal} phrases well`, 'Listen, repeat and get a pronunciation score in Speaking Practice.', { view: 'speak' }, spoken >= speakGoal, [Math.min(spoken, speakGoal), speakGoal]));
+      const atLevel = listenAll.filter((x) => LEVELS.indexOf(x.level) <= li).length;
+      const listenGoal = capped(PLAN_TARGETS.listen[L], atLevel);
+      steps.push(step(`listen-${L}`, 'listen', `Understand ${listenGoal} spoken lines`, 'Dictation and meaning checks in Listening. Start slow, then try natural speed.', { view: 'listen' }, understood >= listenGoal, [Math.min(understood, listenGoal), listenGoal]));
+      const reviewGoal = capped(PLAN_TARGETS.review[L], deck.length);
+      steps.push(step(`review-${L}`, 'review', `Learn ${reviewGoal} words in Review`, 'A few minutes of spaced review a day keeps words from slipping away.', { view: 'review' }, learned >= reviewGoal, [Math.min(learned, reviewGoal), reviewGoal]));
+      for (const pr of language.writingPrompts.filter((x) => x.level === L)) {
+        steps.push(step(`write-${pr.id}`, 'writing', `Write: ${pr.prompt}`, `Aim for ${pr.minWords}+ words; you get feedback and a model answer.`, { view: 'write', id: pr.id }, lp.prompts[pr.id] && lp.prompts[pr.id].best >= PROMPT_PASS));
+      }
+      for (const pr of language.speakingPrompts.filter((x) => x.level === L)) {
+        steps.push(step(`answer-${pr.id}`, 'answer', `Answer aloud: ${pr.prompt}`, 'Speak freely; your answer is transcribed and checked.', { view: 'speak', tab: 'answer' }, lp.prompts[pr.id] && lp.prompts[pr.id].best >= PROMPT_PASS));
+      }
+      if (L === 'A2' && settings.start !== 'test') {
+        steps.push(step('level-check', 'test', 'Check your level', 'Take the placement test to see how far you have come.', { view: 'test' }, lp.aptitude.length > 0));
+      }
+      units.push({ id: `level-${L}`, level: L, title: `${L} · ${LEVEL_NAMES[L]}`, intro: UNIT_INTROS[L],
+        skipped: settings.start === 'test' && placedIdx > li, steps });
+    });
+
+    let next = null;
+    let nextUnit = null;
+    let done = 0;
+    let total = 0;
+    for (const u of units) {
+      u.done = u.steps.filter((x) => x.done).length;
+      u.total = u.steps.length;
+      if (u.skipped) continue;
+      done += u.done;
+      total += u.total;
+      if (!next) {
+        const s = u.steps.find((x) => !x.done);
+        if (s) { next = s; nextUnit = u; }
+      }
+    }
+    return { settings, needsSetup: !settings.start, units, next, nextUnit, done, total, placed };
+  }
+
   return {
+    PLAN_STARTS, PLAN_DIALECTS, learningPlan, planSettings,
     LEVELS, LEVEL_NAMES, PASS, SKILLS, SPEAK_PASS, LISTEN_PASS, PROMPT_PASS, SRS_DAYS,
     listeningItems, dictationScore, addDays, srsDeck, srsQueue, srsGrade, srsStats, analyzePrompt, logMinute, studyTime,
     logPractice, speakingPhrases, similarity, misspellings, dailyChallenge, challengeStreak, fluency, recordFluency,

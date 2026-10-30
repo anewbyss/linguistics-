@@ -20,6 +20,25 @@ A landing screen leads to a separate menu for each language. Your coach is **Hay
 | **Free-writing / free-speaking prompts** with automatic feedback | 12 / 8 | 8 / 6 |
 | **Media picks by level** (A1–C1) | 18 | 18 |
 
+**Learning plan and first-visit setup.** The first time you open a language, Hayya asks one question: brand new, can already read the script (Arabic), or already know some. For Arabic, it also asks which spoken dialect to learn alongside formal Arabic: Levantine, Egyptian, both, or formal only.
+
+The plan always starts with the **alphabet**:
+- the letters in small groups
+- vowel marks or accents
+- tracing (Arabic)
+- reading first words
+- typing
+- a letter quiz
+
+Then come units for A1–C1. Each unit mixes lessons, a role-play after every couple of lessons, speaking, listening, review, and writing and speaking prompts at that level.
+
+How the plan behaves:
+- **Steps tick themselves off** from your real progress, and the language home always shows the next step.
+- **The placement test adjusts the plan:** it marks lower units as tested out.
+- **Nothing is ever locked,** and you can change your choices at any time.
+
+The language home is grouped by stage, *Start here → Practise → Go further*, with lessons listed by level. The plan logic is shared: `learningPlan` in `web/js/engine.js`, mirrored in `Plan.swift`.
+
 **Daily challenge.** A new 10-item challenge each day per language: 3 reading, 3 writing (two typed answers and a spelling check), 2 listening (a dictation and a line to understand by ear) and 2 phrases to say aloud.
 - Items are drawn from your current level, and the challenge stays the same all day.
 - Your first completion each day counts towards fluency, XP and a challenge streak. You can replay it for practice without it being scored.
@@ -115,6 +134,7 @@ swift/Lingua.swiftpm/
   Engine.swift               Swift port of engine.js (translator, placement, writing)
   Fluency.swift              daily challenge, speech scoring and fluency (port of engine.js)
   Practice.swift             listening, spaced repetition, prompt feedback, study time
+  Plan.swift                 the learning plan (port of learningPlan in engine.js)
   Speech.swift               on-device speech recognition
   ProgressStore.swift        persistence + backup import/export
   Models.swift, ContentStore.swift, LinguaApp.swift, Views/

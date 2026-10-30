@@ -233,6 +233,10 @@ struct LangProgress: Codable {
     var srs: [String: SrsRecord] = [:]
     var prompts: [String: SpeakRecord] = [:]
     var minutes: [String: Int] = [:]
+    /// Checkpoints for activities with no other record: "marks" (seen), "words" (revealed), "readQuiz" (best %).
+    var checks: [String: Int] = [:]
+    /// Onboarding choices for the learning plan.
+    var plan = PlanRecord()
 
     init() {}
 
@@ -240,6 +244,7 @@ struct LangProgress: Codable {
         case lessons, scenarios, aptitude, letters, writing, saved, lastVisit
         case tracing, speaking, practice, challenges, fluency
         case listening, srs, prompts, minutes
+        case checks, plan
     }
 
     mutating func logMinute(_ day: String) {
@@ -270,6 +275,10 @@ struct LangProgress: Codable {
         srs = (try? c.decodeIfPresent([String: SrsRecord].self, forKey: .srs)) ?? [:]
         prompts = (try? c.decodeIfPresent([String: SpeakRecord].self, forKey: .prompts)) ?? [:]
         minutes = (try? c.decodeIfPresent([String: Int].self, forKey: .minutes)) ?? [:]
+        checks = (try? c.decodeIfPresent([String: Int].self, forKey: .checks)) ?? [:]
+        let savedPlan = (try? c.decodeIfPresent(PlanRecord.self, forKey: .plan)) ?? PlanRecord()
+        plan = PlanRecord(start: savedPlan.start.flatMap { Engine.planStarts.contains($0) ? $0 : nil },
+                          dialect: savedPlan.dialect.flatMap { Engine.planDialects.contains($0) ? $0 : nil })
     }
 }
 

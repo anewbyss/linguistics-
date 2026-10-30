@@ -21,7 +21,9 @@ struct LandingView: View {
                 }
                 .padding(.top, 8)
 
-                HayyaTip(text: "Hi, I'm Hayya! My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll coach you all the way to fluency.")
+                HayyaTip(text: content.languages.allSatisfy { progress.lang($0.id).plan.start == nil }
+                    ? "Hi, I'm Hayya! New here? Pick a language below and I'll set up a plan for you, starting with the alphabet."
+                    : "Hi, I'm Hayya! My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll coach you all the way to fluency.", mood: .cheer)
 
                 ForEach(content.languages) { lang in
                     NavigationLink(value: Route.language(lang.id)) {
@@ -112,19 +114,10 @@ struct LanguageHomeView: View {
     let lang: Language
     @EnvironmentObject var progress: ProgressStore
 
-    private var nextLesson: Lesson? {
-        let lp = progress.lang(lang.id)
-        let undone = lang.allLessons.filter { lp.lessons[$0.id]?.done != true }
-        if let placed = lp.aptitude.last?.level, let placedIdx = Engine.levels.firstIndex(of: placed) {
-            let target = min(placedIdx, 3)
-            if let match = undone.first(where: { (Engine.levels.firstIndex(of: $0.level) ?? 0) >= target }) { return match }
-        }
-        return undone.first
-    }
-
     var body: some View {
         let lp = progress.lang(lang.id)
         let stats = Engine.stats(lang, lp)
+        let plan = Engine.learningPlan(lang, lp)
         List {
             Section {
                 VStack(alignment: .leading, spacing: 8) {
@@ -136,21 +129,14 @@ struct LanguageHomeView: View {
                     Text("\(stats.percent)% of the course complete").font(.caption).foregroundColor(.secondary)
                 }
                 .padding(.vertical, 4)
-                if let next = nextLesson {
-                    NavigationLink(value: Route.lesson(lang.id, next.id)) {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Continue learning").font(.caption).foregroundColor(.secondary)
-                            Text("\(lang.category(of: next)?.emoji ?? "") \(next.title)").font(.headline)
-                            Text(next.summary).font(.caption).foregroundColor(.secondary)
-                        }
-                    }
-                }
             }
 
             Section {
-                CoachTip(lang: lang)
-                    .listRowInsets(EdgeInsets())
-                    .listRowBackground(Color.clear)
+                if plan.needsSetup {
+                    WelcomeCard(lang: lang)
+                } else {
+                    PlanCard(lang: lang, plan: plan)
+                }
             }
 
             Section("Today") {
@@ -165,23 +151,33 @@ struct LanguageHomeView: View {
                 }
             }
 
-            Section("Practice") {
+            Section {
+                NavigationLink(value: Route.plan(lang.id)) {
+                    MenuRow(emoji: "🧭", title: "Learning plan", detail: "Every step in the recommended order · \(plan.done)/\(plan.total) done")
+                }
+                NavigationLink(value: Route.reading(lang.id)) {
+                    MenuRow(emoji: lang.isArabic ? "ع" : "🔤", title: lang.isArabic ? "The alphabet" : "Alphabet & pronunciation",
+                            detail: "\(stats.lettersDone)/\(stats.lettersTotal) letters · \(stats.writingDone)/\(stats.writingTotal) written")
+                }
+                NavigationLink(value: Route.aptitude(lang.id)) {
+                    MenuRow(emoji: "🎯", title: "Placement test", detail: stats.level.map { "Last result: \($0)" } ?? "Already know some? Find your level (A1–B2)")
+                }
+            } header: {
+                Text("1 · Start here")
+            } footer: {
+                Text("New learners begin with the alphabet; the learning plan takes you through everything else in order.")
+            }
+
+            Section {
                 let srs = Engine.srsStats(lang, lp, day: ProgressStore.day(Date()))
                 NavigationLink(value: Route.review(lang.id)) {
                     MenuRow(emoji: "🔁", title: "Review", detail: "\(srs.due) due · \(srs.newAvailable) new · \(srs.learned)/\(srs.total) words learned")
                 }
-                NavigationLink(value: Route.listening(lang.id)) {
-                    MenuRow(emoji: "🎧", title: "Listening", detail: "Dictation and meaning checks at three speeds")
-                }
                 NavigationLink(value: Route.speaking(lang.id)) {
                     MenuRow(emoji: "🎙️", title: "Speaking Practice", detail: "Repeat phrases and answer questions out loud")
                 }
-                NavigationLink(value: Route.writing(lang.id)) {
-                    MenuRow(emoji: "📝", title: "Writing Studio", detail: "\(lang.writingPrompts.count) free-writing prompts with feedback")
-                }
-                NavigationLink(value: Route.reading(lang.id)) {
-                    MenuRow(emoji: lang.isArabic ? "ع" : "✍️", title: "Reading & Writing",
-                            detail: "\(stats.lettersDone)/\(stats.lettersTotal) letters · \(stats.writingDone)/\(stats.writingTotal) written")
+                NavigationLink(value: Route.listening(lang.id)) {
+                    MenuRow(emoji: "🎧", title: "Listening", detail: "Dictation and meaning checks at three speeds")
                 }
                 NavigationLink(value: Route.scenarios(lang.id)) {
                     MenuRow(emoji: "🎭", title: "Real-World Scenarios", detail: "\(stats.scenariosDone)/\(stats.scenariosTotal) completed")
@@ -189,8 +185,15 @@ struct LanguageHomeView: View {
                 NavigationLink(value: Route.translator(lang.id)) {
                     MenuRow(emoji: "🔄", title: "Offline Translator", detail: "\(lang.dictionary.count) entries, no internet needed")
                 }
-                NavigationLink(value: Route.aptitude(lang.id)) {
-                    MenuRow(emoji: "🎯", title: "Aptitude Test", detail: stats.level.map { "Last result: \($0)" } ?? "Find your level (A1–C1)")
+            } header: {
+                Text("2 · Practise")
+            } footer: {
+                Text("Use these alongside your lessons, a little every day.")
+            }
+
+            Section {
+                NavigationLink(value: Route.writing(lang.id)) {
+                    MenuRow(emoji: "📝", title: "Writing Studio", detail: "\(lang.writingPrompts.count) free-writing prompts with feedback")
                 }
                 NavigationLink(value: Route.media(lang.id)) {
                     MenuRow(emoji: "🎬", title: "Media Picks", detail: "Films, shows, books and music by level")
@@ -198,13 +201,24 @@ struct LanguageHomeView: View {
                 NavigationLink(value: Route.resources(lang.id)) {
                     MenuRow(emoji: "🏛️", title: "Free Courses & Resources", detail: "From universities and government bodies, by level")
                 }
+            } header: {
+                Text("3 · Go further")
+            } footer: {
+                Text("Best from A2 onwards: free writing, real media and outside courses.")
             }
 
-            Section("Lessons: grammar & culture") {
-                ForEach(lang.categories) { cat in
-                    let done = cat.lessons.filter { lp.lessons[$0.id]?.done == true }.count
-                    NavigationLink(value: Route.category(lang.id, cat.id)) {
-                        MenuRow(emoji: cat.emoji, title: cat.title, detail: "\(cat.nativeTitle) · \(done)/\(cat.lessons.count) done")
+            // Lesson categories grouped by the level of their first lesson, easiest first.
+            ForEach(Array(Engine.levels.enumerated()), id: \.offset) { i, level in
+                let group = lang.categories.filter { cat in (cat.lessons.map { Engine.levelIndex($0.level) }.min() ?? 0) == i }
+                if !group.isEmpty {
+                    Section("Lessons · \(level) \(Engine.levelNames[level] ?? "")") {
+                        ForEach(group) { cat in
+                            let done = cat.lessons.filter { lp.lessons[$0.id]?.done == true }.count
+                            let levels = Array(Set(cat.lessons.map(\.level))).sorted().joined(separator: "–")
+                            NavigationLink(value: Route.category(lang.id, cat.id)) {
+                                MenuRow(emoji: cat.emoji, title: cat.title, detail: "\(cat.nativeTitle) · \(levels) · \(done)/\(cat.lessons.count) done")
+                            }
+                        }
                     }
                 }
             }

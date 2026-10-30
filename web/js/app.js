@@ -156,18 +156,6 @@
     return href ? `<a class="hayya-tip" href="${href}">${inner}</a>` : `<div class="hayya-tip">${inner}</div>`;
   }
 
-  /** One suggestion for what to do next, based on reviews, the challenge and the weakest skill. */
-  function coachTip(lang) {
-    const d = lp(lang.id);
-    const day = E.localDay();
-    const st = E.srsStats(lang, d, day);
-    if (st.due > 0) return hayya(`You have <b>${st.due}</b> word${st.due === 1 ? '' : 's'} due for review. A few minutes now keeps them from slipping away. Tap to start.`, { href: `#/${lang.id}/review` });
-    if (!d.challenges[day]) return hayya("Today's challenge is ready: ten quick items across reading, writing, listening and speaking. ¡Vámonos! / يلا!", { href: `#/${lang.id}/challenge`, mood: 'cheer' });
-    const f = E.fluency(lang, d);
-    const weakest = E.SKILLS.slice().sort((a, b) => f[a].score - f[b].score)[0];
-    const where = { reading: ['review', 'Review your words or finish a lesson'], writing: ['write', 'Try a prompt in the Writing Studio'], listening: ['listen', 'Do a few dictations in Listening'], speaking: ['speak', 'Answer a speaking prompt out loud'] }[weakest];
-    return hayya(`Challenge done, nice! Your ${SKILL_META[weakest].label.toLowerCase()} is your weakest skill right now (${f[weakest].score}/100). ${where[1]}.`, { href: `#/${lang.id}/${where[0]}`, mood: 'think' });
-  }
 
   // ---------------------------------------------------------------- quiz component
   function newQuiz(questions, mode, onFinish) {
@@ -289,19 +277,20 @@
       case undefined: return langHome(lang);
       case 'cat': return categoryView(lang, parts[2]);
       case 'lesson': return lessonView(lang, parts[2]);
-      case 'read': return readingView(lang);
+      case 'read': return readingView(lang, parts[2]);
       case 'scenarios': return scenarioList(lang);
       case 'scenario': return scenarioView(lang, parts[2]);
       case 'translate': return translateView(lang);
       case 'test': return testView(lang);
       case 'media': return mediaView(lang);
       case 'challenge': return challengeView(lang);
-      case 'speak': return speakView(lang);
+      case 'speak': return speakView(lang, parts[2]);
       case 'fluency': return fluencyView(lang);
       case 'review': return reviewView(lang);
       case 'listen': return listenView(lang);
-      case 'write': return writeView(lang);
+      case 'write': return writeView(lang, parts[2]);
       case 'resources': return resourcesView(lang);
+      case 'plan': return planView(lang);
       default: return langHome(lang);
     }
   }
@@ -330,7 +319,9 @@
         <h1>Learn Arabic &amp; Mexican Spanish</h1>
         <p>Lessons from your first letters to C1, a dialect track, daily challenges, spaced review, listening, writing and speaking practice, and fluency tracking. Your progress saves automatically.</p>
       </section>
-      ${hayya("Hi, I'm Hayya! My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll keep you on track.", { size: 56 })}
+      ${hayya(LIB.languages.every((l) => !lp(l.id).plan.start)
+        ? "Hi, I'm Hayya! New here? Pick a language below and I'll set up a plan for you, starting with the alphabet. (My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl. My name is Arabic for “let's go!”, هيّا.)"
+        : "Hi, I'm Hayya! My colours come from Lyra, a real ball python, and my feathers from Quetzalcóatl, Mexico's feathered serpent. My name is Arabic for “let's go!” (هيّا). Pick a language and I'll keep you on track.", { size: 56, mood: 'cheer' })}
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">${cards}</div>
       <div class="grid tight" style="margin-top:1.2rem">
         <div class="card center gamify"><div class="score-big">${progress.xp}</div><div class="muted small">XP earned</div></div>
@@ -341,47 +332,47 @@
   }
 
   // ---------------------------------------------------------------- language home
-  function nextLesson(lang) {
-    const d = lp(lang.id);
-    const lessons = allLessons(lang);
-    const placed = d.aptitude.length ? d.aptitude[d.aptitude.length - 1].level : null;
-    const undone = lessons.filter((l) => !(d.lessons[l.id] && d.lessons[l.id].done));
-    if (!undone.length) return null;
-    if (placed) {
-      const atLevel = undone.find((l) => levelIdx(l.level) >= Math.min(levelIdx(placed), 3));
-      if (atLevel) return atLevel;
-    }
-    return undone[0];
-  }
 
   function langHome(lang) {
     setChrome(lang.name, '#/', lang.id);
     const d = lp(lang.id);
     const s = E.languageStats(lang, d);
-    const next = nextLesson(lang);
     const sr = E.srsStats(lang, d, E.localDay());
     const listenAll = E.listeningItems(lang);
     const listenDone = listenAll.filter((x) => d.listening[x.t] && d.listening[x.t].best >= E.LISTEN_PASS).length;
     const wpDone = (lang.writingPrompts || []).filter((pr) => d.prompts[pr.id] && d.prompts[pr.id].best >= E.PROMPT_PASS).length;
+    const plan = E.learningPlan(lang, d);
+    const tile = ([r, emoji, title, sub, meta]) => `<a class="tile" href="#/${lang.id}/${r}"><span class="emoji ${r === 'read' && isAr(lang) ? 'ar' : ''}">${emoji}</span><span class="title">${title}</span><span class="sub">${sub}</span><span class="meta small muted">${h(meta)}</span></a>`;
+    const startTiles = [
+      ['plan', '🧭', 'Learning plan', 'Every step in the recommended order, starting with the alphabet', `${plan.done}/${plan.total} steps done`],
+      ['read', isAr(lang) ? 'ع' : '🔤', isAr(lang) ? 'The alphabet' : 'Alphabet & pronunciation', isAr(lang) ? 'Letters, vowel marks, tracing and typing' : 'Letters, sounds, accents and spelling', `${s.lettersDone}/${s.lettersTotal} letters · ${s.writingDone}/${s.writingTotal} written`],
+      ['test', '🎯', 'Placement test', 'Already know some? Find your level (A1–B2)', s.level ? `Last result: ${s.level}` : 'Not taken yet'],
+    ].map(tile).join('');
     const tiles = [
       ['review', '🔁', 'Review', 'Spaced repetition: words come back just before you forget them', sr.due ? `${sr.due} due now · ${sr.learned}/${sr.total} learned` : `${sr.learned}/${sr.total} learned · ${sr.newAvailable} new ready`],
       ['listen', '🎧', 'Listening', 'Dictation and comprehension at slow or natural speed', `${listenDone}/${listenAll.length} lines understood`],
-      ['write', '📝', 'Writing Studio', 'Free writing with automatic checks and a model answer', `${wpDone}/${(lang.writingPrompts || []).length} prompts passed`],
-      ['read', isAr(lang) ? 'ع' : '✍️', 'Reading & Writing', isAr(lang) ? 'Alphabet, vowel marks, tracing and typing' : 'Pronunciation, accents and writing practice', `${s.lettersDone}/${s.lettersTotal} letters · ${s.writingDone}/${s.writingTotal} written`],
       ['speak', '🎙️', 'Speaking Practice', 'Listen, repeat and get a pronunciation score', `${E.speakingPhrases(lang).filter((p) => d.speaking[p.t] && d.speaking[p.t].best >= E.SPEAK_PASS).length}/${E.speakingPhrases(lang).length} phrases spoken`],
       ['scenarios', '🎭', 'Real-World Scenarios', 'Role-play cafés, taxis, markets and more', `${s.scenariosDone}/${s.scenariosTotal} completed`],
       ['translate', '🔄', 'Offline Translator', 'Dictionary and phrasebook, no internet needed', `${lang.dictionary.length} entries`],
-      ['test', '🎯', 'Aptitude Test', 'Find your level (A1–C1)', s.level ? `Last result: ${s.level}` : 'Not taken yet'],
+    ].map(tile).join('');
+    const furtherTiles = [
+      ['write', '📝', 'Writing Studio', 'Free writing with automatic checks and a model answer', `${wpDone}/${(lang.writingPrompts || []).length} prompts passed`],
       ['media', '🎬', 'Media Picks', 'Films, shows, books and music by level', `${lang.media.length} picks`],
       ['resources', '🏛️', 'Free Courses & Resources', 'From universities and government bodies, by level', `${lang.resources.length} sources`],
-    ].map(([r, emoji, title, sub, meta]) => `<a class="tile" href="#/${lang.id}/${r}"><span class="emoji ${r === 'read' && isAr(lang) ? 'ar' : ''}">${emoji}</span><span class="title">${title}</span><span class="sub">${sub}</span><span class="meta small muted">${h(meta)}</span></a>`).join('');
-    const cats = lang.categories.map((c) => {
+    ].map(tile).join('');
+    const catTile = (c) => {
       const done = c.lessons.filter((l) => d.lessons[l.id] && d.lessons[l.id].done).length;
       const levels = [...new Set(c.lessons.map((l) => l.level))].join('–');
       return `<a class="tile" href="#/${lang.id}/cat/${c.id}"><span class="emoji">${c.emoji}</span>
         <span class="title">${h(c.title)}</span><span class="sub" lang="${lang.id}" dir="${lang.dir}">${h(c.nativeTitle)}</span>
         <span class="sub">${h(c.summary)}</span>
         <span class="meta"><span class="chip">${levels}</span><span class="chip ${done === c.lessons.length ? 'done' : ''}">${done}/${c.lessons.length} done</span></span></a>`;
+    };
+    // Categories grouped by the level of their first lesson, easiest first.
+    const firstLevel = (c) => Math.min(...c.lessons.map((l) => levelIdx(l.level)));
+    const cats = E.LEVELS.map((L, i) => {
+      const group = lang.categories.filter((c) => firstLevel(c) === i);
+      return group.length ? `<h3 class="level-head">${levelChip(L)} ${h(E.LEVEL_NAMES[L])}</h3><div class="grid">${group.map(catTile).join('')}</div>` : '';
     }).join('');
     return `<section class="lang-hero">
         <div class="row spread"><div><h1>${h(lang.name)}</h1><div lang="${lang.id}" dir="${lang.dir}" style="font-size:1.2rem;opacity:.9">${h(lang.nativeName)}</div></div>
@@ -389,13 +380,20 @@
         ${bar(s.percent)}
         <div class="small" style="margin-top:.4rem;opacity:.9">${s.percent}% of the course complete</div>
       </section>
-      <div style="margin-bottom:1rem">${coachTip(lang)}</div>
+      ${plan.needsSetup ? welcomeCard(lang) : planCard(lang, plan, sr)}
       <div class="grid" style="margin-bottom:1rem">${challengeCard(lang)}${fluencyCard(lang)}</div>
-      ${next ? `<a class="tile" href="#/${lang.id}/lesson/${next.id}" style="margin-bottom:1rem"><span class="small muted">Continue learning</span>
-        <span class="title">${next.cat.emoji} ${h(next.title)}</span><span class="sub">${h(next.cat.title)} · ${h(next.summary)}</span><span class="meta">${levelChip(next.level)}</span></a>` : ''}
+      <h2 class="section-title">1 · Start here</h2>
+      <p class="small muted section-sub">New learners begin with the alphabet; the learning plan takes you through everything else in order.</p>
+      <div class="grid">${startTiles}</div>
+      <h2 class="section-title">2 · Practise</h2>
+      <p class="small muted section-sub">Use these alongside your lessons, a little every day.</p>
       <div class="grid">${tiles}</div>
-      <h2 class="section-title">Lessons: grammar &amp; culture</h2>
-      <div class="grid">${cats}</div>`;
+      <h2 class="section-title">3 · Go further</h2>
+      <p class="small muted section-sub">Best from A2 onwards: free writing, real media and outside courses.</p>
+      <div class="grid">${furtherTiles}</div>
+      <h2 class="section-title">Lessons by level</h2>
+      <p class="small muted section-sub">Grammar and culture, easiest first. Every lesson is open; the plan suggests an order.</p>
+      ${cats}`;
   }
 
   function categoryView(lang, id) {
@@ -488,10 +486,11 @@
     });
   }
 
-  function readingView(lang) {
+  const READ_TABS = ['letters', 'marks', 'read', 'write', 'trace', 'quiz'];
+  function readingView(lang, tab) {
     const r = lang.reading;
     setChrome(r.title, `#/${lang.id}`, lang.id);
-    if (!view) view = { tab: 'letters', letter: null, word: 0, reveal: false, task: 0, input: '', result: null, trace: r.letters[0].char, form: 0, traceScore: null };
+    if (!view) view = { tab: READ_TABS.includes(tab) ? tab : 'letters', letter: null, word: 0, reveal: false, task: 0, input: '', result: null, trace: r.letters[0].char, form: 0, traceScore: null };
     const tabs = [['letters', isAr(lang) ? 'Alphabet' : 'Letters & sounds'], ['marks', isAr(lang) ? 'Vowel marks' : 'Accents & rules'],
       ['read', 'Read words'], ['write', 'Write'], ['trace', 'Trace'], ['quiz', isAr(lang) ? 'Letter quiz' : 'Accent quiz']];
     const seg = `<div class="seg" role="tablist">${tabs.map(([k, label]) => `<button role="tab" aria-pressed="${view.tab === k}" data-act="tab" data-tab="${k}">${label}</button>`).join('')}</div>`;
@@ -511,6 +510,7 @@
           ${tText(x.char, lang, 'glyph')}<span class="name">${h(x.name)}</span></button>`).join('')}</div></div>
         <div class="grid">${r.tips.map((t) => `<div class="card"><h3>💡 ${h(t.title)}</h3><p class="small">${h(t.body)}</p></div>`).join('')}</div>`;
     } else if (view.tab === 'marks') {
+      if (!d.checks.marks) { d.checks.marks = 1; saveQuiet(); }
       body = r.marks.map((m) => `<div class="card"><div class="row spread"><h3 style="margin:0">${h(m.name)}</h3>${tText(m.symbol, lang, isAr(lang) ? 'glyph' : 't')}</div>
         <p style="margin-top:.4rem">${h(m.body)}</p>${m.example ? `<div class="phrases">${phrase(m.example, lang)}</div>` : ''}</div>`).join('');
     } else if (view.tab === 'read') {
@@ -562,7 +562,12 @@
     } else if (view.tab === 'quiz') {
       if (!view.quiz) {
         const qs = isAr(lang) ? letterQuiz(lang) : accentQuiz(lang);
-        view.quiz = newQuiz(qs, 'practice', (q) => { E.logPractice(d, 'reading', pct(q.correct, q.questions.length)); award(q.correct * 5); });
+        view.quiz = newQuiz(qs, 'practice', (q) => {
+          const score = pct(q.correct, q.questions.length);
+          d.checks.readQuiz = Math.max(d.checks.readQuiz || 0, score);
+          E.logPractice(d, 'reading', score);
+          award(q.correct * 5);
+        });
       }
       const q = view.quiz;
       body = `<div class="card">${q.done ? `<div class="center"><div class="score-big">${pct(q.correct, q.questions.length)}%</div><p>${q.correct} of ${q.questions.length} correct.</p>
@@ -977,6 +982,74 @@
       </ul></div>`;
   }
 
+  // ---------------------------------------------------------------- learning plan
+  function planHref(lang, t) {
+    const base = `#/${lang.id}/`;
+    switch (t.view) {
+      case 'read': return `${base}read/${t.tab}`;
+      case 'lesson': return `${base}lesson/${t.id}`;
+      case 'scenario': return `${base}scenario/${t.id}`;
+      case 'write': return `${base}write/${t.id}`;
+      case 'speak': return t.tab ? `${base}speak/${t.tab}` : `${base}speak`;
+      default: return base + t.view;
+    }
+  }
+  const DIALECT_LABELS = [['lev', 'Levantine', 'Syria, Lebanon, Jordan, Palestine'], ['egy', 'Egyptian', 'Egypt; widely understood from films and TV'], ['both', 'Both', 'Learn both spoken varieties'], ['msa', 'Formal only', 'Modern Standard Arabic for reading and news']];
+  function dialectPicker(lang, current) {
+    return `<div class="seg plan-dialect" role="group" aria-label="Spoken Arabic">${DIALECT_LABELS.map(([k, label, sub]) => `<button aria-pressed="${current === k}" data-act="plan-dialect" data-dialect="${k}" title="${h(sub)}">${label}</button>`).join('')}</div>`;
+  }
+  function welcomeCard(lang) {
+    const ar = isAr(lang);
+    const choices = [
+      ['zero', '🌱', ar ? "I'm brand new to Arabic" : "I'm brand new to Spanish", 'Start with the alphabet. No experience needed.'],
+      ...(ar ? [['script', '📖', 'I can read the Arabic script', 'Skip the alphabet and start with the A1 lessons.']] : []),
+      ['test', '🎯', ar ? 'I already know some Arabic' : 'I already know some Spanish', 'Take a five-minute placement test; your plan starts at your level.'],
+    ];
+    const settings = E.planSettings(lang, lp(lang.id));
+    return `<div class="card welcome">
+      ${hayya(`Welcome to ${h(lang.name)}! Let's build your plan. Which sounds like you?`, { mood: 'cheer', size: 56 })}
+      <div class="welcome-choices">${choices.map(([k, emoji, title, sub]) => `<button class="tile" data-act="plan-start" data-start="${k}"><span class="emoji">${emoji}</span><span class="title">${h(title)}</span><span class="sub">${h(sub)}</span></button>`).join('')}</div>
+      ${ar ? `<p class="small" style="margin:.8rem 0 .4rem"><b>Which spoken Arabic do you want alongside formal Arabic?</b> Formal Arabic is for reading, writing and the news; people speak a dialect day to day.</p>${dialectPicker(lang, settings.dialect)}` : ''}
+      <p class="small muted" style="margin-top:.8rem">You can change these any time from your learning plan. Everything below stays open if you'd rather explore.</p></div>`;
+  }
+  function planCard(lang, plan, sr) {
+    const today = !lp(lang.id).challenges[E.localDay()];
+    const extras = [sr.due ? `<a class="chip" href="#/${lang.id}/review">🔁 ${sr.due} review${sr.due === 1 ? '' : 's'} due</a>` : '', today ? `<a class="chip" href="#/${lang.id}/challenge">⚡ Daily challenge</a>` : ''].join('');
+    const body = plan.next
+      ? `<a class="tile plan-next" href="${planHref(lang, plan.next.target)}"><span class="small muted">Next step · ${h(plan.nextUnit.title)}</span>
+          <span class="title">${h(plan.next.title)}</span><span class="sub">${h(plan.next.why)}</span>
+          ${plan.next.progress ? `<span class="meta small muted">${plan.next.progress[0]}/${plan.next.progress[1]} so far</span>` : ''}</a>`
+      : `<p>🎉 You've finished every step in your plan. Keep reviewing, read and listen widely, and talk to people as often as you can.</p>`;
+    return `<div class="card plan-card"><div class="row spread"><h2 style="margin:0">🧭 Your learning plan</h2><a class="small" href="#/${lang.id}/plan">See the full plan →</a></div>
+      <div style="margin:.6rem 0">${bar(pct(plan.done, plan.total))}</div><p class="small muted" style="margin:0 0 .6rem">${plan.done} of ${plan.total} steps done</p>
+      ${body}${extras ? `<div class="row" style="margin-top:.6rem;gap:.4rem"><span class="small muted">Also today:</span>${extras}</div>` : ''}</div>`;
+  }
+  function planView(lang) {
+    setChrome('Learning plan', `#/${lang.id}`, lang.id);
+    const d = lp(lang.id);
+    const plan = E.learningPlan(lang, d);
+    if (plan.needsSetup) return welcomeCard(lang);
+    const startLabel = { zero: 'Starting from zero, with the alphabet', script: 'Skipping the alphabet (you read the script)', test: plan.placed ? `Starting at your tested level, ${plan.placed}` : 'Starting with the placement test' }[plan.settings.start];
+    const units = plan.units.map((u) => {
+      const isCurrent = plan.nextUnit === u;
+      const steps = u.steps.map((st) => {
+        const status = st.done ? 'done' : st === plan.next ? 'next' : '';
+        return `<a class="plan-step ${status}" href="${planHref(lang, st.target)}"><span class="plan-icon" aria-hidden="true">${st.done ? '✓' : st === plan.next ? '▶' : '○'}</span>
+          <span class="plan-text"><span class="plan-title">${h(st.title)}</span><span class="small muted">${h(st.why)}</span></span>
+          ${st.progress && !st.done ? `<span class="small muted plan-count">${st.progress[0]}/${st.progress[1]}</span>` : ''}</a>`;
+      }).join('');
+      return `<details class="card plan-unit" ${isCurrent ? 'open' : ''}><summary><span class="row spread" style="width:100%"><span><b>${h(u.title)}</b>${u.skipped ? ' <span class="chip">tested out</span>' : ''}</span><span class="small muted">${u.done}/${u.total}</span></span></summary>
+        <p class="small muted">${h(u.intro)}${u.skipped ? ' You tested above this unit, so the plan skips it; open any step to revise.' : ''}</p>${bar(pct(u.done, u.total))}
+        <div class="plan-steps">${steps}</div></details>`;
+    }).join('');
+    return `<div class="lesson-head"><h1>🧭 Your learning plan</h1>
+        <p class="muted">The recommended order through the whole course. Steps tick themselves off as you go, and nothing is locked: jump to anything whenever you like.</p></div>
+      <div class="card"><div class="row spread"><span>${h(startLabel)}</span><button class="btn" data-act="plan-reset">Change</button></div>
+        ${isAr(lang) ? `<p class="small" style="margin:.8rem 0 .4rem">Spoken Arabic in your plan:</p>${dialectPicker(lang, plan.settings.dialect)}` : ''}
+        <div style="margin-top:.8rem">${bar(pct(plan.done, plan.total))}</div><p class="small muted">${plan.done} of ${plan.total} steps done</p></div>
+      ${units}`;
+  }
+
   // ---------------------------------------------------------------- free courses & resources
   const levelSpan = (levels) => (levels.length === E.LEVELS.length ? 'All levels' : levels.length === 1 ? levels[0] : `${levels[0]}–${levels[levels.length - 1]}`);
   function resourcesView(lang) {
@@ -1123,11 +1196,11 @@
     if (firstPass) award(10); else save();
   }
 
-  function writeView(lang) {
+  function writeView(lang, pid) {
     setChrome('Writing Studio', `#/${lang.id}`, lang.id);
     const d = lp(lang.id);
     const prompts = lang.writingPrompts || [];
-    if (!view) view = { pid: null, text: '', result: null, busy: true };
+    if (!view) view = { pid: prompts.some((x) => x.id === pid) ? pid : null, text: '', result: null, busy: true };
     if (!view.pid) {
       return `<div class="card"><h1>📝 Writing Studio</h1>
           <p class="muted">Write freely in ${h(lang.name)}. You'll get automatic feedback on the required points, length, spelling and ${isAr(lang) ? 'hamza' : 'accents'}, plus a model answer to compare with.</p></div>
@@ -1225,13 +1298,13 @@
   }
 
   // ---------------------------------------------------------------- speaking practice
-  function speakView(lang) {
+  function speakView(lang, tab) {
     setChrome('Speaking Practice', `#/${lang.id}`, lang.id);
     const d = lp(lang.id);
     const all = E.speakingPhrases(lang);
     if (!view) {
       const firstUnspoken = all.findIndex((p) => !(d.speaking[p.t] && d.speaking[p.t].best >= E.SPEAK_PASS));
-      view = { tab: 'repeat', i: Math.max(0, firstUnspoken), speak: { status: 'idle' }, pi: 0, answer: { status: 'idle' }, typed: '', busy: true };
+      view = { tab: tab === 'answer' ? 'answer' : 'repeat', i: Math.max(0, firstUnspoken), speak: { status: 'idle' }, pi: 0, answer: { status: 'idle' }, typed: '', busy: true };
     }
     const tabs = `<div class="seg" role="tablist" style="margin-bottom:1rem">${[['repeat', 'Repeat phrases'], ['answer', 'Answer questions']].map(([k, l]) => `<button role="tab" aria-pressed="${view.tab === k}" data-act="sp-tab" data-tab="${k}">${l}</button>`).join('')} ${speedControl()}</div>`;
     if (view.tab === 'answer') return answerView(lang, tabs);
@@ -1506,6 +1579,16 @@
         challengeAnswer({ skill: it.skill, correct: true, measured: false });
       }
     },
+    'plan-start': (el) => {
+      const id = route()[0];
+      lp(id).plan.start = el.dataset.start;
+      save();
+      if (el.dataset.start === 'test') location.hash = `#/${id}/test`;
+      else if (el.dataset.start === 'zero') location.hash = `#/${id}/plan`;
+      else render();
+    },
+    'plan-dialect': (el) => { lp(route()[0]).plan.dialect = el.dataset.dialect; save(); render(); },
+    'plan-reset': () => { const id = route()[0]; delete lp(id).plan.start; save(); location.hash = `#/${id}`; },
     'res-level': (el) => { view.level = el.dataset.level; render(); },
     rate: (el) => { rateName = el.dataset.rate; try { localStorage.setItem('lingua.rate', rateName); } catch (err) { /* per-session */ } render(); },
     'sp-tab': (el) => { view.tab = el.dataset.tab; render(); },
@@ -1653,7 +1736,14 @@
       view.form = 0; view.traceScore = null; render();
     },
     'word-step': (el) => { view.word += Number(el.dataset.d); view.reveal = false; render(); },
-    'word-reveal': () => { view.reveal = !view.reveal; render(); },
+    'word-reveal': () => {
+      view.reveal = !view.reveal;
+      if (view.reveal) {
+        const d = lp(route()[0]);
+        if ((d.checks.words || 0) < view.word + 1) { d.checks.words = view.word + 1; saveQuiet(); }
+      }
+      render();
+    },
     'write-step': (el) => { view.task += Number(el.dataset.d); view.input = ''; view.result = null; view.showHint = false; render(); },
     'write-hint': () => { view.showHint = true; render(); },
     'write-check': () => {

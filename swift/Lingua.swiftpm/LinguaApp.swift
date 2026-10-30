@@ -32,22 +32,32 @@ enum Route: Hashable {
     case listening(String)
     case writing(String)
     case resources(String)
+    case plan(String)
+    case readingSection(String, String)
+    case speakingAnswers(String)
+    case writingPrompt(String, String)
     case progress
+}
+
+/// The navigation stack's path, shared so views can navigate after an action (for example onboarding).
+final class AppRouter: ObservableObject {
+    @Published var path = NavigationPath()
 }
 
 struct RootView: View {
     @EnvironmentObject var content: ContentStore
     @EnvironmentObject var progress: ProgressStore
     @Environment(\.scenePhase) private var scenePhase
-    @State private var path = NavigationPath()
+    @StateObject private var router = AppRouter()
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $router.path) {
             LandingView()
                 .navigationDestination(for: Route.self) { route in
                     destination(route)
                 }
         }
+        .environmentObject(router)
         .onChange(of: scenePhase) { phase in progress.isAppActive = phase == .active }
     }
 
@@ -92,6 +102,14 @@ struct RootView: View {
             if let lang = content.language(id) { WritingStudioView(lang: lang) }
         case .resources(let id):
             if let lang = content.language(id) { ResourcesView(lang: lang) }
+        case .plan(let id):
+            if let lang = content.language(id) { LearningPlanView(lang: lang) }
+        case .readingSection(let id, let tab):
+            if let lang = content.language(id) { ReadingView(lang: lang, initialTab: ReadingTab(rawValue: tab) ?? .letters) }
+        case .speakingAnswers(let id):
+            if let lang = content.language(id) { SpeakingPracticeView(lang: lang, initialTab: "answer") }
+        case .writingPrompt(let id, let promptId):
+            if let lang = content.language(id) { WritingStudioView(lang: lang, initialPromptId: promptId) }
         case .progress:
             ProgressBackupView()
         }
