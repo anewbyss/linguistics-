@@ -17,6 +17,7 @@ enum PlanTarget: Hashable {
     case listening
     case review
     case writing(String)
+    case practice(String, String)
     case test
 
     func route(_ langId: String) -> Route {
@@ -28,6 +29,7 @@ enum PlanTarget: Hashable {
         case .listening: return .listening(langId)
         case .review: return .review(langId)
         case .writing(let id): return .writingPrompt(langId, id)
+        case .practice(let scope, let id): return .practice(langId, scope, id)
         case .test: return .aptitude(langId)
         }
     }
@@ -184,6 +186,12 @@ extension Engine {
             for pr in language.speakingPrompts where pr.level == level {
                 steps.append(PlanStep(id: "answer-\(pr.id)", title: "Answer aloud: \(pr.prompt)", why: "Speak freely; your answer is transcribed and checked.",
                                       target: .speaking(answers: true), done: (lp.prompts[pr.id]?.best ?? 0) >= promptPass))
+            }
+            if language.categories.contains(where: { $0.lessons.contains { $0.level == level } }) {
+                let best = lp.checks["drill:level:\(level)"] ?? 0
+                steps.append(PlanStep(id: "drill-\(level)", title: "Mixed practice: score \(practicePass)% on a \(level) set",
+                                      why: "Ten fresh exercises drawn from every lesson at this level. Each set is different.",
+                                      target: .practice("level", level), done: best >= practicePass))
             }
             if level == "A2" && start != "test" {
                 steps.append(PlanStep(id: "level-check", title: "Check your level", why: "Take the placement test to see how far you have come.", target: .test, done: !lp.aptitude.isEmpty))

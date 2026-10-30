@@ -39,6 +39,16 @@ How the plan behaves:
 
 The language home is grouped by stage, *Start here → Practice → Go further*, with lessons listed by level. The plan logic is shared: `learningPlan` in `web/js/engine.js`, mirrored in `Plan.swift`.
 
+**Generated practice (endless and varied).** Every lesson, topic and level has a **Keep practicing** button. Each press builds a fresh, random set of ten exercises from that section's own vocabulary, example sentences, grammar tables and quiz questions:
+- meaning, reverse (English → target), and listen-and-choose
+- typing
+- word-order tiles
+- gap fills with an English cue
+- grammar-table recall
+- the lesson's quiz questions
+
+Everything comes from checked course content, so nothing new is invented. The build of every set is tested: each choice has one correct answer, the options are distinct, and the tiles spell the original sentence. Best scores are saved. The end screen offers another set or a wider one (lesson → topic → level), and each level of the learning plan includes a mixed-practice step (80%).
+
 **Daily challenge.** A new 10-item challenge each day per language: 3 reading, 3 writing (two typed answers and a spelling check), 2 listening (a dictation and a line to understand by ear) and 2 phrases to say aloud.
 - Items are drawn from your current level, and the challenge stays the same all day.
 - Your first completion each day counts toward fluency, XP and a challenge streak. You can replay it for practice without it being scored.
@@ -135,6 +145,7 @@ swift/Lingua.swiftpm/
   Fluency.swift              daily challenge, speech scoring and fluency (port of engine.js)
   Practice.swift             listening, spaced repetition, prompt feedback, study time
   Plan.swift                 the learning plan (port of learningPlan in engine.js)
+  PracticeSet.swift          generated practice sets (port of practiceSet in engine.js)
   Speech.swift               on-device speech recognition
   ProgressStore.swift        persistence + backup import/export
   Models.swift, ContentStore.swift, LinguaApp.swift, Views/

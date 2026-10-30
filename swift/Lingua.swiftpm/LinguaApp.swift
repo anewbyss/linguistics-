@@ -36,6 +36,7 @@ enum Route: Hashable {
     case readingSection(String, String)
     case speakingAnswers(String)
     case writingPrompt(String, String)
+    case practice(String, String, String)
     case progress
 }
 
@@ -108,6 +109,8 @@ struct RootView: View {
             if let lang = content.language(id) { ReadingView(lang: lang, initialTab: ReadingTab(rawValue: tab) ?? .letters) }
         case .speakingAnswers(let id):
             if let lang = content.language(id) { SpeakingPracticeView(lang: lang, initialTab: "answer") }
+        case .practice(let id, let scope, let scopeId):
+            if let lang = content.language(id) { PracticeSetView(lang: lang, scopeType: scope, scopeId: scopeId) }
         case .writingPrompt(let id, let promptId):
             if let lang = content.language(id) { WritingStudioView(lang: lang, initialPromptId: promptId) }
         case .progress:

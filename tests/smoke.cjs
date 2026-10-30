@@ -71,6 +71,21 @@ function assert(cond, msg) { if (!cond) throw new Error('Assertion failed: ' + m
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('lingua.progress.v1')));
     assert(saved.languages[lang].lessons[lessonId].done === true, 'lesson saved as done');
 
+    step(`${lang}: generated practice (endless, varied sets)`);
+    await page.locator('.keep-practicing a.btn.primary').click();
+    await page.waitForSelector('[data-act="dr-pick"], #dr-input, [data-act="dr-tile"]');
+    for (let n = 0; n < 10; n++) {
+      if (await page.locator('[data-act="dr-pick"]').count()) await page.locator('[data-act="dr-pick"]').first().click();
+      else if (await page.locator('#dr-input').count()) { await page.fill('#dr-input', 'x'); await page.locator('[data-act="dr-check"]').click(); }
+      else { while (await page.locator('[data-act="dr-tile"]').count()) await page.locator('[data-act="dr-tile"]').first().click(); await page.locator('[data-act="dr-order"]').click(); }
+      await page.locator('[data-act="dr-next"]').click();
+    }
+    assert(await page.locator('[data-act="dr-new"]').count() === 1, 'practice set ends with "Another set"');
+    const drill = await page.evaluate((id) => JSON.parse(localStorage.getItem('lingua.progress.v1')).languages[id].checks, lang);
+    assert(Object.keys(drill).some((k) => k.startsWith('drill:lesson:')), 'practice score saved');
+    await page.locator('[data-act="dr-new"]').click();
+    assert(await page.locator('.progress-label', { hasText: '1 of 10' }).count() === 1, 'a fresh set starts');
+
     step(`${lang}: reading tabs`);
     await go(`/${lang}/read`);
     await page.locator('.letter').nth(1).click();

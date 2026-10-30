@@ -377,3 +377,36 @@ test('learning plan starts with the alphabet and adapts to the learner', () => {
   assert.deepEqual(back.languages.ar.plan, { start: 'script', dialect: 'egy' });
   assert.equal(back.languages.ar.checks.words, 4);
 });
+
+test('generated practice: varied, valid sets for every lesson, topic and level', () => {
+  for (const L of lib.languages) {
+    const scopes = [
+      ...L.categories.flatMap((c) => c.lessons.map((l) => ({ type: 'lesson', id: l.id }))),
+      ...L.categories.map((c) => ({ type: 'cat', id: c.id })),
+      ...E.LEVELS.map((id) => ({ type: 'level', id })),
+    ];
+    for (const scope of scopes) {
+      for (const seed of [1, 2, 3]) {
+        const set = E.practiceSet(L, scope, seed);
+        assert.equal(set.length, 10, `${L.id} ${scope.type} ${scope.id}: full set`);
+        assert.ok(new Set(set.map((x) => x.type + (x.audio ? '*' : ''))).size >= 3, `${scope.id}: at least three exercise types`);
+        for (const it of set) {
+          if (it.type === 'choice') {
+            assert.ok(it.answer >= 0 && it.answer < it.options.length, `${scope.id}: answer is an option`);
+            assert.equal(new Set(it.options).size, it.options.length, `${scope.id}: options are distinct`);
+          }
+          if (it.type === 'order') assert.deepEqual([...it.tiles].sort(), [...it.answer].sort());
+          if (it.type === 'type') assert.ok(E.checkWriting(it.answer, { answer: it.answer }, L.id).ok);
+        }
+      }
+    }
+  }
+  const ar = lib.languages.find((l) => l.id === 'ar');
+  const a = E.practiceSet(ar, { type: 'cat', id: 'ar-food' }, 11).map((x) => x.q || x.prompt);
+  const b = E.practiceSet(ar, { type: 'cat', id: 'ar-food' }, 12).map((x) => x.q || x.prompt);
+  assert.notDeepEqual(a, b, 'different seeds give different sets');
+  assert.ok(E.checkOrder(['a', 'b'], ['a', 'b']) && !E.checkOrder(['b', 'a'], ['a', 'b']));
+  // Each level of the plan gets a mixed-practice step.
+  const plan = E.learningPlan(ar, { ...E.emptyLang(), plan: { start: 'zero' } });
+  assert.ok(plan.units.find((u) => u.id === 'level-A1').steps.some((s) => s.id === 'drill-A1' && s.target.view === 'practice'));
+});

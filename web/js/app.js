@@ -291,6 +291,7 @@
       case 'write': return writeView(lang, parts[2]);
       case 'resources': return resourcesView(lang);
       case 'plan': return planView(lang);
+      case 'practice': return practiceView(lang, parts[2], parts[3]);
       default: return langHome(lang);
     }
   }
@@ -372,7 +373,7 @@
     const firstLevel = (c) => Math.min(...c.lessons.map((l) => levelIdx(l.level)));
     const cats = E.LEVELS.map((L, i) => {
       const group = lang.categories.filter((c) => firstLevel(c) === i);
-      return group.length ? `<h3 class="level-head">${levelChip(L)} ${h(E.LEVEL_NAMES[L])}</h3><div class="grid">${group.map(catTile).join('')}</div>` : '';
+      return group.length ? `<h3 class="level-head">${levelChip(L)} ${h(E.LEVEL_NAMES[L])}<a class="small level-practice" href="#/${lang.id}/practice/level/${L}">🔁 Practice ${L}</a></h3><div class="grid">${group.map(catTile).join('')}</div>` : '';
     }).join('');
     return `<section class="lang-hero">
         <div class="row spread"><div><h1>${h(lang.name)}</h1><div lang="${lang.id}" dir="${lang.dir}" style="font-size:1.2rem;opacity:.9">${h(lang.nativeName)}</div></div>
@@ -408,7 +409,17 @@
     }).join('');
     return `<div class="lesson-head"><span class="emoji" style="font-size:2rem">${c.emoji}</span><h1>${h(c.title)}</h1>
       <p class="muted" lang="${lang.id}" dir="${lang.dir}">${h(c.nativeTitle)}</p><p>${h(c.summary)}</p></div>
+      ${practicePrompt(lang, 'cat', c.id, `Mixed exercises from all ${c.lessons.length} lessons in ${c.title}. A new set every time.`)}
       <div class="grid">${items}</div>`;
+  }
+
+  /** A card that invites more practice; every press of the button builds a fresh, random set. */
+  function practicePrompt(lang, type, id, text, extra = '') {
+    const sc = E.practiceScope(lang, { type, id });
+    const best = sc ? lp(lang.id).checks[`drill:${sc.key}`] : null;
+    return `<div class="card keep-practicing"><div class="row spread"><h2 style="margin:0">🔁 Keep practicing</h2>${best != null ? `<span class="chip ${best >= E.PRACTICE_PASS ? 'done' : ''}">Best ${best}%</span>` : ''}</div>
+      <p class="small muted" style="margin:.4rem 0 .7rem">${h(text)}</p>
+      <div class="row"><a class="btn primary" href="#/${lang.id}/practice/${type}/${id}">Practice ${type === 'lesson' ? 'this lesson' : type === 'cat' ? 'this topic' : `all of ${id}`}</a>${extra}</div></div>`;
   }
 
   function notFound(lang) {
@@ -444,6 +455,7 @@
       ? `<div class="center"><div class="score-big">${pct(q.correct, q.questions.length)}%</div>
           <p>${q.correct} of ${q.questions.length} correct${rec ? ` · best ${rec.best}%` : ''}. Progress saved.</p>
           <div class="row" style="justify-content:center"><button class="btn" data-act="lesson-retry">Try again</button>
+          <a class="btn" href="#/${lang.id}/practice/lesson/${l.id}">🔁 Practice more</a>
           ${nextL ? `<a class="btn primary" href="#/${lang.id}/lesson/${nextL.id}">Next lesson →</a>` : `<a class="btn primary" href="#/${lang.id}">Back to ${h(lang.name)}</a>`}</div></div>`
       : quizHtml(q, lang);
     return `<article>
@@ -455,6 +467,8 @@
       <section class="card"><h2><span class="icon">💬</span>In context</h2><div class="phrases wide">${l.examples.map((p) => phrase(p, lang)).join('')}</div></section>
       <section class="card culture"><h2><span class="icon">🌍</span>Culture: ${h(l.culture.title)}</h2>${l.culture.body.map((p) => `<p>${h(p)}</p>`).join('')}</section>
       <section class="card" id="quiz"><h2><span class="icon">✅</span>Check yourself</h2>${quizBody}</section>
+      ${practicePrompt(lang, 'lesson', l.id, 'Fresh, randomly generated exercises from this lesson: meanings, listening, typing, word order, gap fills and grammar.',
+        `<a class="btn" href="#/${lang.id}/practice/cat/${l.cat.id}">Whole topic</a><a class="btn" href="#/${lang.id}/practice/level/${l.level}">All of ${l.level}</a>`)}
       <div class="row spread">${prevL ? `<a class="btn" href="#/${lang.id}/lesson/${prevL.id}">← ${h(prevL.title)}</a>` : '<span></span>'}
         ${nextL ? `<a class="btn" href="#/${lang.id}/lesson/${nextL.id}">${h(nextL.title)} →</a>` : ''}</div>
       <p class="center" style="margin-top:1rem">${reportLink(`${l.id} (${l.title})`)}</p>
@@ -982,6 +996,84 @@
       </ul></div>`;
   }
 
+  // ---------------------------------------------------------------- generated practice
+  const newSeed = () => (Math.random() * 4294967296) >>> 0;
+  function practiceView(lang, type, id) {
+    const sc = E.practiceScope(lang, { type, id });
+    if (!sc) return notFound(lang);
+    const back = type === 'lesson' ? `#/${lang.id}/lesson/${id}` : type === 'cat' ? `#/${lang.id}/cat/${id}` : `#/${lang.id}`;
+    setChrome('Practice', back, lang.id);
+    if (!view) view = { items: E.practiceSet(lang, { type, id }, newSeed()), i: 0, results: [], picked: null, typed: '', typeResult: null, chosen: [], showText: false, busy: true };
+    const d = lp(lang.id);
+    const best = d.checks[`drill:${sc.key}`];
+    const head = `<div class="row spread"><span class="progress-label">🔁 ${h(sc.title)} · ${view.done ? 'done' : `${view.i + 1} of ${view.items.length}`}</span>${best != null ? `<span class="chip">Best ${best}%</span>` : ''}</div>`;
+    if (view.done) {
+      const score = pct(view.results.filter((r) => r.correct).length, view.results.length);
+      const firstLesson = sc.lessons[0];
+      const wider = type === 'lesson'
+        ? `<a class="btn" href="#/${lang.id}/practice/cat/${firstLesson.cat.id}">Whole topic: ${h(firstLesson.cat.title)}</a><a class="btn" href="#/${lang.id}/practice/level/${firstLesson.level}">All of ${firstLesson.level}</a>`
+        : type === 'cat' ? `<a class="btn" href="#/${lang.id}/practice/level/${firstLesson.level}">All of ${firstLesson.level}</a>`
+          : E.LEVELS[E.LEVELS.indexOf(id) + 1] ? `<a class="btn" href="#/${lang.id}/practice/level/${E.LEVELS[E.LEVELS.indexOf(id) + 1]}">Try ${E.LEVELS[E.LEVELS.indexOf(id) + 1]}</a>` : '';
+      return `<div class="card center">${head}<div class="score-big">${score}%</div>
+          <p>${view.results.filter((r) => r.correct).length} of ${view.results.length} correct.</p>
+          ${hayya(score >= E.PRACTICE_PASS ? 'Excellent! Try a wider set, or keep going: every set is different.' : 'Nice work. Another set mixes the same material in new ways, and that repetition is what makes it stick.', { mood: score >= E.PRACTICE_PASS ? 'cheer' : 'happy' })}
+          <div class="row" style="justify-content:center;margin-top:.8rem"><button class="btn primary" data-act="dr-new">🔁 Another set</button>${wider}<a class="btn" href="${back}">Back</a></div></div>`;
+    }
+    const it = view.items[view.i];
+    const answered = view.results.length > view.i;
+    const res = view.results[view.i];
+    const fb = (ok, wrongText) => `<div class="feedback ${ok ? 'good' : 'bad'}">${ok ? '✓ Correct!' : `✗ ${wrongText}`}${it.explain ? `<span class="detail">${h(it.explain)}</span>` : ''}</div>`;
+    let body = '';
+    if (it.type === 'choice') {
+      const hideText = it.audio && canSpeak && !answered && !view.showText;
+      body = `${it.context ? `<p class="small muted" style="margin:0 0 .3rem">${h(it.context)}</p>` : ''}<div class="quiz-q">${h(it.q)}</div>
+        ${it.audio && canSpeak ? `<div class="row" style="margin-bottom:.6rem"><button class="btn primary" data-act="speak" data-text="${h(it.t)}" data-code="${h(lang.speech)}">▶ Play</button>${hideText ? '<button class="btn" data-act="dr-show">Show text</button>' : ''}</div>` : ''}
+        ${it.t && !hideText ? `<div class="quiz-t">${tText(it.t, lang, E.hasArabic(it.t) && isAr(lang) ? 'ar' : '')}${/_{2,}/.test(it.t) ? '' : speakBtn(it.t, lang)}</div>${it.tr && (answered || !it.audio) ? `<div class="reveal-tr" style="margin:-.5rem 0 .6rem">${h(it.tr)}</div>` : ''}` : ''}
+        <div class="options">${it.options.map((o, i) => {
+          let cls = 'option';
+          if (answered) { if (i === it.answer) cls += ' correct'; else if (i === view.picked) cls += ' wrong'; }
+          return `<button class="${cls}" data-act="dr-pick" data-i="${i}" ${E.hasArabic(o) ? 'lang="ar" dir="auto"' : ''} ${answered ? 'disabled' : ''}>${h(o)}</button>`;
+        }).join('')}</div>
+        ${answered ? fb(res.correct, `The answer is: ${h(it.options[it.answer])}`) : ''}`;
+    } else if (it.type === 'type') {
+      const r = view.typeResult;
+      body = `<div class="quiz-q">${h(it.prompt)}</div>
+        <input class="input ${isAr(lang) ? 'ar' : ''}" id="dr-input" dir="${lang.dir}" lang="${lang.id}" autocomplete="off" autocapitalize="off" spellcheck="false" value="${h(view.typed)}" ${answered ? 'disabled' : ''}>
+        ${answered ? '' : keyboard(lang, 'dr-input')}
+        ${it.hint && !answered ? `<details class="small" style="margin-top:.5rem"><summary>Hint</summary>${h(it.hint)}</details>` : ''}
+        ${r ? fb(r.ok, `The answer is: <span lang="${lang.id}" dir="${lang.dir}">${h(it.answer)}</span>`) : ''}
+        ${answered ? '' : '<div class="row" style="margin-top:.8rem"><button class="btn primary" data-act="dr-check">Check</button></div>'}`;
+    } else {
+      const usedK = new Set(view.chosen);
+      body = `<div class="quiz-q">Put the words in order: “${h(it.en)}”</div>
+        <div class="tile-line ${isAr(lang) ? 'ar' : ''}" dir="${lang.dir}" lang="${lang.id}">${view.chosen.map((k, pos) => `<button class="word-tile placed" data-act="dr-untile" data-pos="${pos}" ${answered ? 'disabled' : ''}>${h(it.tiles[k])}</button>`).join('') || '<span class="small muted" dir="ltr" lang="en">Tap the words below in order.</span>'}</div>
+        ${answered ? '' : `<div class="tile-pool ${isAr(lang) ? 'ar' : ''}" dir="${lang.dir}" lang="${lang.id}">${it.tiles.map((t, k) => (usedK.has(k) ? '' : `<button class="word-tile" data-act="dr-tile" data-k="${k}">${h(t)}</button>`)).join('')}</div>`}
+        ${answered ? fb(res.correct, `The sentence is: <span lang="${lang.id}" dir="${lang.dir}">${h(it.answer.join(' '))}</span>${it.tr ? ` · <i>${h(it.tr)}</i>` : ''}`) : ''}
+        ${answered ? '' : `<div class="row" style="margin-top:.8rem"><button class="btn primary" data-act="dr-order" ${view.chosen.length === it.tiles.length ? '' : 'disabled'}>Check</button>${view.chosen.length ? '<button class="btn" data-act="dr-clear">Clear</button>' : ''}</div>`}`;
+    }
+    return `<div class="card">${head}${bar(pct(view.i, view.items.length))}<div style="margin-top:.9rem">${body}</div>
+      ${answered ? `<div class="row" style="margin-top:.9rem"><button class="btn primary" data-act="dr-next">${view.i + 1 < view.items.length ? 'Next →' : 'Finish'}</button></div>` : ''}</div>`;
+  }
+  function practiceAnswer(correct) {
+    view.results[view.i] = { correct, skill: view.items[view.i].skill };
+    render();
+  }
+  function practiceFinish() {
+    const [langId, , type, id] = route();
+    const lang = LANGS[langId];
+    const d = lp(langId);
+    const sc = E.practiceScope(lang, { type, id });
+    const score = pct(view.results.filter((r) => r.correct).length, view.results.length);
+    const key = `drill:${sc.key}`;
+    d.checks[key] = Math.max(d.checks[key] || 0, score);
+    for (const skill of E.SKILLS) {
+      const rs = view.results.filter((r) => r.skill === skill);
+      if (rs.length) E.logPractice(d, skill, pct(rs.filter((r) => r.correct).length, rs.length));
+    }
+    view.done = true;
+    award(view.results.filter((r) => r.correct).length * 3);
+  }
+
   // ---------------------------------------------------------------- learning plan
   function planHref(lang, t) {
     const base = `#/${lang.id}/`;
@@ -990,6 +1082,7 @@
       case 'lesson': return `${base}lesson/${t.id}`;
       case 'scenario': return `${base}scenario/${t.id}`;
       case 'write': return `${base}write/${t.id}`;
+      case 'practice': return `${base}practice/${t.scope}/${t.id}`;
       case 'speak': return t.tab ? `${base}speak/${t.tab}` : `${base}speak`;
       default: return base + t.view;
     }
@@ -1579,6 +1672,35 @@
         challengeAnswer({ skill: it.skill, correct: true, measured: false });
       }
     },
+    'dr-pick': (el) => {
+      if (view.results.length > view.i) return;
+      view.picked = Number(el.dataset.i);
+      practiceAnswer(view.picked === view.items[view.i].answer);
+    },
+    'dr-check': () => {
+      if (view.results.length > view.i) return;
+      const input = document.getElementById('dr-input');
+      view.typed = input ? input.value : view.typed;
+      if (!view.typed.trim()) return;
+      const it = view.items[view.i];
+      view.typeResult = E.checkWriting(view.typed, { answer: it.answer, alts: [] }, route()[0]);
+      practiceAnswer(view.typeResult.ok);
+    },
+    'dr-tile': (el) => { view.chosen.push(Number(el.dataset.k)); render(); },
+    'dr-untile': (el) => { view.chosen.splice(Number(el.dataset.pos), 1); render(); },
+    'dr-clear': () => { view.chosen = []; render(); },
+    'dr-order': () => {
+      const it = view.items[view.i];
+      practiceAnswer(E.checkOrder(view.chosen.map((k) => it.tiles[k]), it.answer));
+    },
+    'dr-show': () => { view.showText = true; render(); },
+    'dr-next': () => {
+      if (view.i + 1 >= view.items.length) practiceFinish();
+      else { view.i += 1; view.picked = null; view.typed = ''; view.typeResult = null; view.chosen = []; view.showText = false; }
+      render();
+      window.scrollTo(0, 0);
+    },
+    'dr-new': () => { view = null; render(); window.scrollTo(0, 0); },
     'plan-start': (el) => {
       const id = route()[0];
       lp(id).plan.start = el.dataset.start;
@@ -1908,6 +2030,7 @@
   });
   app.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && e.target.id === 'write-input') { e.preventDefault(); actions['write-check'](); }
+    if (e.key === 'Enter' && e.target.id === 'dr-input') { e.preventDefault(); actions['dr-check'](); }
     if (e.key === 'Enter' && e.target.id === 'ch-input') { e.preventDefault(); actions[view.items[view.i].type === 'dictation' ? 'ch-dict' : 'ch-check'](); }
     if (e.key === 'Enter' && e.target.id === 'ls-input') { e.preventDefault(); actions['ls-check'](); }
   });

@@ -212,6 +212,9 @@ struct LanguageHomeView: View {
                 let group = lang.categories.filter { cat in (cat.lessons.map { Engine.levelIndex($0.level) }.min() ?? 0) == i }
                 if !group.isEmpty {
                     Section("Lessons · \(level) \(Engine.levelNames[level] ?? "")") {
+                        NavigationLink(value: Route.practice(lang.id, "level", level)) {
+                            MenuRow(emoji: "🔁", title: "Practice \(level)", detail: "A fresh, mixed set from every \(level) lesson")
+                        }
                         ForEach(group) { cat in
                             let done = cat.lessons.filter { lp.lessons[$0.id]?.done == true }.count
                             let levels = Array(Set(cat.lessons.map(\.level))).sorted().joined(separator: "–")
@@ -258,6 +261,11 @@ struct CategoryView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(category.nativeTitle).font(.title3)
                     Text(category.summary).font(.subheadline).foregroundColor(.secondary)
+                }
+                NavigationLink(value: Route.practice(lang.id, "cat", category.id)) {
+                    MenuRow(emoji: "🔁", title: "Practice this topic",
+                            detail: "Mixed exercises from all \(category.lessons.count) lessons. A new set every time"
+                                + (lp.checks["drill:cat:\(category.id)"].map { " · best \($0)%" } ?? ""))
                 }
             }
             Section("Lessons") {
@@ -347,6 +355,11 @@ struct LessonView: View {
                     }
                 }
                 .card()
+
+                KeepPracticingCard(lang: lang, scopeType: "lesson", scopeId: lesson.id,
+                                   text: "Fresh, randomly generated exercises from this lesson: meanings, listening, typing, word order, gap fills and grammar.",
+                                   extra: [("All of \(lesson.level)", Route.practice(lang.id, "level", lesson.level))]
+                                       + (lang.category(of: lesson).map { [("Whole topic", Route.practice(lang.id, "cat", $0.id))] } ?? []))
 
                 if let next = nextLesson {
                     NavigationLink(value: Route.lesson(lang.id, next.id)) {
